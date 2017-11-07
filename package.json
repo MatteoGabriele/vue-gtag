@@ -6,5 +6,28 @@
     "name": "Matteo Gabriele",
     "email": "m.gabriele.dev@gmail.com"
   },
-  "license": "MIT"
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "node config/scripts/dev",
+    "build": "node config/scripts/build"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-blue": "^1.0.0-beta.29",
+    "blue-jest": "^1.5.0",
+    "commitizen": "^2.9.6",
+    "compression-webpack-plugin": "^1.0.1",
+    "cz-conventional-changelog": "2.1.0",
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "jest": "^21.2.1",
+    "ora": "^1.2.0",
+    "semantic-release": "^8.2.0",
+    "vue": "^2.4.2",
+    "vue-router": "^3.0.1",
+    "webpack": "^3.4.1",
+    "webpack-merge": "^4.1.0"
+  }
 }
