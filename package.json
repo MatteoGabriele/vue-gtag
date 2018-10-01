@@ -6,28 +6,68 @@
     "name": "Matteo Gabriele",
     "email": "m.gabriele.dev@gmail.com"
   },
-  "main": "./src/index.js",
-  "scripts": {
-    "dev": "node config/scripts/dev",
-    "build": "node config/scripts/build"
-  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MatteoGabriele/vue-gtag"
+  },
+  "scripts": {
+    "commit": "git-cz",
+    "dev": "webpack --mode development --watch",
+    "build": "webpack --mode production",
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "test:watch": "jest --config ./jest.config.js --watch --verbose",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "keywords": [
+    "google",
+    "google analytics",
+    "tracking",
+    "google tracking",
+    "vue-analytics",
+    "vue-gtag",
+    "gtag",
+    "gtag.js",
+    "global site tag",
+    "vue",
+    "vuejs"
+  ],
+  "main": "dist/vue-gtag.js",
+  "files": [
+    "dist"
+  ],
+  "bugs": {
+    "url": "https://github.com/MatteoGabriele/vue-gtag/issues"
+  },
+  "homepage": "https://github.com/MatteoGabriele/vue-gtag#readme",
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-blue": "^1.0.0-beta.29",
-    "blue-jest": "^1.5.0",
+    "@vue/test-utils": "^1.0.0-beta.25",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.0.1",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "brotli-gzip-webpack-plugin": "^0.5.0",
     "commitizen": "^2.9.6",
-    "compression-webpack-plugin": "^1.0.1",
-    "cz-conventional-changelog": "2.1.0",
+    "compression-webpack-plugin": "^2.0.0",
+    "cz-conventional-changelog": "2.0.0",
+    "flush-promises": "^1.0.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
-    "jest": "^21.2.1",
-    "ora": "^1.2.0",
-    "semantic-release": "^8.2.0",
-    "vue": "^2.4.2",
+    "jest": "^23.1.0",
+    "jest-vue-preprocessor": "^1.4.0",
+    "semantic-release": "^7.0.1",
+    "vue": "^2.5.16",
     "vue-router": "^3.0.1",
-    "webpack": "^3.4.1",
-    "webpack-merge": "^4.1.0"
+    "vue-template-compiler": "^2.5.16",
+    "vue-template-es2015-compiler": "1.6.x",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.3"
   }
 }
