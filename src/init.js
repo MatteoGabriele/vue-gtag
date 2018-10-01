@@ -1,6 +1,7 @@
-import config, { update } from './config'
-import { loadScript, promisify, should } from '@/helpers'
+import config, { update } from '@/config'
+import { loadScript, promisify } from '@/helpers'
 import query from '@/lib/query'
+import disableTracking from '@/lib/disable-tracking'
 
 export default () => {
   const {
@@ -35,6 +36,8 @@ export default () => {
       id: response[0],
       disabled: response[1]
     })
+
+    disableTracking(config.disabled)
   }).catch(error => {
     console.log(error.message)
   })
