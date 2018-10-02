@@ -1,4 +1,4 @@
-import { merge } from './helpers'
+import { merge } from '@/helpers'
 
 let config = {
   id: null,
