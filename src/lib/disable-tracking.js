@@ -1,9 +1,9 @@
-import config from '@/config'
+import settings from '@/settings'
 
 export default (disable = true) => {
   if (typeof window === 'undefined') {
     return
   }
 
-  window[`ga-disable-${config.id}`] = disable
+  window[`ga-disable-${settings.id}`] = disable
 }

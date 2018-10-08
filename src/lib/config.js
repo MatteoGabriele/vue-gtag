@@ -1,6 +1,6 @@
 import query from '@/lib/query'
-import config from '@/config'
+import settings from '@/settings'
 
 export default (...args) => {
-  query('config', config.id, ...args)
+  query('config', settings.id, ...args)
 }

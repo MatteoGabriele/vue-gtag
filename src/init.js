@@ -1,7 +1,8 @@
-import config, { update } from '@/config'
+import settings, { update } from '@/settings'
 import { loadScript, promisify } from '@/helpers'
 import query from '@/lib/query'
 import disableTracking from '@/lib/disable-tracking'
+import { routeTracking } from '@/lib/page'
 
 export default () => {
   const {
@@ -10,7 +11,7 @@ export default () => {
     customResource,
     checkDuplicatedScript,
     disableScriptLoader
-  } = config
+  } = settings
 
   if (!id) {
     throw new Error('[vue-gtag] Missing tracking ID in the configuration object')
@@ -37,9 +38,10 @@ export default () => {
       disabled: response[1]
     })
 
-    disableTracking(config.disabled)
+    disableTracking(disabled)
+    routeTracking()
   }).catch(error => {
-    console.log(error.message)
+    console.error(error.message)
   })
 
   query('js', new Date())

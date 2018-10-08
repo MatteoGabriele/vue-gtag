@@ -1,4 +1,4 @@
-import config from '@/config'
+import settings from '@/settings'
 
 export function loadScript (url) {
   return new Promise((resolve, reject) => {
@@ -82,7 +82,7 @@ export function getQueryString (queryMap) {
 export function isRouteIgnored ({ name, path }) {
   return [name, path]
     .filter(Boolean)
-    .find(value => config.ignoreRoutes.indexOf(value) !== -1)
+    .find(value => settings.ignoreRoutes.indexOf(value) !== -1)
 }
 
 export function isRoute (data) {
