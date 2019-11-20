@@ -20,7 +20,7 @@ export function install(_Vue, _options = {}, _Router) {
       },
       pageTrackerTemplate: null,
       pageTrackerEnabled: Router != null,
-      shouldTrackPage: null
+      pageTrackerShouldUpdate: null
     },
     _options
   );
