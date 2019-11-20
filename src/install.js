@@ -18,6 +18,7 @@ export function install(_Vue, _options = {}, _Router) {
           send_page_view: false
         }
       },
+      pageTrackerTemplate: null,
       pageTrackerEnabled: Router != null,
       shouldTrackPage: null
     },
