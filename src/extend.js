@@ -10,6 +10,8 @@ import exception from "./lib/exception";
 import linker from "./lib/linker";
 import purchase from "./lib/purchase";
 import set from "./lib/set";
+import optIn from "./lib/opt-in";
+import optOut from "./lib/opt-out";
 
 export default function() {
   Vue.prototype.$gtag = {
@@ -24,6 +26,8 @@ export default function() {
     linker,
     purchase,
     set,
+    optIn,
+    optOut,
     $getOptions: () => {
       return JSON.parse(JSON.stringify(options));
     }

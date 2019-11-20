@@ -1,5 +1,6 @@
 import { warn, loadScript } from "./util";
 import { options } from "./install";
+import optOut from "./lib/opt-out";
 import pageTracker from "./page-tracker";
 
 export default function() {
@@ -13,7 +14,7 @@ export default function() {
   loadScript(url)
     .then(() => {
       if (!enabled) {
-        window[`ga-disable-${config.id}`] = true;
+        optOut();
       }
 
       window.dataLayer = window.dataLayer || [];
