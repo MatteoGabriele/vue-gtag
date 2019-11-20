@@ -1,14 +1,10 @@
 {
   "presets": [
-    ["env", {
-      "modules": false,
-      "useBuiltIns": true,
-      "targets": {
-        "browsers": ["> 1%", "last 2 versions", "not ie <= 10"]
+    [
+      "@babel/preset-env",
+      {
+        "targets": "last 3 versions"
       }
-    }]
-  ],
-  "plugins": [
-    ["transform-object-rest-spread", { "useBuiltIns": true }]
+    ]
   ]
 }

@@ -1,11 +1,6 @@
-export default function query (method, ...args) {
-  if (typeof window === 'undefined') {
-    return
-  }
+import { options } from "../install";
 
-  window.dataLayer = window.dataLayer || []
-
-  const gtag = window.gtag = () => window.dataLayer.push(arguments)
-
-  gtag(method, ...args)
+export default function(method, ...args) {
+  const { config } = options;
+  window.gtag(method, config.id, ...args);
 }
