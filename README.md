@@ -24,6 +24,8 @@ npm install vue-gtag
 The package is ready for production, but has no tests yet and might have limited features and documentation compared to vue-analytics.
 In case you need more flexibility, right now I still suggest you to install [vue-analytics](https://github.com/MatteoGabriele/vue-analytics) as your main tracking system.
 
+Make sure to also give a read at the official gtag.js [documentation](https://developers.google.com/analytics/devguides/collection/gtagjs)
+
 ## User guide
 
 Coming soon...
@@ -86,6 +88,24 @@ plugin default options
   }
 }
 ```
+
+available methods within the $gtag object
+it works mostly like vue-analytics structure, but with some different namings
+
+- query,
+- config,
+- event,
+- pageview,
+- screenview,
+- customMap,
+- time,
+- exception,
+- linker,
+- purchase,
+- set,
+- optIn,
+- optOut,
+- $getOptions
 
 # Issues and features requests
 
