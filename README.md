@@ -1,7 +1,3 @@
-# vue-gtag
-
-Global Site Tag plugin for Vue (gtag.js)
-
 <p>
 <a href="https://badge.fury.io/js/vue-gtag">
  <img src="https://badge.fury.io/js/vue-gtag.svg" />
@@ -9,6 +5,10 @@ Global Site Tag plugin for Vue (gtag.js)
 
  <img src="https://img.shields.io/badge/size-1.80kB-brightgreen.svg" />
 </p>
+
+# vue-gtag
+
+Global Site Tag plugin for Vue (gtag.js)
 
 ## Requirements
 
@@ -19,6 +19,10 @@ Vue ^2.0.0
 ```bash
 npm install vue-gtag
 ```
+
+## Notes
+The package is ready for production, but has no tests yet and might have limited features and documentation compared to vue-analytics. 
+In case you need more flexibility, right now I still suggest you to install [vue-analytics](https://github.com/MatteoGabriele/vue-analytics) as your main tracking system.
 
 ## User guide
 
@@ -83,9 +87,6 @@ plugin default options
   }
 }
 ```
-
-## Notes
-The package is ready for production, but might have limited features and documentation, compared to vue-analytics. In case you need more flexibility, right now I still suggest you to install [vue-analytics](https://github.com/MatteoGabriele/vue-analytics) as your main tracking system.
 
 # Issues and features requests
 
