@@ -12,6 +12,7 @@ export function install(_Vue, _options = {}, _Router) {
 
   options = mergeDeep(
     {
+      enabled: true,
       globalObjectName: "gtag",
       pageTrackerTemplate: () => null,
       pageTrackerShouldUpdate: () => true,

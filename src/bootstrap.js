@@ -7,21 +7,22 @@ export default function() {
     return;
   }
 
-  const {
-    config: { id, params },
-    globalObjectName
-  } = options;
-  const url = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+  const { config, globalObjectName, enabled } = options;
+  const url = `https://www.googletagmanager.com/gtag/js?id=${config.id}`;
 
   loadScript(url)
     .then(() => {
+      if (!enabled) {
+        window[`ga-disable-${config.id}`] = true;
+      }
+
       window.dataLayer = window.dataLayer || [];
       window[globalObjectName] = function() {
         window.dataLayer.push(arguments);
       };
 
       window[globalObjectName]("js", new Date());
-      window[globalObjectName]("config", id, params);
+      window[globalObjectName]("config", config.id, config.params);
 
       if (options.pageTrackerEnabled) {
         pageTracker();
