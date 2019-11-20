@@ -1,4 +1,4 @@
-import { Vue } from "./install";
+import { Vue, options } from "./install";
 import query from "./lib/query";
 import config from "./lib/config";
 import event from "./lib/event";
@@ -23,6 +23,7 @@ export default function() {
     exception,
     linker,
     purchase,
-    set
+    set,
+    $getOptions: () => JSON.parse(JSON.stringify(options))
   };
 }
