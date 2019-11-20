@@ -5,6 +5,8 @@ import event from "./lib/event";
 import pageview from "./lib/pageview";
 import screenview from "./lib/screenview";
 import customMap from "./lib/custom-map";
+import time from "./lib/time";
+import exception from "./lib/exception";
 
 export default function() {
   Vue.prototype.$gtag = {
@@ -13,6 +15,8 @@ export default function() {
     event,
     pageview,
     screenview,
-    customMap
+    customMap,
+    time,
+    exception
   };
 }
