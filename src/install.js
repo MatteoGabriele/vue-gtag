@@ -16,11 +16,10 @@ export function install(_Vue, _options = {}, _Router) {
       pageTrackerShouldUpdate: () => true,
       pageTrackerEnabled: Router != null,
       pageTrackerScreenviewEnabled: false,
-
       config: {
         id: null,
         params: {
-          send_page_view: false
+          send_page_view: true
         }
       }
     },
