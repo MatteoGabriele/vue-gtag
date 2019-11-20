@@ -24,6 +24,8 @@ export default function() {
     linker,
     purchase,
     set,
-    $getOptions: () => JSON.parse(JSON.stringify(options))
+    $getOptions: () => {
+      return JSON.parse(JSON.stringify(options));
+    }
   };
 }
