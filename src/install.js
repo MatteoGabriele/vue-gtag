@@ -15,7 +15,6 @@ export function install(_Vue, _options = {}, _Router) {
       enabled: true,
       globalObjectName: "gtag",
       pageTrackerTemplate: () => null,
-      pageTrackerShouldUpdate: () => true,
       pageTrackerEnabled: Router != null,
       pageTrackerScreenviewEnabled: false,
       config: {

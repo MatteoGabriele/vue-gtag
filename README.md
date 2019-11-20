@@ -21,7 +21,7 @@ npm install vue-gtag
 ```
 
 ## Notes
-The package is ready for production, but has no tests yet and might have limited features and documentation compared to vue-analytics. 
+The package is ready for production, but has no tests yet and might have limited features and documentation compared to vue-analytics.
 In case you need more flexibility, right now I still suggest you to install [vue-analytics](https://github.com/MatteoGabriele/vue-analytics) as your main tracking system.
 
 ## User guide
@@ -73,16 +73,15 @@ plugin default options
 
 ```js
 {
-  enabled: true,
-  globalObjectName: "gtag",
+  enabled: true, // opt-in by default, but maybe should be opt-out by default #GDPR
+  globalObjectName: "gtag", // new feature in gtag.js. it's possible to change global object name
   pageTrackerTemplate: () => null,
-  pageTrackerShouldUpdate: () => true,
-  pageTrackerEnabled: Router != null,
-  pageTrackerScreenviewEnabled: false,
+  pageTrackerEnabled: false, // by default it's true if the router is passed
+  pageTrackerScreenviewEnabled: false, // pageviews by default
   config: {
-    id: null,
+    id: null, // GA_MEASUREMENT_ID
     params: {
-      send_page_view: true
+      send_page_view: true // set to false is you don't want the first hit on landing
     }
   }
 }
