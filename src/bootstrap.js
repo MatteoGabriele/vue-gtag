@@ -8,19 +8,20 @@ export default function() {
   }
 
   const {
-    config: { id, params }
+    config: { id, params },
+    globalObjectName
   } = options;
   const url = `https://www.googletagmanager.com/gtag/js?id=${id}`;
 
   loadScript(url)
     .then(() => {
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function() {
+      window[globalObjectName] = function() {
         window.dataLayer.push(arguments);
       };
 
-      window.gtag("js", new Date());
-      window.gtag("config", id, params);
+      window[globalObjectName]("js", new Date());
+      window[globalObjectName]("config", id, params);
 
       if (options.pageTrackerEnabled) {
         pageTracker();
