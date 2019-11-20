@@ -9,6 +9,7 @@ import time from "./lib/time";
 import exception from "./lib/exception";
 import linker from "./lib/linker";
 import purchase from "./lib/purchase";
+import set from "./lib/set";
 
 export default function() {
   Vue.prototype.$gtag = {
@@ -21,6 +22,7 @@ export default function() {
     time,
     exception,
     linker,
-    purchase
+    purchase,
+    set
   };
 }
