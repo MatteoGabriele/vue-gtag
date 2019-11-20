@@ -4,6 +4,10 @@ import config from "./lib/config";
 import screenview from "./lib/screenview";
 
 export const trackPage = (to, from) => {
+  if (to.path === from.path) {
+    return;
+  }
+
   let template;
   const {
     pageTrackerTemplate,
@@ -28,7 +32,14 @@ export const trackPage = (to, from) => {
   }
 
   if (pageTrackerScreenviewEnabled && !template.app_name) {
-    warn("The app name is not defined");
+    warn(
+      "To use the screenview feature, add the appName parameter to the plugin options"
+    );
+    return;
+  }
+
+  if (pageTrackerScreenviewEnabled && !template.screen_name) {
+    warn("To use the screenview feature, name your routes");
     return;
   }
 
