@@ -16,7 +16,7 @@ Tell us what actually happens.
 
 Run this command in the project folder and fill in their results:
 
-`npm ls vue-analytics`: 
+`npm ls vue-gtag`: 
 
 Then, specify:
 
