@@ -32,14 +32,12 @@ export const trackPage = (to, from) => {
   }
 
   if (pageTrackerScreenviewEnabled && !template.app_name) {
-    warn(
-      "To use the screenview feature, add the appName parameter to the plugin options"
-    );
+    warn("To use the screenview, add the appName to the plugin options");
     return;
   }
 
   if (pageTrackerScreenviewEnabled && !template.screen_name) {
-    warn("To use the screenview feature, name your routes");
+    warn("To use the screenview, name your routes");
     return;
   }
 
