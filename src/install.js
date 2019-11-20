@@ -12,15 +12,17 @@ export function install(_Vue, _options = {}, _Router) {
 
   options = mergeDeep(
     {
+      pageTrackerTemplate: () => null,
+      pageTrackerShouldUpdate: () => true,
+      pageTrackerEnabled: Router != null,
+      pageTrackerScreenviewEnabled: false,
+
       config: {
         id: null,
         params: {
           send_page_view: false
         }
-      },
-      pageTrackerTemplate: null,
-      pageTrackerEnabled: Router != null,
-      pageTrackerShouldUpdate: null
+      }
     },
     _options
   );

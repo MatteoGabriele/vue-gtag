@@ -3,6 +3,10 @@ import { options } from "./install";
 import pageTracker from "./page-tracker";
 
 export default function() {
+  if (typeof document === "undefined" || typeof window === "undefined") {
+    return;
+  }
+
   const {
     config: { id, params }
   } = options;

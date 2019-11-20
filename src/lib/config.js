@@ -1,5 +1,6 @@
 import query from "./query";
+import { options } from "../install";
 
-export default pageview => {
-  query("config", pageview);
+export default (...args) => {
+  query("config", options.id, ...args);
 };

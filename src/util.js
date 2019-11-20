@@ -32,6 +32,10 @@ export function isObject(item) {
   return item && typeof item === "object" && !Array.isArray(item);
 }
 
+export function execFunc(func, ...args) {
+  return isFunc(func) && func(...args);
+}
+
 export function mergeDeep(target, ...sources) {
   if (!sources.length) return target;
   const source = sources.shift();

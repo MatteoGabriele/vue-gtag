@@ -1,6 +1,7 @@
-import { options } from "../install";
-
 export default function(method, ...args) {
-  const { config } = options;
-  window.gtag(method, config.id, ...args);
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.gtag(method, ...args);
 }
