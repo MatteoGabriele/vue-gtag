@@ -1,10 +1,10 @@
 import { Vue } from "./install";
 import query from "./lib/query";
-import page from "./lib/page";
+import config from "./lib/config";
 
 export default function() {
   Vue.prototype.$gtag = {
     query,
-    page
+    config
   };
 }

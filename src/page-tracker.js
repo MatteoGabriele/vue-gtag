@@ -1,6 +1,6 @@
 import { Router, options } from "./install";
 import { isFunc } from "./util";
-import page from "./lib/page";
+import config from "./lib/config";
 
 export default () => {
   const { pageTrackerTemplate, pageTrackerShouldUpdate } = options;
@@ -22,7 +22,7 @@ export default () => {
             page_location: window.location.href
           };
 
-      page(template);
+      config(template);
     });
   });
 };
