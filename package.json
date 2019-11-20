@@ -1,7 +1,7 @@
 {
   "name": "vue-gtag",
   "description": "Global Site Tag (gtag.js) plugin for Vue",
-  "version": "0.0.0-development",
+  "version": "0.1.0",
   "author": {
     "name": "Matteo Gabriele",
     "email": "m.gabriele.dev@gmail.com"
@@ -53,6 +53,7 @@
     "commitizen": "^4.0.3",
     "compression-webpack-plugin": "^3.0.0",
     "cz-conventional-changelog": "^3.0.2",
+    "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-loader": "^3.0.2",
     "eslint-plugin-prettier": "^3.1.1",
@@ -62,9 +63,5 @@
     "terser-webpack-plugin": "^2.2.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
-  },
-  "dependencies": {
-    "eslint": "^6.6.0",
-    "lodash.merge": "^4.6.2"
   }
 }
