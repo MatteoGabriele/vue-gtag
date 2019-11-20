@@ -7,6 +7,8 @@ import screenview from "./lib/screenview";
 import customMap from "./lib/custom-map";
 import time from "./lib/time";
 import exception from "./lib/exception";
+import linker from "./lib/linker";
+import purchase from "./lib/purchase";
 
 export default function() {
   Vue.prototype.$gtag = {
@@ -17,6 +19,8 @@ export default function() {
     screenview,
     customMap,
     time,
-    exception
+    exception,
+    linker,
+    purchase
   };
 }
