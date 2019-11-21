@@ -50,6 +50,10 @@ export const trackPage = (to, from) => {
 };
 
 export default () => {
+  if (!Router) {
+    return;
+  }
+
   Router.onReady(() => {
     Router.afterEach(trackPage);
   });
