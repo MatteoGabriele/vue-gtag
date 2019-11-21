@@ -10,6 +10,10 @@
 
 Global Site Tag plugin for Vue (gtag.js)
 
+## Notes before you install this package
+The package is maybe not ready yet for production, has no tests yet and might have limited features and lacks in documentation compared to vue-analytics.
+**In case you need more flexibility and reliability, right now I still suggest you to install [vue-analytics](https://github.com/MatteoGabriele/vue-analytics) as your main tracking system.**
+
 ## Requirements
 
 Vue ^2.0.0
@@ -20,9 +24,6 @@ Vue ^2.0.0
 npm install vue-gtag
 ```
 
-## Notes
-The package is ready for production, but has no tests yet and might have limited features and documentation compared to vue-analytics.
-In case you need more flexibility, right now I still suggest you to install [vue-analytics](https://github.com/MatteoGabriele/vue-analytics) as your main tracking system.
 
 Make sure to also give a read at the official gtag.js [documentation](https://developers.google.com/analytics/devguides/collection/gtagjs)
 
