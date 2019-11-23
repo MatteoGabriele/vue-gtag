@@ -1,5 +1,5 @@
 import { Router, options } from "./install";
-import { warn } from "./util";
+import { isFn, warn } from "./util";
 import config from "./lib/config";
 import screenview from "./lib/screenview";
 
@@ -14,7 +14,9 @@ export const trackPage = (to, from) => {
     pageTrackerScreenviewEnabled,
     appName
   } = options;
-  const customTemplate = pageTrackerTemplate(to, from);
+  const customTemplate = isFn(pageTrackerTemplate)
+    ? pageTrackerTemplate(to, from)
+    : null;
 
   if (customTemplate) {
     template = customTemplate;

@@ -24,7 +24,7 @@ export function warn(msg, err) {
   }
 }
 
-export function isFunc(item) {
+export function isFn(item) {
   return typeof item === "function";
 }
 
@@ -33,7 +33,7 @@ export function isObject(item) {
 }
 
 export function execFunc(func, ...args) {
-  return isFunc(func) && func(...args);
+  return isFn(func) && func(...args);
 }
 
 export function mergeDeep(target, ...sources) {
