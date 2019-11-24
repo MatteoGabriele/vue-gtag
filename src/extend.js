@@ -13,23 +13,22 @@ import set from "./lib/set";
 import optIn from "./lib/opt-in";
 import optOut from "./lib/opt-out";
 
+export const api = {
+  query,
+  config,
+  event,
+  pageview,
+  screenview,
+  customMap,
+  time,
+  exception,
+  linker,
+  purchase,
+  set,
+  optIn,
+  optOut
+};
+
 export default function() {
-  Vue.prototype.$gtag = {
-    query,
-    config,
-    event,
-    pageview,
-    screenview,
-    customMap,
-    time,
-    exception,
-    linker,
-    purchase,
-    set,
-    optIn,
-    optOut,
-    $getOptions: () => {
-      return JSON.parse(JSON.stringify(options));
-    }
-  };
+  Vue.$gtag = Vue.prototype.$gtag = api;
 }

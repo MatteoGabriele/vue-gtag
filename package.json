@@ -64,6 +64,8 @@
     "prettier": "^1.19.1",
     "semantic-release": "^15.13.31",
     "terser-webpack-plugin": "^2.2.1",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.10",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   }
