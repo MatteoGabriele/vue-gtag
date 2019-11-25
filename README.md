@@ -110,27 +110,22 @@ it works mostly like vue-analytics structure, but with some different namings
 
 ## Example Usage
 
-<template>
-  <button @click="recordEvent">Click Me</button>
-</template>
-
-<script>
+```js
 export default {
   name: "Example",
   methods: {
     recordEvent() {
       var callback = function() {
-        console.log("event recorded")
+        console.log("Conversion Recorded")
       };
       this.$gtag.event("conversion", {
-        send_to: "AW-976426424/A-oOCNOspbUBELirzNED",
+        send_to: "your-id-here",
         event_callback: callback
       });
     }
   }
 };
-</script>
-
+```
 
 # Issues and features requests
 
