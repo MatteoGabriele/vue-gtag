@@ -108,6 +108,25 @@ it works mostly like vue-analytics structure, but with some different namings
 - optOut,
 - $getOptions
 
+## Example Usage
+
+```js
+export default {
+  name: "Example",
+  methods: {
+    recordEvent() {
+      var callback = function() {
+        console.log("Conversion Recorded")
+      };
+      this.$gtag.event("conversion", {
+        send_to: "your-id-here",
+        event_callback: callback
+      });
+    }
+  }
+};
+```
+
 # Issues and features requests
 
 Please drop an issue, if you find something that doesn't work, or a feature request at [https://github.com/MatteoGabriele/vue-gtag/issues](https://github.com/MatteoGabriele/vue-gtag/issues)
