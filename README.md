@@ -108,6 +108,30 @@ it works mostly like vue-analytics structure, but with some different namings
 - optOut,
 - $getOptions
 
+## Example Usage
+
+<template>
+  <button @click="recordEvent">Click Me</button>
+</template>
+
+<script>
+export default {
+  name: "Example",
+  methods: {
+    recordEvent() {
+      var callback = function() {
+        console.log("event recorded")
+      };
+      this.$gtag.event("conversion", {
+        send_to: "AW-976426424/A-oOCNOspbUBELirzNED",
+        event_callback: callback
+      });
+    }
+  }
+};
+</script>
+
+
 # Issues and features requests
 
 Please drop an issue, if you find something that doesn't work, or a feature request at [https://github.com/MatteoGabriele/vue-gtag/issues](https://github.com/MatteoGabriele/vue-gtag/issues)
