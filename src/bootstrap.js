@@ -8,7 +8,7 @@ export default function() {
     return;
   }
 
-  const { config, globalObjectName, enabled } = options;
+  const { config, globalObjectName, enabled, ready } = options;
   const url = `https://www.googletagmanager.com/gtag/js?id=${config.id}`;
 
   loadScript(url)
@@ -28,8 +28,10 @@ export default function() {
       if (options.pageTrackerEnabled) {
         pageTracker();
       }
+
+      ready(window[globalObjectName])
     })
-    .catch(() => {
-      warn("Ops! Something happened and gtag.js couldn't be loaded");
+    .catch((e) => {
+      warn("Ops! Something happened and gtag.js couldn't be loaded", e);
     });
 }
