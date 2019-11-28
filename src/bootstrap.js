@@ -1,35 +1,35 @@
 import { warn, loadScript } from "./util";
-import { options } from "./install";
-import optOut from "./lib/opt-out";
 import pageTracker from "./page-tracker";
 
-export default function() {
+export default function({
+  enabled,
+  globalObjectName,
+  pageTrackerEnabled,
+  config
+} = {}) {
   if (typeof document === "undefined" || typeof window === "undefined") {
     return;
   }
 
-  const { config, globalObjectName, enabled } = options;
-  const url = `https://www.googletagmanager.com/gtag/js?id=${config.id}`;
+  if (!enabled) {
+    window[`ga-disable-${config.id}`] = true;
+  }
 
-  loadScript(url)
-    .then(() => {
-      if (!enabled) {
-        optOut();
-      }
+  window.dataLayer = window.dataLayer || [];
+  window[globalObjectName] = function() {
+    window.dataLayer.push(arguments);
+  };
 
-      window.dataLayer = window.dataLayer || [];
-      window[globalObjectName] = function() {
-        window.dataLayer.push(arguments);
-      };
+  window[globalObjectName]("js", new Date());
+  window[globalObjectName]("config", config.id, config.params);
 
-      window[globalObjectName]("js", new Date());
-      window[globalObjectName]("config", config.id, config.params);
+  if (pageTrackerEnabled) {
+    pageTracker();
+  }
 
-      if (options.pageTrackerEnabled) {
-        pageTracker();
-      }
-    })
-    .catch(() => {
-      warn("Ops! Something happened and gtag.js couldn't be loaded");
-    });
+  loadScript(`https://www.googletagmanager.com/gtag/js?id=${config.id}`).catch(
+    error => {
+      warn("Ops! Something happened and gtag.js couldn't be loaded", error);
+    }
+  );
 }

@@ -1,10 +1,11 @@
 import { createLocalVue } from "@vue/test-utils";
-import * as install from "../src/install";
 import extend, { api } from "../src/extend";
 
 describe("extend", () => {
+  let Vue;
+
   beforeEach(() => {
-    install.Vue = createLocalVue();
+    Vue = createLocalVue();
   });
 
   it("should extend vue prototype object", () => {
@@ -27,9 +28,9 @@ describe("extend", () => {
   });
 
   it("should ", () => {
-    extend();
+    extend(Vue);
 
-    expect(install.Vue.$gtag).toBeDefined();
-    expect(install.Vue.prototype.$gtag).toBeDefined();
+    expect(Vue.$gtag).toBeDefined();
+    expect(Vue.prototype.$gtag).toBeDefined();
   });
 });
