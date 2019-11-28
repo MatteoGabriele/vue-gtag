@@ -1,15 +1,13 @@
+import { options } from "./install";
 import { warn, loadScript } from "./util";
 import pageTracker from "./page-tracker";
 
-export default function({
-  enabled,
-  globalObjectName,
-  pageTrackerEnabled,
-  config
-} = {}) {
+export default function() {
   if (typeof document === "undefined" || typeof window === "undefined") {
     return;
   }
+
+  const { enabled, globalObjectName, config, pageTrackerEnabled } = options;
 
   if (!enabled) {
     window[`ga-disable-${config.id}`] = true;

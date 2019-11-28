@@ -1,3 +1,4 @@
+import { Vue } from "./install";
 import query from "./lib/query";
 import config from "./lib/config";
 import event from "./lib/event";
@@ -28,6 +29,6 @@ export const api = {
   optOut
 };
 
-export default function(Vue) {
+export default function() {
   Vue.$gtag = Vue.prototype.$gtag = api;
 }

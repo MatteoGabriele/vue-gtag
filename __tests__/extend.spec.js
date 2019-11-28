@@ -1,5 +1,6 @@
 import { createLocalVue } from "@vue/test-utils";
-import extend, { api } from "../src/extend";
+import { install } from "../src/install";
+import { api } from "../src/extend";
 
 describe("extend", () => {
   let Vue;
@@ -28,7 +29,7 @@ describe("extend", () => {
   });
 
   it("should ", () => {
-    extend(Vue);
+    install(Vue);
 
     expect(Vue.$gtag).toBeDefined();
     expect(Vue.prototype.$gtag).toBeDefined();

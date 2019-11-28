@@ -1,8 +1,8 @@
-import bootstrap from "../src/bootstrap";
+import { install } from "../src/install";
 import * as util from "../src/util";
-import flushPromises from "flush-promises";
 
 jest.mock("../src/lib/opt-out");
+jest.mock("../src/extend");
 
 describe("bootstrap", () => {
   beforeEach(() => {
@@ -14,97 +14,66 @@ describe("bootstrap", () => {
     global.dataLayer = undefined;
   });
 
-  it("should load the gtag.js file", done => {
-    bootstrap({
-      globalObjectName: "gtag",
+  it("should load the gtag.js file", () => {
+    install(null, {
       config: {
         id: 1
       }
     });
 
-    flushPromises().then(() => {
-      expect(util.loadScript).toHaveBeenCalledWith(
-        "https://www.googletagmanager.com/gtag/js?id=1"
-      );
-      done();
-    });
+    expect(util.loadScript).toHaveBeenCalledWith(
+      "https://www.googletagmanager.com/gtag/js?id=1"
+    );
   });
 
-  it("should have dataLayer and gtag defined", done => {
-    bootstrap({
-      globalObjectName: "gtag",
+  it("should have dataLayer and gtag defined", () => {
+    install(null, {
       config: {
         id: 1
       }
     });
 
-    flushPromises().then(() => {
-      expect(global.dataLayer).toBeDefined();
-      expect(global.gtag).toBeDefined();
-      done();
-    });
+    expect(global.dataLayer).toBeDefined();
+    expect(global.gtag).toBeDefined();
   });
 
-  it("should opt-out when plugin has `enabled` set to false", done => {
-    bootstrap({
+  it("should opt-out when plugin has `enabled` set to false", () => {
+    install(null, {
       enabled: false,
-      globalObjectName: "gtag",
       config: {
         id: 1
       }
     });
 
-    flushPromises().then(() => {
-      expect(global["ga-disable-1"]).toEqual(true);
-      done();
-    });
+    expect(global["ga-disable-1"]).toEqual(true);
   });
 
-  it("should load the gtag.js file also when opt-out", done => {
-    bootstrap({
+  it("should load the gtag.js file also when opt-out", () => {
+    install(null, {
+      enabled: false
+    });
+
+    expect(util.loadScript).toHaveBeenCalled();
+  });
+
+  it("should have dataLayer and gtag defined also when opt-out", () => {
+    install(null, {
       enabled: false,
-      globalObjectName: "gtag",
       config: {
         id: 1
       }
     });
 
-    flushPromises().then(() => {
-      expect(util.loadScript).toHaveBeenCalledWith(
-        "https://www.googletagmanager.com/gtag/js?id=1"
-      );
-      done();
-    });
+    expect(global.dataLayer).toBeDefined();
+    expect(global.gtag).toBeDefined();
   });
 
-  it("should have dataLayer and gtag defined also when opt-out", done => {
-    bootstrap({
-      enabled: false,
-      globalObjectName: "gtag",
-      config: {
-        id: 1
-      }
+  it("should inject a custom name for the gtag library", () => {
+    install(null, {
+      globalObjectName: "foo"
     });
 
-    flushPromises().then(() => {
-      expect(global.dataLayer).toBeDefined();
-      expect(global.gtag).toBeDefined();
-      done();
-    });
-  });
-
-  it("should inject a custom name for the gtag library", done => {
-    bootstrap({
-      globalObjectName: "foo",
-      config: {
-        id: 1
-      }
-    });
-
-    flushPromises().then(() => {
-      expect(global.gtag).not.toBeDefined();
-      expect(global.foo).toBeDefined();
-      done();
-    });
+    expect(global.gtag).not.toBeDefined();
+    expect(global.foo).toBeDefined();
   });
 });

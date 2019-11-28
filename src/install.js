@@ -24,6 +24,6 @@ export function install(_Vue, _options = {}, _Router) {
 
   options = mergeDeep(options, _options);
 
-  extend(Vue);
-  bootstrap(options);
+  extend();
+  bootstrap();
 }
