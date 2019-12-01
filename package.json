@@ -24,6 +24,11 @@
       "path": "cz-conventional-changelog"
     }
   },
+  "jest": {
+    "moduleNameMapper": {
+      "@/(.*)$": "<rootDir>/src/$1"
+    }
+  },
   "keywords": [
     "google",
     "google analytics",

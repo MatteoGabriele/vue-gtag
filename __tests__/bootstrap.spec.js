@@ -1,8 +1,8 @@
-import bootstrap from "../src/bootstrap";
-import { getOptions } from "../src/install";
-import * as util from "../src/util";
+import bootstrap from "@/bootstrap";
+import { getOptions } from "@/install";
+import * as util from "@/util";
 
-jest.mock("../src/install");
+jest.mock("@/install");
 
 describe("bootstrap", () => {
   beforeEach(() => {

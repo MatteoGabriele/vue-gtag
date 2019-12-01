@@ -1,11 +1,11 @@
-import { getOptions } from "../src/install";
-import { trackPage } from "../src/page-tracker";
-import config from "../src/api/config";
-import screenview from "../src/api/screenview";
+import { getOptions } from "@/install";
+import { trackPage } from "@/page-tracker";
+import config from "@/api/config";
+import screenview from "@/api/screenview";
 
-jest.mock("../src/install");
-jest.mock("../src/api/config");
-jest.mock("../src/api/screenview");
+jest.mock("@/install");
+jest.mock("@/api/config");
+jest.mock("@/api/screenview");
 
 const to = {
   name: "About",

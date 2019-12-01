@@ -1,9 +1,9 @@
-import { install, getOptions } from "../src/install";
-import bootstrap from "../src/bootstrap";
-import extend from "../src/extend";
+import { install, getOptions } from "@/install";
+import bootstrap from "@/bootstrap";
+import extend from "@/extend";
 
-jest.mock("../src/extend");
-jest.mock("../src/bootstrap");
+jest.mock("@/extend");
+jest.mock("@/bootstrap");
 
 describe("install", () => {
   it("should have default options", () => {
