@@ -1,8 +1,8 @@
-import { install } from "../src/install";
+import bootstrap from "../src/bootstrap";
+import { getOptions } from "../src/install";
 import * as util from "../src/util";
 
-jest.mock("../src/lib/opt-out");
-jest.mock("../src/extend");
+jest.mock("../src/install");
 
 describe("bootstrap", () => {
   beforeEach(() => {
@@ -15,11 +15,14 @@ describe("bootstrap", () => {
   });
 
   it("should load the gtag.js file", () => {
-    install(null, {
+    getOptions.mockReturnValueOnce({
+      globalObjectName: "gtag",
       config: {
         id: 1
       }
     });
+
+    bootstrap();
 
     expect(util.loadScript).toHaveBeenCalledWith(
       "https://www.googletagmanager.com/gtag/js?id=1"
@@ -27,51 +30,71 @@ describe("bootstrap", () => {
   });
 
   it("should have dataLayer and gtag defined", () => {
-    install(null, {
+    getOptions.mockReturnValueOnce({
+      globalObjectName: "gtag",
       config: {
         id: 1
       }
     });
+
+    bootstrap();
 
     expect(global.dataLayer).toBeDefined();
     expect(global.gtag).toBeDefined();
   });
 
   it("should opt-out when plugin has `enabled` set to false", () => {
-    install(null, {
+    getOptions.mockReturnValueOnce({
+      globalObjectName: "gtag",
       enabled: false,
       config: {
         id: 1
       }
     });
+
+    bootstrap();
 
     expect(global["ga-disable-1"]).toEqual(true);
   });
 
   it("should load the gtag.js file also when opt-out", () => {
-    install(null, {
-      enabled: false
+    getOptions.mockReturnValueOnce({
+      enabled: false,
+      globalObjectName: "gtag",
+      config: {
+        id: 1
+      }
     });
+
+    bootstrap();
 
     expect(util.loadScript).toHaveBeenCalled();
   });
 
   it("should have dataLayer and gtag defined also when opt-out", () => {
-    install(null, {
+    getOptions.mockReturnValueOnce({
       enabled: false,
+      globalObjectName: "gtag",
       config: {
         id: 1
       }
     });
+
+    bootstrap();
 
     expect(global.dataLayer).toBeDefined();
     expect(global.gtag).toBeDefined();
   });
 
   it("should inject a custom name for the gtag library", () => {
-    install(null, {
-      globalObjectName: "foo"
+    getOptions.mockReturnValueOnce({
+      globalObjectName: "foo",
+      config: {
+        id: 1
+      }
     });
+
+    bootstrap();
 
     expect(global.gtag).not.toBeDefined();
     expect(global.foo).toBeDefined();

@@ -1,37 +1,18 @@
+import { getVue } from "../src/install";
+import extend from "../src/extend";
 import { createLocalVue } from "@vue/test-utils";
-import { install } from "../src/install";
-import { api } from "../src/extend";
+
+const localVue = createLocalVue();
+
+jest.mock("../src/install");
 
 describe("extend", () => {
-  let Vue;
+  it("should attach api to Vue and Vue prototype object", () => {
+    getVue.mockReturnValueOnce(localVue);
 
-  beforeEach(() => {
-    Vue = createLocalVue();
-  });
+    extend();
 
-  it("should extend vue prototype object", () => {
-    const keys = Object.keys(api);
-    expect(keys).toEqual([
-      "query",
-      "config",
-      "event",
-      "pageview",
-      "screenview",
-      "customMap",
-      "time",
-      "exception",
-      "linker",
-      "purchase",
-      "set",
-      "optIn",
-      "optOut"
-    ]);
-  });
-
-  it("should ", () => {
-    install(Vue);
-
-    expect(Vue.$gtag).toBeDefined();
-    expect(Vue.prototype.$gtag).toBeDefined();
+    expect(localVue.$gtag).toBeDefined();
+    expect(localVue.prototype.$gtag).toBeDefined();
   });
 });

@@ -18,7 +18,7 @@ export function warn(msg, err) {
   if (typeof console !== "undefined") {
     console.warn("[vue-gtag] " + msg);
 
-    if (err) {
+    if (err && err.stack) {
       console.warn(err.stack);
     }
   }

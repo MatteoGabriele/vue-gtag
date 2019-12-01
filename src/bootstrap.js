@@ -1,5 +1,5 @@
-import { options } from "./install";
 import { warn, loadScript } from "./util";
+import { getOptions } from "../src/install";
 import pageTracker from "./page-tracker";
 
 export default function() {
@@ -7,7 +7,12 @@ export default function() {
     return;
   }
 
-  const { enabled, globalObjectName, config, pageTrackerEnabled } = options;
+  const {
+    enabled,
+    globalObjectName,
+    config,
+    pageTrackerEnabled
+  } = getOptions();
 
   if (!enabled) {
     window[`ga-disable-${config.id}`] = true;
@@ -25,9 +30,10 @@ export default function() {
     pageTracker();
   }
 
-  loadScript(`https://www.googletagmanager.com/gtag/js?id=${config.id}`).catch(
-    error => {
+  return loadScript(`https://www.googletagmanager.com/gtag/js?id=${config.id}`)
+    .then(() => window[globalObjectName])
+    .catch(error => {
       warn("Ops! Something happened and gtag.js couldn't be loaded", error);
-    }
-  );
+      return error;
+    });
 }
