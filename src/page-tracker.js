@@ -1,7 +1,7 @@
-import { Router, options } from "./install";
-import { warn } from "./util";
-import config from "./lib/config";
-import screenview from "./lib/screenview";
+import { getRouter, getOptions } from "./install";
+import { isFn, warn } from "./util";
+import config from "./api/config";
+import screenview from "./api/screenview";
 
 export const trackPage = (to, from) => {
   if (to.path === from.path) {
@@ -13,8 +13,11 @@ export const trackPage = (to, from) => {
     pageTrackerTemplate,
     pageTrackerScreenviewEnabled,
     appName
-  } = options;
-  const customTemplate = pageTrackerTemplate(to, from);
+  } = getOptions();
+
+  const customTemplate = isFn(pageTrackerTemplate)
+    ? pageTrackerTemplate(to, from)
+    : null;
 
   if (customTemplate) {
     template = customTemplate;
@@ -50,6 +53,12 @@ export const trackPage = (to, from) => {
 };
 
 export default () => {
+  const Router = getRouter();
+
+  if (!Router) {
+    return;
+  }
+
   Router.onReady(() => {
     Router.afterEach(trackPage);
   });

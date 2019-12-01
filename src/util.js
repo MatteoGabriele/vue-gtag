@@ -18,13 +18,13 @@ export function warn(msg, err) {
   if (typeof console !== "undefined") {
     console.warn("[vue-gtag] " + msg);
 
-    if (err) {
+    if (err && err.stack) {
       console.warn(err.stack);
     }
   }
 }
 
-export function isFunc(item) {
+export function isFn(item) {
   return typeof item === "function";
 }
 
@@ -33,7 +33,7 @@ export function isObject(item) {
 }
 
 export function execFunc(func, ...args) {
-  return isFunc(func) && func(...args);
+  return isFn(func) && func(...args);
 }
 
 export function mergeDeep(target, ...sources) {

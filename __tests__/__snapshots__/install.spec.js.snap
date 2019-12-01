@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`install should have default options 1`] = `
+Object {
+  "bootstrap": true,
+  "config": Object {
+    "id": null,
+    "params": Object {
+      "send_page_view": true,
+    },
+  },
+  "enabled": true,
+  "globalObjectName": "gtag",
+  "pageTrackerEnabled": true,
+  "pageTrackerScreenviewEnabled": false,
+  "pageTrackerTemplate": null,
+}
+`;
