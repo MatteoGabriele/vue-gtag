@@ -15,8 +15,10 @@
     "commit": "git-cz",
     "build": "webpack --mode production",
     "dev": "webpack --mode development --watch",
+    "lint": "eslint src --ext .js",
+    "lint:fix": "eslint src --ext .js --fix",
     "test": "jest",
-    "prepublish": "webpack --mode production",
+    "prepublish": "yarn lint && webpack --mode production",
     "semantic-release": "semantic-release"
   },
   "config": {
