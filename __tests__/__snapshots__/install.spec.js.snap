@@ -11,6 +11,7 @@ Object {
   },
   "enabled": true,
   "globalObjectName": "gtag",
+  "onReady": null,
   "pageTrackerEnabled": true,
   "pageTrackerScreenviewEnabled": false,
   "pageTrackerTemplate": null,

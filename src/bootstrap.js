@@ -1,4 +1,4 @@
-import { warn, loadScript } from "./util";
+import { warn, isFn, loadScript } from "./util";
 import { getOptions } from "../src/install";
 import pageTracker from "./page-tracker";
 
@@ -11,7 +11,8 @@ export default function() {
     enabled,
     globalObjectName,
     config,
-    pageTrackerEnabled
+    pageTrackerEnabled,
+    onReady
   } = getOptions();
 
   if (!enabled) {
@@ -31,7 +32,15 @@ export default function() {
   }
 
   return loadScript(`https://www.googletagmanager.com/gtag/js?id=${config.id}`)
-    .then(() => window[globalObjectName])
+    .then(() => {
+      const library = window[globalObjectName];
+
+      if (isFn(onReady)) {
+        onReady(library);
+      }
+
+      return library;
+    })
     .catch(error => {
       warn("Ops! Something happened and gtag.js couldn't be loaded", error);
       return error;

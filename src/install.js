@@ -9,6 +9,7 @@ let options = {
   bootstrap: true,
   globalObjectName: "gtag",
   pageTrackerTemplate: null,
+  onReady: null,
   pageTrackerEnabled: true,
   pageTrackerScreenviewEnabled: false,
   config: {
