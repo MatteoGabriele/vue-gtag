@@ -1,9 +1,11 @@
-import { options } from "../install";
+import { getOptions } from "../install";
 
 export default function(method, ...args) {
+  const { globalObjectName } = getOptions();
+
   if (typeof window === "undefined") {
     return;
   }
 
-  window[options.globalObjectName](method, ...args);
+  window[globalObjectName](method, ...args);
 }

@@ -1,5 +1,6 @@
-import { options } from "../install";
+import { getOptions } from "../install";
 
 export default () => {
-  window[`ga-disable-${options.config.id}`] = true;
+  const { config } = getOptions();
+  window[`ga-disable-${config.id}`] = true;
 };
