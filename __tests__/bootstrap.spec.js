@@ -1,5 +1,6 @@
 import bootstrap from "@/bootstrap";
 import { getOptions } from "@/install";
+import flushPromises from "flush-promises";
 import * as util from "@/util";
 
 jest.mock("@/install");
@@ -27,6 +28,24 @@ describe("bootstrap", () => {
     expect(util.loadScript).toHaveBeenCalledWith(
       "https://www.googletagmanager.com/gtag/js?id=1"
     );
+  });
+
+  it("should fire the onReady method when gtag is loaded", () => {
+    const spy = jest.fn();
+
+    getOptions.mockReturnValueOnce({
+      globalObjectName: "gtag",
+      onReady: spy,
+      config: {
+        id: 1
+      }
+    });
+
+    bootstrap();
+
+    flushPromises().then(() => {
+      expect(spy).toHaveBeenCalled();
+    });
   });
 
   it("should have dataLayer and gtag defined", () => {
