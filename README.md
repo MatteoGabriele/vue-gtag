@@ -4,7 +4,9 @@
 <a/>
 
  <img src="https://img.shields.io/badge/size-1.80kB-brightgreen.svg" />
+ <img src="https://travis-ci.com/MatteoGabriele/vue-gtag.svg?branch=master" />
 </p>
+
 
 # vue-gtag
 
