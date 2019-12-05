@@ -29,7 +29,10 @@
   },
   "jest": {
     "collectCoverage": true,
-    "coverageReporters": ["json", "html"],
+    "coverageReporters": [
+      "json",
+      "html"
+    ],
     "moduleNameMapper": {
       "@/(.*)$": "<rootDir>/src/$1"
     }
