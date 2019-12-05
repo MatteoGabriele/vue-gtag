@@ -36,6 +36,20 @@ describe("bootstrap", () => {
     });
   });
 
+  it("should not load the gtag.js file", () => {
+    getOptions.mockReturnValueOnce({
+      disableScriptLoad: true,
+      globalObjectName: "gtag",
+      config: {
+        id: 1
+      }
+    });
+
+    bootstrap();
+
+    expect(util.loadScript).not.toHaveBeenCalled();
+  });
+
   it("should fire the onReady method when gtag is loaded", done => {
     const spy = jest.fn();
 

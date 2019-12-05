@@ -12,7 +12,8 @@ export default function() {
     globalObjectName,
     config,
     pageTrackerEnabled,
-    onReady
+    onReady,
+    disableScriptLoad
   } = getOptions();
 
   if (!enabled) {
@@ -31,7 +32,13 @@ export default function() {
     pageTracker();
   }
 
-  return loadScript(`https://www.googletagmanager.com/gtag/js?id=${config.id}`)
+  if (disableScriptLoad) {
+    return;
+  }
+
+  const resource = `https://www.googletagmanager.com/gtag/js?id=${config.id}`;
+
+  return loadScript(resource)
     .then(() => {
       const library = window[globalObjectName];
 

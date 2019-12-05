@@ -9,6 +9,7 @@ Object {
       "send_page_view": true,
     },
   },
+  "disableScriptLoad": false,
   "enabled": true,
   "globalObjectName": "gtag",
   "onReady": null,

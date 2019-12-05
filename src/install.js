@@ -6,6 +6,7 @@ let Vue;
 let Router;
 let options = {
   enabled: true,
+  disableScriptLoad: false,
   bootstrap: true,
   globalObjectName: "gtag",
   pageTrackerTemplate: null,
