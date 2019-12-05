@@ -31,9 +31,11 @@ Make sure to also give a read at the official gtag.js [documentation](https://de
 
 ## User guide
 
-Coming soon...
+**DOCUMENTATION: COMING SOON...**
 
 For now this is all I got time to write :D
+
+----- 
 
 Start using it your Vue application
 ```js
