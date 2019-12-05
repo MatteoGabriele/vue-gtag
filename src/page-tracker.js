@@ -52,6 +52,13 @@ export const trackPage = (to, from) => {
   config(template);
 };
 
+export const init = Router => {
+  /* istanbul ignore next */
+  Router.onReady(() => {
+    Router.afterEach(trackPage);
+  });
+};
+
 export default () => {
   const Router = getRouter();
 
@@ -59,7 +66,5 @@ export default () => {
     return;
   }
 
-  Router.onReady(() => {
-    Router.afterEach(trackPage);
-  });
+  init(Router);
 };

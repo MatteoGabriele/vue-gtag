@@ -2,9 +2,9 @@ export function loadScript(url) {
   return new Promise((resolve, reject) => {
     var head = document.head || document.getElementsByTagName("head")[0];
     const script = document.createElement("script");
-    script.async = true;
     script.src = url;
     script.setAttribute("rel", "preconnect");
+    script.setAttribute("async", true);
     script.charset = "utf-8";
 
     head.appendChild(script);
@@ -30,10 +30,6 @@ export function isFn(item) {
 
 export function isObject(item) {
   return item && typeof item === "object" && !Array.isArray(item);
-}
-
-export function execFunc(func, ...args) {
-  return isFn(func) && func(...args);
 }
 
 export function mergeDeep(target, ...sources) {

@@ -1,7 +1,8 @@
-import { getOptions } from "@/install";
-import { trackPage } from "@/page-tracker";
+import { getRouter, getOptions } from "@/install";
+import pageTracker, * as tracker from "@/page-tracker";
 import config from "@/api/config";
 import screenview from "@/api/screenview";
+import * as util from "@/util";
 
 jest.mock("@/install");
 jest.mock("@/api/config");
@@ -34,7 +35,7 @@ describe("page-tracker", () => {
       }
     });
 
-    trackPage(to, from);
+    tracker.trackPage(to, from);
 
     expect(config).toHaveBeenCalledWith({
       page_location: url,
@@ -51,7 +52,7 @@ describe("page-tracker", () => {
       appName: "MyApp"
     });
 
-    trackPage(to, from);
+    tracker.trackPage(to, from);
 
     expect(screenview).toHaveBeenCalledWith({
       app_name: "MyApp",
@@ -70,8 +71,67 @@ describe("page-tracker", () => {
       pageTrackerTemplate: () => template
     });
 
-    trackPage(to, from);
+    tracker.trackPage(to, from);
 
     expect(config).toHaveBeenCalledWith(template);
+  });
+
+  it("should not track when `to` and `from` routes are identical", () => {
+    tracker.trackPage({ path: "/foo" }, { path: "/foo" });
+
+    expect(screenview).not.toHaveBeenCalled();
+    expect(config).not.toHaveBeenCalled();
+  });
+
+  it("should warn when using screenview without an appName", () => {
+    util.warn = jest.fn();
+
+    getOptions.mockReturnValueOnce({
+      pageTrackerScreenviewEnabled: true
+    });
+
+    tracker.trackPage(to, from);
+
+    expect(util.warn).toHaveBeenCalledWith(
+      "To use the screenview, add the appName to the plugin options"
+    );
+
+    expect(screenview).not.toHaveBeenCalled();
+  });
+
+  it("should warn when using screenview without naming routes", () => {
+    util.warn = jest.fn();
+
+    getOptions.mockReturnValueOnce({
+      pageTrackerScreenviewEnabled: true,
+      appName: "MyApp"
+    });
+
+    tracker.trackPage({ path: "/" }, { path: "/about" });
+
+    expect(util.warn).toHaveBeenCalledWith(
+      "To use the screenview, name your routes"
+    );
+
+    expect(screenview).not.toHaveBeenCalled();
+  });
+
+  it("should not trigger init without a Router instance", () => {
+    tracker.init = jest.fn();
+
+    pageTracker();
+
+    expect(tracker.init).not.toHaveBeenCalled();
+  });
+
+  it("should trigger init", () => {
+    const spy = jest.fn();
+    getRouter.mockReturnValueOnce({
+      onReady: spy
+    });
+
+    pageTracker();
+
+    expect(spy).toHaveBeenCalled();
   });
 });

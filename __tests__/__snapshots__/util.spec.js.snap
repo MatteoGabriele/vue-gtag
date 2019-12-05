@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`loadScript should create a script tag 1`] = `
+<head>
+  <script
+    async="true"
+    charset="utf-8"
+    rel="preconnect"
+    src="foo"
+  />
+</head>
+`;
