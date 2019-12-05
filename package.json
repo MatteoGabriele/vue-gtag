@@ -19,7 +19,7 @@
     "lint:fix": "eslint src --ext .js --fix",
     "test": "jest",
     "coverage": "jest --coverage",
-    "prepublishOnly": "yarn lint && webpack --mode production",
+    "prepublishOnly": "yarn lint && yarn test && webpack --mode production",
     "semantic-release": "semantic-release"
   },
   "config": {
