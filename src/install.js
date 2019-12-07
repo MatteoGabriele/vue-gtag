@@ -15,6 +15,7 @@ let options = {
   pageTrackerScreenviewEnabled: false,
   defaultGroupName: "default",
   sendTo: null,
+  includes: null,
   config: null
 };
 
