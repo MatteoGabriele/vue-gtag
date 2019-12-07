@@ -1,6 +1,6 @@
 import { getRouter, getOptions } from "./install";
 import { isFn, warn } from "./util";
-import config from "./api/config";
+import pageview from "./api/pageview";
 import screenview from "./api/screenview";
 
 export const trackPage = (to, from) => {
@@ -49,7 +49,7 @@ export const trackPage = (to, from) => {
     return;
   }
 
-  config(template);
+  pageview(template);
 };
 
 export const init = Router => {
