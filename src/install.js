@@ -31,7 +31,9 @@ export function install(_Vue, _options = {}, _Router) {
 
   extend();
 
-  if (options.bootstrap) {
-    bootstrap();
+  if (!options.bootstrap) {
+    return;
   }
+
+  bootstrap();
 }

@@ -8,6 +8,7 @@ module.exports = function(env, argv) {
   return {
     devtool: isProd ? false : "cheap-module-eval-source-map",
     output: {
+      library: "vue-gtag",
       libraryTarget: "umd",
       filename: "vue-gtag.js",
       globalObject: "typeof self !== 'undefined' ? self : this"

@@ -6,6 +6,10 @@ jest.mock("@/extend");
 jest.mock("@/bootstrap");
 
 describe("install", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should have default options", () => {
     expect(getOptions()).toMatchSnapshot();
   });
@@ -28,5 +32,10 @@ describe("install", () => {
   it("should call bootstrap", () => {
     install();
     expect(bootstrap).toHaveBeenCalled();
+  });
+
+  it("should not bootstrap", () => {
+    install(null, { bootstrap: false });
+    expect(bootstrap).not.toHaveBeenCalled();
   });
 });

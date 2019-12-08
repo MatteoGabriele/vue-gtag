@@ -1,6 +1,6 @@
 export function loadScript(url) {
   return new Promise((resolve, reject) => {
-    var head = document.head || document.getElementsByTagName("head")[0];
+    var head = document.head;
     const script = document.createElement("script");
     script.src = url;
     script.setAttribute("rel", "preconnect");
@@ -15,12 +15,10 @@ export function loadScript(url) {
 }
 
 export function warn(msg, err) {
-  if (typeof console !== "undefined") {
-    console.warn("[vue-gtag] " + msg);
+  console.warn("[vue-gtag] " + msg);
 
-    if (err && err.stack) {
-      console.warn(err.stack);
-    }
+  if (err && err.stack) {
+    console.warn(err.stack);
   }
 }
 

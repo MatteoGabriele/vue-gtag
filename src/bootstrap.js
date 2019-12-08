@@ -11,7 +11,7 @@ export default function() {
   const {
     enabled,
     globalObjectName,
-    config: { id, params = {} },
+    config: { id, params },
     include,
     pageTrackerEnabled,
     onReady,
@@ -22,17 +22,28 @@ export default function() {
     optOut();
   }
 
-  window.dataLayer = window.dataLayer || [];
-  window[globalObjectName] = function() {
-    window.dataLayer.push(arguments);
-  };
+  if (window[globalObjectName] == null) {
+    window.dataLayer = window.dataLayer || [];
+    window[globalObjectName] = function() {
+      window.dataLayer.push(arguments);
+    };
+  }
 
   window[globalObjectName]("js", new Date());
-  window[globalObjectName]("config", id, params);
+
+  if (params) {
+    window[globalObjectName]("config", id, params);
+  } else {
+    window[globalObjectName]("config", id);
+  }
 
   if (Array.isArray(include)) {
     include.forEach(domain => {
-      window[globalObjectName]("config", domain.id, domain.params);
+      if (domain.params) {
+        window[globalObjectName]("config", domain.id, domain.params);
+      } else {
+        window[globalObjectName]("config", domain.id);
+      }
     });
   }
 

@@ -140,7 +140,7 @@ describe("bootstrap", () => {
     });
   });
 
-  it("should inject a custom name for the gtag library", done => {
+  it("should inject a custom name for the gtag library", () => {
     getOptions.mockReturnValueOnce({
       globalObjectName: "foo",
       config: {
@@ -150,14 +150,13 @@ describe("bootstrap", () => {
 
     bootstrap();
 
-    flushPromises().then(() => {
-      expect(global.gtag).not.toBeDefined();
-      expect(global.foo).toBeDefined();
-      done();
-    });
+    expect(global.gtag).not.toBeDefined();
+    expect(global.foo).toBeDefined();
+
+    flushPromises();
   });
 
-  it("should start tracking pages when enabled", done => {
+  it("should start tracking pages when enabled", () => {
     getOptions.mockReturnValueOnce({
       globalObjectName: "gtag",
       pageTrackerEnabled: true,
@@ -168,13 +167,12 @@ describe("bootstrap", () => {
 
     bootstrap();
 
-    flushPromises().then(() => {
-      expect(pageTracker).toHaveBeenCalled();
-      done();
-    });
+    expect(pageTracker).toHaveBeenCalled();
+
+    flushPromises();
   });
 
-  it("should not start tracking pages when enabled", done => {
+  it("should not start tracking pages when enabled", () => {
     getOptions.mockReturnValueOnce({
       globalObjectName: "gtag",
       pageTrackerEnabled: false,
@@ -185,10 +183,9 @@ describe("bootstrap", () => {
 
     bootstrap();
 
-    flushPromises().then(() => {
-      expect(pageTracker).not.toHaveBeenCalled();
-      done();
-    });
+    expect(pageTracker).not.toHaveBeenCalled();
+
+    flushPromises();
   });
 
   it("should return an error when script loading fails", done => {
@@ -212,5 +209,27 @@ describe("bootstrap", () => {
       );
       done();
     });
+  });
+
+  it("should fire all the includes", () => {
+    getOptions.mockReturnValueOnce({
+      globalObjectName: "gtag",
+      disableScriptLoad: true,
+      enabled: true,
+      include: [{ id: 2 }, { id: 3, params: { foo: 2 } }],
+      config: {
+        id: 1,
+        params: { foo: 1 }
+      }
+    });
+
+    global.window.gtag = jest.fn();
+
+    bootstrap();
+
+    const { calls } = global.window.gtag.mock;
+    expect(calls[1]).toEqual(["config", 1, { foo: 1 }]);
+    expect(calls[2]).toEqual(["config", 2]);
+    expect(calls[3]).toEqual(["config", 3, { foo: 2 }]);
   });
 });

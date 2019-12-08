@@ -18,7 +18,9 @@
     "lint": "eslint src --ext .js",
     "lint:fix": "eslint src --ext .js --fix",
     "test": "jest",
-    "coverage": "jest --coverage",
+    "coverage:text": "jest --coverage --coverageReporters=text",
+    "coverage:html": "jest --coverage --coverageReporters=html",
+    "coverage:lcov": "jest --coverage --coverageReporters=text-lcov",
     "prepublishOnly": "yarn lint && yarn test && webpack --mode production",
     "semantic-release": "semantic-release"
   },
