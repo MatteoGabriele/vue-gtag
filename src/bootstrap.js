@@ -1,5 +1,8 @@
 import { warn, isFn, loadScript } from "./util";
 import { getOptions } from "../src/install";
+import config from "./api/config";
+import query from "./api/query";
+import optOut from "./api/opt-out";
 import pageTracker from "./page-tracker";
 
 export default function() {
@@ -10,14 +13,14 @@ export default function() {
   const {
     enabled,
     globalObjectName,
-    config,
+    config: { id },
     pageTrackerEnabled,
     onReady,
     disableScriptLoad
   } = getOptions();
 
   if (!enabled) {
-    window[`ga-disable-${config.id}`] = true;
+    optOut();
   }
 
   window.dataLayer = window.dataLayer || [];
@@ -25,8 +28,8 @@ export default function() {
     window.dataLayer.push(arguments);
   };
 
-  window[globalObjectName]("js", new Date());
-  window[globalObjectName]("config", config.id, config.params);
+  query("js", new Date());
+  config(config.params);
 
   if (pageTrackerEnabled) {
     pageTracker();
@@ -36,7 +39,7 @@ export default function() {
     return;
   }
 
-  const resource = `https://www.googletagmanager.com/gtag/js?id=${config.id}`;
+  const resource = `https://www.googletagmanager.com/gtag/js?id=${id}`;
 
   return loadScript(resource)
     .then(() => {
