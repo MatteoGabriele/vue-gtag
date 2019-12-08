@@ -2,10 +2,14 @@ import bootstrap from "@/bootstrap";
 import { getOptions } from "@/install";
 import flushPromises from "flush-promises";
 import pageTracker from "@/page-tracker";
+import optOut from "@/api/opt-out";
 import * as util from "@/util";
 
 jest.mock("@/page-tracker");
+jest.mock("@/api/opt-out");
 jest.mock("@/install");
+jest.mock("@/api/query");
+jest.mock("@/api/config");
 
 describe("bootstrap", () => {
   beforeEach(() => {
@@ -98,7 +102,7 @@ describe("bootstrap", () => {
     bootstrap();
 
     flushPromises().then(() => {
-      expect(global["ga-disable-1"]).toEqual(true);
+      expect(optOut).toHaveBeenCalled();
       done();
     });
   });

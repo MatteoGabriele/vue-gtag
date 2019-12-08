@@ -3,15 +3,12 @@
 exports[`install should have default options 1`] = `
 Object {
   "bootstrap": true,
-  "config": Object {
-    "id": null,
-    "params": Object {
-      "send_page_view": true,
-    },
-  },
+  "config": null,
+  "defaultGroupName": "default",
   "disableScriptLoad": false,
   "enabled": true,
   "globalObjectName": "gtag",
+  "includes": null,
   "onReady": null,
   "pageTrackerEnabled": true,
   "pageTrackerScreenviewEnabled": false,

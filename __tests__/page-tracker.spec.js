@@ -1,11 +1,11 @@
 import { getRouter, getOptions } from "@/install";
 import pageTracker, * as tracker from "@/page-tracker";
-import config from "@/api/config";
+import pageview from "@/api/pageview";
 import screenview from "@/api/screenview";
 import * as util from "@/util";
 
 jest.mock("@/install");
-jest.mock("@/api/config");
+jest.mock("@/api/pageview");
 jest.mock("@/api/screenview");
 
 const to = {
@@ -37,7 +37,7 @@ describe("page-tracker", () => {
 
     tracker.trackPage(to, from);
 
-    expect(config).toHaveBeenCalledWith({
+    expect(pageview).toHaveBeenCalledWith({
       page_location: url,
       page_path: "/about",
       page_title: "About"
@@ -58,7 +58,7 @@ describe("page-tracker", () => {
       app_name: "MyApp",
       screen_name: "About"
     });
-    expect(config).not.toHaveBeenCalled();
+    expect(pageview).not.toHaveBeenCalled();
   });
 
   it("should", () => {
@@ -73,14 +73,14 @@ describe("page-tracker", () => {
 
     tracker.trackPage(to, from);
 
-    expect(config).toHaveBeenCalledWith(template);
+    expect(pageview).toHaveBeenCalledWith(template);
   });
 
   it("should not track when `to` and `from` routes are identical", () => {
     tracker.trackPage({ path: "/foo" }, { path: "/foo" });
 
     expect(screenview).not.toHaveBeenCalled();
-    expect(config).not.toHaveBeenCalled();
+    expect(pageview).not.toHaveBeenCalled();
   });
 
   it("should warn when using screenview without an appName", () => {

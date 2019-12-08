@@ -13,7 +13,7 @@ export default function() {
   const {
     enabled,
     globalObjectName,
-    config: { id },
+    config: { id, params = {} },
     pageTrackerEnabled,
     onReady,
     disableScriptLoad
@@ -29,7 +29,7 @@ export default function() {
   };
 
   query("js", new Date());
-  config(config.params);
+  config(params);
 
   if (pageTrackerEnabled) {
     pageTracker();
