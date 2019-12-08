@@ -3,7 +3,7 @@
  <img src="https://badge.fury.io/js/vue-gtag.svg" />
 <a/>
 
- <img src="https://img.shields.io/badge/size-1.80kB-brightgreen.svg" />
+ <img src="https://img.shields.io/badge/size-2.07kB-brightgreen.svg" />
  <img src="https://travis-ci.com/MatteoGabriele/vue-gtag.svg?branch=master" />
 </p>
 
