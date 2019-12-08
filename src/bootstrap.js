@@ -1,7 +1,5 @@
 import { warn, isFn, loadScript } from "./util";
 import { getOptions } from "../src/install";
-import config from "./api/config";
-import query from "./api/query";
 import optOut from "./api/opt-out";
 import pageTracker from "./page-tracker";
 
@@ -14,6 +12,7 @@ export default function() {
     enabled,
     globalObjectName,
     config: { id, params = {} },
+    include,
     pageTrackerEnabled,
     onReady,
     disableScriptLoad
@@ -28,8 +27,14 @@ export default function() {
     window.dataLayer.push(arguments);
   };
 
-  query("js", new Date());
-  config(params);
+  window[globalObjectName]("js", new Date());
+  window[globalObjectName]("config", id, params);
+
+  if (Array.isArray(include)) {
+    include.forEach(domain => {
+      window[globalObjectName]("config", domain.id, domain.params);
+    });
+  }
 
   if (pageTrackerEnabled) {
     pageTracker();

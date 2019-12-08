@@ -8,8 +8,6 @@ import * as util from "@/util";
 jest.mock("@/page-tracker");
 jest.mock("@/api/opt-out");
 jest.mock("@/install");
-jest.mock("@/api/query");
-jest.mock("@/api/config");
 
 describe("bootstrap", () => {
   beforeEach(() => {

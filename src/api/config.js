@@ -8,7 +8,7 @@ export default (...args) => {
 
   if (Array.isArray(includes)) {
     includes.forEach(domain => {
-      query("config", domain.id, domain.params);
+      query("config", domain.id, ...args);
     });
   }
 };
