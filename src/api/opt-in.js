@@ -1,6 +1,5 @@
-import { getOptions } from "../install";
+import disable from "./ga-disable";
 
 export default () => {
-  const { config } = getOptions();
-  window[`ga-disable-${config.id}`] = false;
+  disable(false);
 };
