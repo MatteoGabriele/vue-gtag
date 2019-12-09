@@ -5,6 +5,7 @@
 
  <img src="https://img.shields.io/badge/size-2.07kB-brightgreen.svg" />
  <img src="https://travis-ci.com/MatteoGabriele/vue-gtag.svg?branch=master" />
+ <a href="https://codeclimate.com/github/MatteoGabriele/vue-gtag/maintainability"><img src="https://api.codeclimate.com/v1/badges/889f91b065ffc8740082/maintainability" /></a>
  <a href="https://codeclimate.com/github/MatteoGabriele/vue-gtag/test_coverage"><img src="https://api.codeclimate.com/v1/badges/889f91b065ffc8740082/test_coverage" /></a>
 </p>
 
