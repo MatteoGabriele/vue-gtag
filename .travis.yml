@@ -11,6 +11,6 @@ before_script:
 - chmod +x ./cc-test-reporter
 - ./cc-test-reporter before-build
 script:
-- nyc --reporter=lcov npm run test
+- nyc --reporter=lcov npm run test:ci
 after_script:
 - ./cc-test-reporter after-build
