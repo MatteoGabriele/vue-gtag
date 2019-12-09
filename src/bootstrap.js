@@ -12,7 +12,7 @@ export default function() {
     enabled,
     globalObjectName,
     config: { id, params },
-    include,
+    includes,
     pageTrackerEnabled,
     onReady,
     disableScriptLoad
@@ -37,8 +37,8 @@ export default function() {
     window[globalObjectName]("config", id);
   }
 
-  if (Array.isArray(include)) {
-    include.forEach(domain => {
+  if (Array.isArray(includes)) {
+    includes.forEach(domain => {
       if (domain.params) {
         window[globalObjectName]("config", domain.id, domain.params);
       } else {

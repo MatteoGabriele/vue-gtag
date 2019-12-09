@@ -216,7 +216,7 @@ describe("bootstrap", () => {
       globalObjectName: "gtag",
       disableScriptLoad: true,
       enabled: true,
-      include: [{ id: 2 }, { id: 3, params: { foo: 2 } }],
+      includes: [{ id: 2 }, { id: 3, params: { foo: 2 } }],
       config: {
         id: 1,
         params: { foo: 1 }
