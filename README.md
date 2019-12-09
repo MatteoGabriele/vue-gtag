@@ -38,7 +38,7 @@ npm install vue-gtag
 
 Please drop an issue, if you find something that doesn't work, or a feature request at [https://github.com/MatteoGabriele/vue-gtag/issues](https://github.com/MatteoGabriele/vue-gtag/issues)
 
-Follow me on twitter [@matteo\_gabriele](https://twitter.com/matteo_gabriele)
+Follow me on twitter [@matteo\_gabriele](https://twitter.com/matteo_gabriele) for updates
 
 ## Sponsors
 <a href="https://www.homerun.co/">
