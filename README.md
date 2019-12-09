@@ -36,7 +36,7 @@ npm install vue-gtag
 
 ## Sponsors
 <a href="https://www.homerun.co/">
- <img width="400" src="https://i.imgur.com/mjmxrfo.png" alt="Homerun.co" />
+ <img width="350" src="https://i.imgur.com/mjmxrfo.png" alt="Homerun.co" />
 </a>
 
 ---
