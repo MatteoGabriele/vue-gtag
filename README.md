@@ -1,4 +1,6 @@
-<p>
+<p align="center">
+ <img width="250" src="https://i.imgur.com/AlAf04U.png" />
+ <br />
 <a href="https://badge.fury.io/js/vue-gtag">
  <img src="https://badge.fury.io/js/vue-gtag.svg" />
 <a/>
