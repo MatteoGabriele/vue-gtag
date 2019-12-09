@@ -34,15 +34,16 @@ npm install vue-gtag
 - [gtag.js official documentation](https://developers.google.com/analytics/devguides/collection/gtagjs)
 
 
+## Issues and features requests
+
+Please drop an issue, if you find something that doesn't work, or a feature request at [https://github.com/MatteoGabriele/vue-gtag/issues](https://github.com/MatteoGabriele/vue-gtag/issues)
+
+Follow me on twitter [@matteo\_gabriele](https://twitter.com/matteo_gabriele)
+
+---
+
 ## Sponsors
 <a href="https://www.homerun.co/">
  <img width="350" src="https://i.imgur.com/mjmxrfo.png" alt="Homerun.co" />
 </a>
 
----
-
-### Issues and features requests
-
-Please drop an issue, if you find something that doesn't work, or a feature request at [https://github.com/MatteoGabriele/vue-gtag/issues](https://github.com/MatteoGabriele/vue-gtag/issues)
-
-Follow me on twitter [@matteo\_gabriele](https://twitter.com/matteo_gabriele)
