@@ -30,7 +30,8 @@ npm install vue-gtag
 
 ## Documentation
 
-click [here](https://matteo-gabriele.gitbook.io/vue-gtag/) for vue-gtag plugin documentation but make sure to also give a read at the official gtag.js [documentation](https://developers.google.com/analytics/devguides/collection/gtagjs)
+- [vue-gtag documentation](https://matteo-gabriele.gitbook.io/vue-gtag/)
+- [gtag.js official documentation](https://developers.google.com/analytics/devguides/collection/gtagjs)
 
 
 # Issues and features requests
