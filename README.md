@@ -34,10 +34,12 @@ npm install vue-gtag
 - [gtag.js official documentation](https://developers.google.com/analytics/devguides/collection/gtagjs)
 
 
-### Sponsors
+## Sponsors
 <a href="https://www.homerun.co/">
  <img width="400" src="https://i.imgur.com/mjmxrfo.png" alt="Homerun.co" />
 </a>
+
+---
 
 ### Issues and features requests
 
