@@ -1,6 +1,6 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
-const CompressionPlugin = require("compression-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = function(env, argv) {
   const isProd = argv.mode === "production";
@@ -32,6 +32,6 @@ module.exports = function(env, argv) {
         }
       ]
     },
-    plugins: [...(isProd ? [new CompressionPlugin()] : [])]
+    plugins: [new CleanWebpackPlugin()]
   };
 };

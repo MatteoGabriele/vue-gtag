@@ -67,6 +67,7 @@
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
     "commitizen": "^4.0.3",
     "compression-webpack-plugin": "^3.0.0",
     "cz-conventional-changelog": "^3.0.2",
