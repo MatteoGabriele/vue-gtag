@@ -12,3 +12,8 @@ script:
 - npm run coverage:lcov
 after_script:
 - ./cc-test-reporter after-build
+after_success:
+  - npm run semantic-release
+branches:
+  only:
+    - master
