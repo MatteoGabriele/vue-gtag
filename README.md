@@ -1,4 +1,6 @@
-<p>
+<p align="center">
+ <img width="250" src="https://i.imgur.com/AlAf04U.png" />
+ <br />
 <a href="https://badge.fury.io/js/vue-gtag">
  <img src="https://badge.fury.io/js/vue-gtag.svg" />
 <a/>
@@ -12,11 +14,9 @@
 
 # vue-gtag
 
-Global Site Tag plugin for Vue (gtag.js)
+Global Site Tag plugin for Vue
 
-## Notes before you install this package
-The package might have limited features and lacks in documentation compared to vue-analytics.
-**In case you need more flexibility and reliability, right now I still suggest you to install [vue-analytics](https://github.com/MatteoGabriele/vue-analytics) as your main tracking system.**
+The global site tag (gtag.js) is a JavaScript tagging framework and API that allows you to send event data to Google Analytics, Google Ads, and Google Marketing Platform. For general gtag.js [documentation](https://developers.google.com/analytics/devguides/collection/gtagjs), read the gtag.js developer guide.
 
 ## Requirements
 
@@ -28,112 +28,20 @@ Vue ^2.0.0
 npm install vue-gtag
 ```
 
+## Documentation
 
-Make sure to also give a read at the official gtag.js [documentation](https://developers.google.com/analytics/devguides/collection/gtagjs)
+- [vue-gtag documentation](https://matteo-gabriele.gitbook.io/vue-gtag/) ( working progress )
+- [gtag.js official documentation](https://developers.google.com/analytics/devguides/collection/gtagjs)
 
-## User guide
 
-**DOCUMENTATION: COMING SOON...**
+## Sponsors
+<a href="https://www.homerun.co/">
+ <img width="400" src="https://i.imgur.com/mjmxrfo.png" alt="Homerun.co" />
+</a>
 
-For now this is all I got time to write :D
+---
 
------ 
-
-Start using it your Vue application
-```js
-import Vue from 'vue'
-import VueGtag from 'vue-gtag'
-
-const options = {
-  config: {
-    id: 'GA_MEASUREMENT_ID' // replace GA_MEASUREMENT_ID with your ID
-  }
-}
-
-Vue.use(VueGtag, options)
-```
-
-Start automatic routing track by passing your VueRouter instance
-
-```js
-import Vue from 'vue'
-import VueGtag from 'vue-gtag'
-import VueRouter from 'vue-router'
-
-const router = new VueRouter({
-  routes: [{...}]
-})
-
-const options = {
-  config: {
-    id: 'GA_MEASUREMENT_ID' // replace GA_MEASUREMENT_ID with your ID
-  }
-}
-
-Vue.use(VueGtag, options, router)
-
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount("#app");
-```
-
-plugin default options
-
-```js
-{
-  enabled: true, // opt-in by default, but maybe should be opt-out by default #GDPR
-  globalObjectName: "gtag", // new feature in gtag.js. it's possible to change global object name
-  pageTrackerTemplate: () => null,
-  pageTrackerEnabled: false, // by default it's true if the router is passed
-  pageTrackerScreenviewEnabled: false, // pageviews by default
-  config: {
-    id: null, // GA_MEASUREMENT_ID
-    params: {
-      send_page_view: true // set to false is you don't want the first hit on landing
-    }
-  }
-}
-```
-
-available methods within the $gtag object
-it works mostly like vue-analytics structure, but with some different namings
-
-- query,
-- config,
-- event,
-- pageview,
-- screenview,
-- customMap,
-- time,
-- exception,
-- linker,
-- purchase,
-- set,
-- optIn,
-- optOut,
-- $getOptions
-
-## Example Usage
-
-```js
-export default {
-  name: "Example",
-  methods: {
-    recordEvent() {
-      var callback = function() {
-        console.log("Conversion Recorded")
-      };
-      this.$gtag.event("conversion", {
-        send_to: "your-id-here",
-        event_callback: callback
-      });
-    }
-  }
-};
-```
-
-# Issues and features requests
+### Issues and features requests
 
 Please drop an issue, if you find something that doesn't work, or a feature request at [https://github.com/MatteoGabriele/vue-gtag/issues](https://github.com/MatteoGabriele/vue-gtag/issues)
 
