@@ -1,3 +1,5 @@
+export const noop = function() {};
+
 export function loadScript(url) {
   return new Promise((resolve, reject) => {
     var head = document.head;

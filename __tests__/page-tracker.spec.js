@@ -8,6 +8,8 @@ jest.mock("@/install");
 jest.mock("@/api/pageview");
 jest.mock("@/api/screenview");
 
+const noop = () => {};
+
 const to = {
   name: "About",
   path: "/about"
@@ -24,7 +26,9 @@ describe("page-tracker", () => {
   });
 
   it("should call config to track pageviews", () => {
-    getOptions.mockReturnValueOnce({});
+    getOptions.mockReturnValueOnce({
+      pageTrackerTemplate: noop
+    });
 
     const url = "foo";
 
@@ -48,6 +52,7 @@ describe("page-tracker", () => {
 
   it("should call screenview to track screenviews", () => {
     getOptions.mockReturnValueOnce({
+      pageTrackerTemplate: noop,
       pageTrackerScreenviewEnabled: true,
       appName: "MyApp"
     });
@@ -87,6 +92,7 @@ describe("page-tracker", () => {
     util.warn = jest.fn();
 
     getOptions.mockReturnValueOnce({
+      pageTrackerTemplate: noop,
       pageTrackerScreenviewEnabled: true
     });
 
@@ -103,6 +109,7 @@ describe("page-tracker", () => {
     util.warn = jest.fn();
 
     getOptions.mockReturnValueOnce({
+      pageTrackerTemplate: noop,
       pageTrackerScreenviewEnabled: true,
       appName: "MyApp"
     });
@@ -126,6 +133,12 @@ describe("page-tracker", () => {
 
   it("should trigger init", () => {
     const spy = jest.fn();
+
+    getOptions.mockReturnValueOnce({
+      onBeforeTrack: noop,
+      onAfterTrack: noop
+    });
+
     getRouter.mockReturnValueOnce({
       onReady: spy
     });

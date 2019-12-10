@@ -9,9 +9,11 @@ Object {
   "enabled": true,
   "globalObjectName": "gtag",
   "includes": null,
-  "onReady": null,
+  "onAfterTrack": [Function],
+  "onBeforeTrack": [Function],
+  "onReady": [Function],
   "pageTrackerEnabled": true,
   "pageTrackerScreenviewEnabled": false,
-  "pageTrackerTemplate": null,
+  "pageTrackerTemplate": [Function],
 }
 `;
