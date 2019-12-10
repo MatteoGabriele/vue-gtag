@@ -20,6 +20,7 @@
     "test": "jest",
     "test:ci": "jest --coverage --bail --runInBand --verbose=false",
     "coverage": "jest --coverage",
+    "coverage:html": "jest --coverage --coverageReporters=html",
     "coverage:text": "jest --coverage --coverageReporters=text",
     "coverage:lcov": "jest --coverage --coverageReporters=lcov",
     "prepublishOnly": "yarn lint && yarn test && webpack --mode production",

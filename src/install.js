@@ -1,16 +1,18 @@
-import { mergeDeep } from "./util";
+import { noop, mergeDeep } from "./util";
 import extend from "./extend";
 import bootstrap from "./bootstrap";
 
 let Vue;
 let Router;
 let options = {
+  pageTrackerTemplate: noop,
+  onBeforeTrack: noop,
+  onAfterTrack: noop,
+  onReady: noop,
   enabled: true,
   disableScriptLoad: false,
   bootstrap: true,
   globalObjectName: "gtag",
-  pageTrackerTemplate: null,
-  onReady: null,
   pageTrackerEnabled: true,
   pageTrackerScreenviewEnabled: false,
   defaultGroupName: "default",
