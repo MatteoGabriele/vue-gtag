@@ -45,6 +45,6 @@ Follow me on twitter [@matteo\_gabriele](https://twitter.com/matteo_gabriele) fo
 
 ## Sponsors
 <a href="https://www.homerun.co/">
- <img width="350" src="https://i.imgur.com/mjmxrfo.png" alt="Homerun.co" />
+ <img width="350" src="https://i.imgur.com/3bNzRy1.png" alt="Homerun.co" />
 </a>
 
