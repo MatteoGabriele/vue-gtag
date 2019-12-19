@@ -1,14 +1,11 @@
 import linker from "@/api/linker";
-import event from "@/api/event";
+import config from "@/api/config";
 
-jest.mock("@/api/event");
+jest.mock("@/api/config");
 
 describe("api/linker", () => {
   it("should be called with this parameters", () => {
-    linker("foo");
-    expect(event).toHaveBeenCalledWith("linker", "foo");
-
     linker({ foo: "bar" });
-    expect(event).toHaveBeenCalledWith("linker", { foo: "bar" });
+    expect(config).toHaveBeenCalledWith("linker", { foo: "bar" });
   });
 });

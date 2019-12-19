@@ -1,5 +1,5 @@
-import event from "./event";
+import config from "./config";
 
-export default (...args) => {
-  event("linker", ...args);
+export default params => {
+  config("linker", params);
 };
