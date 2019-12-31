@@ -1,19 +1,22 @@
 <p align="center">
- <img width="250" src="https://i.imgur.com/AlAf04U.png" />
- <br />
-<a href="https://badge.fury.io/js/vue-gtag">
- <img src="https://badge.fury.io/js/vue-gtag.svg" />
-<a/>
-
- <img src="https://img.shields.io/badge/size-2.07kB-brightgreen.svg" />
- 
+  <img width="250" src="https://i.imgur.com/AlAf04U.png">
+  <br>
+  <a href="https://npm.im/vue-gtag">
+    <img src="https://badgen.net/npm/v/vue-gtag">
+  </a>
+  <a href="https://bundlephobia.com/result?p=vue-gtag">
+    <img src="https://badgen.net/bundlephobia/min/vue-gtag">
+  </a>
   <a href="https://travis-ci.org/MatteoGabriele/vue-gtag">
-  <img src="https://travis-ci.org/MatteoGabriele/vue-gtag.svg?branch=master" />
- </a>
- <a href="https://codeclimate.com/github/MatteoGabriele/vue-gtag/maintainability"><img src="https://api.codeclimate.com/v1/badges/889f91b065ffc8740082/maintainability" /></a>
- <a href="https://codeclimate.com/github/MatteoGabriele/vue-gtag/test_coverage"><img src="https://api.codeclimate.com/v1/badges/889f91b065ffc8740082/test_coverage" /></a>
+    <img src="https://badgen.net/travis/MatteoGabriele/vue-gtag/master">
+  </a>
+  <a href="https://codeclimate.com/github/MatteoGabriele/vue-gtag/maintainability">
+    <img src="https://badgen.net/codeclimate/maintainability/MatteoGabriele/vue-gtag?icon=codeclimate">
+  </a>
+  <a href="https://codeclimate.com/github/MatteoGabriele/vue-gtag/test_coverage">
+    <img src="https://badgen.net/codeclimate/coverage/MatteoGabriele/vue-gtag?icon=codeclimate">
+  </a>
 </p>
-
 
 # vue-gtag
 
@@ -36,7 +39,6 @@ npm install vue-gtag
 - [vue-gtag documentation](https://matteo-gabriele.gitbook.io/vue-gtag/)
 - [gtag.js official documentation](https://developers.google.com/analytics/devguides/collection/gtagjs)
 
-
 ## Issues and features requests
 
 Please drop an issue, if you find something that doesn't work, or a feature request at [https://github.com/MatteoGabriele/vue-gtag/issues](https://github.com/MatteoGabriele/vue-gtag/issues)
@@ -44,7 +46,7 @@ Please drop an issue, if you find something that doesn't work, or a feature requ
 Follow me on twitter [@matteo\_gabriele](https://twitter.com/matteo_gabriele) for updates
 
 ## Sponsors
-<a href="https://www.homerun.co/">
- <img width="350" src="https://i.imgur.com/3bNzRy1.png" alt="Homerun.co" />
-</a>
 
+<a href="https://www.homerun.co/">
+  <img width="350" src="https://i.imgur.com/3bNzRy1.png" alt="Homerun.co">
+</a>
