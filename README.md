@@ -5,7 +5,7 @@
     <img src="https://badgen.net/npm/v/vue-gtag">
   </a>
   <a href="https://bundlephobia.com/result?p=vue-gtag">
-    <img src="https://badgen.net/bundlephobia/min/vue-gtag">
+    <img src="https://badgen.net/bundlephobia/minzip/vue-gtag">
   </a>
   <a href="https://travis-ci.org/MatteoGabriele/vue-gtag">
     <img src="https://badgen.net/travis/MatteoGabriele/vue-gtag/master">
