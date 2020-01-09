@@ -1,11 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`loadScript should create a link for domain preconnect 1`] = `
+<head>
+  <link
+    href="bar"
+    rel="preconnect"
+  />
+  <script
+    charset="utf-8"
+    src="foo"
+  />
+</head>
+`;
+
 exports[`loadScript should create a script tag 1`] = `
 <head>
   <script
-    async="true"
     charset="utf-8"
-    rel="preconnect"
     src="foo"
   />
 </head>

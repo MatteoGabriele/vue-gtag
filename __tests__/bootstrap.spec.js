@@ -32,7 +32,8 @@ describe("bootstrap", () => {
 
     flushPromises().then(() => {
       expect(util.loadScript).toHaveBeenCalledWith(
-        "https://www.googletagmanager.com/gtag/js?id=1"
+        "https://www.googletagmanager.com/gtag/js?id=1",
+        "https://www.googletagmanager.com"
       );
       done();
     });

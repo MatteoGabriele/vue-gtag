@@ -18,6 +18,15 @@ describe("loadScript", () => {
       done();
     });
   });
+
+  it("should create a link for domain preconnect", done => {
+    util.loadScript("foo", "bar");
+
+    flushPromises().then(() => {
+      expect(document.head).toMatchSnapshot();
+      done();
+    });
+  });
 });
 
 describe("mergeDeep", () => {

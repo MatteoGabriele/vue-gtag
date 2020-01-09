@@ -55,9 +55,10 @@ export default function() {
     return;
   }
 
-  const resource = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+  const domain = "https://www.googletagmanager.com";
+  const resource = `${domain}/gtag/js?id=${id}`;
 
-  return loadScript(resource)
+  return loadScript(resource, domain)
     .then(() => {
       const library = window[globalObjectName];
 
