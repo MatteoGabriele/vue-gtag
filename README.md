@@ -16,9 +16,6 @@
   <a href="https://codeclimate.com/github/MatteoGabriele/vue-gtag/test_coverage">
     <img src="https://badgen.net/codeclimate/coverage/MatteoGabriele/vue-gtag?icon=codeclimate">
   </a>
-  <a href="https://david-dm.org/matteogabriele/vue-gtag">
-    <img alt="David" src="https://img.shields.io/david/dev/matteogabriele/vue-gtag">
-  </a>
 </p>
 
 # vue-gtag
