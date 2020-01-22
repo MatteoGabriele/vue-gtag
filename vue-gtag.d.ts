@@ -1,5 +1,6 @@
 declare module 'vue-gtag' {
   import _Vue, { PluginFunction } from 'vue';
+  import VueRouter from 'vue-router';
 
   export interface PageView {
     page_path: string;
@@ -44,6 +45,7 @@ declare module 'vue-gtag' {
   }
 
   export interface PluginOptions {
+    appName?: string;
     pageTrackerTemplate?: () => void;
     onBeforeTrack?: () => void;
     onAfterTrack?: () => void;
@@ -56,11 +58,14 @@ declare module 'vue-gtag' {
     pageTrackerScreenviewEnabled: boolean;
     defaultGroupName?: string;
     includes: any;
-    config: any;
+    config: {
+      id: string,
+      params?: Dictionary<any>
+    };
   }
 
   export class VueGtagPlugin {
-    static install(Vue: typeof _Vue, options: PluginOptions): void;
+    static install(Vue: typeof _Vue, options: PluginOptions, router?: VueRouter): void;
   }
 
   export default VueGtagPlugin;
