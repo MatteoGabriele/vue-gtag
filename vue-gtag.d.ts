@@ -55,10 +55,10 @@ declare module 'vue-gtag' {
     bootstrap?: boolean;
     globalObjectName?: string;
     pageTrackerEnabled?: boolean;
-    pageTrackerScreenviewEnabled: boolean;
+    pageTrackerScreenviewEnabled?: boolean;
     defaultGroupName?: string;
-    includes: any;
-    config: {
+    includes?: any;
+    config?: {
       id: string,
       params?: Dictionary<any>
     };
