@@ -3,6 +3,8 @@ declare module 'vue-gtag' {
   import VueRouter from 'vue-router';
 
   export interface PageView {
+    page_title: string;
+    page_location: string;
     page_path: string;
   }
 
