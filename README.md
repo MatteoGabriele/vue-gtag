@@ -4,6 +4,9 @@
   <a href="https://npm.im/vue-gtag">
     <img src="https://badgen.net/npm/v/vue-gtag">
   </a>
+  <a href="https://npm.im/vue-gtag">
+    <img src="https://badgen.net/npm/dw/vue-gtag?color=blue">
+  </a>
   <a href="https://bundlephobia.com/result?p=vue-gtag">
     <img src="https://badgen.net/bundlephobia/minzip/vue-gtag">
   </a>
