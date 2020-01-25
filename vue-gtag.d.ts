@@ -8,12 +8,6 @@ declare module 'vue-gtag' {
     page_path: string;
   }
 
-  export interface Event {
-    event_category: string;
-    event_label: string;
-    value: string;
-  }
-
   export interface ScreenView {
     app_name: string;
     screen_name: string;
@@ -38,7 +32,16 @@ declare module 'vue-gtag' {
 
   export interface VueGtag {
     pageview(pageView: PageView): void;
-    event(action: string, event: Event): void;
+
+    /**
+     * Send a Google Analytics Event.
+     *
+     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/events
+     *
+     * @param action string that will appear as the event action in Google Analytics Event reports
+     * @param eventParams
+     */
+    event(action: string, eventParams?: Gtag.ControlParams | Gtag.EventParams | Gtag.CustomParams): void;
     screenview(screenView: ScreenView): void;
     customMap(map: Dictionary<string>): void;
     purchase(purchase: Purchase): void;
@@ -74,7 +77,7 @@ declare module 'vue-gtag' {
 
   module 'vue/types/vue' {
     interface Vue {
-      $ga: VueGtag;
+      $gtag: VueGtag;
     }
   }
 }
