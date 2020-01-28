@@ -1,11 +1,98 @@
 declare module "vue-gtag" {
   import _Vue, { PluginFunction } from "vue";
   import VueRouter from "vue-router";
+  type Currency = string | number;
 
-  type GtagEventParams =
-    | Gtag.ControlParams
-    | Gtag.EventParams
-    | Gtag.CustomParams;
+  type EventNames =
+    | "add_payment_info"
+    | "add_to_cart"
+    | "add_to_wishlist"
+    | "begin_checkout"
+    | "checkout_progress"
+    | "exception"
+    | "generate_lead"
+    | "login"
+    | "page_view"
+    | "purchase"
+    | "refund"
+    | "remove_from_cart"
+    | "screen_view"
+    | "search"
+    | "select_content"
+    | "set_checkout_option"
+    | "share"
+    | "sign_up"
+    | "timing_complete"
+    | "view_item"
+    | "view_item_list"
+    | "view_promotion"
+    | "view_search_results";
+
+  interface GtagPromotion {
+    creative_name?: string;
+    creative_slot?: string;
+    id?: string;
+    name?: string;
+  }
+  interface GtagItem {
+    brand?: string;
+    category?: string;
+    creative_name?: string;
+    creative_slot?: string;
+    id?: string;
+    location_id?: string;
+    name?: string;
+    price?: Currency;
+    quantity?: number;
+  }
+
+  type GtagControlParams = {
+    groups?: string | string[];
+    send_to?: string | string[];
+    event_callback?: () => void;
+    event_timeout?: number;
+  };
+
+  type GtagEventParams = {
+    checkout_option?: string;
+    checkout_step?: number;
+    content_id?: string;
+    content_type?: string;
+    coupon?: string;
+    currency?: string;
+    description?: string;
+    fatal?: boolean;
+    items?: GtagItem[];
+    method?: string;
+    number?: string;
+    promotions?: GtagPromotion[];
+    screen_name?: string;
+    search_term?: string;
+    shipping?: Currency;
+    tax?: Currency;
+    transaction_id?: string;
+    value?: number;
+    event_label?: string;
+    event_category?: string;
+  };
+  interface CustomParams {
+    [key: string]: any;
+  }
+  interface Gtag {
+    (
+      command: "config",
+      targetId: string,
+      config?: GtagControlParams | GtagEventParams | CustomParams
+    ): void;
+    (command: "set", config: CustomParams): void;
+    (command: "js", config: Date): void;
+    (
+      command: "event",
+      eventName: EventNames | string,
+      eventParams?: GtagControlParams | GtagEventParams | CustomParams
+    ): void;
+  }
+  type GtagGenericParams = GtagControlParams | GtagEventParams | CustomParams;
 
   export interface PageView {
     page_title: string;
@@ -13,7 +100,7 @@ declare module "vue-gtag" {
     page_path: string;
   }
 
-  export interface Event extends Gtag.EventParams {
+  export interface Event extends GtagEventParams {
     event_category: string;
     event_label: string;
     value: number;
@@ -30,7 +117,7 @@ declare module "vue-gtag" {
     value?: number;
     tax?: number;
     shipping?: number;
-    items?: Gtag.Item[];
+    items?: GtagItem[];
     checkout_step?: number;
     checkout_option?: string;
   }
@@ -60,21 +147,21 @@ declare module "vue-gtag" {
     optIn(): void;
     optOut(): void;
     pageview(pageView: PageView): void;
-    event(action: Gtag.EventNames | string, event: Event): void;
+    event(action: EventNames | string, event: Event): void;
     screenview(screenView: ScreenView): void;
     customMap(map: Dictionary<string>): void;
     purchase(puchase: Event): void;
     purchase(purchase: Purchase): void;
     linker(config: Linker): void;
     exception(ex: Exception): void;
-    set(config: Gtag.CustomParams): void;
-    config(config?: GtagEventParams);
+    set(config: CustomParams): void;
+    config(config?: GtagGenericParams);
     time(timing: Timing);
   }
 
   export interface DomainConfig {
     id: string;
-    params?: GtagEventParams & { send_page_view: boolean };
+    params?: GtagGenericParams & { send_page_view: boolean };
   }
 
   export interface PluginOptions {
@@ -102,7 +189,7 @@ declare module "vue-gtag" {
     ): void;
   }
 
-  export function bootstrap(): Promise<Gtag.Gtag>;
+  export function bootstrap(): Promise<Gtag>;
   export function setOptions(PluginOptions): void;
 
   export default VueGtagPlugin;
