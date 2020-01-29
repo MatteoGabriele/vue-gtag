@@ -90,8 +90,5 @@
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
-  },
-  "dependencies": {
-    "@types/gtag.js": "0.0.3"
   }
 }

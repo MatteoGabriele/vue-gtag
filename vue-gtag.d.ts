@@ -8,6 +8,16 @@ declare module 'vue-gtag' {
     page_path: string;
   }
 
+  export interface EventParams {
+    /** string that will appear as the event category */
+    event_category?: string;
+    /** string that will appear as the event label */
+    event_label?: string;
+    /** non-negative integer that will appear as the event value */
+    value?: number;
+    [key: string]: any;
+  }
+
   export interface ScreenView {
     app_name: string;
     screen_name: string;
@@ -41,7 +51,7 @@ declare module 'vue-gtag' {
      * @param action string that will appear as the event action in Google Analytics Event reports
      * @param eventParams
      */
-    event(action: string, eventParams?: Gtag.ControlParams | Gtag.EventParams | Gtag.CustomParams): void;
+    event(action: string, eventParams?: EventParams): void;
     screenview(screenView: ScreenView): void;
     customMap(map: Dictionary<string>): void;
     purchase(purchase: Purchase): void;
