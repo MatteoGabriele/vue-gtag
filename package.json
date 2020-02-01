@@ -83,7 +83,7 @@
     "flush-promises": "^1.0.2",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
-    "semantic-release": "^15.13.31",
+    "semantic-release": "^17.0.2",
     "terser-webpack-plugin": "^2.2.1",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3",
