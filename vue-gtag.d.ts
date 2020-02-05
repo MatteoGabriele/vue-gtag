@@ -74,7 +74,7 @@ declare module 'vue-gtag' {
 
   module 'vue/types/vue' {
     interface Vue {
-      $ga: VueGtag;
+      $gtag: VueGtag;
     }
   }
 }
