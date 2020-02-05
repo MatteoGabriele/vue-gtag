@@ -1,19 +1,31 @@
 language: node_js
 node_js:
 - '10'
-cache:
-  directories:
-  - node_modules
-before_script:
-- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-- chmod +x ./cc-test-reporter
-- ./cc-test-reporter before-build
-script:
-- npm run coverage:lcov
-after_script:
-- ./cc-test-reporter after-build
-after_success:
-  - npm run semantic-release
-branches:
-  only:
-    - master
+cache: yarn
+jobs:
+  include:
+    - stage: test
+      script:
+        - yarn
+        - yarn test
+
+    - stage: coverage
+      script:
+        before_script:
+          - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          - chmod +x ./cc-test-reporter
+          - ./cc-test-reporter before-build
+        script:
+          - npm run coverage:lcov
+        after_script:
+          - ./cc-test-reporter after-build
+
+    - stage: release
+      script:
+        - yarn build
+      after_success:
+        - npm run semantic-release
+
+stages:
+  - name: release
+    if: branch = master
