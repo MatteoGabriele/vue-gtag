@@ -18,7 +18,7 @@
     "build": "bili",
     "dev": "bili --config bili.config.dev.js --watch",
     "lint": "eslint --ext .js .",
-    "lint:fix": "eslint  --ext .js . --fix",
+    "lint:fix": "yarn lint --fix",
     "test": "jest",
     "test:ci": "jest --coverage --bail --runInBand --verbose=false",
     "coverage": "jest --coverage",
