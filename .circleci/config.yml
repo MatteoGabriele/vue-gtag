@@ -46,3 +46,4 @@ workflows:
       - build:
           requires:
             - test
+            - lint
