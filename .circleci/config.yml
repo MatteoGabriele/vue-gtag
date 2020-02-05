@@ -35,6 +35,8 @@ jobs:
           command: yarn lint
 
   code_climate:
+    environment:
+      CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
     docker:
       - image: circleci/node:10.16.3
     steps:
