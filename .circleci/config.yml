@@ -1,37 +1,51 @@
-# JavaScript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
-jobs:
-  build:
+version: 2.1
+
+executors:
+  node-10-lts:
     docker:
-      # specify the version you desire here
-      - image: circleci/node:10
+      - image: circleci/node:10.16.3
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
+commands:
+  install_dependencies:
+    description: "Checkout, install and save yarn dependencies"
     steps:
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
+          key: v1-yarn-{{ checksum "yarn.lock" }}
       - run: yarn install
-
       - save_cache:
+          key: v1-yarn-{{ checksum "yarn.lock" }}
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+            - ./node_modules
 
-      # run tests!
+jobs:
+  test:
+    executor: node-10-lts
+    steps:
+      - install_dependencies
       - run: yarn test
+
+  coverage:
+    executor: node-10-lts
+    steps:
+      - install_dependencies
+      - run:
+          context: GTAG
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+            yarn coverage:lcov
+            ./cc-test-reporter after-build
+
+  lint:
+    executor: node-10-lts
+    steps:
+      - install_dependencies
+      - run: yarn lint
+
+  build:
+    executor: node-10-lts
+    steps:
+      - install_dependencies
+      - run: yarn build
