@@ -1,51 +1,37 @@
-version: 2.1
+version: 2
 
-executors:
-  node-10-lts:
+jobs:
+  test:
     docker:
       - image: circleci/node:10.16.3
-
-commands:
-  install_dependencies:
-    description: "Checkout, install and save yarn dependencies"
     steps:
       - checkout
       - restore_cache:
           key: v1-yarn-{{ checksum "yarn.lock" }}
-      - run: yarn install
+      - run:
+          command: yarn
       - save_cache:
           key: v1-yarn-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
-
-jobs:
-  test:
-    executor: node-10-lts
-    steps:
-      - install_dependencies
-      - run: yarn test
-
-  coverage:
-    executor: node-10-lts
-    steps:
-      - install_dependencies
       - run:
-          context: GTAG
-          command: |
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
-            ./cc-test-reporter before-build
-            yarn coverage:lcov
-            ./cc-test-reporter after-build
-
-  lint:
-    executor: node-10-lts
-    steps:
-      - install_dependencies
-      - run: yarn lint
+        command: yarn test
 
   build:
-    executor: node-10-lts
+    docker:
+      - image: circleci/node:10.16.3
     steps:
-      - install_dependencies
-      - run: yarn build
+      - checkout
+      - restore_cache:
+          key: v1-yarn-{{ checksum "yarn.lock" }}
+      - run:
+          command: yarn build
+
+workflows:
+  version: 2
+  test-and-build:
+    jobs:
+      - test
+      - build:
+          required:
+            - test
