@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  install:
+  dependencies:
     docker:
       - image: circleci/node:10.16.3
     steps:
@@ -64,13 +64,13 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - install
+      - dependencies
       - lint:
           requires:
-            - install
+            - dependencies
       - test:
           requires:
-            - install
+            - dependencies
       - build:
           requires:
             - test
