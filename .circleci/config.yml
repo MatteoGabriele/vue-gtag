@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  test:
+  install:
     docker:
       - image: circleci/node:10.16.3
     steps:
@@ -14,6 +14,13 @@ jobs:
           key: v1-yarn-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
+  test:
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-yarn-{{ checksum "yarn.lock" }}
       - run:
           command: yarn test
 
@@ -26,6 +33,20 @@ jobs:
           key: v1-yarn-{{ checksum "yarn.lock" }}
       - run:
           command: yarn lint
+
+  code_climate:
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - run:
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+            yarn coverage:lcov
+            ./cc-test-reporter after-build
+
 
   build:
     docker:
@@ -41,9 +62,17 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - lint
-      - test
+      - install
+      - lint:
+          requires:
+            - install
+      - test:
+          requires:
+            - install
       - build:
           requires:
             - test
             - lint
+      - code_climate:
+          requires:
+            - build
