@@ -39,6 +39,8 @@ jobs:
       - image: circleci/node:10.16.3
     steps:
       - checkout
+      - restore_cache:
+          key: v1-yarn-{{ checksum "yarn.lock" }}
       - run:
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
