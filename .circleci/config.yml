@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 executors:
   node-10-lts:
