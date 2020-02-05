@@ -74,20 +74,27 @@ workflows:
   workflow:
     jobs:
       - dependencies
+
       - lint:
           requires:
             - dependencies
+
       - test:
           requires:
             - dependencies
+
       - code_climate:
           requires:
             - test
+            - lint
+
       - build:
           requires:
             - test
             - lint
-      - release:
+            - code_climate
+
+      - semantic_release:
           filters:
             branches:
               only:
