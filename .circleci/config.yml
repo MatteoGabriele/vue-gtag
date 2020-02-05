@@ -84,6 +84,10 @@ workflows:
             - dependencies
 
       - code_climate:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - test
             - lint
