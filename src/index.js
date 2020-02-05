@@ -3,6 +3,7 @@ import _bootstrap from "./bootstrap";
 import api from "./api";
 
 export default install;
+export { install };
 
 export const bootstrap = _bootstrap;
 export const setOptions = _setOptions;
