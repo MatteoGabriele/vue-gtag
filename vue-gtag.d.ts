@@ -122,6 +122,12 @@ declare module "vue-gtag" {
     checkout_option?: string;
   }
 
+  export interface Refund {
+    transaction_id: string;
+    affiliation: string;
+    value: number;
+  }
+
   export interface Linker {
     domains: string[];
     decorate_forms?: boolean;
@@ -160,6 +166,7 @@ declare module "vue-gtag" {
     customMap(map: Dictionary<string>): void;
     purchase(puchase: Event): void;
     purchase(purchase: Purchase): void;
+    refund(refund: Refund): void;
     linker(config: Linker): void;
     exception(ex: Exception): void;
     set(config: CustomParams): void;
