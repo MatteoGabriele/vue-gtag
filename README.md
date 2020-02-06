@@ -10,8 +10,8 @@
   <a href="https://bundlephobia.com/result?p=vue-gtag">
     <img src="https://badgen.net/bundlephobia/minzip/vue-gtag">
   </a>
-  <a href="https://travis-ci.org/MatteoGabriele/vue-gtag">
-    <img src="https://badgen.net/travis/MatteoGabriele/vue-gtag/master">
+  <a href="https://circleci.com/gh/MatteoGabriele/workflows/vue-gtag/tree/master">
+    <img src="https://badgen.net/circleci/github/MatteoGabriele/vue-gtag/master">
   </a>
   <a href="https://codeclimate.com/github/MatteoGabriele/vue-gtag/maintainability">
     <img src="https://badgen.net/codeclimate/maintainability/MatteoGabriele/vue-gtag?icon=codeclimate">

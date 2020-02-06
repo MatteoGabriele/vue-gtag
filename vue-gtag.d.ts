@@ -1,6 +1,6 @@
 declare module "vue-gtag" {
-  import _Vue, { PluginFunction } from "vue";
   import VueRouter from "vue-router";
+  import _Vue, { PluginFunction } from "vue";
   type Currency = string | number;
 
   type EventNames =
@@ -147,6 +147,14 @@ declare module "vue-gtag" {
     optIn(): void;
     optOut(): void;
     pageview(pageView: PageView): void;
+    /**
+     * Send a Google Analytics Event.
+     *
+     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/events
+     *
+     * @param action string that will appear as the event action in Google Analytics Event reports
+     * @param event
+     */
     event(action: EventNames | string, event: Event): void;
     screenview(screenView: ScreenView): void;
     customMap(map: Dictionary<string>): void;
@@ -196,7 +204,7 @@ declare module "vue-gtag" {
 
   module "vue/types/vue" {
     interface Vue {
-      $ga: VueGtag;
+      $gtag: VueGtag;
     }
   }
 }
