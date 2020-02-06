@@ -8,6 +8,7 @@ import time from "./time";
 import exception from "./exception";
 import linker from "./linker";
 import purchase from "./purchase";
+import refund from "./refund";
 import set from "./set";
 import optIn from "./opt-in";
 import optOut from "./opt-out";
@@ -23,6 +24,7 @@ export default {
   exception,
   linker,
   purchase,
+  refund,
   set,
   optIn,
   optOut

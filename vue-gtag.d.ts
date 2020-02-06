@@ -29,6 +29,12 @@ declare module 'vue-gtag' {
     value: number;
   }
 
+  export interface Refund {
+    transaction_id: string;
+    affiliation: string;
+    value: number;
+  }
+
   export interface Linker {
     domains: string[];
   }
@@ -55,6 +61,7 @@ declare module 'vue-gtag' {
     screenview(screenView: ScreenView): void;
     customMap(map: Dictionary<string>): void;
     purchase(purchase: Purchase): void;
+    refund(refund: Refund): void;
     linker(config: Linker): void;
     exception(ex: Exception): void;
   }
