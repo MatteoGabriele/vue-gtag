@@ -1,131 +1,136 @@
 declare module "vue-gtag" {
   import VueRouter from "vue-router";
-  import _Vue, { PluginFunction } from "vue";
-  type Currency = string | number;
+  import _Vue from "vue";
 
-  type EventNames =
-    | "add_payment_info"
-    | "add_to_cart"
-    | "add_to_wishlist"
-    | "begin_checkout"
-    | "checkout_progress"
-    | "exception"
-    | "generate_lead"
-    | "login"
-    | "page_view"
-    | "purchase"
-    | "refund"
-    | "remove_from_cart"
-    | "screen_view"
-    | "search"
-    | "select_content"
-    | "set_checkout_option"
-    | "share"
-    | "sign_up"
-    | "timing_complete"
-    | "view_item"
-    | "view_item_list"
-    | "view_promotion"
-    | "view_search_results";
+  /**
+   * Types copied from @types/gtag.js.
+   *
+   * @see https://www.npmjs.com/package/@types/gtag.js
+   */
+  namespace Gtag {
+    interface Gtag {
+      (command: 'config', targetId: string, config?: ControlParams | EventParams | CustomParams): void;
+      (command: 'set', config: CustomParams): void;
+      (command: 'js', config: Date): void;
+      (command: 'event', eventName: EventNames | string, eventParams?: ControlParams |  EventParams | CustomParams): void;
+    }
 
-  interface GtagPromotion {
-    creative_name?: string;
-    creative_slot?: string;
-    id?: string;
-    name?: string;
-  }
-  interface GtagItem {
-    brand?: string;
-    category?: string;
-    creative_name?: string;
-    creative_slot?: string;
-    id?: string;
-    location_id?: string;
-    name?: string;
-    price?: Currency;
-    quantity?: number;
-  }
+    interface CustomParams {
+      [key: string]: any;
+    }
 
-  type GtagControlParams = {
-    groups?: string | string[];
-    send_to?: string | string[];
-    event_callback?: () => void;
-    event_timeout?: number;
-  };
+    interface ControlParams {
+      groups?: string | string[];
+      send_to?: string | string[];
+      event_callback?: () => void;
+      event_timeout?: number;
+    }
 
-  type GtagEventParams = {
-    checkout_option?: string;
-    checkout_step?: number;
-    content_id?: string;
-    content_type?: string;
-    coupon?: string;
-    currency?: string;
-    description?: string;
-    fatal?: boolean;
-    items?: GtagItem[];
-    method?: string;
-    number?: string;
-    promotions?: GtagPromotion[];
-    screen_name?: string;
-    search_term?: string;
-    shipping?: Currency;
-    tax?: Currency;
-    transaction_id?: string;
-    value?: number;
-    event_label?: string;
-    event_category?: string;
-  };
-  interface CustomParams {
-    [key: string]: any;
+    type EventNames = 'add_payment_info'
+      | 'add_to_cart'
+      | 'add_to_wishlist'
+      | 'begin_checkout'
+      | 'checkout_progress'
+      | 'exception'
+      | 'generate_lead'
+      | 'login'
+      | 'page_view'
+      | 'purchase'
+      | 'refund'
+      | 'remove_from_cart'
+      | 'screen_view'
+      | 'search'
+      | 'select_content'
+      | 'set_checkout_option'
+      | 'share'
+      | 'sign_up'
+      | 'timing_complete'
+      | 'view_item'
+      | 'view_item_list'
+      | 'view_promotion'
+      | 'view_search_results';
+
+    interface EventParams {
+      checkout_option?: string;
+      checkout_step?: number;
+      content_id?: string;
+      content_type?: string;
+      coupon?: string;
+      currency?: string;
+      description?: string;
+      fatal?: boolean;
+      items?: Item[];
+      method?: string;
+      number?: string;
+      promotions?: Promotion[];
+      screen_name?: string;
+      search_term?: string;
+      shipping?: Currency;
+      tax?: Currency;
+      transaction_id?: string;
+      value?: number;
+      event_label?: string;
+      event_category?: string;
+    }
+
+    type Currency = string | number;
+
+    interface Item {
+      brand?: string;
+      category?: string;
+      creative_name?: string;
+      creative_slot?: string;
+      id?: string;
+      location_id?: string;
+      name?: string;
+      price?: Currency;
+      quantity?: number;
+    }
+
+    interface Promotion {
+      creative_name?: string;
+      creative_slot?: string;
+      id?: string;
+      name?: string;
+    }
   }
-  interface Gtag {
-    (
-      command: "config",
-      targetId: string,
-      config?: GtagControlParams | GtagEventParams | CustomParams
-    ): void;
-    (command: "set", config: CustomParams): void;
-    (command: "js", config: Date): void;
-    (
-      command: "event",
-      eventName: EventNames | string,
-      eventParams?: GtagControlParams | GtagEventParams | CustomParams
-    ): void;
-  }
-  type GtagGenericParams = GtagControlParams | GtagEventParams | CustomParams;
 
   export interface PageView {
-    page_title: string;
-    page_location: string;
-    page_path: string;
-  }
-
-  export interface Event extends GtagEventParams {
-    event_category: string;
-    event_label: string;
-    value: number;
+    /** The page's title. */
+    page_title?: string;
+    /** The page's URL. */
+    page_location?: string;
+    /** The path portion of location. This value must start with a slash (/) character. */
+    page_path?: string;
   }
 
   export interface ScreenView {
-    app_name: string;
+    /** The name of the screen. */
     screen_name: string;
+    /** The name of the application. */
+    app_name: string;
   }
 
-  export interface Purchase {
+  /**
+   * @see https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#action_data
+   */
+  export interface EcommerceAction {
+    /** Unique ID for the transaction. */
     transaction_id: string;
+    /** The store or affiliation from which this transaction occurred */
     affiliation?: string;
+    /** Value (i.e., revenue) associated with the event */
     value?: number;
+    /** Tax amount */
     tax?: number;
+    /** Shipping cost */
     shipping?: number;
-    items?: GtagItem[];
+    /** The array containing the associated products */
+    items?: Gtag.Item[];
+    /** The step (a number) in the checkout process */
     checkout_step?: number;
+    /** Checkout option (i.e. selected payment method) */
     checkout_option?: string;
-  }
-
-  export interface Refund {
-    transaction_id: string;
-    affiliation: string;
-    value: number;
   }
 
   export interface Linker {
@@ -136,14 +141,20 @@ declare module "vue-gtag" {
   }
 
   export interface Exception {
-    description: string;
-    fatal: boolean;
+    /** A description of the error. */
+    description?: string;
+    /** true if the error was fatal. */
+    fatal?: boolean;
   }
 
   export interface Timing {
+    /** A string to identify the variable being recorded (e.g. 'load'). */
     name: string;
+    /** The number of milliseconds in elapsed time to report to Google Analytics (e.g. 20). */
     value: number;
+    /** A string for categorizing all user timing variables into logical groups (e.g. 'JS Dependencies'). */
     event_category?: string;
+    /** A string that can be used to add flexibility in visualizing user timings in the reports (e.g. 'Google CDN'). */
     event_label?: string;
   }
 
@@ -152,31 +163,91 @@ declare module "vue-gtag" {
   export interface VueGtag {
     optIn(): void;
     optOut(): void;
+
+    /**
+     * Send an ad-hoc Google Analytics pageview.
+     *
+     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/pages
+     */
     pageview(pageView: PageView): void;
+
     /**
      * Send a Google Analytics Event.
      *
      * @see https://developers.google.com/analytics/devguides/collection/gtagjs/events
      *
      * @param action string that will appear as the event action in Google Analytics Event reports
-     * @param event
+     * @param eventParams
      */
-    event(action: EventNames | string, event: Event): void;
+    event(action: Gtag.EventNames | string, eventParams?: Gtag.ControlParams | Gtag.EventParams | Gtag.CustomParams): void;
+
+    /**
+     * Send a Google Analytics screen view.
+     *
+     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/screens
+     */
     screenview(screenView: ScreenView): void;
+
+    /**
+     * Configure a map of custom dimensions and metrics.
+     *
+     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/custom-dims-mets
+     */
     customMap(map: Dictionary<string>): void;
-    purchase(puchase: Event): void;
-    purchase(purchase: Purchase): void;
-    refund(refund: Refund): void;
+
+    /**
+     * Measure a transaction.
+     *
+     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_purchases
+     */
+    purchase(purchase: EcommerceAction): void;
+
+    /**
+     * Measure a full refund of a transaction.
+     *
+     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_refunds
+     */
+    refund(refund: EcommerceAction): void;
+
+    /**
+     * Automatically link domains.
+     *
+     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/cross-domain#automatically_link_domains
+     */
     linker(config: Linker): void;
+
+    /**
+     * Measure an exception.
+     *
+     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/exceptions
+     */
     exception(ex: Exception): void;
-    set(config: CustomParams): void;
-    config(config?: GtagGenericParams);
-    time(timing: Timing);
+
+    /**
+     * Set parameters that will be associated with every subsequent event on the page.
+     *
+     * @see https://developers.google.com/gtagjs/devguide/configure#send_data_on_every_event_with_set
+     */
+    set(config: Gtag.CustomParams): void;
+
+    /**
+     * Initialize and configure settings for a particular product account.
+     *
+     * @see https://developers.google.com/gtagjs/devguide/configure
+     */
+    config(config?: Gtag.ControlParams | Gtag.EventParams | Gtag.CustomParams): void;
+
+    /**
+     * Send user timing information to Google Analytics.
+     *
+     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/user-timings
+     */
+    time(timing: Timing): void;
   }
 
   export interface DomainConfig {
     id: string;
-    params?: GtagGenericParams & { send_page_view: boolean };
+    params?: Gtag.ControlParams | Gtag.EventParams | Gtag.CustomParams;
   }
 
   export interface PluginOptions {
@@ -204,8 +275,8 @@ declare module "vue-gtag" {
     ): void;
   }
 
-  export function bootstrap(): Promise<Gtag>;
-  export function setOptions(PluginOptions): void;
+  export function bootstrap(): Promise<Gtag.Gtag>;
+  export function setOptions(options: PluginOptions): void;
 
   export default VueGtagPlugin;
 
