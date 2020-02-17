@@ -5,7 +5,9 @@ export default (value = true) => {
 
   window[`ga-disable-${config.id}`] = value;
 
-  includes.forEach(domain => {
-    window[`ga-disable-${domain.id}`] = value;
-  });
+  if (Array.isArray(includes)) {
+    includes.forEach(domain => {
+      window[`ga-disable-${domain.id}`] = value;
+    });
+  }
 };

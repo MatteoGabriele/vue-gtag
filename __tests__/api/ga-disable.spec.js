@@ -27,4 +27,16 @@ describe("ga-disable", () => {
 
     expect(global["ga-disable-1"]).toBe(false);
   });
+
+  it("should set false to includes domains", () => {
+    getOptions.mockReturnValueOnce({
+      config: { id: 1 },
+      includes: [{ id: 2 }, { id: 3 }]
+    });
+
+    disable(false);
+
+    expect(global["ga-disable-2"]).toBe(false);
+    expect(global["ga-disable-3"]).toBe(false);
+  });
 });
