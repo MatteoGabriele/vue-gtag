@@ -1,4 +1,4 @@
-import { getRouter, getOptions } from "./install";
+import { getVue, getRouter, getOptions } from "./install";
 import { warn } from "./util";
 import pageview from "./api/pageview";
 import screenview from "./api/screenview";
@@ -51,14 +51,17 @@ export const trackPage = (to, from) => {
 };
 
 export const init = Router => {
+  const Vue = getVue();
   const { onBeforeTrack, onAfterTrack } = getOptions();
 
   /* istanbul ignore next */
   Router.onReady(() => {
     Router.afterEach((to, from) => {
-      onBeforeTrack(to, from);
-      trackPage(to, from);
-      onAfterTrack(to, from);
+      Vue.nextTick().then(() => {
+        onBeforeTrack(to, from);
+        trackPage(to, from);
+        onAfterTrack(to, from);
+      });
     });
   });
 };
