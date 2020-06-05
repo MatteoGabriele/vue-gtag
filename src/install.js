@@ -13,6 +13,7 @@ let options = {
   disableScriptLoad: false,
   bootstrap: true,
   globalObjectName: "gtag",
+  globalDataLayerName: "dataLayer",
   pageTrackerEnabled: true,
   pageTrackerScreenviewEnabled: false,
   defaultGroupName: "default",
