@@ -211,26 +211,4 @@ describe("bootstrap", () => {
       done();
     });
   });
-
-  it("should fire all the includes", () => {
-    getOptions.mockReturnValueOnce({
-      globalObjectName: "gtag",
-      disableScriptLoad: true,
-      enabled: true,
-      includes: [{ id: 2 }, { id: 3, params: { foo: 2 } }],
-      config: {
-        id: 1,
-        params: { foo: 1 }
-      }
-    });
-
-    global.window.gtag = jest.fn();
-
-    bootstrap();
-
-    const { calls } = global.window.gtag.mock;
-    expect(calls[1]).toEqual(["config", 1, { foo: 1 }]);
-    expect(calls[2]).toEqual(["config", 2]);
-    expect(calls[3]).toEqual(["config", 3, { foo: 2 }]);
-  });
 });
