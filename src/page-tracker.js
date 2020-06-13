@@ -3,7 +3,7 @@ import { warn } from "./util";
 import pageview from "./api/pageview";
 import screenview from "./api/screenview";
 
-export const trackPage = (to, from) => {
+export const trackPage = (to = {}, from = {}) => {
   if (to.path === from.path) {
     return;
   }
@@ -55,7 +55,11 @@ export const init = Router => {
   const { onBeforeTrack, onAfterTrack } = getOptions();
 
   /* istanbul ignore next */
-  Router.onReady(() => {
+  Router.onReady(current => {
+    Vue.nextTick().then(() => {
+      trackPage(current);
+    });
+
     Router.afterEach((to, from) => {
       Vue.nextTick().then(() => {
         onBeforeTrack(to, from);

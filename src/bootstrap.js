@@ -11,8 +11,7 @@ export default function() {
   const {
     enabled,
     globalObjectName,
-    config: { id, params },
-    includes,
+    config,
     pageTrackerEnabled,
     onReady,
     disableScriptLoad
@@ -31,22 +30,6 @@ export default function() {
 
   window[globalObjectName]("js", new Date());
 
-  if (params) {
-    window[globalObjectName]("config", id, params);
-  } else {
-    window[globalObjectName]("config", id);
-  }
-
-  if (Array.isArray(includes)) {
-    includes.forEach(domain => {
-      if (domain.params) {
-        window[globalObjectName]("config", domain.id, domain.params);
-      } else {
-        window[globalObjectName]("config", domain.id);
-      }
-    });
-  }
-
   if (pageTrackerEnabled) {
     pageTracker();
   }
@@ -56,7 +39,7 @@ export default function() {
   }
 
   const domain = "https://www.googletagmanager.com";
-  const resource = `${domain}/gtag/js?id=${id}`;
+  const resource = `${domain}/gtag/js?id=${config.id}`;
 
   return loadScript(resource, domain)
     .then(() => {
