@@ -5,6 +5,7 @@ import pageTracker from "@/page-tracker";
 import optOut from "@/api/opt-out";
 import * as util from "@/util";
 
+jest.mock("@/api/config");
 jest.mock("@/page-tracker");
 jest.mock("@/api/opt-out");
 jest.mock("@/install");
