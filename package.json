@@ -84,7 +84,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^6.0.1",
     "flush-promises": "^1.0.2",
-    "jest": "^24.9.0",
+    "jest": "^26.0.1",
     "prettier": "^1.19.1",
     "semantic-release": "^15.13.31",
     "vue": "^2.6.10",
