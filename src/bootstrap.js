@@ -1,5 +1,6 @@
 import { warn, isFn, loadScript } from "./util";
-import { getOptions } from "../src/install";
+import config from "./api/config";
+import { getRouter, getOptions } from "../src/install";
 import optOut from "./api/opt-out";
 import pageTracker from "./page-tracker";
 
@@ -11,11 +12,14 @@ export default function() {
   const {
     enabled,
     globalObjectName,
-    config,
+    config: { id },
     pageTrackerEnabled,
     onReady,
     disableScriptLoad
   } = getOptions();
+
+  const Router = getRouter();
+  const isPageTrackerEnabled = Boolean(pageTrackerEnabled && Router);
 
   if (!enabled) {
     optOut();
@@ -30,8 +34,10 @@ export default function() {
 
   window[globalObjectName]("js", new Date());
 
-  if (pageTrackerEnabled) {
+  if (isPageTrackerEnabled) {
     pageTracker();
+  } else {
+    config();
   }
 
   if (disableScriptLoad) {
@@ -39,7 +45,7 @@ export default function() {
   }
 
   const domain = "https://www.googletagmanager.com";
-  const resource = `${domain}/gtag/js?id=${config.id}`;
+  const resource = `${domain}/gtag/js?id=${id}`;
 
   return loadScript(resource, domain)
     .then(() => {

@@ -1,10 +1,12 @@
+import config from "@/api/config";
 import bootstrap from "@/bootstrap";
-import { getOptions } from "@/install";
+import { getRouter, getOptions } from "@/install";
 import flushPromises from "flush-promises";
 import pageTracker from "@/page-tracker";
 import optOut from "@/api/opt-out";
 import * as util from "@/util";
 
+jest.mock("@/api/config");
 jest.mock("@/page-tracker");
 jest.mock("@/api/opt-out");
 jest.mock("@/install");
@@ -158,6 +160,7 @@ describe("bootstrap", () => {
   });
 
   it("should start tracking pages when enabled", () => {
+    getRouter.mockReturnValueOnce({});
     getOptions.mockReturnValueOnce({
       globalObjectName: "gtag",
       pageTrackerEnabled: true,
@@ -169,11 +172,12 @@ describe("bootstrap", () => {
     bootstrap();
 
     expect(pageTracker).toHaveBeenCalled();
+    expect(config).not.toHaveBeenCalled();
 
     flushPromises();
   });
 
-  it("should not start tracking pages when enabled", () => {
+  it("should not start tracking pages when disabled", () => {
     getOptions.mockReturnValueOnce({
       globalObjectName: "gtag",
       pageTrackerEnabled: false,
@@ -185,6 +189,21 @@ describe("bootstrap", () => {
     bootstrap();
 
     expect(pageTracker).not.toHaveBeenCalled();
+
+    flushPromises();
+  });
+
+  it("should fire a config when pageTracker is not enabled", () => {
+    getOptions.mockReturnValueOnce({
+      globalObjectName: "gtag",
+      config: {
+        id: 1
+      }
+    });
+
+    bootstrap();
+
+    expect(config).toHaveBeenCalled();
 
     flushPromises();
   });
