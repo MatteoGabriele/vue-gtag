@@ -1,6 +1,6 @@
 export const noop = function() {};
 
-export function loadScript(url, domain) {
+export function loadScript(url, domain, cspNonce) {
   return new Promise((resolve, reject) => {
     const head = document.head || document.getElementsByTagName("head")[0];
     const script = document.createElement("script");
@@ -16,6 +16,10 @@ export function loadScript(url, domain) {
       link.rel = "preconnect";
 
       head.appendChild(link);
+    }
+
+    if (cspNonce) {
+      script.setAttribute("nonce", cspNonce);
     }
 
     head.appendChild(script);

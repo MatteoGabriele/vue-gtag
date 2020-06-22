@@ -17,7 +17,8 @@ let options = {
   pageTrackerScreenviewEnabled: false,
   defaultGroupName: "default",
   includes: null,
-  config: null
+  config: null,
+  cspNonce: null
 };
 
 export const getOptions = () => options;

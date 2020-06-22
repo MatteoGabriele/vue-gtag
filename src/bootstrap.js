@@ -1,6 +1,6 @@
 import { warn, isFn, loadScript } from "./util";
 import config from "./api/config";
-import { getRouter, getOptions } from "../src/install";
+import { getRouter, getOptions } from "./install";
 import optOut from "./api/opt-out";
 import pageTracker from "./page-tracker";
 
@@ -15,7 +15,8 @@ export default function() {
     config: { id },
     pageTrackerEnabled,
     onReady,
-    disableScriptLoad
+    disableScriptLoad,
+    cspNonce
   } = getOptions();
 
   const Router = getRouter();
@@ -47,7 +48,7 @@ export default function() {
   const domain = "https://www.googletagmanager.com";
   const resource = `${domain}/gtag/js?id=${id}`;
 
-  return loadScript(resource, domain)
+  return loadScript(resource, domain, cspNonce)
     .then(() => {
       const library = window[globalObjectName];
 

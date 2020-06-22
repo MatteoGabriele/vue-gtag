@@ -265,6 +265,7 @@ declare module "vue-gtag" {
     defaultGroupName?: string;
     includes?: DomainConfig[];
     config?: DomainConfig;
+    cspNonce?: string;
   }
 
   export class VueGtagPlugin {
