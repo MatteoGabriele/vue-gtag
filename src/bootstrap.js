@@ -27,7 +27,7 @@ export default function() {
   }
 
   if (window[globalObjectName] == null) {
-    window[globalDataLayerName] = [];
+    window[globalDataLayerName] = window[globalDataLayerName] || [];
     window[globalObjectName] = function() {
       window[globalDataLayerName].push(arguments);
     };
