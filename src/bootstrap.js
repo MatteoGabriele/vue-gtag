@@ -1,5 +1,6 @@
 import { warn, isFn, loadScript } from "./util";
-import { getOptions } from "../src/install";
+import config from "./api/config";
+import { getRouter, getOptions } from "../src/install";
 import optOut from "./api/opt-out";
 import pageTracker from "./page-tracker";
 
@@ -12,12 +13,14 @@ export default function() {
     enabled,
     globalObjectName,
     globalDataLayerName,
-    config: { id, params },
-    includes,
+    config: { id },
     pageTrackerEnabled,
     onReady,
     disableScriptLoad
   } = getOptions();
+
+  const Router = getRouter();
+  const isPageTrackerEnabled = Boolean(pageTrackerEnabled && Router);
 
   if (!enabled) {
     optOut();
@@ -32,24 +35,10 @@ export default function() {
 
   window[globalObjectName]("js", new Date());
 
-  if (params) {
-    window[globalObjectName]("config", id, params);
-  } else {
-    window[globalObjectName]("config", id);
-  }
-
-  if (Array.isArray(includes)) {
-    includes.forEach(domain => {
-      if (domain.params) {
-        window[globalObjectName]("config", domain.id, domain.params);
-      } else {
-        window[globalObjectName]("config", domain.id);
-      }
-    });
-  }
-
-  if (pageTrackerEnabled) {
+  if (isPageTrackerEnabled) {
     pageTracker();
+  } else {
+    config();
   }
 
   if (disableScriptLoad) {
