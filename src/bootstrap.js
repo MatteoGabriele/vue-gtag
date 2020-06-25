@@ -12,6 +12,7 @@ export default function() {
   const {
     enabled,
     globalObjectName,
+    globalDataLayerName,
     config: { id },
     pageTrackerEnabled,
     onReady,
@@ -26,9 +27,9 @@ export default function() {
   }
 
   if (window[globalObjectName] == null) {
-    window.dataLayer = window.dataLayer || [];
+    window[globalDataLayerName] = window[globalDataLayerName] || [];
     window[globalObjectName] = function() {
-      window.dataLayer.push(arguments);
+      window[globalDataLayerName].push(arguments);
     };
   }
 
@@ -45,7 +46,7 @@ export default function() {
   }
 
   const domain = "https://www.googletagmanager.com";
-  const resource = `${domain}/gtag/js?id=${id}`;
+  const resource = `${domain}/gtag/js?id=${id}&l=${globalDataLayerName}`;
 
   return loadScript(resource, domain)
     .then(() => {
