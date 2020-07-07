@@ -24,6 +24,7 @@ describe("bootstrap", () => {
 
   it("should load the gtag.js file", done => {
     getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
         id: 1
@@ -34,7 +35,7 @@ describe("bootstrap", () => {
 
     flushPromises().then(() => {
       expect(util.loadScript).toHaveBeenCalledWith(
-        "https://www.googletagmanager.com/gtag/js?id=1",
+        "https://www.googletagmanager.com/gtag/js?id=1&l=dataLayer",
         "https://www.googletagmanager.com"
       );
       done();
@@ -44,6 +45,7 @@ describe("bootstrap", () => {
   it("should not load the gtag.js file", () => {
     getOptions.mockReturnValueOnce({
       disableScriptLoad: true,
+      globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
         id: 1
@@ -59,6 +61,7 @@ describe("bootstrap", () => {
     const spy = jest.fn();
 
     getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       onReady: spy,
       config: {
@@ -76,6 +79,7 @@ describe("bootstrap", () => {
 
   it("should have dataLayer and gtag defined", done => {
     getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
         id: 1
@@ -93,6 +97,7 @@ describe("bootstrap", () => {
 
   it("should opt-out when plugin has `enabled` set to false", done => {
     getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       enabled: false,
       config: {
@@ -111,6 +116,7 @@ describe("bootstrap", () => {
   it("should load the gtag.js file also when opt-out", done => {
     getOptions.mockReturnValueOnce({
       enabled: false,
+      globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
         id: 1
@@ -128,6 +134,7 @@ describe("bootstrap", () => {
   it("should have dataLayer and gtag defined also when opt-out", done => {
     getOptions.mockReturnValueOnce({
       enabled: false,
+      globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
         id: 1
@@ -145,6 +152,7 @@ describe("bootstrap", () => {
 
   it("should inject a custom name for the gtag library", () => {
     getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
       globalObjectName: "foo",
       config: {
         id: 1
@@ -162,6 +170,7 @@ describe("bootstrap", () => {
   it("should start tracking pages when enabled", () => {
     getRouter.mockReturnValueOnce({});
     getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       pageTrackerEnabled: true,
       config: {
@@ -179,6 +188,7 @@ describe("bootstrap", () => {
 
   it("should not start tracking pages when disabled", () => {
     getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       pageTrackerEnabled: false,
       config: {
@@ -195,6 +205,7 @@ describe("bootstrap", () => {
 
   it("should fire a config when pageTracker is not enabled", () => {
     getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
         id: 1
@@ -213,6 +224,7 @@ describe("bootstrap", () => {
     util.loadScript = jest.fn(() => Promise.reject(new Error()));
 
     getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       pageTrackerEnabled: true,
       config: {
