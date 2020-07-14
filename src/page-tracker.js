@@ -3,7 +3,7 @@ import { warn } from "./util";
 import pageview from "./api/pageview";
 import screenview from "./api/screenview";
 
-export const trackPage = (to = {}, from = {}) => {
+export const getPageviewTemplate = (to = {}, from = {}) => {
   if (to.path === from.path) {
     return;
   }
@@ -32,50 +32,62 @@ export const trackPage = (to = {}, from = {}) => {
     };
   }
 
-  if (pageTrackerScreenviewEnabled && !template.app_name) {
+  return template;
+};
+
+export const trackPage = ({ to, from, params = {} } = {}) => {
+  const { pageTrackerScreenviewEnabled } = getOptions();
+  const newParams = {
+    ...getPageviewTemplate(to, from),
+    ...params
+  };
+
+  if (pageTrackerScreenviewEnabled && !newParams.app_name) {
     warn("To use the screenview, add the appName to the plugin options");
     return;
   }
 
-  if (pageTrackerScreenviewEnabled && !template.screen_name) {
+  if (pageTrackerScreenviewEnabled && !newParams.screen_name) {
     warn("To use the screenview, name your routes");
     return;
   }
 
   if (pageTrackerScreenviewEnabled) {
-    screenview(template);
+    screenview(newParams);
     return;
   }
 
-  pageview(template);
+  pageview(newParams);
 };
 
-export const init = Router => {
+export const startRouter = Router => {
   const Vue = getVue();
-  const { onBeforeTrack, onAfterTrack } = getOptions();
+  const { onBeforeTrack, onAfterTrack, config } = getOptions();
 
   /* istanbul ignore next */
   Router.onReady(current => {
     Vue.nextTick().then(() => {
-      trackPage(current);
+      trackPage({ to: current, params: config.params });
     });
 
     Router.afterEach((to, from) => {
       Vue.nextTick().then(() => {
         onBeforeTrack(to, from);
-        trackPage(to, from);
+        trackPage({ to, from });
         onAfterTrack(to, from);
       });
     });
   });
 };
 
-export default () => {
+export const autotrack = () => {
   const Router = getRouter();
 
   if (!Router) {
     return;
   }
 
-  init(Router);
+  startRouter(Router);
 };
+
+export default autotrack;

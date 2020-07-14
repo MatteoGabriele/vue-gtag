@@ -1,149 +1,151 @@
+import { warn } from "@/util";
 import { getRouter, getOptions } from "@/install";
-import pageTracker, * as tracker from "@/page-tracker";
+import * as pageTracker from "@/page-tracker";
 import pageview from "@/api/pageview";
 import screenview from "@/api/screenview";
-import * as util from "@/util";
 
 jest.mock("@/install");
 jest.mock("@/api/pageview");
 jest.mock("@/api/screenview");
+jest.mock("@/util");
 
-const noop = () => {};
+const toMock = { name: "about", path: "/about" };
+const fromMock = { name: "home", path: "/" };
 
-const to = {
-  name: "About",
-  path: "/about"
-};
+const updateLocationPath = href => {
+  global.window = Object.create(window);
 
-const from = {
-  name: "Home",
-  path: "/"
+  Object.defineProperty(window, "location", {
+    value: {
+      href
+    }
+  });
 };
 
 describe("page-tracker", () => {
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it("should call config to track pageviews", () => {
-    getOptions.mockReturnValueOnce({
-      pageTrackerTemplate: noop
+  it("should track a pageview", () => {
+    updateLocationPath("http://localhost/about");
+
+    getOptions.mockReturnValue({
+      pageTrackerTemplate: () => null
     });
 
-    const url = "foo";
-
-    global.window = Object.create(window);
-    Object.defineProperty(window, "location", {
-      value: {
-        href: url
-      }
-    });
-
-    tracker.trackPage(to, from);
+    pageTracker.trackPage({ to: toMock, from: fromMock });
 
     expect(pageview).toHaveBeenCalledWith({
-      page_location: url,
+      page_location: "http://localhost/about",
       page_path: "/about",
-      page_title: "About"
+      page_title: "about"
     });
-
-    expect(screenview).not.toHaveBeenCalled();
   });
 
-  it("should call screenview to track screenviews", () => {
-    getOptions.mockReturnValueOnce({
-      pageTrackerTemplate: noop,
+  it("should track a screenview", () => {
+    updateLocationPath("http://localhost/about");
+
+    getOptions.mockReturnValue({
       pageTrackerScreenviewEnabled: true,
+      pageTrackerTemplate: () => null,
       appName: "MyApp"
     });
 
-    tracker.trackPage(to, from);
+    pageTracker.trackPage({ to: toMock, from: fromMock });
 
     expect(screenview).toHaveBeenCalledWith({
       app_name: "MyApp",
-      screen_name: "About"
+      screen_name: "about"
     });
-    expect(pageview).not.toHaveBeenCalled();
   });
 
-  it("should", () => {
-    const template = {
-      foo: "bar",
-      bar: "foo"
-    };
+  it("should not track when same path", () => {
+    const to = { name: "home", path: "/" };
+    const from = { name: "home", path: "/" };
 
-    getOptions.mockReturnValueOnce({
-      pageTrackerTemplate: () => template
-    });
+    updateLocationPath("http://localhost/about");
 
-    tracker.trackPage(to, from);
+    getOptions.mockReturnValue({});
 
-    expect(pageview).toHaveBeenCalledWith(template);
-  });
-
-  it("should not track when `to` and `from` routes are identical", () => {
-    tracker.trackPage({ path: "/foo" }, { path: "/foo" });
+    pageTracker.trackPage({ to, from });
 
     expect(screenview).not.toHaveBeenCalled();
-    expect(pageview).not.toHaveBeenCalled();
   });
 
   it("should warn when using screenview without an appName", () => {
-    util.warn = jest.fn();
-
-    getOptions.mockReturnValueOnce({
-      pageTrackerTemplate: noop,
+    getOptions.mockReturnValue({
+      pageTrackerTemplate: () => null,
       pageTrackerScreenviewEnabled: true
     });
 
-    tracker.trackPage(to, from);
+    pageTracker.trackPage({ to: toMock, from: fromMock });
 
-    expect(util.warn).toHaveBeenCalledWith(
+    expect(warn).toHaveBeenCalledWith(
       "To use the screenview, add the appName to the plugin options"
     );
-
-    expect(screenview).not.toHaveBeenCalled();
   });
 
   it("should warn when using screenview without naming routes", () => {
-    util.warn = jest.fn();
-
-    getOptions.mockReturnValueOnce({
-      pageTrackerTemplate: noop,
+    getOptions.mockReturnValue({
+      pageTrackerTemplate: () => null,
       pageTrackerScreenviewEnabled: true,
       appName: "MyApp"
     });
 
-    tracker.trackPage({ path: "/" }, { path: "/about" });
+    const to = { path: "/" };
+    const from = { path: "/about" };
 
-    expect(util.warn).toHaveBeenCalledWith(
+    pageTracker.trackPage({ to, from });
+
+    expect(warn).toHaveBeenCalledWith(
       "To use the screenview, name your routes"
     );
 
     expect(screenview).not.toHaveBeenCalled();
   });
 
+  it("should return a custom template", () => {
+    getOptions.mockReturnValue({
+      pageTrackerTemplate() {
+        return {
+          page_title: "foo",
+          page_path: "bar",
+          page_location: "/foo/bar"
+        };
+      }
+    });
+
+    pageTracker.trackPage({ to: toMock, from: fromMock });
+
+    expect(pageview).toHaveBeenCalledWith({
+      page_title: "foo",
+      page_path: "bar",
+      page_location: "/foo/bar"
+    });
+  });
+
   it("should not trigger init without a Router instance", () => {
-    tracker.init = jest.fn();
+    pageTracker.startRouter = jest.fn();
 
-    pageTracker();
+    pageTracker.autotrack();
 
-    expect(tracker.init).not.toHaveBeenCalled();
+    expect(pageTracker.startRouter).not.toHaveBeenCalled();
   });
 
   it("should trigger init", () => {
     const spy = jest.fn();
 
     getOptions.mockReturnValueOnce({
-      onBeforeTrack: noop,
-      onAfterTrack: noop
+      onBeforeTrack: () => {},
+      onAfterTrack: () => {}
     });
 
     getRouter.mockReturnValueOnce({
       onReady: spy
     });
 
-    pageTracker();
+    pageTracker.autotrack();
 
     expect(spy).toHaveBeenCalled();
   });
