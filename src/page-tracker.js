@@ -4,10 +4,6 @@ import pageview from "./api/pageview";
 import screenview from "./api/screenview";
 
 export const getPageviewTemplate = (to = {}, from = {}) => {
-  if (to.path === from.path) {
-    return;
-  }
-
   const {
     pageTrackerTemplate,
     pageTrackerScreenviewEnabled,
@@ -35,8 +31,16 @@ export const getPageviewTemplate = (to = {}, from = {}) => {
   return template;
 };
 
-export const trackPage = ({ to, from, params = {} } = {}) => {
-  const { pageTrackerScreenviewEnabled } = getOptions();
+export const trackPage = ({ to = {}, from = {}, params = {} } = {}) => {
+  const {
+    pageTrackerSkipSamePath,
+    pageTrackerScreenviewEnabled
+  } = getOptions();
+
+  if (pageTrackerSkipSamePath && to.path === from.path) {
+    return;
+  }
+
   const newParams = {
     ...getPageviewTemplate(to, from),
     ...params

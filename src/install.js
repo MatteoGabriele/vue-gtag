@@ -4,7 +4,8 @@ import bootstrap from "./bootstrap";
 
 let Vue;
 let Router;
-let options = {
+
+export let options = {
   pageTrackerTemplate: noop,
   onBeforeTrack: noop,
   onAfterTrack: noop,
@@ -16,6 +17,7 @@ let options = {
   globalDataLayerName: "dataLayer",
   pageTrackerEnabled: true,
   pageTrackerScreenviewEnabled: false,
+  pageTrackerSkipSamePath: true,
   defaultGroupName: "default",
   includes: null,
   config: null

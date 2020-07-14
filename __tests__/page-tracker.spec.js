@@ -64,13 +64,32 @@ describe("page-tracker", () => {
     const to = { name: "home", path: "/" };
     const from = { name: "home", path: "/" };
 
-    updateLocationPath("http://localhost/about");
+    updateLocationPath("http://localhost/");
 
-    getOptions.mockReturnValue({});
+    getOptions.mockReturnValue({
+      pageTrackerTemplate: () => null,
+      pageTrackerSkipSamePath: true
+    });
 
     pageTracker.trackPage({ to, from });
 
-    expect(screenview).not.toHaveBeenCalled();
+    expect(pageview).not.toHaveBeenCalled();
+  });
+
+  it("should track the same path", () => {
+    const to = { name: "home", path: "/" };
+    const from = { name: "home", path: "/" };
+
+    updateLocationPath("http://localhost/about");
+
+    getOptions.mockReturnValue({
+      pageTrackerTemplate: () => null,
+      pageTrackerSkipSamePath: false
+    });
+
+    pageTracker.trackPage({ to, from });
+
+    expect(pageview).toHaveBeenCalled();
   });
 
   it("should warn when using screenview without an appName", () => {
@@ -136,7 +155,7 @@ describe("page-tracker", () => {
   it("should trigger init", () => {
     const spy = jest.fn();
 
-    getOptions.mockReturnValueOnce({
+    getOptions.mockReturnValue({
       onBeforeTrack: () => {},
       onAfterTrack: () => {}
     });
