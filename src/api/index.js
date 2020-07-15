@@ -27,5 +27,5 @@ export default {
   refund,
   set,
   optIn,
-  optOut
+  optOut,
 };

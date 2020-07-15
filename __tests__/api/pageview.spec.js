@@ -8,7 +8,7 @@ describe("api/pageview", () => {
     pageview("foo");
     expect(config).toHaveBeenCalledWith({
       page_path: "foo",
-      page_location: "http://localhost/"
+      page_location: "http://localhost/",
     });
 
     pageview({ foo: "bar" });

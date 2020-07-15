@@ -1,6 +1,6 @@
 import { getOptions } from "../install";
 
-export default function(...args) {
+export default function (...args) {
   const { globalObjectName } = getOptions();
 
   if (typeof window === "undefined") {

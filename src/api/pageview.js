@@ -7,7 +7,7 @@ export default (...args) => {
   if (typeof arg === "string") {
     params = {
       page_path: arg,
-      page_location: window.location.href
+      page_location: window.location.href,
     };
   } else {
     params = arg;

@@ -1,4 +1,4 @@
-export const noop = function() {};
+export const noop = function () {};
 
 export function loadScript(url, domain) {
   return new Promise((resolve, reject) => {

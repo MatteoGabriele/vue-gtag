@@ -8,7 +8,7 @@ jest.mock("@/api/query");
 describe("api/event", () => {
   it("should be called with an event name and parameters", () => {
     getOptions.mockReturnValueOnce({
-      defaultGroupName: "default"
+      defaultGroupName: "default",
     });
 
     event("click", { foo: "bar" });
@@ -19,26 +19,26 @@ describe("api/event", () => {
   it("should add the send_to parameter when includes is set", () => {
     getOptions.mockReturnValueOnce({
       defaultGroupName: "default",
-      includes: [{ id: "foo" }]
+      includes: [{ id: "foo" }],
     });
 
     event("click");
 
     expect(query).toHaveBeenCalledWith("event", "click", {
-      send_to: ["foo", "default"]
+      send_to: ["foo", "default"],
     });
   });
 
   it("should not override the sent_to property when set already", () => {
     getOptions.mockReturnValueOnce({
       defaultGroupName: "default",
-      includes: [{ id: "foo" }]
+      includes: [{ id: "foo" }],
     });
 
     event("click", { send_to: ["bar"] });
 
     expect(query).toHaveBeenCalledWith("event", "click", {
-      send_to: ["bar"]
+      send_to: ["bar"],
     });
   });
 });

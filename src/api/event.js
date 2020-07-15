@@ -7,7 +7,7 @@ export default (name, _params = {}) => {
 
   if (includes && params.send_to == null) {
     params.send_to = includes
-      .map(include => include.id)
+      .map((include) => include.id)
       .concat(defaultGroupName);
   }
 

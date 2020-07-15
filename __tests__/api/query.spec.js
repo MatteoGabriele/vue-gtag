@@ -10,11 +10,11 @@ describe("api/query", () => {
   it("should call the gtag main object", () => {
     global.window = Object.create(window);
     Object.defineProperty(window, "gtag", {
-      value: jest.fn()
+      value: jest.fn(),
     });
 
     getOptions.mockReturnValue({
-      globalObjectName: "gtag"
+      globalObjectName: "gtag",
     });
 
     query("foo", "bar");
@@ -26,7 +26,7 @@ describe("api/query", () => {
     delete global.window;
 
     getOptions.mockReturnValue({
-      globalObjectName: "gtag"
+      globalObjectName: "gtag",
     });
 
     query("foo", "bar");

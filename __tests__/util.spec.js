@@ -10,7 +10,7 @@ describe("loadScript", () => {
     expect(util.loadScript("a")).toBeInstanceOf(Promise);
   });
 
-  it("should create a script tag", done => {
+  it("should create a script tag", (done) => {
     util.loadScript("foo");
 
     flushPromises().then(() => {
@@ -19,7 +19,7 @@ describe("loadScript", () => {
     });
   });
 
-  it("should create a link for domain preconnect", done => {
+  it("should create a link for domain preconnect", (done) => {
     util.loadScript("foo", "bar");
 
     flushPromises().then(() => {
@@ -40,8 +40,8 @@ describe("mergeDeep", () => {
       b: 1,
       c: {
         b: 1,
-        a: 1
-      }
+        a: 1,
+      },
     });
   });
 
@@ -52,7 +52,7 @@ describe("mergeDeep", () => {
 
     expect(c).toEqual({
       c: [4, 5],
-      d: { b: 1 }
+      d: { b: 1 },
     });
   });
 });

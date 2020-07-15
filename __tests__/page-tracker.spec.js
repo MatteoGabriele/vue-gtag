@@ -12,13 +12,13 @@ jest.mock("@/util");
 const toMock = { name: "about", path: "/about" };
 const fromMock = { name: "home", path: "/" };
 
-const updateLocationPath = href => {
+const updateLocationPath = (href) => {
   global.window = Object.create(window);
 
   Object.defineProperty(window, "location", {
     value: {
-      href
-    }
+      href,
+    },
   });
 };
 
@@ -31,7 +31,7 @@ describe("page-tracker", () => {
     updateLocationPath("http://localhost/about");
 
     getOptions.mockReturnValue({
-      pageTrackerTemplate: () => null
+      pageTrackerTemplate: () => null,
     });
 
     pageTracker.trackPage({ to: toMock, from: fromMock });
@@ -39,7 +39,7 @@ describe("page-tracker", () => {
     expect(pageview).toHaveBeenCalledWith({
       page_location: "http://localhost/about",
       page_path: "/about",
-      page_title: "about"
+      page_title: "about",
     });
   });
 
@@ -49,14 +49,14 @@ describe("page-tracker", () => {
     getOptions.mockReturnValue({
       pageTrackerScreenviewEnabled: true,
       pageTrackerTemplate: () => null,
-      appName: "MyApp"
+      appName: "MyApp",
     });
 
     pageTracker.trackPage({ to: toMock, from: fromMock });
 
     expect(screenview).toHaveBeenCalledWith({
       app_name: "MyApp",
-      screen_name: "about"
+      screen_name: "about",
     });
   });
 
@@ -68,7 +68,7 @@ describe("page-tracker", () => {
 
     getOptions.mockReturnValue({
       pageTrackerTemplate: () => null,
-      pageTrackerSkipSamePath: true
+      pageTrackerSkipSamePath: true,
     });
 
     pageTracker.trackPage({ to, from });
@@ -84,7 +84,7 @@ describe("page-tracker", () => {
 
     getOptions.mockReturnValue({
       pageTrackerTemplate: () => null,
-      pageTrackerSkipSamePath: false
+      pageTrackerSkipSamePath: false,
     });
 
     pageTracker.trackPage({ to, from });
@@ -95,7 +95,7 @@ describe("page-tracker", () => {
   it("should warn when using screenview without an appName", () => {
     getOptions.mockReturnValue({
       pageTrackerTemplate: () => null,
-      pageTrackerScreenviewEnabled: true
+      pageTrackerScreenviewEnabled: true,
     });
 
     pageTracker.trackPage({ to: toMock, from: fromMock });
@@ -109,7 +109,7 @@ describe("page-tracker", () => {
     getOptions.mockReturnValue({
       pageTrackerTemplate: () => null,
       pageTrackerScreenviewEnabled: true,
-      appName: "MyApp"
+      appName: "MyApp",
     });
 
     const to = { path: "/" };
@@ -130,9 +130,9 @@ describe("page-tracker", () => {
         return {
           page_title: "foo",
           page_path: "bar",
-          page_location: "/foo/bar"
+          page_location: "/foo/bar",
         };
-      }
+      },
     });
 
     pageTracker.trackPage({ to: toMock, from: fromMock });
@@ -140,7 +140,7 @@ describe("page-tracker", () => {
     expect(pageview).toHaveBeenCalledWith({
       page_title: "foo",
       page_path: "bar",
-      page_location: "/foo/bar"
+      page_location: "/foo/bar",
     });
   });
 
@@ -157,11 +157,11 @@ describe("page-tracker", () => {
 
     getOptions.mockReturnValue({
       onBeforeTrack: () => {},
-      onAfterTrack: () => {}
+      onAfterTrack: () => {},
     });
 
     getRouter.mockReturnValueOnce({
-      onReady: spy
+      onReady: spy,
     });
 
     pageTracker.autotrack();
