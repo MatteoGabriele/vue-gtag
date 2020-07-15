@@ -1,7 +1,7 @@
 import config from "./config";
 
-export default map => {
+export default (map) => {
   config({
-    custom_map: map
+    custom_map: map,
   });
 };

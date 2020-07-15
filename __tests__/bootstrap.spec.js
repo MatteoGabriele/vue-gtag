@@ -22,13 +22,13 @@ describe("bootstrap", () => {
     global.dataLayer = undefined;
   });
 
-  it("should load the gtag.js file", done => {
+  it("should load the gtag.js file", (done) => {
     getOptions.mockReturnValueOnce({
       globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     bootstrap();
@@ -48,8 +48,8 @@ describe("bootstrap", () => {
       globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     bootstrap();
@@ -57,7 +57,7 @@ describe("bootstrap", () => {
     expect(util.loadScript).not.toHaveBeenCalled();
   });
 
-  it("should fire the onReady method when gtag is loaded", done => {
+  it("should fire the onReady method when gtag is loaded", (done) => {
     const spy = jest.fn();
 
     getOptions.mockReturnValueOnce({
@@ -65,8 +65,8 @@ describe("bootstrap", () => {
       globalObjectName: "gtag",
       onReady: spy,
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     bootstrap();
@@ -77,13 +77,13 @@ describe("bootstrap", () => {
     });
   });
 
-  it("should have dataLayer and gtag defined", done => {
+  it("should have dataLayer and gtag defined", (done) => {
     getOptions.mockReturnValueOnce({
       globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     bootstrap();
@@ -95,14 +95,14 @@ describe("bootstrap", () => {
     });
   });
 
-  it("should opt-out when plugin has `enabled` set to false", done => {
+  it("should opt-out when plugin has `enabled` set to false", (done) => {
     getOptions.mockReturnValueOnce({
       globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       enabled: false,
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     bootstrap();
@@ -113,14 +113,14 @@ describe("bootstrap", () => {
     });
   });
 
-  it("should load the gtag.js file also when opt-out", done => {
+  it("should load the gtag.js file also when opt-out", (done) => {
     getOptions.mockReturnValueOnce({
       enabled: false,
       globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     bootstrap();
@@ -131,14 +131,14 @@ describe("bootstrap", () => {
     });
   });
 
-  it("should have dataLayer and gtag defined also when opt-out", done => {
+  it("should have dataLayer and gtag defined also when opt-out", (done) => {
     getOptions.mockReturnValueOnce({
       enabled: false,
       globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     bootstrap();
@@ -155,8 +155,8 @@ describe("bootstrap", () => {
       globalDataLayerName: "dataLayer",
       globalObjectName: "foo",
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     bootstrap();
@@ -174,8 +174,8 @@ describe("bootstrap", () => {
       globalObjectName: "gtag",
       pageTrackerEnabled: true,
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     bootstrap();
@@ -192,8 +192,8 @@ describe("bootstrap", () => {
       globalObjectName: "gtag",
       pageTrackerEnabled: false,
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     bootstrap();
@@ -208,8 +208,8 @@ describe("bootstrap", () => {
       globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     bootstrap();
@@ -219,7 +219,7 @@ describe("bootstrap", () => {
     flushPromises();
   });
 
-  it("should return an error when script loading fails", done => {
+  it("should return an error when script loading fails", (done) => {
     util.warn = jest.fn();
     util.loadScript = jest.fn(() => Promise.reject(new Error()));
 
@@ -228,8 +228,8 @@ describe("bootstrap", () => {
       globalObjectName: "gtag",
       pageTrackerEnabled: true,
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     bootstrap();

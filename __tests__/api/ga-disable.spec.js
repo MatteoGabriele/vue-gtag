@@ -10,7 +10,7 @@ describe("ga-disable", () => {
 
   it("should set true", () => {
     getOptions.mockReturnValueOnce({
-      config: { id: 1 }
+      config: { id: 1 },
     });
 
     disable();
@@ -20,7 +20,7 @@ describe("ga-disable", () => {
 
   it("should set false", () => {
     getOptions.mockReturnValueOnce({
-      config: { id: 1 }
+      config: { id: 1 },
     });
 
     disable(false);
@@ -31,7 +31,7 @@ describe("ga-disable", () => {
   it("should set false to includes domains", () => {
     getOptions.mockReturnValueOnce({
       config: { id: 1 },
-      includes: [{ id: 2 }, { id: 3 }]
+      includes: [{ id: 2 }, { id: 3 }],
     });
 
     disable(false);

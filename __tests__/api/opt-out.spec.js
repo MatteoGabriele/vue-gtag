@@ -6,7 +6,7 @@ jest.mock("@/install");
 describe("api/opt-out", () => {
   it("should set disable to false", () => {
     getOptions.mockReturnValueOnce({
-      config: { id: 1 }
+      config: { id: 1 },
     });
 
     optOut();

@@ -12,7 +12,7 @@ describe("api/config", () => {
 
   it("should be called with this parameters", () => {
     getOptions.mockReturnValue({
-      config: { id: 1 }
+      config: { id: 1 },
     });
 
     config("foo");
@@ -26,8 +26,8 @@ describe("api/config", () => {
     getOptions.mockReturnValue({
       includes: [{ id: 2 }],
       config: {
-        id: 1
-      }
+        id: 1,
+      },
     });
 
     config("foo");

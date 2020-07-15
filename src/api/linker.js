@@ -1,5 +1,5 @@
 import config from "./config";
 
-export default params => {
+export default (params) => {
   config("linker", params);
 };

@@ -4,7 +4,7 @@ import { getRouter, getOptions } from "../src/install";
 import optOut from "./api/opt-out";
 import pageTracker from "./page-tracker";
 
-export default function() {
+export default function () {
   if (typeof document === "undefined" || typeof window === "undefined") {
     return;
   }
@@ -16,7 +16,7 @@ export default function() {
     config,
     pageTrackerEnabled,
     onReady,
-    disableScriptLoad
+    disableScriptLoad,
   } = getOptions();
 
   const Router = getRouter();
@@ -28,7 +28,7 @@ export default function() {
 
   if (window[globalObjectName] == null) {
     window[globalDataLayerName] = window[globalDataLayerName] || [];
-    window[globalObjectName] = function() {
+    window[globalObjectName] = function () {
       window[globalDataLayerName].push(arguments);
     };
   }
@@ -58,7 +58,7 @@ export default function() {
 
       return library;
     })
-    .catch(error => {
+    .catch((error) => {
       warn("Ops! Something happened and gtag.js couldn't be loaded", error);
       return error;
     });

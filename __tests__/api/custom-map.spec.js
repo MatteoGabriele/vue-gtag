@@ -7,7 +7,7 @@ describe("api/custom", () => {
   it("should be called with this parameters", () => {
     customMap({ foo: "bar" });
     expect(config).toHaveBeenCalledWith({
-      custom_map: { foo: "bar" }
+      custom_map: { foo: "bar" },
     });
   });
 });

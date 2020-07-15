@@ -20,11 +20,11 @@ export let options = {
   pageTrackerSkipSamePath: true,
   defaultGroupName: "default",
   includes: null,
-  config: null
+  config: null,
 };
 
 export const getOptions = () => options;
-export const setOptions = _options => mergeDeep(options, _options);
+export const setOptions = (_options) => mergeDeep(options, _options);
 export const getVue = () => Vue;
 export const getRouter = () => Router;
 

@@ -7,7 +7,7 @@ export const getPageviewTemplate = (to = {}, from = {}) => {
   const {
     pageTrackerTemplate,
     pageTrackerScreenviewEnabled,
-    appName
+    appName,
   } = getOptions();
 
   let template;
@@ -18,13 +18,13 @@ export const getPageviewTemplate = (to = {}, from = {}) => {
   } else if (pageTrackerScreenviewEnabled) {
     template = {
       app_name: appName,
-      screen_name: to.name
+      screen_name: to.name,
     };
   } else {
     template = {
       page_title: to.name,
       page_path: to.path,
-      page_location: window.location.href
+      page_location: window.location.href,
     };
   }
 
@@ -34,7 +34,7 @@ export const getPageviewTemplate = (to = {}, from = {}) => {
 export const trackPage = ({ to = {}, from = {}, params = {} } = {}) => {
   const {
     pageTrackerSkipSamePath,
-    pageTrackerScreenviewEnabled
+    pageTrackerScreenviewEnabled,
   } = getOptions();
 
   if (pageTrackerSkipSamePath && to.path === from.path) {
@@ -43,7 +43,7 @@ export const trackPage = ({ to = {}, from = {}, params = {} } = {}) => {
 
   const newParams = {
     ...getPageviewTemplate(to, from),
-    ...params
+    ...params,
   };
 
   if (pageTrackerScreenviewEnabled && !newParams.app_name) {
@@ -64,12 +64,12 @@ export const trackPage = ({ to = {}, from = {}, params = {} } = {}) => {
   pageview(newParams);
 };
 
-export const startRouter = Router => {
+export const startRouter = (Router) => {
   const Vue = getVue();
   const { onBeforeTrack, onAfterTrack, config } = getOptions();
 
   /* istanbul ignore next */
-  Router.onReady(current => {
+  Router.onReady((current) => {
     Vue.nextTick().then(() => {
       trackPage({ to: current, params: config.params });
     });
