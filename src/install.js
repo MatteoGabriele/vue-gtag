@@ -6,6 +6,7 @@ let Vue;
 let Router;
 
 export let options = {
+  customResourceURL: "https://www.googletagmanager.com/gtag/js",
   pageTrackerTemplate: noop,
   onBeforeTrack: noop,
   onAfterTrack: noop,

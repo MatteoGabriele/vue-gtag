@@ -29,6 +29,7 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js"
     });
 
     bootstrap();
@@ -42,6 +43,27 @@ describe("bootstrap", () => {
     });
   });
 
+  it("should load gtag.js file from custom resource url", (done) => {
+    getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
+      globalObjectName: "gtag",
+      config: {
+        id: 1,
+      },
+      customResourceURL: "https://www.example.com/gtag/js"
+    });
+
+    bootstrap();
+
+    flushPromises().then(() => {
+      expect(util.loadScript).toHaveBeenCalledWith(
+          "https://www.example.com/gtag/js?id=1&l=dataLayer",
+          "https://www.example.com"
+      );
+      done();
+    });
+  });
+
   it("should not load the gtag.js file", () => {
     getOptions.mockReturnValueOnce({
       disableScriptLoad: true,
@@ -50,6 +72,7 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js"
     });
 
     bootstrap();
@@ -67,6 +90,7 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js"
     });
 
     bootstrap();
@@ -84,6 +108,7 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js"
     });
 
     bootstrap();
@@ -103,6 +128,7 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js"
     });
 
     bootstrap();
@@ -121,6 +147,7 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js"
     });
 
     bootstrap();
@@ -139,6 +166,7 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js"
     });
 
     bootstrap();
@@ -157,6 +185,7 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js"
     });
 
     bootstrap();
@@ -176,6 +205,7 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js"
     });
 
     bootstrap();
@@ -194,6 +224,7 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js"
     });
 
     bootstrap();
@@ -210,6 +241,7 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js"
     });
 
     bootstrap();
@@ -230,6 +262,7 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js"
     });
 
     bootstrap();

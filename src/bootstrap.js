@@ -10,6 +10,7 @@ export default function () {
   }
 
   const {
+    customResourceURL,
     enabled,
     globalObjectName,
     globalDataLayerName,
@@ -45,8 +46,8 @@ export default function () {
     return;
   }
 
-  const domain = "https://www.googletagmanager.com";
-  const resource = `${domain}/gtag/js?id=${config.id}&l=${globalDataLayerName}`;
+  const resource = `${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`;
+  const domain = new URL(customResourceURL).origin;
 
   return loadScript(resource, domain)
     .then(() => {

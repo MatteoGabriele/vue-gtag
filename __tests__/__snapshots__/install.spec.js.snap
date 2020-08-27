@@ -4,6 +4,7 @@ exports[`install should have default options 1`] = `
 Object {
   "bootstrap": true,
   "config": null,
+  "customResourceURL": "https://www.googletagmanager.com/gtag/js",
   "defaultGroupName": "default",
   "disableScriptLoad": false,
   "enabled": true,
