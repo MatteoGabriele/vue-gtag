@@ -4,7 +4,7 @@ const SCHEME_DEFAULT_PORTS = Object.freeze({
   "ftp://": 21,
   "http://": 80,
   "https://": 443,
-})
+});
 
 export function loadScript(url, domain) {
   return new Promise((resolve, reject) => {

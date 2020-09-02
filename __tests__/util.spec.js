@@ -93,14 +93,32 @@ describe("isObject", () => {
 
 describe("getUrlOrigin", () => {
   it("should return the correct origin string", () => {
-    expect(util.getUrlOrigin("https://vuejs.org/v2/guide/")).toBe("https://vuejs.org");
-    expect(util.getUrlOrigin("https://vuejs.org/v2/guide/#Getting-Started")).toBe("https://vuejs.org");
-    expect(util.getUrlOrigin("https://mozilla.org:443/")).toBe("https://mozilla.org");
-    expect(util.getUrlOrigin("blob:https://mozilla.org:443/")).toBe("https://mozilla.org");
-    expect(util.getUrlOrigin("blob:http://mozilla.org:8080/")).toBe("http://mozilla.org:8080");
-    expect(util.getUrlOrigin("https://github.com/MatteoGabriele/vue-gtag.git")).toBe("https://github.com");
-    expect(util.getUrlOrigin("https://github.com/MatteoGabriele/vue-gtag#install")).toBe("https://github.com");
-    expect(util.getUrlOrigin("https://github.com/MatteoGabriele/vue-gtag?query-string=value")).toBe("https://github.com");
+    expect(util.getUrlOrigin("https://vuejs.org/v2/guide/")).toBe(
+      "https://vuejs.org"
+    );
+    expect(
+      util.getUrlOrigin("https://vuejs.org/v2/guide/#Getting-Started")
+    ).toBe("https://vuejs.org");
+    expect(util.getUrlOrigin("https://mozilla.org:443/")).toBe(
+      "https://mozilla.org"
+    );
+    expect(util.getUrlOrigin("blob:https://mozilla.org:443/")).toBe(
+      "https://mozilla.org"
+    );
+    expect(util.getUrlOrigin("blob:http://mozilla.org:8080/")).toBe(
+      "http://mozilla.org:8080"
+    );
+    expect(
+      util.getUrlOrigin("https://github.com/MatteoGabriele/vue-gtag.git")
+    ).toBe("https://github.com");
+    expect(
+      util.getUrlOrigin("https://github.com/MatteoGabriele/vue-gtag#install")
+    ).toBe("https://github.com");
+    expect(
+      util.getUrlOrigin(
+        "https://github.com/MatteoGabriele/vue-gtag?query-string=value"
+      )
+    ).toBe("https://github.com");
   });
   it("should throw error", () => {
     expect(() => util.getUrlOrigin("")).toThrow();
