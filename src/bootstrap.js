@@ -1,4 +1,4 @@
-import { warn, isFn, loadScript } from "./util";
+import { warn, isFn, loadScript, getUrlOrigin } from "./util";
 import api from "./api";
 import { getRouter, getOptions } from "../src/install";
 import optOut from "./api/opt-out";
@@ -47,7 +47,7 @@ export default function () {
   }
 
   const resource = `${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`;
-  const domain = new URL(customResourceURL).origin;
+  const domain = getUrlOrigin(customResourceURL);
 
   return loadScript(resource, domain)
     .then(() => {
