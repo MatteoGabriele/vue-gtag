@@ -1,6 +1,6 @@
 export const noop = function () {};
 
-export function loadScript(url, domain) {
+export function loadScript(url, preconnectOrigin) {
   return new Promise((resolve, reject) => {
     const head = document.head || document.getElementsByTagName("head")[0];
     const script = document.createElement("script");
@@ -9,10 +9,10 @@ export function loadScript(url, domain) {
     script.src = url;
     script.charset = "utf-8";
 
-    if (domain) {
+    if (preconnectOrigin) {
       const link = document.createElement("link");
 
-      link.href = domain;
+      link.href = preconnectOrigin;
       link.rel = "preconnect";
 
       head.appendChild(link);

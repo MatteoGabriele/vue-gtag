@@ -10,6 +10,8 @@ export default function () {
   }
 
   const {
+    customResourceURL,
+    customPreconnectOrigin,
     enabled,
     globalObjectName,
     globalDataLayerName,
@@ -45,10 +47,9 @@ export default function () {
     return;
   }
 
-  const domain = "https://www.googletagmanager.com";
-  const resource = `${domain}/gtag/js?id=${config.id}&l=${globalDataLayerName}`;
+  const resource = `${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`;
 
-  return loadScript(resource, domain)
+  return loadScript(resource, customPreconnectOrigin)
     .then(() => {
       const library = window[globalObjectName];
 

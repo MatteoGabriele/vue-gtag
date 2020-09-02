@@ -29,6 +29,8 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
     });
 
     bootstrap();
@@ -42,6 +44,28 @@ describe("bootstrap", () => {
     });
   });
 
+  it("should load gtag.js file from custom resource url", (done) => {
+    getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
+      globalObjectName: "gtag",
+      config: {
+        id: 1,
+      },
+      customResourceURL: "https://www.example.com/gtag/js",
+      customPreconnectOrigin: "https://www.example.com",
+    });
+
+    bootstrap();
+
+    flushPromises().then(() => {
+      expect(util.loadScript).toHaveBeenCalledWith(
+        "https://www.example.com/gtag/js?id=1&l=dataLayer",
+        "https://www.example.com"
+      );
+      done();
+    });
+  });
+
   it("should not load the gtag.js file", () => {
     getOptions.mockReturnValueOnce({
       disableScriptLoad: true,
@@ -50,6 +74,8 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
     });
 
     bootstrap();
@@ -67,6 +93,8 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
     });
 
     bootstrap();
@@ -84,6 +112,8 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
     });
 
     bootstrap();
@@ -103,6 +133,8 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
     });
 
     bootstrap();
@@ -121,6 +153,8 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
     });
 
     bootstrap();
@@ -139,6 +173,8 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
     });
 
     bootstrap();
@@ -157,6 +193,8 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
     });
 
     bootstrap();
@@ -176,6 +214,8 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
     });
 
     bootstrap();
@@ -194,6 +234,8 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
     });
 
     bootstrap();
@@ -210,6 +252,8 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
     });
 
     bootstrap();
@@ -230,6 +274,8 @@ describe("bootstrap", () => {
       config: {
         id: 1,
       },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
     });
 
     bootstrap();
