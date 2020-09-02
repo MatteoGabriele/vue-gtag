@@ -7,7 +7,7 @@ let Router;
 
 export let options = {
   customResourceURL: "https://www.googletagmanager.com/gtag/js",
-  preconnectOrigin: "https://www.googletagmanager.com",
+  customPreconnectOrigin: "https://www.googletagmanager.com",
   pageTrackerTemplate: noop,
   onBeforeTrack: noop,
   onAfterTrack: noop,

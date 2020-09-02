@@ -4,6 +4,7 @@ exports[`install should have default options 1`] = `
 Object {
   "bootstrap": true,
   "config": null,
+  "customPreconnectOrigin": "https://www.googletagmanager.com",
   "customResourceURL": "https://www.googletagmanager.com/gtag/js",
   "defaultGroupName": "default",
   "disableScriptLoad": false,
@@ -18,6 +19,5 @@ Object {
   "pageTrackerScreenviewEnabled": false,
   "pageTrackerSkipSamePath": true,
   "pageTrackerTemplate": [Function],
-  "preconnectOrigin": "https://www.googletagmanager.com",
 }
 `;
