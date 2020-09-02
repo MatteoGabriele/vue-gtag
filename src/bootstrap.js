@@ -11,6 +11,7 @@ export default function () {
 
   const {
     customResourceURL,
+    preconnectOrigin,
     enabled,
     globalObjectName,
     globalDataLayerName,
@@ -47,9 +48,8 @@ export default function () {
   }
 
   const resource = `${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`;
-  const domain = new URL(customResourceURL).origin;
 
-  return loadScript(resource, domain)
+  return loadScript(resource, preconnectOrigin)
     .then(() => {
       const library = window[globalObjectName];
 

@@ -18,5 +18,6 @@ Object {
   "pageTrackerScreenviewEnabled": false,
   "pageTrackerSkipSamePath": true,
   "pageTrackerTemplate": [Function],
+  "preconnectOrigin": "https://www.googletagmanager.com",
 }
 `;
