@@ -59,15 +59,15 @@ describe("mergeDeep", () => {
 
 describe("warn", () => {
   it("should warn with a customized message prefix", () => {
-    console.warn = jest.fn();
+    console.error = jest.fn();
     util.warn("foo");
-    expect(console.warn).toHaveBeenCalledWith("[vue-gtag] foo");
+    expect(console.error).toHaveBeenCalledWith("[vue-gtag] foo");
   });
 
   it("should console the error", () => {
-    console.warn = jest.fn();
+    console.error = jest.fn();
     util.warn("foo", new Error());
-    expect(console.warn).toHaveBeenCalledTimes(2);
+    expect(console.error).toHaveBeenCalledTimes(2);
   });
 });
 

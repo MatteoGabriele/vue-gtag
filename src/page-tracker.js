@@ -1,5 +1,6 @@
 import { getVue, getRouter, getOptions } from "./install";
 import { warn } from "./util";
+import api from "./api";
 import pageview from "./api/pageview";
 import screenview from "./api/screenview";
 
@@ -71,7 +72,8 @@ export const startRouter = (Router) => {
   /* istanbul ignore next */
   Router.onReady((current) => {
     Vue.nextTick().then(() => {
-      trackPage({ to: current, params: config.params });
+      api.config(config.params);
+      trackPage({ to: current });
     });
 
     Router.afterEach((to, from) => {

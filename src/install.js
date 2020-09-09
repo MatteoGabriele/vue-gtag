@@ -22,7 +22,13 @@ export let options = {
   pageTrackerSkipSamePath: true,
   defaultGroupName: "default",
   includes: null,
-  config: null,
+  appName: null,
+  config: {
+    id: null,
+    params: {
+      send_page_view: false,
+    },
+  },
 };
 
 export const getOptions = () => options;

@@ -1,17 +1,23 @@
 import pageview from "@/api/pageview";
-import config from "@/api/config";
+import event from "@/api/event";
 
-jest.mock("@/api/config");
+jest.mock("@/api/event");
 
 describe("api/pageview", () => {
   it("should be called with this parameters", () => {
     pageview("foo");
-    expect(config).toHaveBeenCalledWith({
+
+    expect(event).toHaveBeenCalledWith("page_view", {
       page_path: "foo",
       page_location: "http://localhost/",
+      send_page_view: true,
     });
 
     pageview({ foo: "bar" });
-    expect(config).toHaveBeenCalledWith({ foo: "bar" });
+
+    expect(event).toHaveBeenCalledWith("page_view", {
+      foo: "bar",
+      send_page_view: true,
+    });
   });
 });

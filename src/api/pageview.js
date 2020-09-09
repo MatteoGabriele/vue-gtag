@@ -1,4 +1,4 @@
-import config from "./config";
+import event from "./event";
 
 export default (...args) => {
   const [arg] = args;
@@ -13,5 +13,9 @@ export default (...args) => {
     params = arg;
   }
 
-  config(params);
+  if (params.send_page_view == null) {
+    params.send_page_view = true;
+  }
+
+  event("page_view", params);
 };
