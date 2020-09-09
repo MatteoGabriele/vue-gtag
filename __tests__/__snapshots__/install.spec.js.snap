@@ -2,8 +2,14 @@
 
 exports[`install should have default options 1`] = `
 Object {
+  "appName": null,
   "bootstrap": true,
-  "config": null,
+  "config": Object {
+    "id": null,
+    "params": Object {
+      "send_page_view": false,
+    },
+  },
   "customPreconnectOrigin": "https://www.googletagmanager.com",
   "customResourceURL": "https://www.googletagmanager.com/gtag/js",
   "defaultGroupName": "default",
