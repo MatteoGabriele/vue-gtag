@@ -27,6 +27,9 @@ Global Site Tag plugin for Vue
 
 The global site tag (gtag.js) is a JavaScript tagging framework and API that allows you to send event data to Google Analytics, Google Ads, and Google Marketing Platform. For general gtag.js [documentation](https://developers.google.com/analytics/devguides/collection/gtagjs), read the gtag.js developer guide.
 
+## Vue 3 update
+Currently working on the Vue 3 version on this new repo https://github.com/MatteoGabriele/vue-gtag-next and you can install the package under `vue-gtag-next` if you want to start playing with it
+
 ## Requirements
 
 Vue ^2.0.0
