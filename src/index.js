@@ -22,3 +22,4 @@ export const purchase = api.purchase;
 export const set = api.set;
 export const optIn = api.optIn;
 export const optOut = api.optOut;
+export const refund = api.refund;
