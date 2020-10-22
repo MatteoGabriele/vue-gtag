@@ -158,91 +158,105 @@ declare module "vue-gtag" {
     event_label?: string;
   }
 
+  export type GtagOptIO = () => void;
+
+  /**
+   * Send a Google Analytics Event.
+   *
+   * @see https://developers.google.com/analytics/devguides/collection/gtagjs/events
+   *
+   * @param action string that will appear as the event action in Google Analytics Event reports
+   * @param eventParams
+   */
+  export type GtagEvent = (action: Gtag.EventNames | string, eventParams?: Gtag.ControlParams | Gtag.EventParams | Gtag.CustomParams) => void;
+
+  /**
+   * Send an ad-hoc Google Analytics pageview.
+   *
+   * @see https://developers.google.com/analytics/devguides/collection/gtagjs/pages
+   */
+  export type GtagPageView = (pageView: PageView) => void;
+
+  /**
+   * Send a Google Analytics screen view.
+   *
+   * @see https://developers.google.com/analytics/devguides/collection/gtagjs/screens
+   */
+  export type GtagScreenView = (screenView: ScreenView) => void;
+
+  /**
+   * Configure a map of custom dimensions and metrics.
+   *
+   * @see https://developers.google.com/analytics/devguides/collection/gtagjs/custom-dims-mets
+   */
+  export type GtagCustomMap = (map: Dictionary<string>) => void;
+
+  /**
+   * Measure a transaction.
+   *
+   * @see https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_purchases
+   */
+  export type GtagPurchase = (purchase: EcommerceAction) => void;
+
+  /**
+   * Send user timing information to Google Analytics.
+   *
+   * @see https://developers.google.com/analytics/devguides/collection/gtagjs/user-timings
+   */
+  export type GtagTime = (timing: Timing) => void;
+
+  /**
+   * Measure an exception.
+   *
+   * @see https://developers.google.com/analytics/devguides/collection/gtagjs/exceptions
+   */
+  export type GtagException = (ex: Exception) => void;
+
+  /**
+   * Automatically link domains.
+   *
+   * @see https://developers.google.com/analytics/devguides/collection/gtagjs/cross-domain#automatically_link_domains
+   */
+  export type GtagLinker = (config: Linker) => void;
+
+  /**
+   * Set parameters that will be associated with every subsequent event on the page.
+   *
+   * @see https://developers.google.com/gtagjs/devguide/configure#send_data_on_every_event_with_set
+   */
+  export type GtagSet = (config: Gtag.CustomParams) => void;
+
+  /**
+   * Initialize and configure settings for a particular product account.
+   *
+   * @see https://developers.google.com/gtagjs/devguide/configure
+   */
+  export type GtagConfig = (config?: Gtag.ControlParams | Gtag.EventParams | Gtag.CustomParams) => void;
+
+  /**
+   * Measure a full refund of a transaction.
+   *
+   * @see https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_refunds
+   */
+  export type GtagRefund = (refund: EcommerceAction) => void;
+
   export type Dictionary<T> = { [key: string]: T };
 
   export interface VueGtag {
-    optIn(): void;
-    optOut(): void;
-
-    /**
-     * Send an ad-hoc Google Analytics pageview.
-     *
-     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/pages
-     */
-    pageview(pageView: PageView): void;
-
-    /**
-     * Send a Google Analytics Event.
-     *
-     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/events
-     *
-     * @param action string that will appear as the event action in Google Analytics Event reports
-     * @param eventParams
-     */
-    event(action: Gtag.EventNames | string, eventParams?: Gtag.ControlParams | Gtag.EventParams | Gtag.CustomParams): void;
-
-    /**
-     * Send a Google Analytics screen view.
-     *
-     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/screens
-     */
-    screenview(screenView: ScreenView): void;
-
-    /**
-     * Configure a map of custom dimensions and metrics.
-     *
-     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/custom-dims-mets
-     */
-    customMap(map: Dictionary<string>): void;
-
-    /**
-     * Measure a transaction.
-     *
-     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_purchases
-     */
-    purchase(purchase: EcommerceAction): void;
-
-    /**
-     * Measure a full refund of a transaction.
-     *
-     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_refunds
-     */
-    refund(refund: EcommerceAction): void;
-
-    /**
-     * Automatically link domains.
-     *
-     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/cross-domain#automatically_link_domains
-     */
-    linker(config: Linker): void;
-
-    /**
-     * Measure an exception.
-     *
-     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/exceptions
-     */
-    exception(ex: Exception): void;
-
-    /**
-     * Set parameters that will be associated with every subsequent event on the page.
-     *
-     * @see https://developers.google.com/gtagjs/devguide/configure#send_data_on_every_event_with_set
-     */
-    set(config: Gtag.CustomParams): void;
-
-    /**
-     * Initialize and configure settings for a particular product account.
-     *
-     * @see https://developers.google.com/gtagjs/devguide/configure
-     */
-    config(config?: Gtag.ControlParams | Gtag.EventParams | Gtag.CustomParams): void;
-
-    /**
-     * Send user timing information to Google Analytics.
-     *
-     * @see https://developers.google.com/analytics/devguides/collection/gtagjs/user-timings
-     */
-    time(timing: Timing): void;
+    query: Gtag.Gtag;
+    optIn: GtagOptIO;
+    optOut: GtagOptIO;
+    pageview: GtagPageView;
+    event: GtagEvent;
+    screenview: GtagScreenView;
+    customMap: GtagCustomMap;
+    purchase: GtagPurchase;
+    refund: GtagRefund;
+    linker: GtagLinker;
+    exception: GtagException;
+    set: GtagSet;
+    config: GtagConfig;
+    time: GtagTime;
   }
 
   export interface DomainConfig {
@@ -279,6 +293,20 @@ declare module "vue-gtag" {
   export function setOptions(options: PluginOptions): void;
 
   export default VueGtagPlugin;
+  export const query: Gtag.Gtag;
+  export const config: GtagConfig;
+  export const event: GtagEvent;
+  export const pageview: GtagPageView;
+  export const screenview: GtagScreenView;
+  export const customMap: GtagCustomMap;
+  export const time: GtagTime;
+  export const exception: GtagException;
+  export const linker: GtagLinker;
+  export const purchase: GtagPurchase;
+  export const set: GtagSet;
+  export const optIn: GtagOptIO;
+  export const optOut: GtagOptIO;
+  export const refund: GtagRefund;
 
   module "vue/types/vue" {
     interface Vue {
