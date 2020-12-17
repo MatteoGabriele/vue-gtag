@@ -35,6 +35,7 @@ export const getOptions = () => options;
 export const setOptions = (_options) => mergeDeep(options, _options);
 export const getVue = () => Vue;
 export const getRouter = () => Router;
+export const setRouter = (_Router) => (Router = _Router);
 
 export function install(_Vue, _options = {}, _Router) {
   Vue = _Vue;
