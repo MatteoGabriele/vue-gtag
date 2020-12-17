@@ -13,4 +13,8 @@ describe("entry point", () => {
   it("should export setOptions", () => {
     expect(entry.setOptions).toBeDefined();
   });
+
+  it("should export setRouter", () => {
+    expect(entry.setRouter).toBeDefined();
+  });
 });

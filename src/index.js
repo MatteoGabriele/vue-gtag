@@ -1,4 +1,8 @@
-import { setOptions as _setOptions, install } from "./install";
+import {
+  setOptions as _setOptions,
+  install,
+  setRouter as _setRouter,
+} from "./install";
 import _bootstrap from "./bootstrap";
 import api from "./api";
 
@@ -7,6 +11,7 @@ export { install };
 
 export const bootstrap = _bootstrap;
 export const setOptions = _setOptions;
+export const setRouter = _setRouter;
 
 // export api for usages outside Vuejs context
 export const query = api.query;
