@@ -1,4 +1,4 @@
-import { warn, isFn, loadScript } from "./util";
+import { isFn, loadScript } from "./util";
 import api from "./api";
 import { getRouter, getOptions } from "../src/install";
 import optOut from "./api/opt-out";
