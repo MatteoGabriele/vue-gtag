@@ -262,30 +262,4 @@ describe("bootstrap", () => {
 
     flushPromises();
   });
-
-  it("should return an error when script loading fails", (done) => {
-    util.warn = jest.fn();
-    util.loadScript = jest.fn(() => Promise.reject(new Error()));
-
-    getOptions.mockReturnValueOnce({
-      globalDataLayerName: "dataLayer",
-      globalObjectName: "gtag",
-      pageTrackerEnabled: true,
-      config: {
-        id: 1,
-      },
-      customResourceURL: "https://www.googletagmanager.com/gtag/js",
-      customPreconnectOrigin: "https://www.googletagmanager.com",
-    });
-
-    bootstrap();
-
-    flushPromises().then(() => {
-      expect(util.warn).toHaveBeenCalledWith(
-        "Ops! Something happened and gtag.js couldn't be loaded",
-        new Error()
-      );
-      done();
-    });
-  });
 });

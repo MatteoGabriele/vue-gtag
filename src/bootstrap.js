@@ -60,7 +60,6 @@ export default function () {
       return library;
     })
     .catch((error) => {
-      warn(error);
       return error;
     });
 }
