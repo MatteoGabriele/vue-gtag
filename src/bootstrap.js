@@ -60,7 +60,7 @@ export default function () {
       return library;
     })
     .catch((error) => {
-      warn("Ops! Something happened and gtag.js couldn't be loaded", error);
+      warn(error);
       return error;
     });
 }

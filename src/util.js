@@ -26,10 +26,10 @@ export function loadScript(url, preconnectOrigin) {
 }
 
 export function warn(msg, err) {
-  console.error("[vue-gtag] " + msg);
+  console.warn("[vue-gtag] " + msg);
 
   if (err && err.stack) {
-    console.error(err.stack);
+    console.warn(err.stack);
   }
 }
 
