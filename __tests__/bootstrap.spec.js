@@ -31,14 +31,17 @@ describe("bootstrap", () => {
       },
       customResourceURL: "https://www.googletagmanager.com/gtag/js",
       customPreconnectOrigin: "https://www.googletagmanager.com",
+      deferScriptLoad: false,
     });
 
     bootstrap();
 
     flushPromises().then(() => {
-      expect(util.loadScript).toHaveBeenCalledWith(
+      expect(
+        util.loadScript
+      ).toHaveBeenCalledWith(
         "https://www.googletagmanager.com/gtag/js?id=1&l=dataLayer",
-        "https://www.googletagmanager.com"
+        { defer: false, preconnectOrigin: "https://www.googletagmanager.com" }
       );
       done();
     });
@@ -53,14 +56,42 @@ describe("bootstrap", () => {
       },
       customResourceURL: "https://www.example.com/gtag/js",
       customPreconnectOrigin: "https://www.example.com",
+      deferScriptLoad: false,
     });
 
     bootstrap();
 
     flushPromises().then(() => {
-      expect(util.loadScript).toHaveBeenCalledWith(
+      expect(
+        util.loadScript
+      ).toHaveBeenCalledWith(
         "https://www.example.com/gtag/js?id=1&l=dataLayer",
-        "https://www.example.com"
+        { defer: false, preconnectOrigin: "https://www.example.com" }
+      );
+      done();
+    });
+  });
+
+  it("should load gtag.js with the defer option", (done) => {
+    getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
+      globalObjectName: "gtag",
+      config: {
+        id: 1,
+      },
+      customResourceURL: "https://www.example.com/gtag/js",
+      customPreconnectOrigin: "https://www.example.com",
+      deferScriptLoad: true,
+    });
+
+    bootstrap();
+
+    flushPromises().then(() => {
+      expect(
+        util.loadScript
+      ).toHaveBeenCalledWith(
+        "https://www.example.com/gtag/js?id=1&l=dataLayer",
+        { defer: true, preconnectOrigin: "https://www.example.com" }
       );
       done();
     });

@@ -18,6 +18,7 @@ export default function () {
     config,
     pageTrackerEnabled,
     onReady,
+    deferScriptLoad,
     disableScriptLoad,
   } = getOptions();
 
@@ -49,7 +50,10 @@ export default function () {
 
   const resource = `${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`;
 
-  return loadScript(resource, customPreconnectOrigin)
+  return loadScript(resource, {
+    preconnectOrigin: customPreconnectOrigin,
+    defer: deferScriptLoad,
+  })
     .then(() => {
       const library = window[globalObjectName];
 

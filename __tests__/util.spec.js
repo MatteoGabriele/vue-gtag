@@ -20,7 +20,20 @@ describe("loadScript", () => {
   });
 
   it("should create a link for domain preconnect", (done) => {
-    util.loadScript("foo", "bar");
+    util.loadScript("foo", {
+      preconnectOrigin: "bar",
+    });
+
+    flushPromises().then(() => {
+      expect(document.head).toMatchSnapshot();
+      done();
+    });
+  });
+
+  it("should create a script tag with the defer attribute", (done) => {
+    util.loadScript("foo", {
+      defer: true,
+    });
 
     flushPromises().then(() => {
       expect(document.head).toMatchSnapshot();
