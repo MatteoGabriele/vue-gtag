@@ -1,6 +1,6 @@
 export const noop = function () {};
 
-export function loadScript(url, preconnectOrigin) {
+export function loadScript(url, options = {}) {
   return new Promise((resolve, reject) => {
     const head = document.head || document.getElementsByTagName("head")[0];
     const script = document.createElement("script");
@@ -8,11 +8,12 @@ export function loadScript(url, preconnectOrigin) {
     script.async = true;
     script.src = url;
     script.charset = "utf-8";
+    script.defer = options.defer;
 
-    if (preconnectOrigin) {
+    if (options.preconnectOrigin) {
       const link = document.createElement("link");
 
-      link.href = preconnectOrigin;
+      link.href = options.preconnectOrigin;
       link.rel = "preconnect";
 
       head.appendChild(link);
@@ -25,12 +26,8 @@ export function loadScript(url, preconnectOrigin) {
   });
 }
 
-export function warn(msg, err) {
-  console.error("[vue-gtag] " + msg);
-
-  if (err && err.stack) {
-    console.error(err.stack);
-  }
+export function warn(msg) {
+  console.warn("[vue-gtag] " + msg);
 }
 
 export function isFn(item) {

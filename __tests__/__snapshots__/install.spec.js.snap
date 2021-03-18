@@ -13,6 +13,7 @@ Object {
   "customPreconnectOrigin": "https://www.googletagmanager.com",
   "customResourceURL": "https://www.googletagmanager.com/gtag/js",
   "defaultGroupName": "default",
+  "deferScriptLoad": false,
   "disableScriptLoad": false,
   "enabled": true,
   "globalDataLayerName": "dataLayer",

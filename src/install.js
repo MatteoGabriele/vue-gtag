@@ -14,6 +14,7 @@ export let options = {
   onReady: noop,
   enabled: true,
   disableScriptLoad: false,
+  deferScriptLoad: false,
   bootstrap: true,
   globalObjectName: "gtag",
   globalDataLayerName: "dataLayer",
