@@ -26,5 +26,6 @@ Object {
   "pageTrackerScreenviewEnabled": false,
   "pageTrackerSkipSamePath": true,
   "pageTrackerTemplate": [Function],
+  "pageTrackerUseFullPath": false,
 }
 `;

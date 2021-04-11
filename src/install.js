@@ -18,6 +18,7 @@ export let options = {
   bootstrap: true,
   globalObjectName: "gtag",
   globalDataLayerName: "dataLayer",
+  pageTrackerUseFullPath: false,
   pageTrackerEnabled: true,
   pageTrackerScreenviewEnabled: false,
   pageTrackerSkipSamePath: true,
