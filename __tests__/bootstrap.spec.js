@@ -13,7 +13,7 @@ jest.mock("@/install");
 
 describe("bootstrap", () => {
   beforeEach(() => {
-    util.loadScript = jest.fn(() => Promise.resolve());
+    jest.spyOn(util, "loadScript").mockResolvedValue();
   });
 
   afterEach(() => {
@@ -23,7 +23,12 @@ describe("bootstrap", () => {
   });
 
   it("should load the gtag.js file", (done) => {
+    const onReadySpy = jest.fn();
+    const onErrorSpy = jest.fn();
+
     getOptions.mockReturnValueOnce({
+      onReady: onReadySpy,
+      onError: onErrorSpy,
       globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
@@ -31,14 +36,19 @@ describe("bootstrap", () => {
       },
       customResourceURL: "https://www.googletagmanager.com/gtag/js",
       customPreconnectOrigin: "https://www.googletagmanager.com",
+      deferScriptLoad: false,
     });
 
     bootstrap();
 
     flushPromises().then(() => {
-      expect(util.loadScript).toHaveBeenCalledWith(
+      expect(onReadySpy).toHaveBeenCalled();
+      expect(onErrorSpy).not.toHaveBeenCalled();
+      expect(
+        util.loadScript
+      ).toHaveBeenCalledWith(
         "https://www.googletagmanager.com/gtag/js?id=1&l=dataLayer",
-        "https://www.googletagmanager.com"
+        { defer: false, preconnectOrigin: "https://www.googletagmanager.com" }
       );
       done();
     });
@@ -53,14 +63,42 @@ describe("bootstrap", () => {
       },
       customResourceURL: "https://www.example.com/gtag/js",
       customPreconnectOrigin: "https://www.example.com",
+      deferScriptLoad: false,
     });
 
     bootstrap();
 
     flushPromises().then(() => {
-      expect(util.loadScript).toHaveBeenCalledWith(
+      expect(
+        util.loadScript
+      ).toHaveBeenCalledWith(
         "https://www.example.com/gtag/js?id=1&l=dataLayer",
-        "https://www.example.com"
+        { defer: false, preconnectOrigin: "https://www.example.com" }
+      );
+      done();
+    });
+  });
+
+  it("should load gtag.js with the defer option", (done) => {
+    getOptions.mockReturnValueOnce({
+      globalDataLayerName: "dataLayer",
+      globalObjectName: "gtag",
+      config: {
+        id: 1,
+      },
+      customResourceURL: "https://www.example.com/gtag/js",
+      customPreconnectOrigin: "https://www.example.com",
+      deferScriptLoad: true,
+    });
+
+    bootstrap();
+
+    flushPromises().then(() => {
+      expect(
+        util.loadScript
+      ).toHaveBeenCalledWith(
+        "https://www.example.com/gtag/js?id=1&l=dataLayer",
+        { defer: true, preconnectOrigin: "https://www.example.com" }
       );
       done();
     });
@@ -263,28 +301,31 @@ describe("bootstrap", () => {
     flushPromises();
   });
 
-  it("should return an error when script loading fails", (done) => {
-    util.warn = jest.fn();
-    util.loadScript = jest.fn(() => Promise.reject(new Error()));
+  it("should throw an error", (done) => {
+    const onReadySpy = jest.fn();
+    const onErrorSpy = jest.fn();
+    const error = new Error("not good!");
+
+    util.loadScript.mockRejectedValue(error);
 
     getOptions.mockReturnValueOnce({
+      onReady: onReadySpy,
+      onError: onErrorSpy,
       globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
-      pageTrackerEnabled: true,
       config: {
         id: 1,
       },
       customResourceURL: "https://www.googletagmanager.com/gtag/js",
       customPreconnectOrigin: "https://www.googletagmanager.com",
+      deferScriptLoad: false,
     });
 
     bootstrap();
 
     flushPromises().then(() => {
-      expect(util.warn).toHaveBeenCalledWith(
-        "Ops! Something happened and gtag.js couldn't be loaded",
-        new Error()
-      );
+      expect(onErrorSpy).toHaveBeenCalledWith(error);
+      expect(onReadySpy).not.toHaveBeenCalled();
       done();
     });
   });

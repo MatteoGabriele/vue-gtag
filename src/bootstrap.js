@@ -1,4 +1,4 @@
-import { warn, isFn, loadScript } from "./util";
+import { isFn, loadScript } from "./util";
 import api from "./api";
 import { getRouter, getOptions } from "../src/install";
 import optOut from "./api/opt-out";
@@ -18,6 +18,8 @@ export default function () {
     config,
     pageTrackerEnabled,
     onReady,
+    onError,
+    deferScriptLoad,
     disableScriptLoad,
   } = getOptions();
 
@@ -49,7 +51,10 @@ export default function () {
 
   const resource = `${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`;
 
-  return loadScript(resource, customPreconnectOrigin)
+  return loadScript(resource, {
+    preconnectOrigin: customPreconnectOrigin,
+    defer: deferScriptLoad,
+  })
     .then(() => {
       const library = window[globalObjectName];
 
@@ -60,7 +65,10 @@ export default function () {
       return library;
     })
     .catch((error) => {
-      warn("Ops! Something happened and gtag.js couldn't be loaded", error);
+      if (isFn(onError)) {
+        onError(error);
+      }
+
       return error;
     });
 }

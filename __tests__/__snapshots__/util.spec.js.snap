@@ -21,3 +21,13 @@ exports[`loadScript should create a script tag 1`] = `
   />
 </head>
 `;
+
+exports[`loadScript should create a script tag with the defer attribute 1`] = `
+<head>
+  <script
+    charset="utf-8"
+    defer=""
+    src="foo"
+  />
+</head>
+`;
