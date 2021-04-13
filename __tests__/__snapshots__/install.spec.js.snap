@@ -21,6 +21,7 @@ Object {
   "includes": null,
   "onAfterTrack": [Function],
   "onBeforeTrack": [Function],
+  "onError": [Function],
   "onReady": [Function],
   "pageTrackerEnabled": true,
   "pageTrackerScreenviewEnabled": false,
