@@ -71,10 +71,10 @@ export const startRouter = (Router) => {
   const { onBeforeTrack, onAfterTrack, config } = getOptions();
 
   /* istanbul ignore next */
-  Router.onReady((current) => {
+  Router.onReady(() => {
     Vue.nextTick().then(() => {
       api.config(config.params);
-      trackPage({ to: current });
+      trackPage({ to: Router.currentRoute });
     });
 
     Router.afterEach((to, from) => {
