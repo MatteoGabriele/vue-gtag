@@ -12,6 +12,7 @@ export let options = {
   onBeforeTrack: noop,
   onAfterTrack: noop,
   onReady: noop,
+  onError: noop,
   enabled: true,
   disableScriptLoad: false,
   deferScriptLoad: false,
