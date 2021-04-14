@@ -1,4 +1,4 @@
-import { getVue, getRouter, install, getOptions } from "@/install";
+import { getVue, getRouter, install, getOptions, setRouter } from "@/install";
 import bootstrap from "@/bootstrap";
 import extend from "@/extend";
 
@@ -17,6 +17,15 @@ describe("install", () => {
   it("should return VueRouter", () => {
     install(null, null, { foo: "bar" });
     expect(getRouter()).toEqual({ foo: "bar" });
+  });
+
+  it("should set VueRouter", () => {
+    const router = { foo: "bar" };
+
+    install();
+    setRouter(router);
+
+    expect(getRouter()).toEqual(router);
   });
 
   it("should return Vue", () => {
