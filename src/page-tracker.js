@@ -8,6 +8,7 @@ export const getPageviewTemplate = (to = {}, from = {}) => {
   const {
     pageTrackerTemplate,
     pageTrackerScreenviewEnabled,
+    pageTrackerUseFullPath,
     appName,
   } = getOptions();
 
@@ -24,7 +25,7 @@ export const getPageviewTemplate = (to = {}, from = {}) => {
   } else {
     template = {
       page_title: to.name,
-      page_path: to.path,
+      page_path: pageTrackerUseFullPath ? to.fullPath : to.path,
       page_location: window.location.href,
     };
   }
@@ -70,10 +71,10 @@ export const startRouter = (Router) => {
   const { onBeforeTrack, onAfterTrack, config } = getOptions();
 
   /* istanbul ignore next */
-  Router.onReady((current) => {
+  Router.onReady(() => {
     Vue.nextTick().then(() => {
       api.config(config.params);
-      trackPage({ to: current });
+      trackPage({ to: Router.currentRoute });
     });
 
     Router.afterEach((to, from) => {
