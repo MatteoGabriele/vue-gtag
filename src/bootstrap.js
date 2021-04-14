@@ -18,6 +18,7 @@ export default function () {
     config,
     pageTrackerEnabled,
     onReady,
+    onError,
     deferScriptLoad,
     disableScriptLoad,
   } = getOptions();
@@ -64,6 +65,10 @@ export default function () {
       return library;
     })
     .catch((error) => {
+      if (isFn(onError)) {
+        onError(error);
+      }
+
       return error;
     });
 }
