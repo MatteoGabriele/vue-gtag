@@ -13,7 +13,7 @@ jest.mock("@/install");
 
 describe("bootstrap", () => {
   beforeEach(() => {
-    util.loadScript = jest.fn(() => Promise.resolve());
+    jest.spyOn(util, "loadScript").mockResolvedValue();
   });
 
   afterEach(() => {
@@ -23,7 +23,12 @@ describe("bootstrap", () => {
   });
 
   it("should load the gtag.js file", (done) => {
+    const onReadySpy = jest.fn();
+    const onErrorSpy = jest.fn();
+
     getOptions.mockReturnValueOnce({
+      onReady: onReadySpy,
+      onError: onErrorSpy,
       globalDataLayerName: "dataLayer",
       globalObjectName: "gtag",
       config: {
@@ -37,6 +42,8 @@ describe("bootstrap", () => {
     bootstrap();
 
     flushPromises().then(() => {
+      expect(onReadySpy).toHaveBeenCalled();
+      expect(onErrorSpy).not.toHaveBeenCalled();
       expect(
         util.loadScript
       ).toHaveBeenCalledWith(
@@ -292,5 +299,34 @@ describe("bootstrap", () => {
     expect(config).toHaveBeenCalled();
 
     flushPromises();
+  });
+
+  it("should throw an error", (done) => {
+    const onReadySpy = jest.fn();
+    const onErrorSpy = jest.fn();
+    const error = new Error("not good!");
+
+    util.loadScript.mockRejectedValue(error);
+
+    getOptions.mockReturnValueOnce({
+      onReady: onReadySpy,
+      onError: onErrorSpy,
+      globalDataLayerName: "dataLayer",
+      globalObjectName: "gtag",
+      config: {
+        id: 1,
+      },
+      customResourceURL: "https://www.googletagmanager.com/gtag/js",
+      customPreconnectOrigin: "https://www.googletagmanager.com",
+      deferScriptLoad: false,
+    });
+
+    bootstrap();
+
+    flushPromises().then(() => {
+      expect(onErrorSpy).toHaveBeenCalledWith(error);
+      expect(onReadySpy).not.toHaveBeenCalled();
+      done();
+    });
   });
 });
