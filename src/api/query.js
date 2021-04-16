@@ -1,11 +1,11 @@
-import { getOptions } from "../install";
+import options from "@/options";
 
-export default function (...args) {
-  const { globalObjectName } = getOptions();
-
-  if (typeof document === "undefined" || typeof window === "undefined") {
+const query = (...args) => {
+  if (typeof window === "undefined") {
     return;
   }
 
-  window[globalObjectName](...args);
-}
+  window[options.globalObjectName](...args);
+};
+
+export default query;

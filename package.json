@@ -34,7 +34,15 @@
     }
   },
   "jest": {
+    "setupFiles": [
+      "<rootDir>/jest/init.js"
+    ],
+    "testMatch": [
+      "**/test/**/*.spec.js"
+    ],
     "collectCoverage": true,
+    "restoreMocks": true,
+    "resetMocks": true,
     "coverageReporters": [
       "json",
       "html"
@@ -76,6 +84,7 @@
     "babel-eslint": "^10.0.3",
     "bili": "^5.0.5",
     "commitizen": "^4.0.3",
+    "core-js": "^3.10.1",
     "cz-conventional-changelog": "^3.0.2",
     "del-cli": "^3.0.0",
     "eslint": "^6.6.0",
@@ -85,7 +94,9 @@
     "eslint-plugin-vue": "^6.0.1",
     "flush-promises": "^1.0.2",
     "jest": "^26.0.1",
+    "mockdate": "^3.0.5",
     "prettier": "^2.0.5",
+    "regenerator-runtime": "^0.13.7",
     "semantic-release": "^15.13.31",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3",

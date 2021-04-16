@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`boostrap first dataLayer item is a date 1`] = `
+Arguments [
+  "js",
+  1997-06-03T08:00:00.000Z,
+]
+`;

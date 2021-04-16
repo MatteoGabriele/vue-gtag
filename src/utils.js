@@ -1,13 +1,14 @@
-export const noop = function () {};
-
-export function loadScript(url, options = {}) {
+export const load = (url, options = {}) => {
   return new Promise((resolve, reject) => {
+    if (typeof document === "undefined") {
+      return;
+    }
+
     const head = document.head || document.getElementsByTagName("head")[0];
     const script = document.createElement("script");
 
     script.async = true;
     script.src = url;
-    script.charset = "utf-8";
     script.defer = options.defer;
 
     if (options.preconnectOrigin) {
@@ -24,21 +25,13 @@ export function loadScript(url, options = {}) {
     script.onload = resolve;
     script.onerror = reject;
   });
-}
+};
 
-export function warn(msg) {
-  console.warn("[vue-gtag] " + msg);
-}
-
-export function isFn(item) {
-  return typeof item === "function";
-}
-
-export function isObject(item) {
+export const isObject = (item) => {
   return item && typeof item === "object" && !Array.isArray(item);
-}
+};
 
-export function mergeDeep(target, ...sources) {
+export const mergeDeep = (target, ...sources) => {
   if (!sources.length) {
     return target;
   }
@@ -62,4 +55,4 @@ export function mergeDeep(target, ...sources) {
   }
 
   return mergeDeep(target, ...sources);
-}
+};

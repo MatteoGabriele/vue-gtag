@@ -1,34 +1,18 @@
-import { isFn, loadScript } from "./util";
-import api from "./api";
-import { getRouter, getOptions } from "../src/install";
-import optOut from "./api/opt-out";
-import pageTracker from "./page-tracker";
+import { load } from "@/utils";
+import * as api from "@/api";
+import options from "@/options";
 
-export default function () {
-  if (typeof document === "undefined" || typeof window === "undefined") {
+const bootstrap = () => {
+  if (typeof window === "undefined") {
     return;
   }
 
   const {
-    customResourceURL,
-    customPreconnectOrigin,
-    enabled,
     globalObjectName,
     globalDataLayerName,
     config,
-    pageTrackerEnabled,
-    onReady,
-    onError,
-    deferScriptLoad,
-    disableScriptLoad,
-  } = getOptions();
-
-  const Router = getRouter();
-  const isPageTrackerEnabled = Boolean(pageTrackerEnabled && Router);
-
-  if (!enabled) {
-    optOut();
-  }
+    customResourceURL,
+  } = options;
 
   if (window[globalObjectName] == null) {
     window[globalDataLayerName] = window[globalDataLayerName] || [];
@@ -39,36 +23,9 @@ export default function () {
 
   window[globalObjectName]("js", new Date());
 
-  if (isPageTrackerEnabled) {
-    pageTracker();
-  } else {
-    api.config(config.params);
-  }
+  api.config(config.params);
 
-  if (disableScriptLoad) {
-    return;
-  }
+  load(`${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`);
+};
 
-  const resource = `${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`;
-
-  return loadScript(resource, {
-    preconnectOrigin: customPreconnectOrigin,
-    defer: deferScriptLoad,
-  })
-    .then(() => {
-      const library = window[globalObjectName];
-
-      if (isFn(onReady)) {
-        onReady(library);
-      }
-
-      return library;
-    })
-    .catch((error) => {
-      if (isFn(onError)) {
-        onError(error);
-      }
-
-      return error;
-    });
-}
+export default bootstrap;
