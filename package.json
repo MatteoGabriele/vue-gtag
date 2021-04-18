@@ -40,9 +40,8 @@
     "testMatch": [
       "**/test/**/*.spec.js"
     ],
+    "setupFilesAfterEnv": ["jest-extended"],
     "collectCoverage": true,
-    "restoreMocks": true,
-    "resetMocks": true,
     "coverageReporters": [
       "json",
       "html"
@@ -94,6 +93,7 @@
     "eslint-plugin-vue": "^6.0.1",
     "flush-promises": "^1.0.2",
     "jest": "^26.0.1",
+    "jest-extended": "^0.11.5",
     "mockdate": "^3.0.5",
     "prettier": "^2.0.5",
     "regenerator-runtime": "^0.13.7",

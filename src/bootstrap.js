@@ -1,6 +1,9 @@
 import { load } from "@/utils";
+import registerGlobals from "@/register-globals";
 import * as api from "@/api";
-import options from "@/options";
+import pageTracker from "@/page-tracker";
+import { getOptions } from "@/options";
+import { getRouter } from "@/router";
 
 const bootstrap = () => {
   if (typeof window === "undefined") {
@@ -8,24 +11,53 @@ const bootstrap = () => {
   }
 
   const {
+    onReady,
+    onError,
     globalObjectName,
     globalDataLayerName,
     config,
     customResourceURL,
-  } = options;
+    customPreconnectOrigin,
+    deferScriptLoad,
+    pageTrackerEnabled,
+    enabled,
+    disableScriptLoad,
+  } = getOptions();
 
-  if (window[globalObjectName] == null) {
-    window[globalDataLayerName] = window[globalDataLayerName] || [];
-    window[globalObjectName] = function () {
-      window[globalDataLayerName].push(arguments);
-    };
+  const isPageTrackerEnabled = pageTrackerEnabled && getRouter();
+
+  registerGlobals();
+
+  if (!enabled) {
+    api.optOut();
   }
 
-  window[globalObjectName]("js", new Date());
+  if (isPageTrackerEnabled) {
+    pageTracker();
+  } else {
+    api.config(config.params);
+  }
 
-  api.config(config.params);
+  if (disableScriptLoad) {
+    return;
+  }
 
-  load(`${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`);
+  return load(`${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`, {
+    preconnectOrigin: customPreconnectOrigin,
+    defer: deferScriptLoad,
+  })
+    .then(() => {
+      if (onReady) {
+        onReady(window[globalObjectName]);
+      }
+    })
+    .catch((error) => {
+      if (onError) {
+        onError(error);
+      }
+
+      return error;
+    });
 };
 
 export default bootstrap;

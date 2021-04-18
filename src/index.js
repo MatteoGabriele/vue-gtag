@@ -1,12 +1,17 @@
-import * as api from "@/api";
-import { merge } from "@/options";
+import attachApi from "@/attach-api";
+import { setUserOptions } from "@/options";
 import bootstrap from "@/bootstrap";
+import { setRouter } from "@/router";
 
 export default {
-  install(Vue, options = {}) {
-    Vue.$gtag = Vue.prototype.$gtag = api;
+  install(Vue, options = {}, router) {
+    attachApi(Vue);
+    setUserOptions(options);
 
-    merge(options);
+    if (router) {
+      setRouter(router);
+    }
+
     bootstrap();
   },
 };

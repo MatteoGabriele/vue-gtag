@@ -1,11 +1,13 @@
-import options from "@/options";
+import { getOptions } from "@/options";
 
 const query = (...args) => {
   if (typeof window === "undefined") {
     return;
   }
 
-  window[options.globalObjectName](...args);
+  const { globalObjectName } = getOptions();
+
+  window[globalObjectName](...args);
 };
 
 export default query;

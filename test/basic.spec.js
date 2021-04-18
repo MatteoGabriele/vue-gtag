@@ -3,7 +3,9 @@ import { install } from "./utils";
 describe("basic", () => {
   test("install plugin", () => {
     const vue = install();
+
     expect(vue.$gtag).toBeDefined();
+    expect(vue.prototype.$gtag).toBeDefined();
   });
 
   test("install without window object", () => {

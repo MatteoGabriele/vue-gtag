@@ -1,8 +1,10 @@
 import query from "@/api/query";
-import options from "@/options";
+import { getOptions } from "@/options";
 
 const config = (...args) => {
-  query("config", options.config.id, ...args);
+  const { config } = getOptions();
+
+  query("config", config.id, ...args);
 };
 
 export default config;
