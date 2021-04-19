@@ -20,7 +20,7 @@ export const getDefaultParams = () => ({
 
 let params = {};
 
-export const setUserOptions = (options = {}) => {
+export const setOptions = (options = {}) => {
   const defaultParams = getDefaultParams();
   params = mergeDeep(defaultParams, options);
 };
