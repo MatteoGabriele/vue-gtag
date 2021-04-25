@@ -24,7 +24,7 @@ const bootstrap = () => {
     disableScriptLoad,
   } = getOptions();
 
-  const isPageTrackerEnabled = pageTrackerEnabled && getRouter();
+  const isPageTrackerEnabled = Boolean(pageTrackerEnabled && getRouter());
 
   registerGlobals();
 

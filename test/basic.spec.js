@@ -1,28 +1,35 @@
-import { install } from "./utils";
+import { createLocalVue } from "@vue/test-utils";
+import VueGtag from "@/index";
 
 describe("basic", () => {
   test("install plugin", () => {
-    const vue = install();
+    const localVue = createLocalVue();
 
-    expect(vue.$gtag).toBeDefined();
-    expect(vue.prototype.$gtag).toBeDefined();
+    localVue.use(VueGtag);
+
+    expect(localVue.$gtag).toBeDefined();
+    expect(localVue.prototype.$gtag).toBeDefined();
   });
 
   test("install without window object", () => {
+    const localVue = createLocalVue();
+
     delete global.window;
 
     expect(() => {
-      install();
+      localVue.use(VueGtag);
     }).not.toThrow();
   });
 
   test("query without window object", () => {
+    const localVue = createLocalVue();
+
+    localVue.use(VueGtag);
+
     delete global.window;
 
-    const vue = install();
-
     expect(() => {
-      vue.$gtag.query();
+      localVue.$gtag.query();
     }).not.toThrow();
   });
 });

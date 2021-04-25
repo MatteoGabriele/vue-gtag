@@ -1,4 +1,5 @@
-import { install } from "./utils";
+import { createLocalVue } from "@vue/test-utils";
+import VueGtag from "@/index";
 import MockDate from "mockdate";
 import VueRouter from "vue-router";
 import flushPromises from "flush-promises";
@@ -25,7 +26,9 @@ describe("boostrap", () => {
   });
 
   test("load gtag script", async () => {
-    install({
+    const localVue = createLocalVue();
+
+    localVue.use(VueGtag, {
       config: {
         id: UA_ID,
       },
@@ -41,7 +44,9 @@ describe("boostrap", () => {
   });
 
   test("load gtag script with custom source", () => {
-    install({
+    const localVue = createLocalVue();
+
+    localVue.use(VueGtag, {
       customResourceURL: "foo.com",
       config: {
         id: UA_ID,
@@ -55,7 +60,9 @@ describe("boostrap", () => {
   });
 
   test("load gtag script with custom preconnect origin", () => {
-    install({
+    const localVue = createLocalVue();
+
+    localVue.use(VueGtag, {
       customPreconnectOrigin: "bar.com",
       config: {
         id: UA_ID,
@@ -69,7 +76,9 @@ describe("boostrap", () => {
   });
 
   test("load gtag script with defer script", () => {
-    install({
+    const localVue = createLocalVue();
+
+    localVue.use(VueGtag, {
       deferScriptLoad: true,
       config: {
         id: UA_ID,
@@ -83,13 +92,17 @@ describe("boostrap", () => {
   });
 
   test("attach library to window scope", () => {
-    install();
+    const localVue = createLocalVue();
+
+    localVue.use(VueGtag);
 
     expect(registerGlobals).toHaveBeenCalled();
   });
 
   test("fire a configuration hit on install", () => {
-    install({
+    const localVue = createLocalVue();
+
+    localVue.use(VueGtag, {
       config: {
         id: UA_ID,
       },
@@ -101,15 +114,17 @@ describe("boostrap", () => {
   });
 
   test("enable automatic page tracker", () => {
+    const localVue = createLocalVue();
     const router = new VueRouter({
-      mode: "abstract",
+      mode: "history",
       routes: [
         { name: "home", path: "/" },
         { name: "about", path: "/about" },
       ],
     });
 
-    install(
+    localVue.use(
+      VueGtag,
       {
         config: {
           id: UA_ID,
@@ -123,7 +138,9 @@ describe("boostrap", () => {
   });
 
   test("opt-out before the first hit", async () => {
-    install({
+    const localVue = createLocalVue();
+
+    localVue.use(VueGtag, {
       enabled: false,
       config: {
         id: UA_ID,
@@ -137,7 +154,9 @@ describe("boostrap", () => {
   });
 
   test("prevent script loading", async () => {
-    install({
+    const localVue = createLocalVue();
+
+    localVue.use(VueGtag, {
       disableScriptLoad: true,
       config: {
         id: UA_ID,
@@ -148,13 +167,14 @@ describe("boostrap", () => {
   });
 
   test("use onReady callback after script is loaded", async () => {
+    const localVue = createLocalVue();
     const spy = jest.fn();
 
     Object.defineProperty(window, "gtag", {
       get: () => "global_registerd_value",
     });
 
-    install({
+    localVue.use(VueGtag, {
       onReady: spy,
       config: {
         id: UA_ID,
@@ -167,12 +187,13 @@ describe("boostrap", () => {
   });
 
   test("use onError callback after script failed loading", async () => {
+    const localVue = createLocalVue();
     const spy = jest.fn();
     const error = new Error("error_value");
 
     utils.load.mockRejectedValue(error);
 
-    install({
+    localVue.use(VueGtag, {
       onError: spy,
       config: {
         id: UA_ID,
