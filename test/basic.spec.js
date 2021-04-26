@@ -2,7 +2,7 @@ import { createLocalVue } from "@vue/test-utils";
 import VueGtag from "@/index";
 
 describe("basic", () => {
-  test("install plugin", () => {
+  test("installs plugin", () => {
     const localVue = createLocalVue();
 
     localVue.use(VueGtag);
@@ -11,7 +11,7 @@ describe("basic", () => {
     expect(localVue.prototype.$gtag).toBeDefined();
   });
 
-  test("install without window object", () => {
+  test("installs plugin without window object", () => {
     const localVue = createLocalVue();
 
     delete global.window;
@@ -21,7 +21,7 @@ describe("basic", () => {
     }).not.toThrow();
   });
 
-  test("query without window object", () => {
+  test("can use API without window object", () => {
     const localVue = createLocalVue();
 
     localVue.use(VueGtag);

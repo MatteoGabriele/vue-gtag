@@ -25,7 +25,7 @@ describe("boostrap", () => {
     jest.clearAllMocks();
   });
 
-  test("load gtag script", async () => {
+  test("loads gtag script", async () => {
     const localVue = createLocalVue();
 
     localVue.use(VueGtag, {
@@ -43,7 +43,7 @@ describe("boostrap", () => {
     });
   });
 
-  test("load gtag script with custom source", () => {
+  test("loads gtag script with custom source", () => {
     const localVue = createLocalVue();
 
     localVue.use(VueGtag, {
@@ -59,7 +59,7 @@ describe("boostrap", () => {
     );
   });
 
-  test("load gtag script with custom preconnect origin", () => {
+  test("loads gtag script with custom preconnect origin", () => {
     const localVue = createLocalVue();
 
     localVue.use(VueGtag, {
@@ -75,7 +75,7 @@ describe("boostrap", () => {
     });
   });
 
-  test("load gtag script with defer script", () => {
+  test("loads gtag script with defer script", () => {
     const localVue = createLocalVue();
 
     localVue.use(VueGtag, {
@@ -91,7 +91,7 @@ describe("boostrap", () => {
     });
   });
 
-  test("attach library to window scope", () => {
+  test("attaches library to window scope", () => {
     const localVue = createLocalVue();
 
     localVue.use(VueGtag);
@@ -99,7 +99,7 @@ describe("boostrap", () => {
     expect(registerGlobals).toHaveBeenCalled();
   });
 
-  test("fire a configuration hit on install", () => {
+  test("fires a configuration hit on install", () => {
     const localVue = createLocalVue();
 
     localVue.use(VueGtag, {
@@ -113,10 +113,10 @@ describe("boostrap", () => {
     });
   });
 
-  test("enable automatic page tracker", () => {
+  test("enables automatic page tracker", () => {
     const localVue = createLocalVue();
     const router = new VueRouter({
-      mode: "history",
+      mode: "abstract",
       routes: [
         { name: "home", path: "/" },
         { name: "about", path: "/about" },
@@ -153,7 +153,7 @@ describe("boostrap", () => {
     expect(api.config).toHaveBeenCalledTimes(1);
   });
 
-  test("prevent script loading", async () => {
+  test("prevents script loading", async () => {
     const localVue = createLocalVue();
 
     localVue.use(VueGtag, {
@@ -166,7 +166,7 @@ describe("boostrap", () => {
     expect(utils.load).not.toHaveBeenCalled();
   });
 
-  test("use onReady callback after script is loaded", async () => {
+  test("uses onReady callback after script is loaded", async () => {
     const localVue = createLocalVue();
     const spy = jest.fn();
 
@@ -186,7 +186,7 @@ describe("boostrap", () => {
     expect(spy).toHaveBeenCalledWith("global_registerd_value");
   });
 
-  test("use onError callback after script failed loading", async () => {
+  test("uses onError callback after script failed loading", async () => {
     const localVue = createLocalVue();
     const spy = jest.fn();
     const error = new Error("error_value");

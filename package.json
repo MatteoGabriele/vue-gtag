@@ -40,7 +40,9 @@
     "testMatch": [
       "**/test/**/*.spec.js"
     ],
-    "setupFilesAfterEnv": ["jest-extended"],
+    "setupFilesAfterEnv": [
+      "jest-extended"
+    ],
     "collectCoverage": true,
     "coverageReporters": [
       "json",

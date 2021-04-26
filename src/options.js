@@ -9,6 +9,8 @@ export const getDefaultParams = () => ({
   pageTrackerEnabled: true,
   enabled: true,
   disableScriptLoad: false,
+  pageTrackerScreenviewEnabled: false,
+  appName: "",
   globalDataLayerName: "dataLayer",
   globalObjectName: "gtag",
   config: {
