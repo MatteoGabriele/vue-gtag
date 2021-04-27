@@ -27,6 +27,8 @@ export const load = (url, options = {}) => {
   });
 };
 
+export const isFn = (fn) => typeof fn === "function";
+
 export const isObject = (item) => {
   return item && typeof item === "object" && !Array.isArray(item);
 };
@@ -55,4 +57,24 @@ export const mergeDeep = (target, ...sources) => {
   }
 
   return mergeDeep(target, ...sources);
+};
+
+export const isBrowser = () => {
+  if (typeof window === "undefined" || typeof document === "undefined") {
+    return false;
+  }
+
+  return true;
+};
+
+export const warn = (text, shouldLog = true) => {
+  if (!isBrowser() || process.env.NODE_ENV === "production") {
+    return;
+  }
+
+  if (!shouldLog) {
+    return;
+  }
+
+  console.warn(`[vue-gtag] ${text}`);
 };

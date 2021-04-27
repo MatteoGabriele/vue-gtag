@@ -3,6 +3,8 @@ import { mergeDeep } from "@/utils";
 export const getDefaultParams = () => ({
   onReady: null,
   onError: null,
+  onBeforeTrack: null,
+  onAfterTrack: null,
   customResourceURL: "https://www.googletagmanager.com/gtag/js",
   customPreconnectOrigin: "https://www.googletagmanager.com",
   deferScriptLoad: false,
@@ -12,6 +14,7 @@ export const getDefaultParams = () => ({
   pageTrackerScreenviewEnabled: false,
   appName: "",
   globalDataLayerName: "dataLayer",
+  pageTrackerSkipSamePath: true,
   globalObjectName: "gtag",
   config: {
     params: {

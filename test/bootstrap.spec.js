@@ -108,6 +108,7 @@ describe("boostrap", () => {
       },
     });
 
+    expect(api.optOut).not.toHaveBeenCalled();
     expect(api.config).toHaveBeenCalledWith({
       send_page_view: false,
     });

@@ -1,4 +1,4 @@
-import { load } from "@/utils";
+import { isBrowser, load } from "@/utils";
 import registerGlobals from "@/register-globals";
 import * as api from "@/api";
 import pageTracker from "@/page-tracker";
@@ -6,7 +6,7 @@ import { getOptions } from "@/options";
 import { getRouter } from "@/router";
 
 const bootstrap = () => {
-  if (typeof window === "undefined") {
+  if (!isBrowser()) {
     return;
   }
 

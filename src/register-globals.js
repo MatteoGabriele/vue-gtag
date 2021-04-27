@@ -1,6 +1,11 @@
+import { isBrowser } from "@/utils";
 import { getOptions } from "@/options";
 
 const attachToScope = () => {
+  if (!isBrowser()) {
+    return;
+  }
+
   const { globalObjectName, globalDataLayerName } = getOptions();
 
   if (window[globalObjectName] == null) {

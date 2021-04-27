@@ -1,7 +1,8 @@
 import { getOptions } from "@/options";
+import { isBrowser } from "@/utils";
 
 const query = (...args) => {
-  if (typeof window === "undefined") {
+  if (!isBrowser()) {
     return;
   }
 
