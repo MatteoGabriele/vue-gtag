@@ -16,7 +16,20 @@ const Home = { template: "<div>home</div>" };
 const About = { template: "<div>about</div>" };
 
 describe("page-tracker", () => {
+  const { location } = window;
   let router;
+
+  beforeAll(() => {
+    delete window.location;
+
+    window.location = {
+      href: "window_location_href_value",
+    };
+  });
+
+  afterAll(() => {
+    window.location = location;
+  });
 
   beforeEach(() => {
     router = new VueRouter({
@@ -85,7 +98,7 @@ describe("page-tracker", () => {
     expect(api.pageview).toHaveBeenCalledWith({
       page_title: "home",
       page_path: "/",
-      page_location: "http://localhost/",
+      page_location: "window_location_href_value",
     });
 
     expect(api.pageview).toHaveBeenCalledTimes(1);
