@@ -4,8 +4,10 @@ import VueRouter from "vue-router";
 import VueGtag from "@/index";
 import * as api from "@/api";
 import * as utils from "@/utils";
+import addConfiguration from "@/add-configuration";
 
 jest.mock("@/api");
+jest.mock("@/add-configuration");
 
 const UA_ID = "UA-123456-7";
 
@@ -78,9 +80,7 @@ describe("page-tracker", () => {
     router.push("/");
     await flushPromises();
 
-    expect(api.config).toHaveBeenCalledWith({
-      send_page_view: false,
-    });
+    expect(addConfiguration).toHaveBeenCalled();
 
     expect(api.pageview).toHaveBeenCalledWith({
       page_title: "home",
@@ -89,7 +89,6 @@ describe("page-tracker", () => {
     });
 
     expect(api.pageview).toHaveBeenCalledTimes(1);
-    expect(api.config).toHaveBeenCalledTimes(1);
   });
 
   describe("pageTrackerScreenviewEnabled", () => {

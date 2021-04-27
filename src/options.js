@@ -16,7 +16,9 @@ export const getDefaultParams = () => ({
   globalDataLayerName: "dataLayer",
   pageTrackerSkipSamePath: true,
   globalObjectName: "gtag",
+  includes: null,
   config: {
+    id: null,
     params: {
       send_page_view: false,
     },

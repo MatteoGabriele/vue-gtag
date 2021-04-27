@@ -3,6 +3,7 @@ import { warn, isFn } from "@/utils";
 import { getRouter } from "@/router";
 import { getOptions } from "@/options";
 import * as api from "@/api";
+import addConfiguration from "@/add-configuration";
 
 export const track = (to = {}, from = {}) => {
   const {
@@ -50,12 +51,12 @@ export const track = (to = {}, from = {}) => {
 };
 
 export default () => {
-  const { config, onBeforeTrack, onAfterTrack } = getOptions();
+  const { onBeforeTrack, onAfterTrack } = getOptions();
   const router = getRouter();
 
   router.onReady(() => {
     Vue.nextTick().then(() => {
-      api.config(config.params);
+      addConfiguration();
       track(router.currentRoute);
     });
 

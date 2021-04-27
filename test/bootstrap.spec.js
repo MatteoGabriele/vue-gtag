@@ -7,14 +7,16 @@ import registerGlobals from "@/register-globals";
 import pageTracker from "@/page-tracker";
 import * as utils from "@/utils";
 import * as api from "@/api";
+import addConfiguration from "@/add-configuration";
 
 MockDate.set("06-03-1997 10:00:00");
 
 jest.mock("@/register-globals");
 jest.mock("@/api");
 jest.mock("@/page-tracker");
+jest.mock("@/add-configuration");
 
-const UA_ID = "UA-123456-7";
+const UA_ID = "UA-123456-1";
 
 describe("boostrap", () => {
   beforeEach(() => {
@@ -35,7 +37,7 @@ describe("boostrap", () => {
     });
 
     const url =
-      "https://www.googletagmanager.com/gtag/js?id=UA-123456-7&l=dataLayer";
+      "https://www.googletagmanager.com/gtag/js?id=UA-123456-1&l=dataLayer";
 
     expect(utils.load).toHaveBeenCalledWith(url, {
       preconnectOrigin: "https://www.googletagmanager.com",
@@ -54,7 +56,7 @@ describe("boostrap", () => {
     });
 
     expect(utils.load).toHaveBeenCalledWith(
-      "foo.com?id=UA-123456-7&l=dataLayer",
+      "foo.com?id=UA-123456-1&l=dataLayer",
       expect.any(Object)
     );
   });
@@ -109,9 +111,7 @@ describe("boostrap", () => {
     });
 
     expect(api.optOut).not.toHaveBeenCalled();
-    expect(api.config).toHaveBeenCalledWith({
-      send_page_view: false,
-    });
+    expect(addConfiguration).toHaveBeenCalled();
   });
 
   test("enables automatic page tracker", () => {
@@ -150,8 +150,7 @@ describe("boostrap", () => {
 
     await flushPromises();
 
-    expect(api.optOut).toHaveBeenCalledBefore(api.config);
-    expect(api.config).toHaveBeenCalledTimes(1);
+    expect(api.optOut).toHaveBeenCalledBefore(addConfiguration);
   });
 
   test("prevents script loading", async () => {

@@ -4,6 +4,7 @@ import * as api from "@/api";
 import pageTracker from "@/page-tracker";
 import { getOptions } from "@/options";
 import { getRouter } from "@/router";
+import addConfiguration from "@/add-configuration";
 
 const bootstrap = () => {
   if (!isBrowser()) {
@@ -35,7 +36,7 @@ const bootstrap = () => {
   if (isPageTrackerEnabled) {
     pageTracker();
   } else {
-    api.config(config.params);
+    addConfiguration();
   }
 
   if (disableScriptLoad) {
