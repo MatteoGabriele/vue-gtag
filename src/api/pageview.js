@@ -1,29 +1,29 @@
 import event from "@/api/event";
 
-export default (...args) => {
-  const [firstArgument] = args;
-  let params;
+export default (param) => {
+  let template;
 
-  if (typeof firstArgument === "string") {
-    params = {
-      page_path: firstArgument,
+  if (typeof param === "string") {
+    template = {
+      page_path: param,
     };
-  } else if (firstArgument.matched) {
-    params = {
-      page_path: firstArgument.path,
-      page_title: firstArgument.name,
+  } else if (param.matched) {
+    // I'd love to find another way to understand that this is a route object
+    template = {
+      page_path: param.path,
+      page_title: param.name,
     };
   } else {
-    params = { ...firstArgument };
+    template = param;
   }
 
-  if (params.page_location == null) {
-    params.page_location = window.location.href;
+  if (template.page_location == null) {
+    template.page_location = window.location.href;
   }
 
-  if (params.send_page_view == null) {
-    params.send_page_view = true;
+  if (template.send_page_view == null) {
+    template.send_page_view = true;
   }
 
-  event("page_view", params);
+  event("page_view", template);
 };

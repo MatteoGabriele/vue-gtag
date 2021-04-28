@@ -1,7 +1,7 @@
 import { isBrowser } from "@/utils";
 import { getOptions } from "@/options";
 
-const disable = (value = true) => {
+export default (value = true) => {
   if (!isBrowser()) {
     return;
   }
@@ -10,5 +10,3 @@ const disable = (value = true) => {
 
   window[`ga-disable-${config.id}`] = value;
 };
-
-export default disable;

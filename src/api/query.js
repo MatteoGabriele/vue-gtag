@@ -1,7 +1,7 @@
 import { getOptions } from "@/options";
 import { isBrowser } from "@/utils";
 
-const query = (...args) => {
+export default (...args) => {
   if (!isBrowser()) {
     return;
   }
@@ -10,5 +10,3 @@ const query = (...args) => {
 
   window[globalObjectName](...args);
 };
-
-export default query;
