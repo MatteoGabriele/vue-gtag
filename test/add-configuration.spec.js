@@ -2,9 +2,6 @@ import { createLocalVue } from "@vue/test-utils";
 import VueGtag from "@/index";
 import * as api from "@/api";
 
-const UA_ID = "UA-123456-1";
-const UA_ID_2 = "UA-123456-2";
-
 jest.mock("@/api");
 
 describe("add-configuration", () => {
@@ -17,11 +14,11 @@ describe("add-configuration", () => {
 
     localVue.use(VueGtag, {
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
-    expect(api.query).toHaveBeenNthCalledWith(1, "config", UA_ID, {
+    expect(api.query).toHaveBeenNthCalledWith(1, "config", 1, {
       send_page_view: false,
     });
     expect(api.query).toHaveBeenCalledTimes(1);
@@ -33,22 +30,22 @@ describe("add-configuration", () => {
     localVue.use(VueGtag, {
       includes: [
         {
-          id: UA_ID_2,
+          id: 2,
           params: {
             userId: 2,
           },
         },
       ],
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
-    expect(api.query).toHaveBeenNthCalledWith(1, "config", UA_ID, {
+    expect(api.query).toHaveBeenNthCalledWith(1, "config", 1, {
       send_page_view: false,
     });
 
-    expect(api.query).toHaveBeenNthCalledWith(2, "config", UA_ID_2, {
+    expect(api.query).toHaveBeenNthCalledWith(2, "config", 2, {
       send_page_view: false,
       userId: 2,
     });

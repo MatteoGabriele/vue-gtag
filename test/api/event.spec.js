@@ -5,9 +5,6 @@ import VueGtag from "@/index";
 
 jest.mock("@/api/query");
 
-const UA_ID = "UA-123456-1";
-const UA_ID_2 = "UA-123456-2";
-
 describe("event", () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -18,7 +15,7 @@ describe("event", () => {
 
     localVue.use(VueGtag, {
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
@@ -31,9 +28,9 @@ describe("event", () => {
     const localVue = createLocalVue();
 
     localVue.use(VueGtag, {
-      includes: [{ id: UA_ID_2 }],
+      includes: [{ id: 2 }],
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
@@ -41,7 +38,7 @@ describe("event", () => {
 
     expect(query).toHaveBeenCalledWith("event", "foobar", {
       foo: "bar",
-      send_to: [UA_ID_2, "default"],
+      send_to: [2, "default"],
     });
   });
 
@@ -49,9 +46,9 @@ describe("event", () => {
     const localVue = createLocalVue();
 
     localVue.use(VueGtag, {
-      includes: [{ id: UA_ID_2 }],
+      includes: [{ id: 2 }],
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
@@ -67,10 +64,10 @@ describe("event", () => {
     const localVue = createLocalVue();
 
     localVue.use(VueGtag, {
-      includes: [{ id: UA_ID_2 }],
+      includes: [{ id: 2 }],
       defaultGroupName: "custom_default_group_value",
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
@@ -78,7 +75,7 @@ describe("event", () => {
 
     expect(query).toHaveBeenCalledWith("event", "foobar", {
       foo: "bar",
-      send_to: [UA_ID_2, "custom_default_group_value"],
+      send_to: [2, "custom_default_group_value"],
     });
   });
 });

@@ -9,8 +9,6 @@ import addConfiguration from "@/add-configuration";
 jest.mock("@/api");
 jest.mock("@/add-configuration");
 
-const UA_ID = "UA-123456-7";
-
 const App = { template: "<div>app</div>" };
 const Home = { template: "<div>home</div>" };
 const About = { template: "<div>about</div>" };
@@ -59,7 +57,7 @@ describe("page-tracker", () => {
       VueGtag,
       {
         config: {
-          id: UA_ID,
+          id: 1,
         },
       },
       router
@@ -82,7 +80,7 @@ describe("page-tracker", () => {
       VueGtag,
       {
         config: {
-          id: UA_ID,
+          id: 1,
         },
       },
       router
@@ -116,7 +114,7 @@ describe("page-tracker", () => {
           pageTrackerScreenviewEnabled: true,
           appName: "MyApp",
           config: {
-            id: UA_ID,
+            id: 1,
           },
         },
         router
@@ -143,7 +141,7 @@ describe("page-tracker", () => {
         {
           pageTrackerScreenviewEnabled: true,
           config: {
-            id: UA_ID,
+            id: 1,
           },
         },
         router
@@ -175,7 +173,7 @@ describe("page-tracker", () => {
             bar: from.path,
           }),
           config: {
-            id: UA_ID,
+            id: 1,
           },
         },
         router
@@ -209,7 +207,7 @@ describe("page-tracker", () => {
             bar: from.path,
           }),
           config: {
-            id: UA_ID,
+            id: 1,
           },
         },
         router
@@ -242,7 +240,7 @@ describe("page-tracker", () => {
         VueGtag,
         {
           config: {
-            id: UA_ID,
+            id: 1,
           },
         },
         router
@@ -270,7 +268,7 @@ describe("page-tracker", () => {
         {
           pageTrackerUseFullPath: true,
           config: {
-            id: UA_ID,
+            id: 1,
           },
         },
         router
@@ -298,7 +296,7 @@ describe("page-tracker", () => {
       VueGtag,
       {
         config: {
-          id: UA_ID,
+          id: 1,
         },
       },
       router
@@ -350,7 +348,7 @@ describe("page-tracker", () => {
         {
           pageTrackerSkipSamePath: false,
           config: {
-            id: UA_ID,
+            id: 1,
           },
         },
         router
@@ -388,7 +386,7 @@ describe("page-tracker", () => {
         VueGtag,
         {
           config: {
-            id: UA_ID,
+            id: 1,
           },
         },
         router
@@ -422,7 +420,7 @@ describe("page-tracker", () => {
       {
         onBeforeTrack: onBeforeTrackSpy,
         config: {
-          id: UA_ID,
+          id: 1,
         },
       },
       router
@@ -450,7 +448,7 @@ describe("page-tracker", () => {
       {
         onAfterTrack: onAfterTrackSpy,
         config: {
-          id: UA_ID,
+          id: 1,
         },
       },
       router
@@ -479,7 +477,7 @@ describe("page-tracker", () => {
       VueGtag,
       {
         config: {
-          id: UA_ID,
+          id: 1,
         },
       },
       router

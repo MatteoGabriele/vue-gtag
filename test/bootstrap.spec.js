@@ -17,8 +17,6 @@ jest.mock("@/api");
 jest.mock("@/page-tracker");
 jest.mock("@/add-configuration");
 
-const UA_ID = "UA-123456-1";
-
 describe("boostrap", () => {
   beforeEach(() => {
     jest.spyOn(utils, "load").mockResolvedValue();
@@ -33,12 +31,11 @@ describe("boostrap", () => {
 
     localVue.use(VueGtag, {
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
-    const url =
-      "https://www.googletagmanager.com/gtag/js?id=UA-123456-1&l=dataLayer";
+    const url = "https://www.googletagmanager.com/gtag/js?id=1&l=dataLayer";
 
     expect(utils.load).toHaveBeenCalledWith(url, {
       preconnectOrigin: "https://www.googletagmanager.com",
@@ -52,12 +49,12 @@ describe("boostrap", () => {
     localVue.use(VueGtag, {
       customResourceURL: "foo.com",
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
     expect(utils.load).toHaveBeenCalledWith(
-      "foo.com?id=UA-123456-1&l=dataLayer",
+      "foo.com?id=1&l=dataLayer",
       expect.any(Object)
     );
   });
@@ -68,7 +65,7 @@ describe("boostrap", () => {
     localVue.use(VueGtag, {
       customPreconnectOrigin: "bar.com",
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
@@ -84,7 +81,7 @@ describe("boostrap", () => {
     localVue.use(VueGtag, {
       deferScriptLoad: true,
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
@@ -107,7 +104,7 @@ describe("boostrap", () => {
 
     localVue.use(VueGtag, {
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
@@ -129,7 +126,7 @@ describe("boostrap", () => {
       VueGtag,
       {
         config: {
-          id: UA_ID,
+          id: 1,
         },
       },
       router
@@ -145,7 +142,7 @@ describe("boostrap", () => {
     localVue.use(VueGtag, {
       enabled: false,
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
@@ -160,7 +157,7 @@ describe("boostrap", () => {
     localVue.use(VueGtag, {
       disableScriptLoad: true,
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
@@ -178,7 +175,7 @@ describe("boostrap", () => {
     localVue.use(VueGtag, {
       onReady: spy,
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
@@ -197,7 +194,7 @@ describe("boostrap", () => {
     localVue.use(VueGtag, {
       onError: spy,
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
@@ -212,7 +209,7 @@ describe("boostrap", () => {
     localVue.use(VueGtag, {
       bootstrap: false,
       config: {
-        id: UA_ID,
+        id: 1,
       },
     });
 
