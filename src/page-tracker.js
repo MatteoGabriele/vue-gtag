@@ -19,7 +19,7 @@ export const track = (to = {}, from = {}) => {
   if (isFn(pageTrackerTemplate)) {
     template = pageTrackerTemplate(to, from);
   } else if (pageTrackerScreenviewEnabled) {
-    warn(`Missing "appName" value inside the plugin options.`, appName === "");
+    warn(`Missing "appName" value inside the plugin options.`, appName == null);
 
     template = {
       app_name: appName,

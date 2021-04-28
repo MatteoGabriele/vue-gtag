@@ -8,6 +8,7 @@ import pageTracker from "@/page-tracker";
 import * as utils from "@/utils";
 import * as api from "@/api";
 import addConfiguration from "@/add-configuration";
+import bootstrap from "@/bootstrap";
 
 MockDate.set("06-03-1997 10:00:00");
 
@@ -203,5 +204,21 @@ describe("boostrap", () => {
     await flushPromises();
 
     expect(spy).toHaveBeenCalledWith(error);
+  });
+
+  test("bootstrap manually", () => {
+    const localVue = createLocalVue();
+
+    localVue.use(VueGtag, {
+      bootstrap: false,
+      config: {
+        id: UA_ID,
+      },
+    });
+
+    bootstrap();
+
+    expect(utils.load).toHaveBeenCalled();
+    expect(addConfiguration).toHaveBeenCalled();
   });
 });

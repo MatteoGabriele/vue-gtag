@@ -1,5 +1,5 @@
 import attachApi from "@/attach-api";
-import { setOptions } from "@/options";
+import { setOptions, getOptions } from "@/options";
 import bootstrap from "@/bootstrap";
 import { setRouter } from "@/router";
 
@@ -8,6 +8,9 @@ export default {
     attachApi(Vue);
     setOptions(options);
     setRouter(router);
-    bootstrap();
+
+    if (getOptions().bootstrap) {
+      bootstrap();
+    }
   },
 };

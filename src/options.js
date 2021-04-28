@@ -1,6 +1,7 @@
 import { mergeDeep } from "@/utils";
 
 export const getDefaultParams = () => ({
+  bootstrap: true,
   onReady: null,
   onError: null,
   onBeforeTrack: null,
@@ -12,10 +13,11 @@ export const getDefaultParams = () => ({
   enabled: true,
   disableScriptLoad: false,
   pageTrackerScreenviewEnabled: false,
-  appName: "",
+  appName: null,
   globalDataLayerName: "dataLayer",
   pageTrackerSkipSamePath: true,
   globalObjectName: "gtag",
+  defaultGroupName: "default",
   includes: null,
   config: {
     id: null,
