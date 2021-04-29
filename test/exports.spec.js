@@ -30,55 +30,19 @@ describe("exports", () => {
     expect(bootstrap).toBeDefined();
   });
 
-  test("event", () => {
+  test("api", () => {
     expect(event).toBeDefined();
-  });
-
-  test("query", () => {
     expect(query).toBeDefined();
-  });
-
-  test("config", () => {
     expect(config).toBeDefined();
-  });
-
-  test("optOut", () => {
     expect(optOut).toBeDefined();
-  });
-
-  test("pageview", () => {
     expect(pageview).toBeDefined();
-  });
-
-  test("screenview", () => {
     expect(screenview).toBeDefined();
-  });
-
-  test("exception", () => {
     expect(exception).toBeDefined();
-  });
-
-  test("linker", () => {
     expect(linker).toBeDefined();
-  });
-
-  test("time", () => {
     expect(time).toBeDefined();
-  });
-
-  test("set", () => {
     expect(set).toBeDefined();
-  });
-
-  test("refund", () => {
     expect(refund).toBeDefined();
-  });
-
-  test("purchase", () => {
     expect(purchase).toBeDefined();
-  });
-
-  test("customMap", () => {
     expect(customMap).toBeDefined();
   });
 });
