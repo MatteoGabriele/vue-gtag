@@ -16,6 +16,23 @@ describe("basic", () => {
 
     expect(localVue.$gtag).toBeDefined();
     expect(localVue.prototype.$gtag).toBeDefined();
+    expect(Object.keys(localVue.$gtag)).toMatchInlineSnapshot(`
+      Array [
+        "query",
+        "config",
+        "optOut",
+        "pageview",
+        "screenview",
+        "exception",
+        "linker",
+        "time",
+        "set",
+        "refund",
+        "purchase",
+        "customMap",
+        "event",
+      ]
+    `);
   });
 
   test("installs plugin without window object", () => {

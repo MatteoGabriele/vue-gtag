@@ -3,14 +3,34 @@ import { setOptions, getOptions } from "@/options";
 import bootstrap from "@/bootstrap";
 import { setRouter } from "@/router";
 
-export default {
-  install(Vue, options = {}, router) {
-    attachApi(Vue);
-    setOptions(options);
-    setRouter(router);
+const install = (Vue, options = {}, router) => {
+  attachApi(Vue);
+  setOptions(options);
+  setRouter(router);
 
-    if (getOptions().bootstrap) {
-      bootstrap();
-    }
-  },
+  if (getOptions().bootstrap) {
+    bootstrap();
+  }
 };
+
+export { default as query } from "@/api/query";
+export { default as config } from "@/api/config";
+export { default as optOut } from "@/api/opt-out";
+export { default as pageview } from "@/api/pageview";
+export { default as screenview } from "@/api/screenview";
+export { default as exception } from "@/api/exception";
+export { default as linker } from "@/api/linker";
+export { default as time } from "@/api/time";
+export { default as set } from "@/api/set";
+export { default as refund } from "@/api/refund";
+export { default as purchase } from "@/api/purchase";
+export { default as customMap } from "@/api/custom-map";
+export { default as event } from "@/api/event";
+export { default as bootstrap } from "@/bootstrap";
+
+export { setOptions } from "@/options";
+export { setRouter } from "@/router";
+
+export { install };
+
+export default install;

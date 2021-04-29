@@ -1,8 +1,6 @@
 import * as api from "@/api";
 import { getOptions } from "@/options";
 
-jest.mock("@/api");
-
 const mergeDefaultParams = (params) => ({
   send_page_view: false,
   ...params,
