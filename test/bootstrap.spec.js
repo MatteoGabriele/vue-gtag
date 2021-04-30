@@ -4,7 +4,7 @@ import MockDate from "mockdate";
 import VueRouter from "vue-router";
 import flushPromises from "flush-promises";
 import registerGlobals from "@/register-globals";
-import pageTracker from "@/page-tracker";
+import addRoutesTracker from "@/add-routes-tracker";
 import * as utils from "@/utils";
 import * as api from "@/api";
 import addConfiguration from "@/add-configuration";
@@ -13,9 +13,9 @@ import bootstrap from "@/bootstrap";
 MockDate.set("06-03-1997 10:00:00");
 
 jest.mock("@/register-globals");
-jest.mock("@/api");
-jest.mock("@/page-tracker");
+jest.mock("@/add-routes-tracker");
 jest.mock("@/add-configuration");
+jest.mock("@/api");
 
 describe("boostrap", () => {
   beforeEach(() => {
@@ -132,7 +132,7 @@ describe("boostrap", () => {
       router
     );
 
-    expect(pageTracker).toHaveBeenCalled();
+    expect(addRoutesTracker).toHaveBeenCalled();
     expect(api.config).not.toHaveBeenCalled();
   });
 

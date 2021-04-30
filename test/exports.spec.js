@@ -15,6 +15,7 @@ import {
   bootstrap,
   setOptions,
   setRouter,
+  addRoutesTracker,
 } from "@/index";
 
 describe("exports", () => {
@@ -44,5 +45,9 @@ describe("exports", () => {
     expect(refund).toBeDefined();
     expect(purchase).toBeDefined();
     expect(customMap).toBeDefined();
+  });
+
+  test("routes tracker", () => {
+    expect(addRoutesTracker).toBeDefined();
   });
 });

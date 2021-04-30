@@ -1,7 +1,7 @@
 import { isBrowser, load } from "@/utils";
 import registerGlobals from "@/register-globals";
 import * as api from "@/api";
-import pageTracker from "@/page-tracker";
+import addRoutesTracker from "@/add-routes-tracker";
 import { getOptions } from "@/options";
 import { getRouter } from "@/router";
 import addConfiguration from "@/add-configuration";
@@ -34,7 +34,7 @@ const bootstrap = () => {
   }
 
   if (isPageTrackerEnabled) {
-    pageTracker();
+    addRoutesTracker();
   } else {
     addConfiguration();
   }

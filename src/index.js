@@ -27,6 +27,7 @@ export { default as purchase } from "@/api/purchase";
 export { default as customMap } from "@/api/custom-map";
 export { default as event } from "@/api/event";
 export { default as bootstrap } from "@/bootstrap";
+export { default as addRoutesTracker } from "@/add-routes-tracker";
 
 export { setOptions } from "@/options";
 export { setRouter } from "@/router";
