@@ -96,7 +96,7 @@ describe("boostrap", () => {
 
     localVue.use(VueGtag);
 
-    expect(registerGlobals).toHaveBeenCalled();
+    expect(registerGlobals).toHaveBeenCalledBefore(addConfiguration);
   });
 
   test("fires a configuration hit on install", () => {
@@ -134,21 +134,6 @@ describe("boostrap", () => {
 
     expect(addRoutesTracker).toHaveBeenCalled();
     expect(api.config).not.toHaveBeenCalled();
-  });
-
-  test("opt-out before the first hit", async () => {
-    const localVue = createLocalVue();
-
-    localVue.use(VueGtag, {
-      enabled: false,
-      config: {
-        id: 1,
-      },
-    });
-
-    await flushPromises();
-
-    expect(api.optOut).toHaveBeenCalledBefore(addConfiguration);
   });
 
   test("prevents script loading", async () => {

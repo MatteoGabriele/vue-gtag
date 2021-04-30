@@ -1,4 +1,3 @@
-import { isBrowser } from "@/utils";
 import { getOptions } from "@/options";
 
 const assignGlobalProperty = (id, value) => {
@@ -6,10 +5,6 @@ const assignGlobalProperty = (id, value) => {
 };
 
 export default (value = true) => {
-  if (!isBrowser()) {
-    return;
-  }
-
   const { config, includes } = getOptions();
 
   assignGlobalProperty(config.id, value);

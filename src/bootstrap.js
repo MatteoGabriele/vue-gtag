@@ -1,4 +1,4 @@
-import { isBrowser, load } from "@/utils";
+import { load } from "@/utils";
 import registerGlobals from "@/register-globals";
 import * as api from "@/api";
 import addRoutesTracker from "@/add-routes-tracker";
@@ -6,11 +6,7 @@ import { getOptions } from "@/options";
 import { getRouter } from "@/router";
 import addConfiguration from "@/add-configuration";
 
-const bootstrap = () => {
-  if (!isBrowser()) {
-    return;
-  }
-
+export default () => {
   const {
     onReady,
     onError,
@@ -21,17 +17,12 @@ const bootstrap = () => {
     customPreconnectOrigin,
     deferScriptLoad,
     pageTrackerEnabled,
-    enabled,
     disableScriptLoad,
   } = getOptions();
 
   const isPageTrackerEnabled = Boolean(pageTrackerEnabled && getRouter());
 
   registerGlobals();
-
-  if (!enabled) {
-    api.optOut();
-  }
 
   if (isPageTrackerEnabled) {
     addRoutesTracker();
@@ -60,5 +51,3 @@ const bootstrap = () => {
       return error;
     });
 };
-
-export default bootstrap;
