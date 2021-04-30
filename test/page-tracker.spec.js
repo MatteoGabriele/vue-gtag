@@ -5,13 +5,13 @@ import VueGtag from "@/index";
 import * as api from "@/api";
 import * as utils from "@/utils";
 import addConfiguration from "@/add-configuration";
+import track from "@/track";
 
+jest.mock("@/track");
 jest.mock("@/api");
 jest.mock("@/add-configuration");
 
 const App = { template: "<div>app</div>" };
-const Home = { template: "<div>home</div>" };
-const About = { template: "<div>about</div>" };
 
 describe("page-tracker", () => {
   const { location } = window;
@@ -33,8 +33,8 @@ describe("page-tracker", () => {
     router = new VueRouter({
       mode: "abstract",
       routes: [
-        { name: "home", path: "/", component: Home },
-        { name: "about", path: "/about", component: About },
+        { name: "home", path: "/" },
+        { name: "about", path: "/about" },
       ],
     });
 
@@ -93,201 +93,11 @@ describe("page-tracker", () => {
 
     expect(addConfiguration).toHaveBeenCalled();
 
-    expect(api.pageview).toHaveBeenCalledWith({
-      page_title: "home",
-      page_path: "/",
-      page_location: "window_location_href_value",
-    });
-
-    expect(api.pageview).toHaveBeenCalledTimes(1);
+    expect(track).toHaveBeenCalledWith(router.currentRoute);
+    expect(track).toHaveBeenCalledTimes(1);
   });
 
-  describe("pageTrackerScreenviewEnabled", () => {
-    test("tracks with screenview instead of pageview", async () => {
-      const localVue = createLocalVue();
-
-      localVue.use(VueRouter);
-
-      localVue.use(
-        VueGtag,
-        {
-          pageTrackerScreenviewEnabled: true,
-          appName: "MyApp",
-          config: {
-            id: 1,
-          },
-        },
-        router
-      );
-
-      mount(App, { router, localVue });
-
-      router.push("/");
-      await flushPromises();
-
-      expect(api.screenview).toHaveBeenCalledWith({
-        app_name: "MyApp",
-        screen_name: "home",
-      });
-      expect(api.screenview).toHaveBeenCalledTimes(1);
-    });
-
-    test("warns when no appName is provided", async () => {
-      const localVue = createLocalVue();
-
-      localVue.use(VueRouter);
-      localVue.use(
-        VueGtag,
-        {
-          pageTrackerScreenviewEnabled: true,
-          config: {
-            id: 1,
-          },
-        },
-        router
-      );
-
-      mount(App, { localVue, router });
-
-      router.push("/");
-
-      await flushPromises();
-
-      expect(console.warn).toHaveBeenCalledWith(
-        `[vue-gtag] Missing "appName" value inside the plugin options.`
-      );
-    });
-  });
-
-  describe("pageTrackerTemplate", () => {
-    test("tracks pageview", async () => {
-      const localVue = createLocalVue();
-
-      localVue.use(VueRouter);
-
-      localVue.use(
-        VueGtag,
-        {
-          pageTrackerTemplate: (to, from) => ({
-            foo: to.name,
-            bar: from.path,
-          }),
-          config: {
-            id: 1,
-          },
-        },
-        router
-      );
-
-      mount(App, { router, localVue });
-
-      router.push("/");
-      await flushPromises();
-
-      router.push("/about");
-      await flushPromises();
-
-      expect(api.pageview).toHaveBeenNthCalledWith(2, {
-        foo: "about",
-        bar: "/",
-      });
-    });
-
-    test("tracks screenview", async () => {
-      const localVue = createLocalVue();
-
-      localVue.use(VueRouter);
-
-      localVue.use(
-        VueGtag,
-        {
-          pageTrackerScreenviewEnabled: true,
-          pageTrackerTemplate: (to, from) => ({
-            foo: to.name,
-            bar: from.path,
-          }),
-          config: {
-            id: 1,
-          },
-        },
-        router
-      );
-
-      mount(App, { router, localVue });
-
-      router.push("/");
-      await flushPromises();
-
-      router.push("/about");
-      await flushPromises();
-
-      expect(api.screenview).toHaveBeenNthCalledWith(2, {
-        foo: "about",
-        bar: "/",
-      });
-
-      expect(api.screenview).toHaveBeenCalledTimes(2);
-    });
-  });
-
-  describe("pageTrackerUseFullPath", () => {
-    test("tracks using router `path` property", async () => {
-      const localVue = createLocalVue();
-
-      localVue.use(VueRouter);
-
-      localVue.use(
-        VueGtag,
-        {
-          config: {
-            id: 1,
-          },
-        },
-        router
-      );
-
-      mount(App, { router, localVue });
-
-      router.push("/about?foo=bar");
-      await flushPromises();
-
-      expect(api.pageview).toHaveBeenCalledWith(
-        expect.objectContaining({
-          page_path: "/about",
-        })
-      );
-    });
-
-    test("tracks using router `fullPath` property", async () => {
-      const localVue = createLocalVue();
-
-      localVue.use(VueRouter);
-
-      localVue.use(
-        VueGtag,
-        {
-          pageTrackerUseFullPath: true,
-          config: {
-            id: 1,
-          },
-        },
-        router
-      );
-
-      mount(App, { router, localVue });
-
-      router.push("/about?foo=bar");
-      await flushPromises();
-
-      expect(api.pageview).toHaveBeenCalledWith(
-        expect.objectContaining({
-          page_path: "/about?foo=bar",
-        })
-      );
-    });
-  });
-
-  test("tracks routes automatically on push", async () => {
+  test("fires track after each route change", async () => {
     const localVue = createLocalVue();
 
     localVue.use(VueRouter);
@@ -313,100 +123,39 @@ describe("page-tracker", () => {
     router.push("/");
     await flushPromises();
 
-    expect(api.pageview).toHaveBeenNthCalledWith(
+    expect(track).toHaveBeenNthCalledWith(
       1,
       expect.objectContaining({
-        page_path: "/",
+        path: "/",
+        name: "home",
       })
     );
 
-    expect(api.pageview).toHaveBeenNthCalledWith(
+    expect(track).toHaveBeenNthCalledWith(
       2,
       expect.objectContaining({
-        page_path: "/about",
+        path: "/about",
+        name: "about",
+      }),
+      expect.objectContaining({
+        path: "/",
+        name: "home",
       })
     );
 
-    expect(api.pageview).toHaveBeenNthCalledWith(
+    expect(track).toHaveBeenNthCalledWith(
       3,
       expect.objectContaining({
-        page_path: "/",
+        path: "/",
+        name: "home",
+      }),
+      expect.objectContaining({
+        path: "/about",
+        name: "about",
       })
     );
 
-    expect(api.pageview).toHaveBeenCalledTimes(3);
-  });
-
-  describe("pageTrackerSkipSamePath", () => {
-    test("tracks the same path twice", async () => {
-      const localVue = createLocalVue();
-
-      localVue.use(VueRouter);
-
-      localVue.use(
-        VueGtag,
-        {
-          pageTrackerSkipSamePath: false,
-          config: {
-            id: 1,
-          },
-        },
-        router
-      );
-
-      mount(App, { router, localVue });
-
-      router.push("/about");
-      await flushPromises();
-
-      router.push("/about?foo=bar");
-      await flushPromises();
-
-      expect(api.pageview).toHaveBeenNthCalledWith(
-        1,
-        expect.objectContaining({
-          page_path: "/about",
-        })
-      );
-
-      expect(api.pageview).toHaveBeenNthCalledWith(
-        2,
-        expect.objectContaining({
-          page_path: "/about",
-        })
-      );
-    });
-
-    test("tracks the same path once", async () => {
-      const localVue = createLocalVue();
-
-      localVue.use(VueRouter);
-
-      localVue.use(
-        VueGtag,
-        {
-          config: {
-            id: 1,
-          },
-        },
-        router
-      );
-
-      mount(App, { router, localVue });
-
-      router.push("/about");
-      await flushPromises();
-
-      router.push("/about?foo=bar");
-      await flushPromises();
-
-      expect(api.pageview).toHaveBeenCalledWith(
-        expect.objectContaining({
-          page_path: "/about",
-        })
-      );
-      expect(api.pageview).toHaveBeenCalledTimes(1);
-    });
+    expect(track).toHaveBeenCalledTimes(3);
   });
 
   test("fires the onBeforeTrack method", async () => {
@@ -433,6 +182,17 @@ describe("page-tracker", () => {
 
     router.push("/about");
     await flushPromises();
+
+    expect(onBeforeTrackSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        path: "/about",
+        name: "about",
+      }),
+      expect.objectContaining({
+        path: "/",
+        name: "home",
+      })
+    );
 
     expect(onBeforeTrackSpy).toHaveBeenCalledTimes(1);
   });
@@ -462,34 +222,17 @@ describe("page-tracker", () => {
     router.push("/about");
     await flushPromises();
 
+    expect(onAfterTrackSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        path: "/about",
+        name: "about",
+      }),
+      expect.objectContaining({
+        path: "/",
+        name: "home",
+      })
+    );
+
     expect(onAfterTrackSpy).toHaveBeenCalledTimes(1);
-  });
-
-  test("warns when route does not have a name", async () => {
-    const localVue = createLocalVue();
-    const router = new VueRouter({
-      mode: "abstract",
-      routes: [{ path: "/about" }],
-    });
-
-    localVue.use(VueRouter);
-    localVue.use(
-      VueGtag,
-      {
-        config: {
-          id: 1,
-        },
-      },
-      router
-    );
-
-    mount(App, { router, localVue });
-
-    router.push("/about");
-    await flushPromises();
-
-    expect(console.warn).toHaveBeenCalledWith(
-      `[vue-gtag] The route with path value "/about" doesn't have a name.`
-    );
   });
 });
