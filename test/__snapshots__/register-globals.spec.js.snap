@@ -4,7 +4,7 @@ exports[`registerGlobals first hit is current date 1`] = `
 Array [
   Arguments [
     "js",
-    2021-04-20T08:00:00.000Z,
+    2021-04-20T10:00:00.000Z,
   ],
 ]
 `;

@@ -1,6 +1,5 @@
 import { load } from "@/utils";
 import registerGlobals from "@/register-globals";
-import * as api from "@/api";
 import addRoutesTracker from "@/add-routes-tracker";
 import { getOptions } from "@/options";
 import { getRouter } from "@/router";
