@@ -16,7 +16,7 @@
     "clean": "del-cli dist",
     "prebuild": "yarn clean",
     "build": "bili",
-    "dev": "bili --config bili.config.dev.js --watch",
+    "dev": "NODE_ENV=dev bili --watch",
     "lint": "eslint --ext .js .",
     "lint:fix": "yarn lint --fix",
     "test": "TZ=UTC jest",
@@ -78,6 +78,9 @@
     "url": "https://github.com/MatteoGabriele/vue-gtag/issues"
   },
   "homepage": "https://github.com/MatteoGabriele/vue-gtag#readme",
+  "peerDependencies": {
+    "vue": "^2.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
@@ -99,8 +102,10 @@
     "mockdate": "^3.0.5",
     "prettier": "^2.0.5",
     "regenerator-runtime": "^0.13.7",
+    "rollup-plugin-alias": "^2.2.0",
+    "rollup-plugin-resolve": "^0.0.1-predev.1",
     "semantic-release": "^15.13.31",
-    "vue": "^2.6.10",
+    "vue": "^2.6.12",
     "vue-router": "^3.1.3",
     "vue-template-compiler": "^2.6.10"
   }

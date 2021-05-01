@@ -1,3 +1,4 @@
+import { getOptions } from "@/options";
 import event from "@/api/event";
 
 export default (param) => {
@@ -7,11 +8,12 @@ export default (param) => {
     template = {
       page_path: param,
     };
-  } else if (param.matched) {
-    // I'd love to find another way to understand that this is a route object
+  } else if (param.path || param.fullPath) {
+    const { pageTrackerUseFullPath } = getOptions();
+
     template = {
-      page_path: param.path,
-      page_title: param.name,
+      ...(param.name && { page_title: param.name }),
+      page_path: pageTrackerUseFullPath ? param.fullPath : param.path,
     };
   } else {
     template = param;
