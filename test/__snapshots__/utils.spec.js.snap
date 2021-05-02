@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`load should create a link for domain preconnect 1`] = `
+<head>
+  <link
+    href="bar"
+    rel="preconnect"
+  />
+  <script
+    src="foo"
+  />
+</head>
+`;
+
+exports[`load should create a script tag 1`] = `
+<head>
+  <script
+    src="foo"
+  />
+</head>
+`;
+
+exports[`load should create a script tag with the defer attribute 1`] = `
+<head>
+  <script
+    defer=""
+    src="foo"
+  />
+</head>
+`;

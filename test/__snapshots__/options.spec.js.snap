@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`options getDefaultParams 1`] = `
+Object {
+  "appName": null,
+  "bootstrap": true,
+  "config": Object {
+    "id": null,
+    "params": Object {
+      "send_page_view": false,
+    },
+  },
+  "customPreconnectOrigin": "https://www.googletagmanager.com",
+  "customResourceURL": "https://www.googletagmanager.com/gtag/js",
+  "defaultGroupName": "default",
+  "deferScriptLoad": false,
+  "disableScriptLoad": false,
+  "enabled": true,
+  "globalDataLayerName": "dataLayer",
+  "globalObjectName": "gtag",
+  "includes": null,
+  "onAfterTrack": null,
+  "onBeforeTrack": null,
+  "onError": null,
+  "onReady": null,
+  "pageTrackerEnabled": true,
+  "pageTrackerScreenviewEnabled": false,
+  "pageTrackerSkipSamePath": true,
+  "pageTrackerTemplate": null,
+  "pageTrackerUseFullPath": false,
+}
+`;
+
+exports[`options set and get options 1`] = `
+Object {
+  "appName": null,
+  "bootstrap": true,
+  "config": Object {
+    "id": 1,
+    "params": Object {
+      "send_page_view": false,
+    },
+  },
+  "customPreconnectOrigin": "https://www.googletagmanager.com",
+  "customResourceURL": "https://www.googletagmanager.com/gtag/js",
+  "defaultGroupName": "default",
+  "deferScriptLoad": false,
+  "disableScriptLoad": false,
+  "enabled": true,
+  "globalDataLayerName": "dataLayer",
+  "globalObjectName": "gtag",
+  "includes": null,
+  "onAfterTrack": null,
+  "onBeforeTrack": null,
+  "onError": null,
+  "onReady": null,
+  "pageTrackerEnabled": true,
+  "pageTrackerScreenviewEnabled": false,
+  "pageTrackerSkipSamePath": true,
+  "pageTrackerTemplate": null,
+  "pageTrackerUseFullPath": false,
+}
+`;
