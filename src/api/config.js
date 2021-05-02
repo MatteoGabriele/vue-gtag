@@ -1,5 +1,5 @@
-import query from "./query";
-import { getOptions } from "../install";
+import query from "@/api/query";
+import { getOptions } from "@/options";
 
 export default (...args) => {
   const { config, includes } = getOptions();

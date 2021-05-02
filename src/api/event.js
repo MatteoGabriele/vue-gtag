@@ -1,13 +1,12 @@
-import { getOptions } from "../install";
-import query from "./query";
+import { getOptions } from "@/options";
+import query from "@/api/query";
 
-export default (name, _params = {}) => {
-  const { defaultGroupName, includes } = getOptions();
-  const params = _params;
+export default (name, params = {}) => {
+  const { includes, defaultGroupName } = getOptions();
 
-  if (includes && params.send_to == null) {
+  if (params.send_to == null && Array.isArray(includes) && includes.length) {
     params.send_to = includes
-      .map((include) => include.id)
+      .map((domain) => domain.id)
       .concat(defaultGroupName);
   }
 

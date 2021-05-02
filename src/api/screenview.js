@@ -1,26 +1,24 @@
-import { getOptions } from "../install";
-import event from "./event";
+import { getOptions } from "@/options";
+import event from "@/api/event";
 
-export default (...args) => {
+export default (param) => {
   const { appName } = getOptions();
-  const [arg] = args;
-  let params = {};
 
-  if (typeof arg === "string") {
-    params = {
-      screen_name: arg,
+  if (!param) {
+    return;
+  }
+
+  let template;
+
+  if (typeof param === "string") {
+    template = {
+      screen_name: param,
     };
   } else {
-    params = arg;
+    template = param;
   }
 
-  if (params.app_name == null) {
-    params.app_name = appName;
-  }
+  template.app_name = template.app_name || appName;
 
-  if (params.send_page_view == null) {
-    params.send_page_view = true;
-  }
-
-  event("screen_view", params);
+  event("screen_view", template);
 };
