@@ -1,11 +1,12 @@
-import { getOptions } from "../install";
+import { getOptions } from "@/options";
+import { isBrowser } from "@/utils";
 
-export default function (...args) {
-  const { globalObjectName } = getOptions();
-
-  if (typeof document === "undefined" || typeof window === "undefined") {
+export default (...args) => {
+  if (!isBrowser()) {
     return;
   }
 
+  const { globalObjectName } = getOptions();
+
   window[globalObjectName](...args);
-}
+};

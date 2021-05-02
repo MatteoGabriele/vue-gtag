@@ -1,25 +1,39 @@
-import { setOptions as _setOptions, install } from "./install";
-import _bootstrap from "./bootstrap";
-import api from "./api";
+import attachApi from "@/attach-api";
+import { setOptions, getOptions } from "@/options";
+import bootstrap from "@/bootstrap";
+import { setRouter } from "@/router";
 
-export default install;
+const install = (Vue, options = {}, router) => {
+  attachApi(Vue);
+  setOptions(options);
+  setRouter(router);
+
+  if (getOptions().bootstrap) {
+    bootstrap();
+  }
+};
+
+export { default as query } from "@/api/query";
+export { default as config } from "@/api/config";
+export { default as optOut } from "@/api/opt-out";
+export { default as optIn } from "@/api/opt-in";
+export { default as pageview } from "@/api/pageview";
+export { default as screenview } from "@/api/screenview";
+export { default as exception } from "@/api/exception";
+export { default as linker } from "@/api/linker";
+export { default as time } from "@/api/time";
+export { default as set } from "@/api/set";
+export { default as refund } from "@/api/refund";
+export { default as purchase } from "@/api/purchase";
+export { default as customMap } from "@/api/custom-map";
+export { default as event } from "@/api/event";
+
+export { default as bootstrap } from "@/bootstrap";
+export { default as addRoutesTracker } from "@/add-routes-tracker";
+
+export { setOptions } from "@/options";
+export { setRouter } from "@/router";
+
 export { install };
 
-export const bootstrap = _bootstrap;
-export const setOptions = _setOptions;
-
-// export api for usages outside Vuejs context
-export const query = api.query;
-export const config = api.config;
-export const event = api.event;
-export const pageview = api.pageview;
-export const screenview = api.screenview;
-export const customMap = api.customMap;
-export const time = api.time;
-export const exception = api.exception;
-export const linker = api.linker;
-export const purchase = api.purchase;
-export const set = api.set;
-export const optIn = api.optIn;
-export const optOut = api.optOut;
-export const refund = api.refund;
+export default install;
