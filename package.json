@@ -16,16 +16,16 @@
     "clean": "del-cli dist",
     "prebuild": "yarn clean",
     "build": "bili",
-    "dev": "bili --config bili.config.dev.js --watch",
+    "dev": "NODE_ENV=dev bili --watch",
     "lint": "eslint --ext .js .",
     "lint:fix": "yarn lint --fix",
-    "test": "jest",
-    "test:ci": "jest --coverage --bail --runInBand --verbose=false",
-    "coverage": "jest --coverage",
-    "coverage:html": "jest --coverage --coverageReporters=html",
-    "coverage:text": "jest --coverage --coverageReporters=text",
-    "coverage:lcov": "jest --coverage --coverageReporters=lcov",
-    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "test": "TZ=UTC jest",
+    "test:ci": "TZ=UTC jest --coverage --bail --runInBand --verbose=false",
+    "coverage": "TZ=UTC jest --coverage",
+    "coverage:html": "TZ=UTC jest --coverage --coverageReporters=html",
+    "coverage:text": "TZ=UTC jest --coverage --coverageReporters=text",
+    "coverage:lcov": "TZ=UTC jest --coverage --coverageReporters=lcov",
+    "prepublishOnly": "TZ=UTC yarn lint && yarn test && yarn build",
     "semantic-release": "semantic-release"
   },
   "config": {
@@ -34,6 +34,15 @@
     }
   },
   "jest": {
+    "setupFiles": [
+      "<rootDir>/jest/init.js"
+    ],
+    "testMatch": [
+      "**/test/**/*.spec.js"
+    ],
+    "setupFilesAfterEnv": [
+      "jest-extended"
+    ],
     "collectCoverage": true,
     "coverageReporters": [
       "json",
@@ -69,6 +78,9 @@
     "url": "https://github.com/MatteoGabriele/vue-gtag/issues"
   },
   "homepage": "https://github.com/MatteoGabriele/vue-gtag#readme",
+  "peerDependencies": {
+    "vue": "^2.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
@@ -76,6 +88,7 @@
     "babel-eslint": "^10.0.3",
     "bili": "^5.0.5",
     "commitizen": "^4.0.3",
+    "core-js": "^3.10.1",
     "cz-conventional-changelog": "^3.0.2",
     "del-cli": "^3.0.0",
     "eslint": "^6.6.0",
@@ -85,9 +98,14 @@
     "eslint-plugin-vue": "^6.0.1",
     "flush-promises": "^1.0.2",
     "jest": "^26.0.1",
+    "jest-extended": "^0.11.5",
+    "mockdate": "^3.0.5",
     "prettier": "^2.0.5",
+    "regenerator-runtime": "^0.13.7",
+    "rollup-plugin-alias": "^2.2.0",
+    "rollup-plugin-resolve": "^0.0.1-predev.1",
     "semantic-release": "^15.13.31",
-    "vue": "^2.6.10",
+    "vue": "^2.6.12",
     "vue-router": "^3.1.3",
     "vue-template-compiler": "^2.6.10"
   }
