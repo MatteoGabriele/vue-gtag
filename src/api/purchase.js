@@ -1,5 +1,5 @@
-import event from "./event";
+import event from "@/api/event";
 
-export default (...args) => {
-  event("purchase", ...args);
+export default (params) => {
+  event("purchase", params);
 };
