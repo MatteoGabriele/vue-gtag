@@ -1,5 +1,5 @@
-import event from "./event";
+import event from "@/api/event";
 
-export default (...args) => {
-  event("timing_complete", ...args);
+export default (params) => {
+  event("timing_complete", params);
 };

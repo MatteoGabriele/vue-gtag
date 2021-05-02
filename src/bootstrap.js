@@ -1,74 +1,52 @@
-import { isFn, loadScript } from "./util";
-import api from "./api";
-import { getRouter, getOptions } from "../src/install";
-import optOut from "./api/opt-out";
-import pageTracker from "./page-tracker";
+import { load } from "@/utils";
+import registerGlobals from "@/register-globals";
+import addRoutesTracker from "@/add-routes-tracker";
+import { getOptions } from "@/options";
+import { getRouter } from "@/router";
+import addConfiguration from "@/add-configuration";
 
-export default function () {
-  if (typeof document === "undefined" || typeof window === "undefined") {
-    return;
-  }
-
+export default () => {
   const {
-    customResourceURL,
-    customPreconnectOrigin,
-    enabled,
+    onReady,
+    onError,
     globalObjectName,
     globalDataLayerName,
     config,
-    pageTrackerEnabled,
-    onReady,
-    onError,
+    customResourceURL,
+    customPreconnectOrigin,
     deferScriptLoad,
+    pageTrackerEnabled,
     disableScriptLoad,
   } = getOptions();
 
-  const Router = getRouter();
-  const isPageTrackerEnabled = Boolean(pageTrackerEnabled && Router);
+  const isPageTrackerEnabled = Boolean(pageTrackerEnabled && getRouter());
 
-  if (!enabled) {
-    optOut();
-  }
-
-  if (window[globalObjectName] == null) {
-    window[globalDataLayerName] = window[globalDataLayerName] || [];
-    window[globalObjectName] = function () {
-      window[globalDataLayerName].push(arguments);
-    };
-  }
-
-  window[globalObjectName]("js", new Date());
+  registerGlobals();
 
   if (isPageTrackerEnabled) {
-    pageTracker();
+    addRoutesTracker();
   } else {
-    api.config(config.params);
+    addConfiguration();
   }
 
   if (disableScriptLoad) {
     return;
   }
 
-  const resource = `${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`;
-
-  return loadScript(resource, {
+  return load(`${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`, {
     preconnectOrigin: customPreconnectOrigin,
     defer: deferScriptLoad,
   })
     .then(() => {
-      const library = window[globalObjectName];
-
-      if (isFn(onReady)) {
-        onReady(library);
+      if (onReady) {
+        onReady(window[globalObjectName]);
       }
-
-      return library;
     })
     .catch((error) => {
-      if (isFn(onError)) {
+      if (onError) {
         onError(error);
       }
 
       return error;
     });
-}
+};
