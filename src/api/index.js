@@ -1,6 +1,7 @@
 export { default as query } from "@/api/query";
 export { default as config } from "@/api/config";
 export { default as optOut } from "@/api/opt-out";
+export { default as optIn } from "@/api/opt-in";
 export { default as pageview } from "@/api/pageview";
 export { default as screenview } from "@/api/screenview";
 export { default as exception } from "@/api/exception";

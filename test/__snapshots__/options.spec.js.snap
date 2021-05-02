@@ -26,6 +26,8 @@ Object {
   "pageTrackerEnabled": true,
   "pageTrackerScreenviewEnabled": false,
   "pageTrackerSkipSamePath": true,
+  "pageTrackerTemplate": null,
+  "pageTrackerUseFullPath": false,
 }
 `;
 
@@ -55,5 +57,7 @@ Object {
   "pageTrackerEnabled": true,
   "pageTrackerScreenviewEnabled": false,
   "pageTrackerSkipSamePath": true,
+  "pageTrackerTemplate": null,
+  "pageTrackerUseFullPath": false,
 }
 `;

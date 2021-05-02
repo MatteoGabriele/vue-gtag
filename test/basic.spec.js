@@ -21,6 +21,7 @@ describe("basic", () => {
         "query",
         "config",
         "optOut",
+        "optIn",
         "pageview",
         "screenview",
         "exception",

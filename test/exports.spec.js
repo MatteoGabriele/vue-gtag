@@ -2,6 +2,7 @@ import {
   screenview,
   pageview,
   optOut,
+  optIn,
   config,
   event,
   query,
@@ -36,6 +37,7 @@ describe("exports", () => {
     expect(query).toBeDefined();
     expect(config).toBeDefined();
     expect(optOut).toBeDefined();
+    expect(optIn).toBeDefined();
     expect(pageview).toBeDefined();
     expect(screenview).toBeDefined();
     expect(exception).toBeDefined();
