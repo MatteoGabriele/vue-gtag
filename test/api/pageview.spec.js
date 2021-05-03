@@ -8,6 +8,7 @@ import flushPromises from "flush-promises";
 jest.mock("@/api/event");
 
 describe("pageview", () => {
+  const _window = window;
   const { location } = window;
 
   beforeAll(() => {
@@ -16,6 +17,10 @@ describe("pageview", () => {
     window.location = {
       href: "window_location_href_value",
     };
+  });
+
+  beforeEach(() => {
+    global.window = _window;
   });
 
   afterAll(() => {
@@ -72,6 +77,20 @@ describe("pageview", () => {
       page_path: "/",
       page_location: "window_location_href_value",
     });
+  });
+
+  test("track pageview without window", () => {
+    const localVue = createLocalVue();
+
+    localVue.use(VueGtag, {
+      config: { id: 1 },
+    });
+
+    delete global.window;
+
+    expect(() => {
+      pageview("/");
+    }).not.toThrow();
   });
 
   describe("pageTrackerUseFullPath", () => {
