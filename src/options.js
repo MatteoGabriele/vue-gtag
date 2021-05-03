@@ -17,6 +17,7 @@ export const getDefaultParams = () => ({
   pageTrackerScreenviewEnabled: false,
   appName: null,
   pageTrackerUseFullPath: false,
+  pageTrackerPrependBase: true,
   pageTrackerSkipSamePath: true,
   globalDataLayerName: "dataLayer",
   globalObjectName: "gtag",

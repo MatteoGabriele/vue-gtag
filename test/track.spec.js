@@ -173,7 +173,7 @@ describe("track", () => {
       await flushPromises();
 
       expect(console.warn).toHaveBeenCalledWith(
-        `[vue-gtag] Missing "name" property in the route with path value "/about".`
+        `[vue-gtag] Missing "name" property in the route.`
       );
     });
   });

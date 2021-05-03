@@ -1,4 +1,6 @@
 import { getOptions } from "@/options";
+import { getRouter } from "@/router";
+import { getPathWithBase } from "@/utils";
 import event from "@/api/event";
 
 export default (param) => {
@@ -9,11 +11,17 @@ export default (param) => {
       page_path: param,
     };
   } else if (param.path || param.fullPath) {
-    const { pageTrackerUseFullPath } = getOptions();
+    const {
+      pageTrackerUseFullPath: useFullPath,
+      pageTrackerPrependBase: useBase,
+    } = getOptions();
+    const router = getRouter();
+    const base = router && router.options.base;
+    const path = useFullPath ? param.fullPath : param.path;
 
     template = {
       ...(param.name && { page_title: param.name }),
-      page_path: pageTrackerUseFullPath ? param.fullPath : param.path,
+      page_path: useBase ? getPathWithBase(path, base) : path,
     };
   } else {
     template = param;
