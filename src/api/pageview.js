@@ -1,7 +1,12 @@
 import { getOptions } from "@/options";
+import { isBrowser } from "@/utils";
 import event from "@/api/event";
 
 export default (param) => {
+  if (!isBrowser()) {
+    return;
+  }
+
   let template;
 
   if (typeof param === "string") {
