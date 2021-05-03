@@ -152,4 +152,68 @@ describe("pageview", () => {
       });
     });
   });
+
+  describe("router base path", () => {
+    test("use with router installed", async () => {
+      const localVue = createLocalVue();
+      const router = new VueRouter({
+        mode: "abstract",
+        base: "/app/",
+        routes: [{ path: "/" }, { path: "/about" }],
+      });
+
+      localVue.use(VueRouter);
+      localVue.use(
+        VueGtag,
+        {
+          pageTrackerPrependBase: true,
+          config: {
+            id: 1,
+          },
+        },
+        router
+      );
+
+      router.push("/about");
+
+      await flushPromises();
+
+      pageview(router.currentRoute);
+
+      expect(event).toHaveBeenCalledWith("page_view", {
+        send_page_view: true,
+        page_path: "/app/about",
+        page_location: "window_location_href_value",
+      });
+    });
+
+    test("use without router installed", async () => {
+      const localVue = createLocalVue();
+      const router = new VueRouter({
+        mode: "abstract",
+        base: "/app/",
+        routes: [{ path: "/" }, { path: "/about" }],
+      });
+
+      localVue.use(VueRouter);
+      localVue.use(VueGtag, {
+        pageTrackerPrependBase: true,
+        config: {
+          id: 1,
+        },
+      });
+
+      router.push("/about");
+
+      await flushPromises();
+
+      pageview(router.currentRoute);
+
+      expect(event).toHaveBeenCalledWith("page_view", {
+        send_page_view: true,
+        page_path: "/about",
+        page_location: "window_location_href_value",
+      });
+    });
+  });
 });
