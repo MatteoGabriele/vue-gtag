@@ -10,6 +10,7 @@ export const getDefaultParams = () => ({
   customResourceURL: "https://www.googletagmanager.com/gtag/js",
   customPreconnectOrigin: "https://www.googletagmanager.com",
   deferScriptLoad: false,
+  pageTrackerExcludedRoutes: [],
   pageTrackerEnabled: true,
   enabled: true,
   disableScriptLoad: false,
