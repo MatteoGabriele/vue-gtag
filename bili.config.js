@@ -9,6 +9,9 @@ const config = {
   },
   externals: ["vue"],
   plugins: {
+    replace: {
+      preventAssignment: true,
+    },
     alias: {
       resolve: [".js"],
       entries: [
