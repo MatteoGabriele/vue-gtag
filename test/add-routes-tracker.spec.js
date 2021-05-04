@@ -235,4 +235,51 @@ describe("page-tracker", () => {
 
     expect(onAfterTrackSpy).toHaveBeenCalledTimes(1);
   });
+
+  test("remove routes from tracking based on path", async () => {
+    const localVue = createLocalVue();
+    const onAfterTrackSpy = jest.fn();
+    const router = new VueRouter({
+      mode: "abstract",
+      routes: [
+        { name: "home", path: "/" },
+        { path: "/about" },
+        { name: "contacts", path: "/contacts" },
+      ],
+    });
+
+    localVue.use(VueRouter);
+
+    localVue.use(
+      VueGtag,
+      {
+        pageTrackerExcludedRoutes: ["/about", "contacts"],
+        onAfterTrack: onAfterTrackSpy,
+        config: {
+          id: 1,
+        },
+      },
+      router
+    );
+
+    mount(App, { router, localVue });
+
+    router.push("/");
+    await flushPromises();
+
+    router.push("/about");
+    await flushPromises();
+
+    router.push("/contacts");
+    await flushPromises();
+
+    expect(track).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        path: "/",
+      })
+    );
+
+    expect(track).toHaveBeenCalledTimes(1);
+  });
 });

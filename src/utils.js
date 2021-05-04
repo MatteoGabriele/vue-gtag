@@ -78,3 +78,25 @@ export const warn = (text, shouldLog = true) => {
 
   console.warn(`[vue-gtag] ${text}`);
 };
+
+export const validateScreenviewShape = (obj = {}) => {
+  warn(
+    `Missing "appName" property inside the plugin options.`,
+    obj.app_name == null
+  );
+
+  warn(`Missing "name" property in the route.`, obj.screen_name == null);
+
+  return obj;
+};
+
+export function getPathWithBase(path = "", base = "") {
+  const pathAsArray = path.split("/");
+  const baseAsArray = base.split("/");
+
+  if (pathAsArray[0] === "" && base[base.length - 1] === "/") {
+    pathAsArray.shift();
+  }
+
+  return baseAsArray.join("/") + pathAsArray.join("/");
+}
