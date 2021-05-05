@@ -8,6 +8,7 @@ import flushPromises from "flush-promises";
 jest.mock("@/api/event");
 
 describe("pageview", () => {
+  const _window = window;
   const { location } = window;
 
   beforeAll(() => {
@@ -16,6 +17,10 @@ describe("pageview", () => {
     window.location = {
       href: "window_location_href_value",
     };
+  });
+
+  beforeEach(() => {
+    global.window = _window;
   });
 
   afterAll(() => {
@@ -74,6 +79,20 @@ describe("pageview", () => {
     });
   });
 
+  test("track pageview without window", () => {
+    const localVue = createLocalVue();
+
+    localVue.use(VueGtag, {
+      config: { id: 1 },
+    });
+
+    delete global.window;
+
+    expect(() => {
+      pageview("/");
+    }).not.toThrow();
+  });
+
   describe("pageTrackerUseFullPath", () => {
     test("tracks using router `path` property", async () => {
       const localVue = createLocalVue();
@@ -129,6 +148,70 @@ describe("pageview", () => {
       expect(event).toHaveBeenCalledWith("page_view", {
         send_page_view: true,
         page_path: "/about?foo=bar",
+        page_location: "window_location_href_value",
+      });
+    });
+  });
+
+  describe("router base path", () => {
+    test("use with router installed", async () => {
+      const localVue = createLocalVue();
+      const router = new VueRouter({
+        mode: "abstract",
+        base: "/app/",
+        routes: [{ path: "/" }, { path: "/about" }],
+      });
+
+      localVue.use(VueRouter);
+      localVue.use(
+        VueGtag,
+        {
+          pageTrackerPrependBase: true,
+          config: {
+            id: 1,
+          },
+        },
+        router
+      );
+
+      router.push("/about");
+
+      await flushPromises();
+
+      pageview(router.currentRoute);
+
+      expect(event).toHaveBeenCalledWith("page_view", {
+        send_page_view: true,
+        page_path: "/app/about",
+        page_location: "window_location_href_value",
+      });
+    });
+
+    test("use without router installed", async () => {
+      const localVue = createLocalVue();
+      const router = new VueRouter({
+        mode: "abstract",
+        base: "/app/",
+        routes: [{ path: "/" }, { path: "/about" }],
+      });
+
+      localVue.use(VueRouter);
+      localVue.use(VueGtag, {
+        pageTrackerPrependBase: true,
+        config: {
+          id: 1,
+        },
+      });
+
+      router.push("/about");
+
+      await flushPromises();
+
+      pageview(router.currentRoute);
+
+      expect(event).toHaveBeenCalledWith("page_view", {
+        send_page_view: true,
+        page_path: "/about",
         page_location: "window_location_href_value",
       });
     });

@@ -71,6 +71,7 @@ declare module "vue-gtag" {
       value?: number;
       event_label?: string;
       event_category?: string;
+      non_interaction?: boolean
     }
 
     type Currency = string | number;
