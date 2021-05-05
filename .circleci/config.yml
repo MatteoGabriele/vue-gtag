@@ -3,7 +3,7 @@ version: 2
 jobs:
   dependencies:
     docker:
-      - image: circleci/node:10.16.3
+      - image: circleci/node:12.18.1
     steps:
       - checkout
       - restore_cache:
@@ -16,7 +16,7 @@ jobs:
             - ./node_modules
   test:
     docker:
-      - image: circleci/node:10.16.3
+      - image: circleci/node:12.18.1
     steps:
       - checkout
       - restore_cache:
@@ -26,7 +26,7 @@ jobs:
 
   lint:
     docker:
-      - image: circleci/node:10.16.3
+      - image: circleci/node:12.18.1
     steps:
       - checkout
       - restore_cache:
@@ -36,7 +36,7 @@ jobs:
 
   code_climate:
     docker:
-      - image: circleci/node:10.16.3
+      - image: circleci/node:12.18.1
     steps:
       - checkout
       - restore_cache:
@@ -51,7 +51,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/node:10.16.3
+      - image: circleci/node:12.18.1
     steps:
       - checkout
       - restore_cache:
@@ -61,7 +61,7 @@ jobs:
 
   semantic_release:
     docker:
-      - image: circleci/node:10.16.3
+      - image: circleci/node:12.18.1
     steps:
       - checkout
       - restore_cache:
