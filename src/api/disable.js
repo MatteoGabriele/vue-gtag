@@ -1,6 +1,11 @@
+import { isBrowser } from "@/utils";
 import { getOptions } from "@/options";
 
 const assignGlobalProperty = (id, value) => {
+  if (!isBrowser()) {
+    return;
+  }
+
   window[`ga-disable-${id}`] = value;
 };
 
