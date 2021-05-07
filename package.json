@@ -79,7 +79,7 @@
   },
   "homepage": "https://github.com/MatteoGabriele/vue-gtag#readme",
   "peerDependencies": {
-    "vue": "^3.0.11"
+    "vue": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
@@ -104,7 +104,7 @@
     "rollup-plugin-alias": "^2.2.0",
     "rollup-plugin-resolve": "^0.0.1-predev.1",
     "semantic-release": "^15.13.31",
-    "vue": "^3.0.11",
+    "vue": "^3.0.0",
     "vue-router": "^4.0.6",
     "vue-template-compiler": "^2.6.10"
   }
