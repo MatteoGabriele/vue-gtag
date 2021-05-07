@@ -1,4 +1,4 @@
-import { createLocalVue } from "@vue/test-utils";
+import { createApp } from "vue";
 import VueGtag from "@/index";
 import query from "@/api/query";
 
@@ -15,9 +15,9 @@ describe("query", () => {
   });
 
   test("passes argumemets to the gtag instance", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag);
+    app.use(VueGtag);
 
     jest.spyOn(window, "gtag").mockReturnValue();
 
@@ -27,9 +27,9 @@ describe("query", () => {
   });
 
   test("passes argumemets to the custom named instance", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       globalObjectName: "foo",
     });
 
@@ -41,9 +41,9 @@ describe("query", () => {
   });
 
   test("use query with gtag disabled", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       bootstrap: false,
       config: {
         id: 1,

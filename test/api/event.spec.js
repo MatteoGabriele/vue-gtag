@@ -1,4 +1,4 @@
-import { createLocalVue } from "@vue/test-utils";
+import { createApp } from "vue";
 import event from "@/api/event";
 import query from "@/api/query";
 import VueGtag from "@/index";
@@ -11,9 +11,9 @@ describe("event", () => {
   });
 
   test("fires an event", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       config: {
         id: 1,
       },
@@ -25,9 +25,9 @@ describe("event", () => {
   });
 
   test("attaches send_to to assign the event to multiple domains", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       includes: [{ id: 2 }],
       config: {
         id: 1,
@@ -43,9 +43,9 @@ describe("event", () => {
   });
 
   test("do not overwrite send_to if already set", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       includes: [{ id: 2 }],
       config: {
         id: 1,
@@ -61,9 +61,9 @@ describe("event", () => {
   });
 
   test("when using send_to, default group name can be customized", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       includes: [{ id: 2 }],
       defaultGroupName: "custom_default_group_value",
       config: {

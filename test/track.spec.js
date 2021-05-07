@@ -1,13 +1,14 @@
-import { mount, createLocalVue } from "@vue/test-utils";
+import { createApp } from "vue";
 import VueGtag from "@/index";
-import VueRouter from "vue-router";
+import { createMemoryHistory, createRouter } from "vue-router";
 import flushPromises from "flush-promises";
 import * as api from "@/api";
 import * as utils from "@/utils";
 
 jest.mock("@/api");
 
-const App = { template: "<div>app</div>" };
+const Home = { template: "<div></div>" };
+const About = { template: "<div></div>" };
 
 describe("track", () => {
   const { location } = window;
@@ -26,9 +27,12 @@ describe("track", () => {
   });
 
   beforeEach(() => {
-    router = new VueRouter({
-      mode: "abstract",
-      routes: [{ name: "home", path: "/" }, { path: "/about" }],
+    router = createRouter({
+      history: createMemoryHistory(),
+      routes: [
+        { name: "home", path: "/", component: Home },
+        { path: "/about", component: About },
+      ],
     });
 
     jest.spyOn(window.console, "warn").mockReturnValue();
@@ -41,10 +45,10 @@ describe("track", () => {
 
   describe("pageview", () => {
     test("tracks route with name", async () => {
-      const localVue = createLocalVue();
+      const app = createApp();
 
-      localVue.use(VueRouter);
-      localVue.use(
+      app.use(router);
+      app.use(
         VueGtag,
         {
           config: {
@@ -53,8 +57,6 @@ describe("track", () => {
         },
         router
       );
-
-      mount(App, { router, localVue });
 
       router.push("/");
       await flushPromises();
@@ -68,10 +70,10 @@ describe("track", () => {
     });
 
     test("tracks route without name", async () => {
-      const localVue = createLocalVue();
+      const app = createApp();
 
-      localVue.use(VueRouter);
-      localVue.use(
+      app.use(router);
+      app.use(
         VueGtag,
         {
           config: {
@@ -80,8 +82,6 @@ describe("track", () => {
         },
         router
       );
-
-      mount(App, { router, localVue });
 
       router.push("/about");
       await flushPromises();
@@ -96,11 +96,11 @@ describe("track", () => {
 
   describe("screenview", () => {
     test("tracks route with screenview", async () => {
-      const localVue = createLocalVue();
+      const app = createApp();
 
-      localVue.use(VueRouter);
+      app.use(router);
 
-      localVue.use(
+      app.use(
         VueGtag,
         {
           pageTrackerScreenviewEnabled: true,
@@ -111,8 +111,6 @@ describe("track", () => {
         },
         router
       );
-
-      mount(App, { router, localVue });
 
       router.push("/");
       await flushPromises();
@@ -125,10 +123,10 @@ describe("track", () => {
     });
 
     test("warns when no appName is provided", async () => {
-      const localVue = createLocalVue();
+      const app = createApp();
 
-      localVue.use(VueRouter);
-      localVue.use(
+      app.use(router);
+      app.use(
         VueGtag,
         {
           pageTrackerScreenviewEnabled: true,
@@ -138,8 +136,6 @@ describe("track", () => {
         },
         router
       );
-
-      mount(App, { localVue, router });
 
       router.push("/");
 
@@ -151,10 +147,10 @@ describe("track", () => {
     });
 
     test("warns when no route name is provided", async () => {
-      const localVue = createLocalVue();
+      const app = createApp();
 
-      localVue.use(VueRouter);
-      localVue.use(
+      app.use(router);
+      app.use(
         VueGtag,
         {
           appName: "MyApp",
@@ -165,8 +161,6 @@ describe("track", () => {
         },
         router
       );
-
-      mount(App, { localVue, router });
 
       router.push("/about");
 
@@ -180,11 +174,11 @@ describe("track", () => {
 
   describe("pageTrackerTemplate", () => {
     test("tracks pageview", async () => {
-      const localVue = createLocalVue();
+      const app = createApp();
 
-      localVue.use(VueRouter);
+      app.use(router);
 
-      localVue.use(
+      app.use(
         VueGtag,
         {
           pageTrackerTemplate: (to, from) => ({
@@ -197,8 +191,6 @@ describe("track", () => {
         },
         router
       );
-
-      mount(App, { router, localVue });
 
       router.push("/");
       await flushPromises();
@@ -213,11 +205,11 @@ describe("track", () => {
     });
 
     test("tracks screenview", async () => {
-      const localVue = createLocalVue();
+      const app = createApp();
 
-      localVue.use(VueRouter);
+      app.use(router);
 
-      localVue.use(
+      app.use(
         VueGtag,
         {
           pageTrackerScreenviewEnabled: true,
@@ -231,8 +223,6 @@ describe("track", () => {
         },
         router
       );
-
-      mount(App, { router, localVue });
 
       router.push("/");
       await flushPromises();
@@ -251,11 +241,11 @@ describe("track", () => {
 
   describe("pageTrackerSkipSamePath", () => {
     test("tracks the same path twice", async () => {
-      const localVue = createLocalVue();
+      const app = createApp();
 
-      localVue.use(VueRouter);
+      app.use(router);
 
-      localVue.use(
+      app.use(
         VueGtag,
         {
           pageTrackerSkipSamePath: false,
@@ -265,8 +255,6 @@ describe("track", () => {
         },
         router
       );
-
-      mount(App, { router, localVue });
 
       router.push("/about");
       await flushPromises();
@@ -290,11 +278,11 @@ describe("track", () => {
     });
 
     test("tracks the same path once", async () => {
-      const localVue = createLocalVue();
+      const app = createApp();
 
-      localVue.use(VueRouter);
+      app.use(router);
 
-      localVue.use(
+      app.use(
         VueGtag,
         {
           config: {
@@ -303,8 +291,6 @@ describe("track", () => {
         },
         router
       );
-
-      mount(App, { router, localVue });
 
       router.push("/about");
       await flushPromises();

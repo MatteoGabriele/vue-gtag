@@ -1,4 +1,4 @@
-import { createLocalVue } from "@vue/test-utils";
+import { createApp } from "vue";
 import disable from "@/api/disable";
 import VueGtag from "@/index";
 
@@ -8,9 +8,9 @@ describe("disable", () => {
   });
 
   test("turns off tracking", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       config: {
         id: 1,
       },
@@ -22,9 +22,9 @@ describe("disable", () => {
   });
 
   test("turns on tracking", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       config: {
         id: 1,
       },
@@ -36,9 +36,9 @@ describe("disable", () => {
   });
 
   test("turns off tracking for multiple domains", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       includes: [{ id: 2 }, { id: 3 }],
       config: {
         id: 1,
@@ -53,9 +53,9 @@ describe("disable", () => {
   });
 
   test("turns on tracking for multiple domains", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       includes: [{ id: 2 }, { id: 3 }],
       config: {
         id: 1,

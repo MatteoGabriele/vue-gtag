@@ -1,6 +1,6 @@
-import { mount, createLocalVue } from "@vue/test-utils";
+import { createApp } from "vue";
 import flushPromises from "flush-promises";
-import VueRouter from "vue-router";
+import { createMemoryHistory, createRouter } from "vue-router";
 import VueGtag from "@/index";
 import * as api from "@/api";
 import * as utils from "@/utils";
@@ -11,7 +11,9 @@ jest.mock("@/track");
 jest.mock("@/api");
 jest.mock("@/add-configuration");
 
-const App = { template: "<div>app</div>" };
+const Home = { template: "<div></div>" };
+const About = { template: "<div></div>" };
+const Contact = { template: "<div></div>" };
 
 describe("page-tracker", () => {
   const { location } = window;
@@ -30,11 +32,11 @@ describe("page-tracker", () => {
   });
 
   beforeEach(() => {
-    router = new VueRouter({
-      mode: "abstract",
+    router = createRouter({
+      history: createMemoryHistory(),
       routes: [
-        { name: "home", path: "/" },
-        { name: "about", path: "/about" },
+        { name: "home", path: "/", component: Home },
+        { name: "about", path: "/about", component: About },
       ],
     });
 
@@ -47,13 +49,13 @@ describe("page-tracker", () => {
   });
 
   test("waits router ready before start tracking", async () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueRouter);
+    app.use(router);
 
-    jest.spyOn(router, "onReady").mockResolvedValue();
+    jest.spyOn(router, "isReady").mockResolvedValue();
 
-    localVue.use(
+    app.use(
       VueGtag,
       {
         config: {
@@ -62,21 +64,19 @@ describe("page-tracker", () => {
       },
       router
     );
-
-    mount(App, { router, localVue });
 
     router.push("/");
     await flushPromises();
 
-    expect(router.onReady).toHaveBeenCalledBefore(api.config);
+    expect(router.isReady).toHaveBeenCalledBefore(api.config);
   });
 
   test("fires the config hit", async () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueRouter);
+    app.use(router);
 
-    localVue.use(
+    app.use(
       VueGtag,
       {
         config: {
@@ -85,24 +85,22 @@ describe("page-tracker", () => {
       },
       router
     );
-
-    mount(App, { router, localVue });
 
     router.push("/");
     await flushPromises();
 
     expect(addConfiguration).toHaveBeenCalled();
 
-    expect(track).toHaveBeenCalledWith(router.currentRoute);
+    expect(track).toHaveBeenCalledWith(router.currentRoute.value);
     expect(track).toHaveBeenCalledTimes(1);
   });
 
   test("fires track after each route change", async () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueRouter);
+    app.use(router);
 
-    localVue.use(
+    app.use(
       VueGtag,
       {
         config: {
@@ -111,8 +109,6 @@ describe("page-tracker", () => {
       },
       router
     );
-
-    mount(App, { router, localVue });
 
     router.push("/");
     await flushPromises();
@@ -159,12 +155,12 @@ describe("page-tracker", () => {
   });
 
   test("fires the onBeforeTrack method", async () => {
-    const localVue = createLocalVue();
+    const app = createApp();
     const onBeforeTrackSpy = jest.fn();
 
-    localVue.use(VueRouter);
+    app.use(router);
 
-    localVue.use(
+    app.use(
       VueGtag,
       {
         onBeforeTrack: onBeforeTrackSpy,
@@ -174,8 +170,6 @@ describe("page-tracker", () => {
       },
       router
     );
-
-    mount(App, { router, localVue });
 
     router.push("/");
     await flushPromises();
@@ -198,12 +192,12 @@ describe("page-tracker", () => {
   });
 
   test("fires the onAfterTrack method", async () => {
-    const localVue = createLocalVue();
+    const app = createApp();
     const onAfterTrackSpy = jest.fn();
 
-    localVue.use(VueRouter);
+    app.use(router);
 
-    localVue.use(
+    app.use(
       VueGtag,
       {
         onAfterTrack: onAfterTrackSpy,
@@ -213,8 +207,6 @@ describe("page-tracker", () => {
       },
       router
     );
-
-    mount(App, { router, localVue });
 
     router.push("/");
     await flushPromises();
@@ -237,20 +229,20 @@ describe("page-tracker", () => {
   });
 
   test("remove routes from tracking based on path", async () => {
-    const localVue = createLocalVue();
+    const app = createApp();
     const onAfterTrackSpy = jest.fn();
-    const router = new VueRouter({
-      mode: "abstract",
+    const router = createRouter({
+      history: createMemoryHistory(),
       routes: [
-        { name: "home", path: "/" },
-        { path: "/about" },
-        { name: "contacts", path: "/contacts" },
+        { name: "home", path: "/", component: Home },
+        { path: "/about", component: About },
+        { name: "contacts", path: "/contacts", component: Contact },
       ],
     });
 
-    localVue.use(VueRouter);
+    app.use(router);
 
-    localVue.use(
+    app.use(
       VueGtag,
       {
         pageTrackerExcludedRoutes: ["/about", "contacts"],
@@ -261,8 +253,6 @@ describe("page-tracker", () => {
       },
       router
     );
-
-    mount(App, { router, localVue });
 
     router.push("/");
     await flushPromises();

@@ -1,4 +1,4 @@
-import { createLocalVue } from "@vue/test-utils";
+import { createApp } from "vue";
 import VueGtag from "@/index";
 import * as api from "@/api";
 
@@ -10,9 +10,9 @@ describe("add-configuration", () => {
   });
 
   test("fires a configuration for the main domain", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       config: {
         id: 1,
       },
@@ -25,9 +25,9 @@ describe("add-configuration", () => {
   });
 
   test("fires a configuration for multiple domains", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       includes: [
         {
           id: 2,

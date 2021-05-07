@@ -1,5 +1,7 @@
 import * as api from "@/api";
 
-const attachApi = (Vue) => (Vue.$gtag = Vue.prototype.$gtag = api);
+const attachApi = (app) => {
+  app.config.globalProperties.$gtag = api;
+};
 
 export default attachApi;
