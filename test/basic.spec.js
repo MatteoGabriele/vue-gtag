@@ -1,4 +1,4 @@
-import { createLocalVue } from "@vue/test-utils";
+import { createApp } from "vue";
 import VueGtag from "@/index";
 import bootstrap from "@/bootstrap";
 
@@ -10,13 +10,12 @@ describe("basic", () => {
   });
 
   test("installs plugin", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag);
+    app.use(VueGtag);
 
-    expect(localVue.$gtag).toBeDefined();
-    expect(localVue.prototype.$gtag).toBeDefined();
-    expect(Object.keys(localVue.$gtag)).toMatchInlineSnapshot(`
+    expect(Object.keys(app.config.globalProperties.$gtag))
+      .toMatchInlineSnapshot(`
       Array [
         "query",
         "config",
@@ -37,39 +36,27 @@ describe("basic", () => {
   });
 
   test("installs plugin without window object", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
     delete global.window;
 
     expect(() => {
-      localVue.use(VueGtag);
-    }).not.toThrow();
-  });
-
-  test("can use API without window object", () => {
-    const localVue = createLocalVue();
-
-    localVue.use(VueGtag);
-
-    delete global.window;
-
-    expect(() => {
-      localVue.$gtag.query();
+      app.use(VueGtag);
     }).not.toThrow();
   });
 
   test("bootstraps the plugin", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag);
+    app.use(VueGtag);
 
     expect(bootstrap).toHaveBeenCalled();
   });
 
   test("bootstrap is disabled", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       bootstrap: false,
     });
 

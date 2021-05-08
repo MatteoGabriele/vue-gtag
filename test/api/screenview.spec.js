@@ -1,4 +1,4 @@
-import { createLocalVue } from "@vue/test-utils";
+import { createApp } from "vue";
 import VueGtag from "@/index";
 import screenview from "@/api/screenview";
 import event from "@/api/event";
@@ -11,9 +11,9 @@ describe("screenview", () => {
   });
 
   test("fires a screenview as string", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       appName: "MyApp",
       config: {
         id: 1,
@@ -29,9 +29,9 @@ describe("screenview", () => {
   });
 
   test("fires a screenview as object", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       appName: "MyApp",
       config: {
         id: 1,
@@ -49,9 +49,9 @@ describe("screenview", () => {
   });
 
   test("uses a custom app_name", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       appName: "MyApp",
       config: {
         id: 1,

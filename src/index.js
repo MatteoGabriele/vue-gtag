@@ -3,8 +3,8 @@ import { setOptions, getOptions } from "@/options";
 import bootstrap from "@/bootstrap";
 import { setRouter } from "@/router";
 
-const install = (Vue, options = {}, router) => {
-  attachApi(Vue);
+const install = (app, options = {}, router) => {
+  attachApi(app);
   setOptions(options);
   setRouter(router);
 

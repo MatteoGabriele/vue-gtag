@@ -1,11 +1,14 @@
-import { createLocalVue } from "@vue/test-utils";
-import VueRouter from "vue-router";
+import { createApp } from "vue";
+import { createRouter, createMemoryHistory } from "vue-router";
 import VueGtag from "@/index";
 import pageview from "@/api/pageview";
 import event from "@/api/event";
 import flushPromises from "flush-promises";
 
 jest.mock("@/api/event");
+
+const Home = { template: "<div><div>" };
+const About = { template: "<div><div>" };
 
 describe("pageview", () => {
   const _window = window;
@@ -57,19 +60,19 @@ describe("pageview", () => {
   });
 
   test("pass page as a route", async () => {
-    const localVue = createLocalVue();
-    const router = new VueRouter({
-      mode: "abstract",
-      routes: [{ name: "home", path: "/" }],
+    const app = createApp();
+    const router = createRouter({
+      history: createMemoryHistory(),
+      routes: [{ name: "home", path: "/", component: Home }],
     });
 
-    localVue.use(VueRouter);
+    app.use(router);
 
     router.push("/");
 
     await flushPromises();
 
-    pageview(router.currentRoute);
+    pageview(router.currentRoute.value);
 
     expect(event).toHaveBeenCalledWith("page_view", {
       send_page_view: true,
@@ -80,9 +83,9 @@ describe("pageview", () => {
   });
 
   test("track pageview without window", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       config: { id: 1 },
     });
 
@@ -95,25 +98,25 @@ describe("pageview", () => {
 
   describe("pageTrackerUseFullPath", () => {
     test("tracks using router `path` property", async () => {
-      const localVue = createLocalVue();
-      const router = new VueRouter({
-        mode: "abstract",
-        routes: [{ name: "home", path: "/" }],
+      const app = createApp();
+      const router = createRouter({
+        history: createMemoryHistory(),
+        routes: [{ path: "/" }, { path: "/about", component: About }],
       });
 
-      localVue.use(VueGtag, {
+      app.use(VueGtag, {
         config: {
           id: 1,
         },
       });
 
-      localVue.use(VueRouter);
+      app.use(router);
 
       router.push("/about?foo=bar");
 
       await flushPromises();
 
-      pageview(router.currentRoute);
+      pageview(router.currentRoute.value);
 
       expect(event).toHaveBeenCalledWith("page_view", {
         send_page_view: true,
@@ -123,27 +126,27 @@ describe("pageview", () => {
     });
 
     test("tracks using router `fullPath` property", async () => {
-      const localVue = createLocalVue();
+      const app = createApp();
 
-      localVue.use(VueGtag, {
+      app.use(VueGtag, {
         pageTrackerUseFullPath: true,
         config: {
           id: 1,
         },
       });
 
-      const router = new VueRouter({
-        mode: "abstract",
-        routes: [{ name: "home", path: "/" }],
+      const router = createRouter({
+        history: createMemoryHistory(),
+        routes: [{ path: "/" }, { path: "/about", component: About }],
       });
 
-      localVue.use(VueRouter);
+      app.use(router);
 
       router.push("/about?foo=bar");
 
       await flushPromises();
 
-      pageview(router.currentRoute);
+      pageview(router.currentRoute.value);
 
       expect(event).toHaveBeenCalledWith("page_view", {
         send_page_view: true,
@@ -155,15 +158,18 @@ describe("pageview", () => {
 
   describe("router base path", () => {
     test("use with router installed", async () => {
-      const localVue = createLocalVue();
-      const router = new VueRouter({
-        mode: "abstract",
+      const app = createApp();
+      const router = createRouter({
+        history: createMemoryHistory(),
         base: "/app/",
-        routes: [{ path: "/" }, { path: "/about" }],
+        routes: [
+          { path: "/", component: Home },
+          { path: "/about", component: About },
+        ],
       });
 
-      localVue.use(VueRouter);
-      localVue.use(
+      app.use(router);
+      app.use(
         VueGtag,
         {
           pageTrackerPrependBase: true,
@@ -178,7 +184,7 @@ describe("pageview", () => {
 
       await flushPromises();
 
-      pageview(router.currentRoute);
+      pageview(router.currentRoute.value);
 
       expect(event).toHaveBeenCalledWith("page_view", {
         send_page_view: true,
@@ -188,15 +194,18 @@ describe("pageview", () => {
     });
 
     test("use without router installed", async () => {
-      const localVue = createLocalVue();
-      const router = new VueRouter({
-        mode: "abstract",
+      const app = createApp();
+      const router = createRouter({
+        history: createMemoryHistory(),
         base: "/app/",
-        routes: [{ path: "/" }, { path: "/about" }],
+        routes: [
+          { path: "/", component: Home },
+          { path: "/about", component: About },
+        ],
       });
 
-      localVue.use(VueRouter);
-      localVue.use(VueGtag, {
+      app.use(router);
+      app.use(VueGtag, {
         pageTrackerPrependBase: true,
         config: {
           id: 1,
@@ -207,7 +216,7 @@ describe("pageview", () => {
 
       await flushPromises();
 
-      pageview(router.currentRoute);
+      pageview(router.currentRoute.value);
 
       expect(event).toHaveBeenCalledWith("page_view", {
         send_page_view: true,

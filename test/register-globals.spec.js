@@ -1,4 +1,4 @@
-import { createLocalVue } from "@vue/test-utils";
+import { createApp } from "vue";
 import VueGtag from "@/index";
 import flushPromises from "flush-promises";
 import * as api from "@/api";
@@ -19,9 +19,9 @@ describe("registerGlobals", () => {
   });
 
   test("register global dataLayer and globalObject", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       config: {
         id: 1,
       },
@@ -32,9 +32,9 @@ describe("registerGlobals", () => {
   });
 
   test("register globalObject with custom name", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       globalObjectName: "foo",
       config: {
         id: 1,
@@ -46,9 +46,9 @@ describe("registerGlobals", () => {
   });
 
   test("register dataLayer with custom name", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       globalDataLayerName: "bar",
       config: {
         id: 1,
@@ -60,9 +60,9 @@ describe("registerGlobals", () => {
   });
 
   test("first hit is current date", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       config: {
         id: 1,
       },
@@ -72,9 +72,9 @@ describe("registerGlobals", () => {
   });
 
   test("optOut when disabled", async () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       enabled: false,
       config: {
         id: 1,

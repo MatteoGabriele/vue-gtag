@@ -1,4 +1,4 @@
-import Vue from "vue";
+import { nextTick } from "vue";
 import { isFn } from "@/utils";
 import { getRouter } from "@/router";
 import { getOptions } from "@/options";
@@ -14,21 +14,21 @@ export default () => {
   const { onBeforeTrack, onAfterTrack } = getOptions();
   const router = getRouter();
 
-  router.onReady(() => {
-    Vue.nextTick().then(() => {
+  router.isReady().then(() => {
+    nextTick().then(() => {
       const { currentRoute } = router;
 
       addConfiguration();
 
-      if (isRouteExcluded(currentRoute)) {
+      if (isRouteExcluded(currentRoute.value)) {
         return;
       }
 
-      track(currentRoute);
+      track(currentRoute.value);
     });
 
     router.afterEach((to, from) => {
-      Vue.nextTick().then(() => {
+      nextTick().then(() => {
         if (isRouteExcluded(to)) {
           return;
         }

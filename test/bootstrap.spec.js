@@ -1,7 +1,7 @@
-import { createLocalVue } from "@vue/test-utils";
+import { createApp } from "vue";
 import VueGtag from "@/index";
 import MockDate from "mockdate";
-import VueRouter from "vue-router";
+import { createMemoryHistory, createRouter } from "vue-router";
 import flushPromises from "flush-promises";
 import registerGlobals from "@/register-globals";
 import addRoutesTracker from "@/add-routes-tracker";
@@ -27,9 +27,9 @@ describe("boostrap", () => {
   });
 
   test("loads gtag script", async () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       config: {
         id: 1,
       },
@@ -44,9 +44,9 @@ describe("boostrap", () => {
   });
 
   test("loads gtag script with custom source", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       customResourceURL: "foo.com",
       config: {
         id: 1,
@@ -60,9 +60,9 @@ describe("boostrap", () => {
   });
 
   test("loads gtag script with custom preconnect origin", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       customPreconnectOrigin: "bar.com",
       config: {
         id: 1,
@@ -76,9 +76,9 @@ describe("boostrap", () => {
   });
 
   test("loads gtag script with defer script", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       deferScriptLoad: true,
       config: {
         id: 1,
@@ -92,17 +92,17 @@ describe("boostrap", () => {
   });
 
   test("attaches library to window scope", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag);
+    app.use(VueGtag);
 
     expect(registerGlobals).toHaveBeenCalledBefore(addConfiguration);
   });
 
   test("fires a configuration hit on install", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       config: {
         id: 1,
       },
@@ -113,16 +113,16 @@ describe("boostrap", () => {
   });
 
   test("enables automatic page tracker", () => {
-    const localVue = createLocalVue();
-    const router = new VueRouter({
-      mode: "abstract",
+    const app = createApp();
+    const router = createRouter({
+      history: createMemoryHistory(),
       routes: [
         { name: "home", path: "/" },
         { name: "about", path: "/about" },
       ],
     });
 
-    localVue.use(
+    app.use(
       VueGtag,
       {
         config: {
@@ -137,9 +137,9 @@ describe("boostrap", () => {
   });
 
   test("prevents script loading", async () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       disableScriptLoad: true,
       config: {
         id: 1,
@@ -150,14 +150,14 @@ describe("boostrap", () => {
   });
 
   test("uses onReady callback after script is loaded", async () => {
-    const localVue = createLocalVue();
+    const app = createApp();
     const spy = jest.fn();
 
     Object.defineProperty(window, "gtag", {
       get: () => "global_registerd_value",
     });
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       onReady: spy,
       config: {
         id: 1,
@@ -170,13 +170,13 @@ describe("boostrap", () => {
   });
 
   test("uses onError callback after script failed loading", async () => {
-    const localVue = createLocalVue();
+    const app = createApp();
     const spy = jest.fn();
     const error = new Error("error_value");
 
     utils.load.mockRejectedValue(error);
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       onError: spy,
       config: {
         id: 1,
@@ -189,9 +189,9 @@ describe("boostrap", () => {
   });
 
   test("bootstrap manually", () => {
-    const localVue = createLocalVue();
+    const app = createApp();
 
-    localVue.use(VueGtag, {
+    app.use(VueGtag, {
       bootstrap: false,
       config: {
         id: 1,
