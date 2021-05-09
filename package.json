@@ -11,6 +11,9 @@
     "type": "git",
     "url": "https://github.com/MatteoGabriele/vue-gtag"
   },
+  "release": {
+    "branches": ["1.0", "latest"]
+  },
   "scripts": {
     "commit": "git-cz",
     "clean": "del-cli dist",
