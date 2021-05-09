@@ -1,3 +1,6 @@
+> :warning: This is version 2 branch and it requires Vue 3. If you are looking for a Vue 2 compatible version, use [version 1](https://github.com/MatteoGabriele/vue-gtag/tree/1.0) you can find both documentations [here](https://matteo-gabriele.gitbook.io/vue-gtag/) 
+
+
 <p align="center">
   <img width="250" src="https://i.imgur.com/AlAf04U.png">
   <br>
