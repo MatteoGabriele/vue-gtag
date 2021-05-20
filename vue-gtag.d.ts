@@ -1,6 +1,6 @@
 declare module "vue-gtag" {
-  import VueRouter from "vue-router";
-  import _Vue from "vue";
+  import type { App } from "vue";
+  import type { Router } from "vue-router";
 
   /**
    * Types copied from @types/gtag.js.
@@ -12,7 +12,7 @@ declare module "vue-gtag" {
       (command: 'config', targetId: string, config?: ControlParams | EventParams | CustomParams): void;
       (command: 'set', config: CustomParams): void;
       (command: 'js', config: Date): void;
-      (command: 'event', eventName: EventNames | string, eventParams?: ControlParams |  EventParams | CustomParams): void;
+      (command: 'event', eventName: EventNames | string, eventParams?: ControlParams | EventParams | CustomParams): void;
     }
 
     interface CustomParams {
@@ -284,9 +284,9 @@ declare module "vue-gtag" {
 
   export class VueGtagPlugin {
     static install(
-      Vue: typeof _Vue,
+      app: App,
       options: PluginOptions,
-      router?: VueRouter
+      router?: Router
     ): void;
   }
 
