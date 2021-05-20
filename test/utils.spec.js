@@ -74,23 +74,3 @@ describe("warn", () => {
     expect(console.warn).toHaveBeenCalledWith("[vue-gtag] foo");
   });
 });
-
-describe("isFn", () => {
-  it("should return true", () => {
-    expect(util.isFn(() => {})).toBe(true);
-  });
-
-  it("should return false", () => {
-    expect(util.isFn("hello")).toBe(false);
-  });
-});
-
-describe("isObject", () => {
-  it("should return true", () => {
-    expect(util.isObject({})).toBe(true);
-  });
-  it("should return false", () => {
-    expect(util.isObject([])).toBe(false);
-    expect(util.isObject("aa")).toBe(false);
-  });
-});
