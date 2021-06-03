@@ -13,6 +13,13 @@ export const load = (url, options = {}) => {
     script.src = url;
     script.defer = options.defer;
 
+    if (options.attrs) {
+      Object.keys(options.attrs).forEach(attrName => {
+        const attrValue = options.attrs[attrName];
+        script.setAttribute(attrName, attrValue);
+      });
+    }
+
     if (options.preconnectOrigin) {
       const link = document.createElement("link");
 
