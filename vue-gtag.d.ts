@@ -313,5 +313,9 @@ declare module "vue-gtag" {
     interface Vue {
       $gtag: VueGtag;
     }
+
+    interface VueConstructor {
+      $gtag: VueGtag;
+    }
   }
 }
