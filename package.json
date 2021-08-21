@@ -99,7 +99,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^7.9.0",
     "flush-promises": "^1.0.2",
-    "jest": "^26.0.1",
+    "jest": "^27.0.6",
     "jest-extended": "^0.11.5",
     "mockdate": "^3.0.5",
     "prettier": "^2.0.5",
