@@ -100,7 +100,7 @@
     "eslint-plugin-vue": "^7.9.0",
     "flush-promises": "^1.0.2",
     "jest": "^26.0.1",
-    "jest-extended": "^0.11.5",
+    "jest-extended": "^1.2.1",
     "mockdate": "^3.0.5",
     "prettier": "^2.0.5",
     "regenerator-runtime": "^0.13.7",
