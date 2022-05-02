@@ -37,7 +37,7 @@ Vue ^3.0.0
 ## Install
 
 ```bash
-npm install vue-gtag@next
+npm install vue-gtag
 ```
 
 ## Documentation
