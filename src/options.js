@@ -14,6 +14,8 @@ export const getDefaultParams = () => ({
   pageTrackerEnabled: true,
   enabled: true,
   disableScriptLoad: false,
+  trackInitialUtmParams: false,
+  hideInitialUtmParams: false,
   pageTrackerScreenviewEnabled: false,
   appName: null,
   pageTrackerUseFullPath: false,

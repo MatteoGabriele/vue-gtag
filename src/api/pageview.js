@@ -1,3 +1,5 @@
+import { utmSynapse } from "utm-synapse";
+
 import { getOptions } from "@/options";
 import { getRouter } from "@/router";
 import { getPathWithBase, isBrowser } from "@/utils";
@@ -10,15 +12,17 @@ export default (param) => {
 
   let template;
 
+  const {
+    pageTrackerUseFullPath: useFullPath,
+    pageTrackerPrependBase: useBase,
+    trackInitialUtmParams: trackInitialUtmParams,
+  } = getOptions();
+
   if (typeof param === "string") {
     template = {
       page_path: param,
     };
   } else if (param.path || param.fullPath) {
-    const {
-      pageTrackerUseFullPath: useFullPath,
-      pageTrackerPrependBase: useBase,
-    } = getOptions();
     const router = getRouter();
     const base = router && router.options.base;
     const path = useFullPath ? param.fullPath : param.path;
@@ -29,6 +33,18 @@ export default (param) => {
     };
   } else {
     template = param;
+  }
+
+  if (trackInitialUtmParams) {
+    const utmParams = utmSynapse.load();
+
+    if (utmParams) {
+      template.page_location = utmSynapse.setIntoUrl(
+        window.location.href,
+        utmParams
+      );
+      utmSynapse.clear();
+    }
   }
 
   if (template.page_location == null) {

@@ -7101,6 +7101,11 @@ mem@^4.0.0:
     mimic-fn "^2.0.0"
     p-is-promise "^2.0.0"
 
+memorystorage@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/memorystorage/-/memorystorage-0.12.0.tgz#582a3374d298e8352dc4512df0186c335d137018"
+  integrity sha512-8oAVcjcyCCqG2iYSXf7AhyESaHkodE3UUouMS6NhqoY2Bnb1xoPe3sdbf3ExufPGkFYi/HgP7SPer8SFsc6MYg==
+
 meow@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/meow/-/meow-5.0.0.tgz#dfc73d63a9afc714a5e371760eb5c88b91078aa4"
@@ -10630,6 +10635,13 @@ util.promisify@~1.0.0:
     es-abstract "^1.17.2"
     has-symbols "^1.0.1"
     object.getownpropertydescriptors "^2.1.0"
+
+utm-synapse@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/utm-synapse/-/utm-synapse-1.2.0.tgz#167321b87598dae72da4b3bfd14630242fb6c123"
+  integrity sha512-/LVDs1S1kOWLFbMEBaG1LDSpEoJh87iX+JmSUObNZwc2eblbCpKvGoYWX+Elod9BQuFqkcUGMqlc+zDJn3yKcA==
+  dependencies:
+    memorystorage "^0.12.0"
 
 uuid@^3.3.2, uuid@^3.3.3:
   version "3.4.0"
