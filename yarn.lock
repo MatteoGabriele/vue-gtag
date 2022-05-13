@@ -10636,10 +10636,10 @@ util.promisify@~1.0.0:
     has-symbols "^1.0.1"
     object.getownpropertydescriptors "^2.1.0"
 
-utm-synapse@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/utm-synapse/-/utm-synapse-1.2.0.tgz#167321b87598dae72da4b3bfd14630242fb6c123"
-  integrity sha512-/LVDs1S1kOWLFbMEBaG1LDSpEoJh87iX+JmSUObNZwc2eblbCpKvGoYWX+Elod9BQuFqkcUGMqlc+zDJn3yKcA==
+utm-synapse@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/utm-synapse/-/utm-synapse-1.2.1.tgz#15672acbaf005714154b3a77652efa45873041c2"
+  integrity sha512-dgbL45O16R71EXKecIgqyE+oSPl0ZpDhpNd04qAeQ+LsRx85U85ebxTeQUe3Fcgwyp2QZXjvmK0v3FWypldu/A==
   dependencies:
     memorystorage "^0.12.0"
 

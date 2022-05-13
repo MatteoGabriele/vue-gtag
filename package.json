@@ -110,6 +110,6 @@
     "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
-    "utm-synapse": "^1.2.0"
+    "utm-synapse": "^1.2.1"
   }
 }
