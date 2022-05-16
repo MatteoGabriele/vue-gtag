@@ -34,7 +34,7 @@ Vue ^2.0.0
 ## Install
 
 ```bash
-npm install vue-gtag@1.16.1
+npm install vue-gtag@legacy
 ```
 
 ## Documentation
