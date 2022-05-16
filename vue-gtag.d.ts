@@ -274,6 +274,8 @@ declare module "vue-gtag" {
     enabled?: boolean;
     disableScriptLoad?: boolean;
     bootstrap?: boolean;
+    trackInitialUtmParams?: boolean;
+    hideInitialUtmParams?: boolean;
     globalObjectName?: string;
     pageTrackerEnabled?: boolean;
     pageTrackerScreenviewEnabled?: boolean;

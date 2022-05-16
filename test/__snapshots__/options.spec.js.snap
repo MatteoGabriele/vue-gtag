@@ -18,6 +18,7 @@ Object {
   "enabled": true,
   "globalDataLayerName": "dataLayer",
   "globalObjectName": "gtag",
+  "hideInitialUtmParams": false,
   "includes": null,
   "onAfterTrack": null,
   "onBeforeTrack": null,
@@ -30,6 +31,7 @@ Object {
   "pageTrackerSkipSamePath": true,
   "pageTrackerTemplate": null,
   "pageTrackerUseFullPath": false,
+  "trackInitialUtmParams": false,
 }
 `;
 
@@ -51,6 +53,7 @@ Object {
   "enabled": true,
   "globalDataLayerName": "dataLayer",
   "globalObjectName": "gtag",
+  "hideInitialUtmParams": false,
   "includes": null,
   "onAfterTrack": null,
   "onBeforeTrack": null,
@@ -63,5 +66,6 @@ Object {
   "pageTrackerSkipSamePath": true,
   "pageTrackerTemplate": null,
   "pageTrackerUseFullPath": false,
+  "trackInitialUtmParams": false,
 }
 `;

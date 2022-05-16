@@ -1,3 +1,5 @@
+import { utmSynapse } from "utm-synapse";
+
 import attachApi from "@/attach-api";
 import { setOptions, getOptions } from "@/options";
 import bootstrap from "@/bootstrap";
@@ -7,6 +9,18 @@ const install = (Vue, options = {}, router) => {
   attachApi(Vue);
   setOptions(options);
   setRouter(router);
+
+  if (getOptions().trackInitialUtmParams) {
+    const utmParams = utmSynapse.parse();
+
+    if (utmParams) {
+      utmSynapse.save(utmParams);
+    }
+  }
+
+  if (getOptions().hideInitialUtmParams) {
+    utmSynapse.cleanDisplayedUrl();
+  }
 
   if (getOptions().bootstrap) {
     bootstrap();
