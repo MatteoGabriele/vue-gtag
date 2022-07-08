@@ -5,6 +5,7 @@ Please fill in at least the mandatory (*) questions below, or I will immediately
 Run this command in the project folder and fill in their results:
 
 `npm ls vue-gtag`: 
+
 `npm ls vue`: 
 
 Then, specify:
