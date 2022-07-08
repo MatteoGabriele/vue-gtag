@@ -1,6 +1,8 @@
-If you are reporting a bug, please fill in below. Otherwise feel free to remove this template entirely.
 
-### Description
+_Please fill-in at least the mandatory (*) questions below or I will immediately close this issue without reading. Thanks_
+
+
+### Description *
 
 What are you reporting?
 
@@ -12,7 +14,7 @@ Tell us what you think should happen.
 
 Tell us what actually happens.
 
-### Environment
+### Environment *
 
 Run this command in the project folder and fill in their results:
 
@@ -23,7 +25,7 @@ Then, specify:
 1. Operating system:
 2. Browser and version:
 
-### Reproducible Demo
+### Reproducible Demo in case of a bug report
 
 Please take the time to create a new app that reproduces the issue or at least some code example
 
