@@ -1,5 +1,4 @@
-
-Please fill-in at least the mandatory (*) questions below or I will immediately close this issue without reading. Thanks
+Please fill in at least the mandatory (*) questions below, or I will immediately close this issue without reading. Thanks
 
 
 ### Description *
