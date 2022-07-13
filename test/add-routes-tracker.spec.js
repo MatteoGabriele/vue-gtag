@@ -91,7 +91,7 @@ describe("page-tracker", () => {
 
     expect(addConfiguration).toHaveBeenCalled();
 
-    expect(track).toHaveBeenCalledWith(router.currentRoute.value);
+    expect(track).toHaveBeenCalledWith(router.currentRoute.value, undefined);
     expect(track).toHaveBeenCalledTimes(1);
   });
 
@@ -124,7 +124,8 @@ describe("page-tracker", () => {
       expect.objectContaining({
         path: "/",
         name: "home",
-      })
+      }),
+      undefined
     );
 
     expect(track).toHaveBeenNthCalledWith(
@@ -177,7 +178,17 @@ describe("page-tracker", () => {
     router.push("/about");
     await flushPromises();
 
-    expect(onBeforeTrackSpy).toHaveBeenCalledWith(
+    expect(onBeforeTrackSpy).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        path: "/",
+        name: "home",
+      }),
+      undefined
+    );
+
+    expect(onBeforeTrackSpy).toHaveBeenNthCalledWith(
+      2,
       expect.objectContaining({
         path: "/about",
         name: "about",
@@ -188,7 +199,7 @@ describe("page-tracker", () => {
       })
     );
 
-    expect(onBeforeTrackSpy).toHaveBeenCalledTimes(1);
+    expect(onBeforeTrackSpy).toHaveBeenCalledTimes(2);
   });
 
   test("fires the onAfterTrack method", async () => {
@@ -214,7 +225,17 @@ describe("page-tracker", () => {
     router.push("/about");
     await flushPromises();
 
-    expect(onAfterTrackSpy).toHaveBeenCalledWith(
+    expect(onAfterTrackSpy).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        path: "/",
+        name: "home",
+      }),
+      undefined
+    );
+
+    expect(onAfterTrackSpy).toHaveBeenNthCalledWith(
+      2,
       expect.objectContaining({
         path: "/about",
         name: "about",
@@ -225,7 +246,7 @@ describe("page-tracker", () => {
       })
     );
 
-    expect(onAfterTrackSpy).toHaveBeenCalledTimes(1);
+    expect(onAfterTrackSpy).toHaveBeenCalledTimes(2);
   });
 
   test("remove routes from tracking based on path", async () => {
@@ -267,7 +288,8 @@ describe("page-tracker", () => {
       1,
       expect.objectContaining({
         path: "/",
-      })
+      }),
+      undefined
     );
 
     expect(track).toHaveBeenCalledTimes(1);
