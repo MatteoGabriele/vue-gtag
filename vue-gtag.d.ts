@@ -268,8 +268,8 @@ declare module "vue-gtag" {
   export interface PluginOptions {
     appName?: string;
     pageTrackerTemplate?: (to: RouteLocationNormalized, from: RouteLocationNormalized) => PageView;
-    onBeforeTrack?: (to: RouteLocationNormalized, from: RouteLocationNormalized) => void;
-    onAfterTrack?: (to: RouteLocationNormalized, from: RouteLocationNormalized) => void;
+    onBeforeTrack?: (to: RouteLocationNormalized, from?: RouteLocationNormalized) => void;
+    onAfterTrack?: (to: RouteLocationNormalized, from?: RouteLocationNormalized) => void;
     onReady?: (gtag: Gtag.Gtag) => void;
     enabled?: boolean;
     disableScriptLoad?: boolean;
