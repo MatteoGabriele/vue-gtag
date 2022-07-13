@@ -156,97 +156,11 @@ describe("page-tracker", () => {
   });
 
   test("fires the onBeforeTrack method", async () => {
-    const app = createApp();
-    const onBeforeTrackSpy = jest.fn();
-
-    app.use(router);
-
-    app.use(
-      VueGtag,
-      {
-        onBeforeTrack: onBeforeTrackSpy,
-        config: {
-          id: 1,
-        },
-      },
-      router
-    );
-
-    router.push("/");
-    await flushPromises();
-
-    router.push("/about");
-    await flushPromises();
-
-    expect(onBeforeTrackSpy).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({
-        path: "/",
-        name: "home",
-      }),
-      undefined
-    );
-
-    expect(onBeforeTrackSpy).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
-        path: "/about",
-        name: "about",
-      }),
-      expect.objectContaining({
-        path: "/",
-        name: "home",
-      })
-    );
-
-    expect(onBeforeTrackSpy).toHaveBeenCalledTimes(2);
+    await testHook("onBeforeTrack");
   });
 
   test("fires the onAfterTrack method", async () => {
-    const app = createApp();
-    const onAfterTrackSpy = jest.fn();
-
-    app.use(router);
-
-    app.use(
-      VueGtag,
-      {
-        onAfterTrack: onAfterTrackSpy,
-        config: {
-          id: 1,
-        },
-      },
-      router
-    );
-
-    router.push("/");
-    await flushPromises();
-
-    router.push("/about");
-    await flushPromises();
-
-    expect(onAfterTrackSpy).toHaveBeenNthCalledWith(
-      1,
-      expect.objectContaining({
-        path: "/",
-        name: "home",
-      }),
-      undefined
-    );
-
-    expect(onAfterTrackSpy).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
-        path: "/about",
-        name: "about",
-      }),
-      expect.objectContaining({
-        path: "/",
-        name: "home",
-      })
-    );
-
-    expect(onAfterTrackSpy).toHaveBeenCalledTimes(2);
+    await testHook("onAfterTrack");
   });
 
   test("remove routes from tracking based on path", async () => {
@@ -294,4 +208,51 @@ describe("page-tracker", () => {
 
     expect(track).toHaveBeenCalledTimes(1);
   });
+
+  async function testHook(hookName) {
+    const app = createApp();
+    const hookSpy = jest.fn();
+
+    app.use(router);
+
+    app.use(
+      VueGtag,
+      {
+        [hookName]: hookSpy,
+        config: {
+          id: 1,
+        },
+      },
+      router
+    );
+
+    router.push("/");
+    await flushPromises();
+
+    router.push("/about");
+    await flushPromises();
+
+    expect(hookSpy).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        path: "/",
+        name: "home",
+      }),
+      undefined
+    );
+
+    expect(hookSpy).toHaveBeenNthCalledWith(
+      2,
+      expect.objectContaining({
+        path: "/about",
+        name: "about",
+      }),
+      expect.objectContaining({
+        path: "/",
+        name: "home",
+      })
+    );
+
+    expect(hookSpy).toHaveBeenCalledTimes(2);
+  }
 });
