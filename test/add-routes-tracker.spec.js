@@ -212,19 +212,14 @@ describe("page-tracker", () => {
   async function testHook(hookName) {
     const app = createApp();
     const hookSpy = jest.fn();
+    const options = {
+      [hookName]: hookSpy,
+      config: { id: 1 },
+    };
 
     app.use(router);
 
-    app.use(
-      VueGtag,
-      {
-        [hookName]: hookSpy,
-        config: {
-          id: 1,
-        },
-      },
-      router
-    );
+    app.use(VueGtag, options, router);
 
     router.push("/");
     await flushPromises();
@@ -234,23 +229,14 @@ describe("page-tracker", () => {
 
     expect(hookSpy).toHaveBeenNthCalledWith(
       1,
-      expect.objectContaining({
-        path: "/",
-        name: "home",
-      }),
+      expect.objectContaining({ path: "/", name: "home" }),
       undefined
     );
 
     expect(hookSpy).toHaveBeenNthCalledWith(
       2,
-      expect.objectContaining({
-        path: "/about",
-        name: "about",
-      }),
-      expect.objectContaining({
-        path: "/",
-        name: "home",
-      })
+      expect.objectContaining({ path: "/about", name: "about" }),
+      expect.objectContaining({ path: "/", name: "home" })
     );
 
     expect(hookSpy).toHaveBeenCalledTimes(2);
