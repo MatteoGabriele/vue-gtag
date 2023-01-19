@@ -2,8 +2,9 @@ import { getOptions } from "@/options";
 import { getRouter } from "@/router";
 import { getPathWithBase, isBrowser } from "@/utils";
 import event from "@/api/event";
+import set from "@/api/set";
 
-export default (param) => {
+export default (param, utm) => {
   if (!isBrowser()) {
     return;
   }
@@ -39,5 +40,6 @@ export default (param) => {
     template.send_page_view = true;
   }
 
+  set("campaign", utm);
   event("page_view", template);
 };

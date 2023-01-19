@@ -65,7 +65,8 @@ describe("track", () => {
         expect.objectContaining({
           name: "home",
           path: "/",
-        })
+        }),
+        expect.objectContaining({})
       );
     });
 
@@ -89,7 +90,8 @@ describe("track", () => {
       expect(api.pageview).toHaveBeenCalledWith(
         expect.objectContaining({
           path: "/about",
-        })
+        }),
+        expect.objectContaining({})
       );
     });
   });
@@ -198,10 +200,14 @@ describe("track", () => {
       router.push("/about");
       await flushPromises();
 
-      expect(api.pageview).toHaveBeenNthCalledWith(2, {
-        foo: "/about",
-        bar: "/",
-      });
+      expect(api.pageview).toHaveBeenNthCalledWith(
+        2,
+        {
+          foo: "/about",
+          bar: "/",
+        },
+        expect.objectContaining({})
+      );
     });
 
     test("tracks screenview", async () => {
@@ -266,14 +272,16 @@ describe("track", () => {
         1,
         expect.objectContaining({
           path: "/about",
-        })
+        }),
+        expect.objectContaining({})
       );
 
       expect(api.pageview).toHaveBeenNthCalledWith(
         2,
         expect.objectContaining({
           path: "/about",
-        })
+        }),
+        expect.objectContaining({})
       );
     });
 
@@ -301,7 +309,8 @@ describe("track", () => {
       expect(api.pageview).toHaveBeenCalledWith(
         expect.objectContaining({
           path: "/about",
-        })
+        }),
+        expect.objectContaining({})
       );
       expect(api.pageview).toHaveBeenCalledTimes(1);
     });

@@ -31,5 +31,21 @@ export default (to = {}, from = {}) => {
     return;
   }
 
-  api.pageview(template);
+  const { query } = to;
+  let utm = {};
+  for (let key in query) {
+    if (key.match(/^utm_/)) {
+      utm[key.split("_")[1]] = query[key];
+    }
+  }
+
+  if (Object.keys(utm).length) {
+    // we have utm params, let's save them in local storage
+    localStorage.setItem("vue_gtag_utm", JSON.stringify(utm));
+  } else {
+    // we don't have utm params, let's check local storage
+    utm = JSON.parse(localStorage.getItem("vue_gtag_utm") || "{}");
+  }
+
+  api.pageview(template, utm);
 };
