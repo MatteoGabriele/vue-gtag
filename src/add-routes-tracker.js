@@ -1,5 +1,5 @@
 import { nextTick } from "vue";
-import { isFunction } from "@vue/shared";
+import { isFn } from "@/utils";
 import { getRouter } from "@/router";
 import { getOptions } from "@/options";
 import addConfiguration from "@/add-configuration";
@@ -33,13 +33,13 @@ export default () => {
           return;
         }
 
-        if (isFunction(onBeforeTrack)) {
+        if (isFn(onBeforeTrack)) {
           onBeforeTrack(to, from);
         }
 
         track(to, from);
 
-        if (isFunction(onAfterTrack)) {
+        if (isFn(onAfterTrack)) {
           onAfterTrack(to, from);
         }
       });
