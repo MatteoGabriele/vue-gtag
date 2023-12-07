@@ -271,6 +271,7 @@ declare module "vue-gtag" {
     onBeforeTrack?: () => void;
     onAfterTrack?: () => void;
     onReady?: () => void;
+    customResourceURL: string,
     enabled?: boolean;
     disableScriptLoad?: boolean;
     bootstrap?: boolean;
