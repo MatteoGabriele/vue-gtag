@@ -20,29 +20,27 @@ export default () => {
 
       addConfiguration();
 
-      if (isRouteExcluded(currentRoute.value)) {
-        return;
-      }
-
-      track(currentRoute.value);
+      trackRoute(currentRoute.value);
     });
 
     router.afterEach((to, from) => {
-      nextTick().then(() => {
-        if (isRouteExcluded(to)) {
-          return;
-        }
-
-        if (isFunction(onBeforeTrack)) {
-          onBeforeTrack(to, from);
-        }
-
-        track(to, from);
-
-        if (isFunction(onAfterTrack)) {
-          onAfterTrack(to, from);
-        }
-      });
+      nextTick().then(() => trackRoute(to, from));
     });
   });
+
+  function trackRoute(to, from) {
+    if (isRouteExcluded(to)) {
+      return;
+    }
+
+    if (isFunction(onBeforeTrack)) {
+      onBeforeTrack(to, from);
+    }
+
+    track(to, from);
+
+    if (isFunction(onAfterTrack)) {
+      onAfterTrack(to, from);
+    }
+  }
 };
