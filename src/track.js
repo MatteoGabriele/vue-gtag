@@ -1,6 +1,5 @@
-import { isFunction } from "@vue/shared";
 import { getOptions } from "@/options";
-import { validateScreenviewShape } from "@/utils";
+import { validateScreenviewShape, isFn } from "@/utils";
 import * as api from "@/api";
 
 export default (to = {}, from = {}) => {
@@ -17,7 +16,7 @@ export default (to = {}, from = {}) => {
 
   let template = to;
 
-  if (isFunction(proxy)) {
+  if (isFn(proxy)) {
     template = proxy(to, from);
   } else if (useScreenview) {
     template = validateScreenviewShape({
