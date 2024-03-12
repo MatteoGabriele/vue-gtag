@@ -1,6 +1,6 @@
 declare module "vue-gtag" {
   import type { App } from "vue";
-  import type { Router } from "vue-router";
+  import type { Router, RouteLocationNormalized } from "vue-router";
 
   /**
    * Types copied from @types/gtag.js.
@@ -268,8 +268,8 @@ declare module "vue-gtag" {
   export interface PluginOptions {
     appName?: string;
     pageTrackerTemplate?: () => PageView;
-    onBeforeTrack?: () => void;
-    onAfterTrack?: () => void;
+    onBeforeTrack?: (to: RouteLocationNormalized, from: RouteLocationNormalized) => void | boolean;
+    onAfterTrack?: (to: RouteLocationNormalized, from: RouteLocationNormalized) => void;
     onReady?: () => void;
     enabled?: boolean;
     customResourceURL: string;
