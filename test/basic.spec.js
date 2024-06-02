@@ -17,20 +17,20 @@ describe("basic", () => {
     expect(Object.keys(app.config.globalProperties.$gtag))
       .toMatchInlineSnapshot(`
       Array [
-        "query",
         "config",
-        "optOut",
-        "optIn",
-        "pageview",
-        "screenview",
-        "exception",
-        "linker",
-        "time",
-        "set",
-        "refund",
-        "purchase",
         "customMap",
         "event",
+        "exception",
+        "linker",
+        "optIn",
+        "optOut",
+        "pageview",
+        "purchase",
+        "query",
+        "refund",
+        "screenview",
+        "set",
+        "time",
       ]
     `);
   });
