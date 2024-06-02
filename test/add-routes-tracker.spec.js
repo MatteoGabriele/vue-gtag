@@ -191,6 +191,35 @@ describe("page-tracker", () => {
     expect(onBeforeTrackSpy).toHaveBeenCalledTimes(1);
   });
 
+  test("onBeforeTrack cancels tracking", async () => {
+    const app = createApp();
+    const onBeforeTrackSpy = jest.fn().mockReturnValue(false);
+    const onAfterTrackSpy = jest.fn();
+
+    app.use(router);
+
+    app.use(
+      VueGtag,
+      {
+        onBeforeTrack: onBeforeTrackSpy,
+        onAfterTrack: onAfterTrackSpy,
+        config: {
+          id: 1,
+        },
+      },
+      router
+    );
+
+    router.push("/");
+    await flushPromises();
+
+    router.push("/about");
+    await flushPromises();
+
+    expect(onBeforeTrackSpy).toHaveBeenCalledTimes(1);
+    expect(onAfterTrackSpy).toHaveBeenCalledTimes(0);
+  });
+
   test("fires the onAfterTrack method", async () => {
     const app = createApp();
     const onAfterTrackSpy = jest.fn();

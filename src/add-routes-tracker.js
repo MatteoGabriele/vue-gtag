@@ -34,7 +34,9 @@ export default () => {
         }
 
         if (isFunction(onBeforeTrack)) {
-          onBeforeTrack(to, from);
+          if (onBeforeTrack(to, from) === false) {
+            return;
+          }
         }
 
         track(to, from);
