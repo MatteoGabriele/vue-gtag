@@ -102,7 +102,7 @@
     "jest": "^26.0.1",
     "jest-extended": "^0.11.5",
     "mockdate": "^3.0.5",
-    "prettier": "^2.0.5",
+    "prettier": "^3.3.3",
     "regenerator-runtime": "^0.13.7",
     "rollup-plugin-alias": "^2.2.0",
     "rollup-plugin-resolve": "^0.0.1-predev.1",
