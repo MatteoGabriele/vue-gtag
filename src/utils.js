@@ -1,5 +1,3 @@
-import { isPlainObject } from "@vue/shared";
-
 export const load = (url, options = {}) => {
   return new Promise((resolve, reject) => {
     if (typeof document === "undefined") {
@@ -29,6 +27,12 @@ export const load = (url, options = {}) => {
   });
 };
 
+export const isFn = (fn) => typeof fn === "function";
+
+export const isObject = (item) => {
+  return item && typeof item === "object" && !Array.isArray(item);
+};
+
 export const mergeDeep = (target, ...sources) => {
   if (!sources.length) {
     return target;
@@ -36,12 +40,12 @@ export const mergeDeep = (target, ...sources) => {
 
   const source = sources.shift();
 
-  if (!isPlainObject(target) || !isPlainObject(source)) {
+  if (!isObject(target) || !isObject(source)) {
     return;
   }
 
   for (const key in source) {
-    if (isPlainObject(source[key])) {
+    if (isObject(source[key])) {
       if (!target[key]) {
         Object.assign(target, { [key]: {} });
       }

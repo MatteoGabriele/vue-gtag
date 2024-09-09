@@ -272,6 +272,8 @@ declare module "vue-gtag" {
     onAfterTrack?: (to: RouteLocationNormalized, from?: RouteLocationNormalized) => void;
     onReady?: (gtag: Gtag.Gtag) => void;
     enabled?: boolean;
+    deferScriptLoad?: boolean;
+    customResourceURL: string;
     disableScriptLoad?: boolean;
     bootstrap?: boolean;
     globalObjectName?: string;
