@@ -131,12 +131,15 @@ declare module "vue-gtag" {
     /** Checkout option (i.e. selected payment method) */
     checkout_option?: string;
   }
+
+  type UppercaseLetter = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z';
+  export type ISO4217Currency = `${UppercaseLetter}${UppercaseLetter}${UppercaseLetter}`;
   
   export interface EcommerceActionWithCurrency extends EcommerceActionBase {
     /** Value (i.e., revenue) associated with the event */
     value: number;
     /** The currency of the value */
-    currency: string;
+    currency: ISO4217Currency;
   }
   
   export interface EcommerceActionWithoutCurrency extends EcommerceActionBase {
