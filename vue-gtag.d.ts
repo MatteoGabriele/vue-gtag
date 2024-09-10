@@ -115,19 +115,15 @@ declare module "vue-gtag" {
   /**
    * @see https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#action_data
    */
-  export interface EcommerceAction {
+  export interface EcommerceActionBase {
     /** Unique ID for the transaction. */
     transaction_id: string;
     /** The store or affiliation from which this transaction occurred */
     affiliation?: string;
-    /** Value (i.e., revenue) associated with the event */
-    value?: number;
     /** Tax amount */
     tax?: number;
     /** Shipping cost */
     shipping?: number;
-    /** The currency of the value */
-    currency?: string;
     /** The array containing the associated products */
     items?: Gtag.Item[];
     /** The step (a number) in the checkout process */
@@ -135,6 +131,22 @@ declare module "vue-gtag" {
     /** Checkout option (i.e. selected payment method) */
     checkout_option?: string;
   }
+  
+  export interface EcommerceActionWithCurrency extends EcommerceActionBase {
+    /** Value (i.e., revenue) associated with the event */
+    value: number;
+    /** The currency of the value */
+    currency: string;
+  }
+  
+  export interface EcommerceActionWithoutCurrency extends EcommerceActionBase {
+    /** Value (i.e., revenue) associated with the event */
+    value?: undefined;
+    /** The currency of the value */
+    currency?: undefined;
+  }
+  
+  export type EcommerceAction = EcommerceActionWithCurrency | EcommerceActionWithoutCurrency;
 
   export interface Linker {
     domains: string[];
