@@ -126,6 +126,8 @@ declare module "vue-gtag" {
     tax?: number;
     /** Shipping cost */
     shipping?: number;
+    /** The currency of the value */
+    currency?: string;
     /** The array containing the associated products */
     items?: Gtag.Item[];
     /** The step (a number) in the checkout process */
