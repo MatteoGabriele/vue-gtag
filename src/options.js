@@ -22,6 +22,7 @@ export const getDefaultParams = () => ({
   globalDataLayerName: "dataLayer",
   globalObjectName: "gtag",
   defaultGroupName: "default",
+  cspNonce: null,
   includes: null,
   config: {
     id: null,
