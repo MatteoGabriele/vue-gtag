@@ -1,9 +1,9 @@
 import { createApp } from "vue";
-import VueGtag from "@/index";
-import screenview from "@/api/screenview";
-import event from "@/api/event";
+import VueGtag from "src/index";
+import screenview from "src/api/screenview";
+import event from "src/api/event";
 
-jest.mock("@/api/event");
+jest.mock("src/api/event");
 
 describe("screenview", () => {
   afterEach(() => {

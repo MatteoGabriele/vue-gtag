@@ -1,7 +1,7 @@
-import exception from "@/api/exception";
-import event from "@/api/event";
+import exception from "src/api/exception";
+import event from "src/api/event";
 
-jest.mock("@/api/event");
+jest.mock("src/api/event");
 
 describe("exception", () => {
   test("fires a exception event", () => {

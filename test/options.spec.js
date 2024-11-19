@@ -1,4 +1,4 @@
-import { getOptions, setOptions, getDefaultParams } from "@/options";
+import { getOptions, setOptions, getDefaultParams } from "src/options";
 
 describe("options", () => {
   afterEach(() => {

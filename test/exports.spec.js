@@ -17,7 +17,7 @@ import {
   setOptions,
   setRouter,
   addRoutesTracker,
-} from "@/index";
+} from "src/index";
 
 describe("exports", () => {
   test("setRouter", () => {

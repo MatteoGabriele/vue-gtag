@@ -1,21 +1,21 @@
 import { createApp } from "vue";
-import VueGtag from "@/index";
+import VueGtag from "src/index";
 import MockDate from "mockdate";
 import { createMemoryHistory, createRouter } from "vue-router";
 import flushPromises from "flush-promises";
-import registerGlobals from "@/register-globals";
-import addRoutesTracker from "@/add-routes-tracker";
-import * as utils from "@/utils";
-import * as api from "@/api";
-import addConfiguration from "@/add-configuration";
-import bootstrap from "@/bootstrap";
+import registerGlobals from "src/register-globals";
+import addRoutesTracker from "src/add-routes-tracker";
+import * as utils from "src/utils";
+import * as api from "src/api";
+import addConfiguration from "src/add-configuration";
+import bootstrap from "src/bootstrap";
 
 MockDate.set("06-03-1997 10:00:00");
 
-jest.mock("@/register-globals");
-jest.mock("@/add-routes-tracker");
-jest.mock("@/add-configuration");
-jest.mock("@/api");
+jest.mock("src/register-globals");
+jest.mock("src/add-routes-tracker");
+jest.mock("src/add-configuration");
+jest.mock("src/api");
 
 describe("boostrap", () => {
   beforeEach(() => {
@@ -55,7 +55,7 @@ describe("boostrap", () => {
 
     expect(utils.load).toHaveBeenCalledWith(
       "foo.com?id=1&l=dataLayer",
-      expect.any(Object)
+      expect.any(Object),
     );
   });
 
@@ -129,7 +129,7 @@ describe("boostrap", () => {
           id: 1,
         },
       },
-      router
+      router,
     );
 
     expect(addRoutesTracker).toHaveBeenCalled();

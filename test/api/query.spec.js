@@ -1,6 +1,6 @@
 import { createApp } from "vue";
-import VueGtag from "@/index";
-import query from "@/api/query";
+import VueGtag from "src/index";
+import query from "src/api/query";
 
 describe("query", () => {
   let _window = window;

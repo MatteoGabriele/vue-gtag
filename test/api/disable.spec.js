@@ -1,6 +1,6 @@
 import { createApp } from "vue";
-import disable from "@/api/disable";
-import VueGtag from "@/index";
+import disable from "src/api/disable";
+import VueGtag from "src/index";
 
 describe("disable", () => {
   afterEach(() => {

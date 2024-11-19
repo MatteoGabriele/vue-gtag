@@ -1,7 +1,7 @@
-import optOut from "@/api/opt-out";
-import disable from "@/api/disable";
+import optOut from "src/api/opt-out";
+import disable from "src/api/disable";
 
-jest.mock("@/api/disable");
+jest.mock("src/api/disable");
 
 describe("optOut", () => {
   test("turns off tracking", () => {

@@ -1,15 +1,15 @@
 import { createApp } from "vue";
 import flushPromises from "flush-promises";
 import { createMemoryHistory, createRouter } from "vue-router";
-import VueGtag from "@/index";
-import * as api from "@/api";
-import * as utils from "@/utils";
-import addConfiguration from "@/add-configuration";
-import track from "@/track";
+import VueGtag from "src/index";
+import * as api from "src/api";
+import * as utils from "src/utils";
+import addConfiguration from "src/add-configuration";
+import track from "src/track";
 
-jest.mock("@/track");
-jest.mock("@/api");
-jest.mock("@/add-configuration");
+jest.mock("src/track");
+jest.mock("src/api");
+jest.mock("src/add-configuration");
 
 const Home = { template: "<div></div>" };
 const About = { template: "<div></div>" };
@@ -62,7 +62,7 @@ describe("page-tracker", () => {
           id: 1,
         },
       },
-      router
+      router,
     );
 
     router.push("/");
@@ -83,7 +83,7 @@ describe("page-tracker", () => {
           id: 1,
         },
       },
-      router
+      router,
     );
 
     router.push("/");
@@ -107,7 +107,7 @@ describe("page-tracker", () => {
           id: 1,
         },
       },
-      router
+      router,
     );
 
     router.push("/");
@@ -124,7 +124,7 @@ describe("page-tracker", () => {
       expect.objectContaining({
         path: "/",
         name: "home",
-      })
+      }),
     );
 
     expect(track).toHaveBeenNthCalledWith(
@@ -136,7 +136,7 @@ describe("page-tracker", () => {
       expect.objectContaining({
         path: "/",
         name: "home",
-      })
+      }),
     );
 
     expect(track).toHaveBeenNthCalledWith(
@@ -148,7 +148,7 @@ describe("page-tracker", () => {
       expect.objectContaining({
         path: "/about",
         name: "about",
-      })
+      }),
     );
 
     expect(track).toHaveBeenCalledTimes(3);
@@ -168,7 +168,7 @@ describe("page-tracker", () => {
           id: 1,
         },
       },
-      router
+      router,
     );
 
     router.push("/");
@@ -185,7 +185,7 @@ describe("page-tracker", () => {
       expect.objectContaining({
         path: "/",
         name: "home",
-      })
+      }),
     );
 
     expect(onBeforeTrackSpy).toHaveBeenCalledTimes(1);
@@ -205,7 +205,7 @@ describe("page-tracker", () => {
           id: 1,
         },
       },
-      router
+      router,
     );
 
     router.push("/");
@@ -222,7 +222,7 @@ describe("page-tracker", () => {
       expect.objectContaining({
         path: "/",
         name: "home",
-      })
+      }),
     );
 
     expect(onAfterTrackSpy).toHaveBeenCalledTimes(1);
@@ -251,7 +251,7 @@ describe("page-tracker", () => {
           id: 1,
         },
       },
-      router
+      router,
     );
 
     router.push("/");
@@ -267,7 +267,7 @@ describe("page-tracker", () => {
       1,
       expect.objectContaining({
         path: "/",
-      })
+      }),
     );
 
     expect(track).toHaveBeenCalledTimes(1);

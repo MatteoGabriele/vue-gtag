@@ -1,11 +1,11 @@
 import { createApp } from "vue";
-import VueGtag from "@/index";
+import VueGtag from "src/index";
 import { createMemoryHistory, createRouter } from "vue-router";
 import flushPromises from "flush-promises";
-import * as api from "@/api";
-import * as utils from "@/utils";
+import * as api from "src/api";
+import * as utils from "src/utils";
 
-jest.mock("@/api");
+jest.mock("src/api");
 
 const Home = { template: "<div></div>" };
 const About = { template: "<div></div>" };
@@ -55,7 +55,7 @@ describe("track", () => {
             id: 1,
           },
         },
-        router
+        router,
       );
 
       router.push("/");
@@ -65,7 +65,7 @@ describe("track", () => {
         expect.objectContaining({
           name: "home",
           path: "/",
-        })
+        }),
       );
     });
 
@@ -80,7 +80,7 @@ describe("track", () => {
             id: 1,
           },
         },
-        router
+        router,
       );
 
       router.push("/about");
@@ -89,7 +89,7 @@ describe("track", () => {
       expect(api.pageview).toHaveBeenCalledWith(
         expect.objectContaining({
           path: "/about",
-        })
+        }),
       );
     });
   });
@@ -109,7 +109,7 @@ describe("track", () => {
             id: 1,
           },
         },
-        router
+        router,
       );
 
       router.push("/");
@@ -134,7 +134,7 @@ describe("track", () => {
             id: 1,
           },
         },
-        router
+        router,
       );
 
       router.push("/");
@@ -142,7 +142,7 @@ describe("track", () => {
       await flushPromises();
 
       expect(console.warn).toHaveBeenCalledWith(
-        `[vue-gtag] Missing "appName" property inside the plugin options.`
+        `[vue-gtag] Missing "appName" property inside the plugin options.`,
       );
     });
 
@@ -159,7 +159,7 @@ describe("track", () => {
             id: 1,
           },
         },
-        router
+        router,
       );
 
       router.push("/about");
@@ -167,7 +167,7 @@ describe("track", () => {
       await flushPromises();
 
       expect(console.warn).toHaveBeenCalledWith(
-        `[vue-gtag] Missing "name" property in the route.`
+        `[vue-gtag] Missing "name" property in the route.`,
       );
     });
   });
@@ -189,7 +189,7 @@ describe("track", () => {
             id: 1,
           },
         },
-        router
+        router,
       );
 
       router.push("/");
@@ -221,7 +221,7 @@ describe("track", () => {
             id: 1,
           },
         },
-        router
+        router,
       );
 
       router.push("/");
@@ -253,7 +253,7 @@ describe("track", () => {
             id: 1,
           },
         },
-        router
+        router,
       );
 
       router.push("/about");
@@ -266,14 +266,14 @@ describe("track", () => {
         1,
         expect.objectContaining({
           path: "/about",
-        })
+        }),
       );
 
       expect(api.pageview).toHaveBeenNthCalledWith(
         2,
         expect.objectContaining({
           path: "/about",
-        })
+        }),
       );
     });
 
@@ -289,7 +289,7 @@ describe("track", () => {
             id: 1,
           },
         },
-        router
+        router,
       );
 
       router.push("/about");
@@ -301,7 +301,7 @@ describe("track", () => {
       expect(api.pageview).toHaveBeenCalledWith(
         expect.objectContaining({
           path: "/about",
-        })
+        }),
       );
       expect(api.pageview).toHaveBeenCalledTimes(1);
     });

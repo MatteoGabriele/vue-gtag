@@ -1,12 +1,12 @@
 import { createApp } from "vue";
-import VueGtag from "@/index";
+import VueGtag from "src/index";
 import flushPromises from "flush-promises";
-import * as api from "@/api";
+import * as api from "src/api";
 import mockDate from "mockdate";
 
 mockDate.set("2021-04-20 10:00:00");
 
-jest.mock("@/api");
+jest.mock("src/api");
 
 describe("registerGlobals", () => {
   beforeEach(() => {

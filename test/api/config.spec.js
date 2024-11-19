@@ -1,9 +1,9 @@
-import { getOptions } from "@/options";
-import config from "@/api/config";
-import query from "@/api/query";
+import { getOptions } from "src/options";
+import config from "src/api/config";
+import query from "src/api/query";
 
-jest.mock("@/api/query");
-jest.mock("@/options");
+jest.mock("src/api/query");
+jest.mock("src/options");
 
 describe("config", () => {
   afterEach(() => {

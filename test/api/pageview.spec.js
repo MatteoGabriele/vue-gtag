@@ -1,11 +1,11 @@
 import { createApp } from "vue";
 import { createRouter, createMemoryHistory } from "vue-router";
-import VueGtag from "@/index";
-import pageview from "@/api/pageview";
-import event from "@/api/event";
+import VueGtag from "src/index";
+import pageview from "src/api/pageview";
+import event from "src/api/event";
 import flushPromises from "flush-promises";
 
-jest.mock("@/api/event");
+jest.mock("src/api/event");
 
 const Home = { template: "<div><div>" };
 const About = { template: "<div><div>" };
@@ -177,7 +177,7 @@ describe("pageview", () => {
             id: 1,
           },
         },
-        router
+        router,
       );
 
       router.push("/about");

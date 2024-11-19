@@ -1,8 +1,8 @@
 import { createApp } from "vue";
-import VueGtag from "@/index";
-import bootstrap from "@/bootstrap";
+import VueGtag from "src/index";
+import bootstrap from "src/bootstrap";
 
-jest.mock("@/bootstrap");
+jest.mock("src/bootstrap");
 
 describe("basic", () => {
   afterEach(() => {

@@ -1,9 +1,9 @@
 import { createApp } from "vue";
-import event from "@/api/event";
-import query from "@/api/query";
-import VueGtag from "@/index";
+import event from "src/api/event";
+import query from "src/api/query";
+import VueGtag from "src/index";
 
-jest.mock("@/api/query");
+jest.mock("src/api/query");
 
 describe("event", () => {
   afterEach(() => {

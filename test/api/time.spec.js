@@ -1,7 +1,7 @@
-import time from "@/api/time";
-import event from "@/api/event";
+import time from "src/api/time";
+import event from "src/api/event";
 
-jest.mock("@/api/event");
+jest.mock("src/api/event");
 
 describe("time", () => {
   test("fires a time event", () => {

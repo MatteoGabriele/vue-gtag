@@ -1,7 +1,7 @@
-import set from "@/api/set";
-import query from "@/api/query";
+import set from "src/api/set";
+import query from "src/api/query";
 
-jest.mock("@/api/query");
+jest.mock("src/api/query");
 
 describe("set", () => {
   test("fires set", () => {

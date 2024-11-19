@@ -1,8 +1,8 @@
 import { createApp } from "vue";
-import VueGtag from "@/index";
-import * as api from "@/api";
+import VueGtag from "src/index";
+import * as api from "src/api";
 
-jest.mock("@/api");
+jest.mock("src/api");
 
 describe("add-configuration", () => {
   afterEach(() => {
