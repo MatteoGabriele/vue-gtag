@@ -31,3 +31,14 @@ export const loadScript = async (
     document.body.appendChild(script);
   });
 };
+
+export function getPathWithBase(path = "", base = "") {
+  const pathAsArray = path.split("/");
+  const baseAsArray = base.split("/");
+
+  if (pathAsArray[0] === "" && base[base.length - 1] === "/") {
+    pathAsArray.shift();
+  }
+
+  return baseAsArray.join("/") + pathAsArray.join("/");
+}

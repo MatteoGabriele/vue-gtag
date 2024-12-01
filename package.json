@@ -65,7 +65,7 @@
     "vite-plugin-dts": "^4.3.0",
     "vitest": "^2.1.5",
     "vue": "^3.0.0",
-    "vue-router": "^4.0.0"
+    "vue-router": "^4"
   },
   "dependencies": {
     "@types/gtag.js": "^0.0.20"

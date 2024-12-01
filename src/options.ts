@@ -11,6 +11,9 @@ export type Options = {
   dataLayerName: string;
   onReady?: () => void;
   onError?: (error: unknown) => void;
+  router?: import("vue-router").Router;
+  routerTrackFullPath?: boolean;
+  routerTrackPrependBase?: boolean;
 };
 
 export type PartialOptions = Partial<Options>;
@@ -23,10 +26,8 @@ const defaultOptions: Options = {
   dataLayerName: "gtag",
 };
 
-let options: Options = { ...defaultOptions };
+export let options: Readonly<Options> = { ...defaultOptions };
 
 export const setOptions = (newOptions: PartialOptions): void => {
-  options = { ...options, ...defaultOptions, ...newOptions };
+  options = Object.assign({}, defaultOptions, newOptions);
 };
-
-export const getOptions = (): Options => options;

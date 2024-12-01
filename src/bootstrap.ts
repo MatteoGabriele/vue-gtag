@@ -1,5 +1,6 @@
-import { loadScript } from "./helper";
-import { getOptions } from "./options";
+import { loadScript } from "src/helper";
+import { options } from "src/options";
+import { addRoutesTracker } from "src/routes-tracker";
 
 const bootstrap = async (): Promise<void> => {
   const {
@@ -10,7 +11,9 @@ const bootstrap = async (): Promise<void> => {
     dataLayerName,
     onReady,
     onError,
-  } = getOptions();
+  } = options;
+
+  addRoutesTracker();
 
   if (!configs.length) {
     return;
