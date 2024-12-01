@@ -5,7 +5,6 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
@@ -15,13 +14,13 @@
     "paths": {
       "src/*": ["./src/*"]
     },
-    "types": ["vitest/globals", "gtag.js"],
-
+    "types": ["@types/gtag.js"],
     "strict": true,
     "noUnusedLocals": true,
+    "noImplicitAny": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "exactOptionalPropertyTypes": true
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts"]
 }

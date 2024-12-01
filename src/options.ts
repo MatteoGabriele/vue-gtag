@@ -1,43 +1,30 @@
-import { mergeDeep } from "src/utils";
-
-export const getDefaultParams = () => ({
-  bootstrap: true,
-  onReady: null,
-  onError: null,
-  onBeforeTrack: null,
-  onAfterTrack: null,
-  pageTrackerTemplate: null,
-  customResourceURL: "https://www.googletagmanager.com/gtag/js",
-  customPreconnectOrigin: "https://www.googletagmanager.com",
-  deferScriptLoad: false,
-  pageTrackerExcludedRoutes: [],
-  pageTrackerEnabled: true,
-  enabled: true,
-  disableScriptLoad: false,
-  pageTrackerScreenviewEnabled: false,
-  appName: null,
-  pageTrackerUseFullPath: false,
-  pageTrackerPrependBase: true,
-  pageTrackerSkipSamePath: true,
-  globalDataLayerName: "dataLayer",
-  globalObjectName: "gtag",
-  defaultGroupName: "default",
-  includes: null,
-  config: {
-    id: null,
-    params: {
-      send_page_view: false,
-    },
-  },
-});
-
-let params = {};
-
-export const setOptions = (options = {}) => {
-  const defaultParams = getDefaultParams();
-  params = mergeDeep(defaultParams, options);
+type Config = {
+  targetId: string;
+  params?: Gtag.ControlParams | Gtag.EventParams | Gtag.ConfigParams;
 };
 
-export const getOptions = () => {
-  return params;
+export type Options = {
+  configs: Config[];
+  scriptResourceUrl: string;
+  scriptPreconnectOrigin: string;
+  scriptDefer: boolean;
+  dataLayerName: string;
+  onReady?: () => void;
+  onError?: (error: unknown) => void;
 };
+
+export type PartialOptions = Partial<Options>;
+
+let options: Options = {
+  configs: [],
+  scriptResourceUrl: "https://www.googletagmanager.com/gtag/js",
+  scriptPreconnectOrigin: "https://www.googletagmanager.com",
+  scriptDefer: true,
+  dataLayerName: "gtag",
+};
+
+export const setOptions = (newOptions: PartialOptions): void => {
+  options = { ...options, ...newOptions };
+};
+
+export const getOptions = (): Options => options;

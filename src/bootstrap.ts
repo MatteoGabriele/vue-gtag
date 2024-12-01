@@ -1,52 +1,36 @@
-import { load } from "src/utils";
-import registerGlobals from "src/register-globals";
-import addRoutesTracker from "src/add-routes-tracker";
-import { getOptions } from "src/options";
-import { getRouter } from "src/router";
-import addConfiguration from "src/add-configuration";
+import { loadScript } from "./helper";
+import { getOptions } from "./options";
 
-export default () => {
+const bootstrap = async (): Promise<void> => {
   const {
+    configs,
+    scriptResourceUrl,
+    scriptDefer,
+    scriptPreconnectOrigin,
+    dataLayerName,
     onReady,
     onError,
-    globalObjectName,
-    globalDataLayerName,
-    config,
-    customResourceURL,
-    customPreconnectOrigin,
-    deferScriptLoad,
-    pageTrackerEnabled,
-    disableScriptLoad,
   } = getOptions();
 
-  const isPageTrackerEnabled = Boolean(pageTrackerEnabled && getRouter());
-
-  registerGlobals();
-
-  if (isPageTrackerEnabled) {
-    addRoutesTracker();
-  } else {
-    addConfiguration();
-  }
-
-  if (disableScriptLoad) {
+  if (!configs.length) {
     return;
   }
 
-  return load(`${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`, {
-    preconnectOrigin: customPreconnectOrigin,
-    defer: deferScriptLoad,
-  })
-    .then(() => {
-      if (onReady) {
-        onReady(window[globalObjectName]);
-      }
-    })
-    .catch((error) => {
-      if (onError) {
-        onError(error);
-      }
+  const [config] = configs;
 
-      return error;
-    });
+  try {
+    await loadScript(
+      `${scriptResourceUrl}?id=${config.targetId}&l=${dataLayerName}`,
+      {
+        preconnectOrigin: scriptPreconnectOrigin,
+        defer: scriptDefer,
+      },
+    );
+
+    onReady?.();
+  } catch (error) {
+    onError?.(error);
+  }
 };
+
+export default bootstrap;
