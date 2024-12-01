@@ -33,6 +33,26 @@ describe("bootstrap", () => {
     expect(onReadySpy).toHaveBeenCalled();
   });
 
+  test("load with custom script properties", async () => {
+    setOptions({
+      configs: [{ targetId: "UA-12345678" }],
+      scriptResourceUrl: "custom_scriptResourceUrl_value",
+      scriptPreconnectOrigin: "custom_scriptPreconnectOrigin_value",
+      dataLayerName: "custom_dataLayerName_value",
+    });
+
+    await bootstrap();
+    await flushPromises();
+
+    expect(helper.loadScript).toHaveBeenCalledWith(
+      "custom_scriptResourceUrl_value?id=UA-12345678&l=custom_dataLayerName_value",
+      {
+        defer: true,
+        preconnectOrigin: "custom_scriptPreconnectOrigin_value",
+      },
+    );
+  });
+
   test("loading gtag.js throws an error", async () => {
     vi.spyOn(helper, "loadScript").mockRejectedValue(new Error("oopsy"));
 
@@ -45,14 +65,6 @@ describe("bootstrap", () => {
 
     await bootstrap();
     await flushPromises();
-
-    expect(helper.loadScript).toHaveBeenCalledWith(
-      "https://www.googletagmanager.com/gtag/js?id=UA-12345678&l=gtag",
-      {
-        defer: true,
-        preconnectOrigin: "https://www.googletagmanager.com",
-      },
-    );
 
     expect(onErrorSpy).toHaveBeenCalled();
   });

@@ -15,7 +15,7 @@ export type Options = {
 
 export type PartialOptions = Partial<Options>;
 
-let options: Options = {
+const defaultOptions: Options = {
   configs: [],
   scriptResourceUrl: "https://www.googletagmanager.com/gtag/js",
   scriptPreconnectOrigin: "https://www.googletagmanager.com",
@@ -23,8 +23,10 @@ let options: Options = {
   dataLayerName: "gtag",
 };
 
+let options: Options = { ...defaultOptions };
+
 export const setOptions = (newOptions: PartialOptions): void => {
-  options = { ...options, ...newOptions };
+  options = { ...options, ...defaultOptions, ...newOptions };
 };
 
 export const getOptions = (): Options => options;
