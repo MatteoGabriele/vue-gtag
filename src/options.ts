@@ -1,17 +1,19 @@
-type Config = {
+import { Router } from "./router";
+
+export type OptionsConfig = {
   targetId: string;
   params?: Gtag.ControlParams | Gtag.EventParams | Gtag.ConfigParams;
 };
 
 export type Options = {
-  configs: Config[];
+  configs: OptionsConfig[];
   scriptResourceUrl: string;
   scriptPreconnectOrigin: string;
   scriptDefer: boolean;
   dataLayerName: string;
   onReady?: () => void;
   onError?: (error: unknown) => void;
-  router?: import("vue-router").Router;
+  router?: Router;
   routerTrackFullPath?: boolean;
   routerTrackPrependBase?: boolean;
 };

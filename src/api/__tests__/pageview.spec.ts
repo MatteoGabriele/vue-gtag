@@ -1,13 +1,8 @@
 import { expect, describe, vi, test, beforeEach } from "vitest";
 import pageview from "src/api/pageview";
-import { Route } from "src/routes-tracker";
+import { Route, Router } from "src/router";
 import event from "src/api/event";
 import { setOptions } from "src/options";
-import {
-  createWebHashHistory,
-  createWebHistory,
-  RouterHistory,
-} from "vue-router";
 
 vi.mock("src/api/event");
 
@@ -109,7 +104,7 @@ describe("pageview", () => {
             base: "app/",
           },
         },
-      },
+      } as Router,
     });
 
     pageview(

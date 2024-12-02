@@ -1,6 +1,6 @@
 import { loadScript } from "src/helper";
 import { options } from "src/options";
-import { addRoutesTracker } from "src/routes-tracker";
+import { addRoutesTracker } from "src/router";
 
 const bootstrap = async (): Promise<void> => {
   const {

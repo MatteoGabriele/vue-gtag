@@ -1,10 +1,11 @@
 import { options } from "src/options";
 import event from "./event";
 import { getPathWithBase } from "src/helper";
+import { Route } from "src/router";
 
-export type Route = import("vue-router").RouteLocationNormalizedGeneric;
+type PageviewParam = Gtag.ConfigParams | Route | string;
 
-const pageview = (param: string | Route | Gtag.ConfigParams) => {
+const pageview = (param: PageviewParam) => {
   const { routerTrackFullPath, router } = options;
 
   let template: Gtag.ConfigParams;

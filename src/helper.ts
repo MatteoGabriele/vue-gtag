@@ -32,7 +32,7 @@ export const loadScript = async (
   });
 };
 
-export function getPathWithBase(path = "", base = "") {
+export const getPathWithBase = (path = "", base = "") => {
   const pathAsArray = path.split("/");
   const baseAsArray = base.split("/");
 
@@ -41,4 +41,4 @@ export function getPathWithBase(path = "", base = "") {
   }
 
   return baseAsArray.join("/") + pathAsArray.join("/");
-}
+};

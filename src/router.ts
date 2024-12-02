@@ -1,6 +1,7 @@
 import { options } from "src/options";
 import api from "src/api";
 
+export type Router = import("vue-router").Router;
 export type Route = import("vue-router").RouteLocationNormalizedGeneric;
 
 export const trackRoute = (to: Route | null, from?: Route | null) => {
@@ -22,7 +23,7 @@ export const addRoutesTracker = async () => {
 
   trackRoute(router.currentRoute.value);
 
-  router.afterEach((to, from) => {
+  router.afterEach((to: Route, from: Route) => {
     trackRoute(to, from);
   });
 };

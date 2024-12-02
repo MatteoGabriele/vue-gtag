@@ -1,8 +1,5 @@
 import { beforeEach, vi, describe, expect, test } from "vitest";
-import * as helper from "src/helper.ts";
-import { setOptions } from "src/options.ts";
-import flushPromises from "flush-promises";
-import { Route, trackRoute } from "src/routes-tracker";
+import { Route, trackRoute } from "src/router";
 import api from "src/api";
 
 vi.mock("src/api.ts");
@@ -27,7 +24,7 @@ const getRoute = (params?: Partial<Route>): Route => {
 
 vi.mock("src/helper.ts");
 
-describe("routes tracker", () => {
+describe("router", () => {
   beforeEach(() => {
     vi.spyOn(api, "pageview");
   });
