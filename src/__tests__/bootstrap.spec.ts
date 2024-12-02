@@ -23,7 +23,7 @@ describe("bootstrap", () => {
     await flushPromises();
 
     expect(helper.loadScript).toHaveBeenCalledWith(
-      "https://www.googletagmanager.com/gtag/js?id=UA-12345678&l=gtag",
+      "https://www.googletagmanager.com/gtag/js?id=UA-12345678&l=dataLayer",
       {
         defer: true,
         preconnectOrigin: "https://www.googletagmanager.com",

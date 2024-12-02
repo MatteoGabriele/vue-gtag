@@ -79,7 +79,9 @@ describe("pageview", () => {
 
   test("use route fullPath", () => {
     setOptions({
-      routerTrackFullPath: true,
+      routerOptions: {
+        useFullPath: true,
+      },
     });
 
     pageview(
@@ -98,6 +100,9 @@ describe("pageview", () => {
 
   test("prepend route base path", () => {
     setOptions({
+      routerOptions: {
+        prependBase: true,
+      },
       router: {
         options: {
           history: {

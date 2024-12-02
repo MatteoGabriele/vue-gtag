@@ -6,7 +6,7 @@ import { Route } from "src/router";
 type PageviewParam = Gtag.ConfigParams | Route | string;
 
 const pageview = (param: PageviewParam) => {
-  const { routerTrackFullPath, router } = options;
+  const { router, routerOptions } = options;
 
   let template: Gtag.ConfigParams;
 
@@ -15,13 +15,15 @@ const pageview = (param: PageviewParam) => {
       page_path: param,
     };
   } else if ("path" in param && "fullPath" in param) {
-    const path = routerTrackFullPath ? param.fullPath : param.path;
+    const path = routerOptions?.useFullPath ? param.fullPath : param.path;
     const base = router?.options.history.base;
     const title = param.name as string;
 
     template = {
       page_title: title,
-      page_path: getPathWithBase(path, base),
+      page_path: routerOptions?.prependBase
+        ? getPathWithBase(path, base)
+        : path,
     };
   } else {
     template = param;

@@ -17,7 +17,7 @@ export const loadScript = async (
       link.rel = "preconnect";
       link.href = preconnectOrigin;
 
-      document.body.appendChild(link);
+      document.head.appendChild(link);
     }
 
     const script = document.createElement("script");
@@ -28,7 +28,7 @@ export const loadScript = async (
     script.onload = () => resolve();
     script.onerror = (err) => reject(err);
 
-    document.body.appendChild(script);
+    document.head.appendChild(script);
   });
 };
 

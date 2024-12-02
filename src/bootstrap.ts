@@ -1,38 +1,14 @@
-import { loadScript } from "src/helper";
-import { options } from "src/options";
 import { addRoutesTracker } from "src/router";
+import setupEnvironment from "./setup-environment";
+import { options } from "./options";
 
 const bootstrap = async (): Promise<void> => {
-  const {
-    configs,
-    scriptResourceUrl,
-    scriptDefer,
-    scriptPreconnectOrigin,
-    dataLayerName,
-    onReady,
-    onError,
-  } = options;
+  const { router } = options;
 
-  addRoutesTracker();
+  setupEnvironment();
 
-  if (!configs.length) {
-    return;
-  }
-
-  const [config] = configs;
-
-  try {
-    await loadScript(
-      `${scriptResourceUrl}?id=${config.targetId}&l=${dataLayerName}`,
-      {
-        preconnectOrigin: scriptPreconnectOrigin,
-        defer: scriptDefer,
-      },
-    );
-
-    onReady?.();
-  } catch (error) {
-    onError?.(error);
+  if (router) {
+    addRoutesTracker();
   }
 };
 
