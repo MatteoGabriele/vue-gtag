@@ -1,6 +1,7 @@
 {
 	"name": "vue-gtag",
 	"description": "Global Site Tag (gtag.js) plugin for Vue",
+	"type": "module",
 	"version": "2.0.1",
 	"author": {
 		"name": "Matteo Gabriele",
@@ -12,6 +13,8 @@
 		"url": "https://github.com/MatteoGabriele/vue-gtag"
 	},
 	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
 		"test": "jest",
 		"coverage": "jest --coverage",
 		"prepublishOnly": "yarn lint && yarn test && yarn build"
@@ -29,12 +32,15 @@
 		"vue",
 		"vuejs"
 	],
-	"main": "./dist/vue-gtag.js",
-	"module": "./dist/vue-gtag.esm.js",
+	"main": "./dist/vue-gtag.cjs.js",
+	"module": "./dist/vue-gtag.es.js",
 	"unpkg": "./dist/vue-gtag.umd.js",
 	"jsdelivr": "./dist/vue-gtag.umd.js",
 	"types": "vue-gtag.d.ts",
-	"files": ["dist", "vue-gtag.d.ts"],
+	"files": [
+		"dist",
+		"vue-gtag.d.ts"
+	],
 	"bugs": {
 		"url": "https://github.com/MatteoGabriele/vue-gtag/issues"
 	},
@@ -43,6 +49,9 @@
 		"vue": "^3.0.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.9.4"
+		"@biomejs/biome": "1.9.4",
+		"vite": "^6.1.0",
+		"vitest": "^3.0.5",
+		"vue": "^3.0.0"
 	}
 }
