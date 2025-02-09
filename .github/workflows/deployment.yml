@@ -5,8 +5,6 @@ on:
     branches:
       - master
   pull_request:
-    branches:
-      - master
 
 jobs:
   build:
@@ -22,19 +20,14 @@ jobs:
           node-version: 23.5.0
           cache: 'npm'
 
-      - name: Setup npm
-        uses: npm/action-setup@v3
-        with:
-          version: 11.0.0
-
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run linter
-        run: npm lint
+        run: npm run lint
 
       - name: Run tests
-        run: npm test:once
+        run: npm run test:once
 
       - name: Build project
-        run: npm build
+        run: npm run build
