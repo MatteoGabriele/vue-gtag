@@ -14,16 +14,11 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [23.5.0]
+        pnpm:
+          - 10.2.0
 
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
+    - uses: actions/checkout@v4
 
     - name: Install dependencies
       run: pnpm install
