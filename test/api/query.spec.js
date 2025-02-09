@@ -1,57 +1,56 @@
-import { createApp } from "vue";
-import VueGtag from "@/index";
 import query from "@/api/query";
+import VueGtag from "@/index";
+import { createApp } from "vue";
 
 describe("query", () => {
-  let _window = window;
+	const _window = window;
 
-  beforeEach(() => {
-    global.window = _window;
-    delete global.window.gtag;
-  });
+	beforeEach(() => {
+		global.window = _window;
+	});
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
 
-  test("passes argumemets to the gtag instance", () => {
-    const app = createApp();
+	test("passes argumemets to the gtag instance", () => {
+		const app = createApp();
 
-    app.use(VueGtag);
+		app.use(VueGtag);
 
-    jest.spyOn(window, "gtag").mockReturnValue();
+		jest.spyOn(window, "gtag").mockReturnValue();
 
-    query("foo", "bar");
+		query("foo", "bar");
 
-    expect(window.gtag).toHaveBeenCalledWith("foo", "bar");
-  });
+		expect(window.gtag).toHaveBeenCalledWith("foo", "bar");
+	});
 
-  test("passes argumemets to the custom named instance", () => {
-    const app = createApp();
+	test("passes argumemets to the custom named instance", () => {
+		const app = createApp();
 
-    app.use(VueGtag, {
-      globalObjectName: "foo",
-    });
+		app.use(VueGtag, {
+			globalObjectName: "foo",
+		});
 
-    jest.spyOn(window, "foo").mockReturnValue();
+		jest.spyOn(window, "foo").mockReturnValue();
 
-    query("foo", "bar");
+		query("foo", "bar");
 
-    expect(window.foo).toHaveBeenCalledWith("foo", "bar");
-  });
+		expect(window.foo).toHaveBeenCalledWith("foo", "bar");
+	});
 
-  test("use query with gtag disabled", () => {
-    const app = createApp();
+	test("use query with gtag disabled", () => {
+		const app = createApp();
 
-    app.use(VueGtag, {
-      bootstrap: false,
-      config: {
-        id: 1,
-      },
-    });
+		app.use(VueGtag, {
+			bootstrap: false,
+			config: {
+				id: 1,
+			},
+		});
 
-    expect(() => {
-      query("foo");
-    }).not.toThrow();
-  });
+		expect(() => {
+			query("foo");
+		}).not.toThrow();
+	});
 });

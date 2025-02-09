@@ -1,9 +1,9 @@
-import { createApp } from "vue";
-import { createRouter, createMemoryHistory } from "vue-router";
-import VueGtag from "@/index";
-import pageview from "@/api/pageview";
 import event from "@/api/event";
+import pageview from "@/api/pageview";
+import VueGtag from "@/index";
 import flushPromises from "flush-promises";
+import { createApp } from "vue";
+import { createMemoryHistory, createRouter } from "vue-router";
 
 jest.mock("@/api/event");
 
@@ -11,218 +11,214 @@ const Home = { template: "<div><div>" };
 const About = { template: "<div><div>" };
 
 describe("pageview", () => {
-  const _window = window;
-  const { location } = window;
+	const _window = window;
+	const { location } = window;
 
-  beforeAll(() => {
-    delete window.location;
+	beforeAll(() => {
+		window.location = {
+			href: "window_location_href_value",
+		};
+	});
 
-    window.location = {
-      href: "window_location_href_value",
-    };
-  });
+	beforeEach(() => {
+		global.window = _window;
+	});
 
-  beforeEach(() => {
-    global.window = _window;
-  });
+	afterAll(() => {
+		window.location = location;
+	});
 
-  afterAll(() => {
-    window.location = location;
-  });
+	afterEach(() => {
+		jest.resetAllMocks();
+	});
 
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
+	test("pass a page as string", () => {
+		pageview("/");
 
-  test("pass a page as string", () => {
-    pageview("/");
+		expect(event).toHaveBeenCalledWith("page_view", {
+			send_page_view: true,
+			page_path: "/",
+			page_location: "window_location_href_value",
+		});
+	});
 
-    expect(event).toHaveBeenCalledWith("page_view", {
-      send_page_view: true,
-      page_path: "/",
-      page_location: "window_location_href_value",
-    });
-  });
+	test("pass page as an object", () => {
+		pageview({
+			page_path: "/about",
+			page_title: "about",
+			page_location: "window_location_href_value",
+		});
 
-  test("pass page as an object", () => {
-    pageview({
-      page_path: "/about",
-      page_title: "about",
-      page_location: "window_location_href_value",
-    });
+		expect(event).toHaveBeenCalledWith("page_view", {
+			send_page_view: true,
+			page_title: "about",
+			page_path: "/about",
+			page_location: "window_location_href_value",
+		});
+	});
 
-    expect(event).toHaveBeenCalledWith("page_view", {
-      send_page_view: true,
-      page_title: "about",
-      page_path: "/about",
-      page_location: "window_location_href_value",
-    });
-  });
+	test("pass page as a route", async () => {
+		const app = createApp();
+		const router = createRouter({
+			history: createMemoryHistory(),
+			routes: [{ name: "home", path: "/", component: Home }],
+		});
 
-  test("pass page as a route", async () => {
-    const app = createApp();
-    const router = createRouter({
-      history: createMemoryHistory(),
-      routes: [{ name: "home", path: "/", component: Home }],
-    });
+		app.use(router);
 
-    app.use(router);
+		router.push("/");
 
-    router.push("/");
+		await flushPromises();
 
-    await flushPromises();
+		pageview(router.currentRoute.value);
 
-    pageview(router.currentRoute.value);
+		expect(event).toHaveBeenCalledWith("page_view", {
+			send_page_view: true,
+			page_title: "home",
+			page_path: "/",
+			page_location: "window_location_href_value",
+		});
+	});
 
-    expect(event).toHaveBeenCalledWith("page_view", {
-      send_page_view: true,
-      page_title: "home",
-      page_path: "/",
-      page_location: "window_location_href_value",
-    });
-  });
+	test("track pageview without window", () => {
+		const app = createApp();
 
-  test("track pageview without window", () => {
-    const app = createApp();
+		app.use(VueGtag, {
+			config: { id: 1 },
+		});
 
-    app.use(VueGtag, {
-      config: { id: 1 },
-    });
+		expect(() => {
+			pageview("/");
+		}).not.toThrow();
+	});
 
-    delete global.window;
+	describe("pageTrackerUseFullPath", () => {
+		test("tracks using router `path` property", async () => {
+			const app = createApp();
+			const router = createRouter({
+				history: createMemoryHistory(),
+				routes: [{ path: "/" }, { path: "/about", component: About }],
+			});
 
-    expect(() => {
-      pageview("/");
-    }).not.toThrow();
-  });
+			app.use(VueGtag, {
+				config: {
+					id: 1,
+				},
+			});
 
-  describe("pageTrackerUseFullPath", () => {
-    test("tracks using router `path` property", async () => {
-      const app = createApp();
-      const router = createRouter({
-        history: createMemoryHistory(),
-        routes: [{ path: "/" }, { path: "/about", component: About }],
-      });
+			app.use(router);
 
-      app.use(VueGtag, {
-        config: {
-          id: 1,
-        },
-      });
+			router.push("/about?foo=bar");
 
-      app.use(router);
+			await flushPromises();
 
-      router.push("/about?foo=bar");
+			pageview(router.currentRoute.value);
 
-      await flushPromises();
+			expect(event).toHaveBeenCalledWith("page_view", {
+				send_page_view: true,
+				page_path: "/about",
+				page_location: "window_location_href_value",
+			});
+		});
 
-      pageview(router.currentRoute.value);
+		test("tracks using router `fullPath` property", async () => {
+			const app = createApp();
 
-      expect(event).toHaveBeenCalledWith("page_view", {
-        send_page_view: true,
-        page_path: "/about",
-        page_location: "window_location_href_value",
-      });
-    });
+			app.use(VueGtag, {
+				pageTrackerUseFullPath: true,
+				config: {
+					id: 1,
+				},
+			});
 
-    test("tracks using router `fullPath` property", async () => {
-      const app = createApp();
+			const router = createRouter({
+				history: createMemoryHistory(),
+				routes: [{ path: "/" }, { path: "/about", component: About }],
+			});
 
-      app.use(VueGtag, {
-        pageTrackerUseFullPath: true,
-        config: {
-          id: 1,
-        },
-      });
+			app.use(router);
 
-      const router = createRouter({
-        history: createMemoryHistory(),
-        routes: [{ path: "/" }, { path: "/about", component: About }],
-      });
+			router.push("/about?foo=bar");
 
-      app.use(router);
+			await flushPromises();
 
-      router.push("/about?foo=bar");
+			pageview(router.currentRoute.value);
 
-      await flushPromises();
+			expect(event).toHaveBeenCalledWith("page_view", {
+				send_page_view: true,
+				page_path: "/about?foo=bar",
+				page_location: "window_location_href_value",
+			});
+		});
+	});
 
-      pageview(router.currentRoute.value);
+	describe("router base path", () => {
+		test("use with router installed", async () => {
+			const app = createApp();
+			const router = createRouter({
+				history: createMemoryHistory(),
+				base: "/app/",
+				routes: [
+					{ path: "/", component: Home },
+					{ path: "/about", component: About },
+				],
+			});
 
-      expect(event).toHaveBeenCalledWith("page_view", {
-        send_page_view: true,
-        page_path: "/about?foo=bar",
-        page_location: "window_location_href_value",
-      });
-    });
-  });
+			app.use(router);
+			app.use(
+				VueGtag,
+				{
+					pageTrackerPrependBase: true,
+					config: {
+						id: 1,
+					},
+				},
+				router,
+			);
 
-  describe("router base path", () => {
-    test("use with router installed", async () => {
-      const app = createApp();
-      const router = createRouter({
-        history: createMemoryHistory(),
-        base: "/app/",
-        routes: [
-          { path: "/", component: Home },
-          { path: "/about", component: About },
-        ],
-      });
+			router.push("/about");
 
-      app.use(router);
-      app.use(
-        VueGtag,
-        {
-          pageTrackerPrependBase: true,
-          config: {
-            id: 1,
-          },
-        },
-        router
-      );
+			await flushPromises();
 
-      router.push("/about");
+			pageview(router.currentRoute.value);
 
-      await flushPromises();
+			expect(event).toHaveBeenCalledWith("page_view", {
+				send_page_view: true,
+				page_path: "/app/about",
+				page_location: "window_location_href_value",
+			});
+		});
 
-      pageview(router.currentRoute.value);
+		test("use without router installed", async () => {
+			const app = createApp();
+			const router = createRouter({
+				history: createMemoryHistory(),
+				base: "/app/",
+				routes: [
+					{ path: "/", component: Home },
+					{ path: "/about", component: About },
+				],
+			});
 
-      expect(event).toHaveBeenCalledWith("page_view", {
-        send_page_view: true,
-        page_path: "/app/about",
-        page_location: "window_location_href_value",
-      });
-    });
+			app.use(router);
+			app.use(VueGtag, {
+				pageTrackerPrependBase: true,
+				config: {
+					id: 1,
+				},
+			});
 
-    test("use without router installed", async () => {
-      const app = createApp();
-      const router = createRouter({
-        history: createMemoryHistory(),
-        base: "/app/",
-        routes: [
-          { path: "/", component: Home },
-          { path: "/about", component: About },
-        ],
-      });
+			router.push("/about");
 
-      app.use(router);
-      app.use(VueGtag, {
-        pageTrackerPrependBase: true,
-        config: {
-          id: 1,
-        },
-      });
+			await flushPromises();
 
-      router.push("/about");
+			pageview(router.currentRoute.value);
 
-      await flushPromises();
-
-      pageview(router.currentRoute.value);
-
-      expect(event).toHaveBeenCalledWith("page_view", {
-        send_page_view: true,
-        page_path: "/about",
-        page_location: "window_location_href_value",
-      });
-    });
-  });
+			expect(event).toHaveBeenCalledWith("page_view", {
+				send_page_view: true,
+				page_path: "/about",
+				page_location: "window_location_href_value",
+			});
+		});
+	});
 });
