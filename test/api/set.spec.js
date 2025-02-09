@@ -4,9 +4,9 @@ import set from "@/api/set";
 vi.mock("@/api/query");
 
 describe("set", () => {
-	test("fires set", () => {
-		set("foo", "bar");
+  test("fires set", () => {
+    set("foo", "bar");
 
-		expect(query).toHaveBeenCalledWith("set", "foo", "bar");
-	});
+    expect(query).toHaveBeenCalledWith("set", "foo", "bar");
+  });
 });

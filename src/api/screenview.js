@@ -2,23 +2,23 @@ import event from "@/api/event";
 import { getOptions } from "@/options";
 
 export default (param) => {
-	const { appName } = getOptions();
+  const { appName } = getOptions();
 
-	if (!param) {
-		return;
-	}
+  if (!param) {
+    return;
+  }
 
-	let template;
+  let template;
 
-	if (typeof param === "string") {
-		template = {
-			screen_name: param,
-		};
-	} else {
-		template = param;
-	}
+  if (typeof param === "string") {
+    template = {
+      screen_name: param,
+    };
+  } else {
+    template = param;
+  }
 
-	template.app_name = template.app_name || appName;
+  template.app_name = template.app_name || appName;
 
-	event("screen_view", template);
+  event("screen_view", template);
 };

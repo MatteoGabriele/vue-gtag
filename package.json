@@ -1,58 +1,59 @@
 {
-	"name": "vue-gtag",
-	"description": "Global Site Tag (gtag.js) plugin for Vue",
-	"type": "module",
-	"version": "2.0.1",
-	"author": {
-		"name": "Matteo Gabriele",
-		"email": "m.gabriele.dev@gmail.com"
-	},
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/MatteoGabriele/vue-gtag"
-	},
-	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"lint": "biome check",
-		"test": "vitest run",
-		"prepublishOnly": "yarn lint && yarn test && yarn build"
-	},
-	"keywords": [
-		"google",
-		"google analytics",
-		"tracking",
-		"google tracking",
-		"vue-analytics",
-		"vue-gtag",
-		"gtag",
-		"gtag.js",
-		"global site tag",
-		"vue",
-		"vuejs"
-	],
-	"main": "./dist/vue-gtag.cjs.js",
-	"module": "./dist/vue-gtag.es.js",
-	"unpkg": "./dist/vue-gtag.umd.js",
-	"jsdelivr": "./dist/vue-gtag.umd.js",
-	"types": "vue-gtag.d.ts",
-	"files": ["dist", "vue-gtag.d.ts"],
-	"bugs": {
-		"url": "https://github.com/MatteoGabriele/vue-gtag/issues"
-	},
-	"homepage": "https://github.com/MatteoGabriele/vue-gtag#readme",
-	"peerDependencies": {
-		"vue": "^3.0.0"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
-		"flush-promises": "^1.0.2",
-		"jsdom": "^26.0.0",
-		"mockdate": "^3.0.5",
-		"vite": "^6.1.0",
-		"vitest": "^3.0.5",
-		"vue": "^3.0.0",
-		"vue-router": "^4.5.0"
-	}
+  "name": "vue-gtag",
+  "description": "Global Site Tag (gtag.js) plugin for Vue",
+  "type": "module",
+  "version": "2.0.1",
+  "author": {
+    "name": "Matteo Gabriele",
+    "email": "m.gabriele.dev@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MatteoGabriele/vue-gtag"
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "fix": "biome check --write",
+    "build": "vite build",
+    "lint": "biome check",
+    "test": "vitest run",
+    "prepublishOnly": "yarn lint && yarn test && yarn build"
+  },
+  "keywords": [
+    "google",
+    "google analytics",
+    "tracking",
+    "google tracking",
+    "vue-analytics",
+    "vue-gtag",
+    "gtag",
+    "gtag.js",
+    "global site tag",
+    "vue",
+    "vuejs"
+  ],
+  "main": "./dist/vue-gtag.cjs.js",
+  "module": "./dist/vue-gtag.es.js",
+  "unpkg": "./dist/vue-gtag.umd.js",
+  "jsdelivr": "./dist/vue-gtag.umd.js",
+  "types": "vue-gtag.d.ts",
+  "files": ["dist", "vue-gtag.d.ts"],
+  "bugs": {
+    "url": "https://github.com/MatteoGabriele/vue-gtag/issues"
+  },
+  "homepage": "https://github.com/MatteoGabriele/vue-gtag#readme",
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "flush-promises": "^1.0.2",
+    "jsdom": "^26.0.0",
+    "mockdate": "^3.0.5",
+    "vite": "^6.1.0",
+    "vitest": "^3.0.5",
+    "vue": "^3.0.0",
+    "vue-router": "^4.5.0"
+  }
 }

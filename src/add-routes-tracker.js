@@ -6,43 +6,43 @@ import { isFn } from "@/utils";
 import { nextTick } from "vue";
 
 const isRouteExcluded = (route) => {
-	const { pageTrackerExcludedRoutes: routes } = getOptions();
-	return routes.includes(route.path) || routes.includes(route.name);
+  const { pageTrackerExcludedRoutes: routes } = getOptions();
+  return routes.includes(route.path) || routes.includes(route.name);
 };
 
 export default () => {
-	const { onBeforeTrack, onAfterTrack } = getOptions();
-	const router = getRouter();
+  const { onBeforeTrack, onAfterTrack } = getOptions();
+  const router = getRouter();
 
-	router.isReady().then(() => {
-		nextTick().then(() => {
-			const { currentRoute } = router;
+  router.isReady().then(() => {
+    nextTick().then(() => {
+      const { currentRoute } = router;
 
-			addConfiguration();
+      addConfiguration();
 
-			if (isRouteExcluded(currentRoute.value)) {
-				return;
-			}
+      if (isRouteExcluded(currentRoute.value)) {
+        return;
+      }
 
-			track(currentRoute.value);
-		});
+      track(currentRoute.value);
+    });
 
-		router.afterEach((to, from) => {
-			nextTick().then(() => {
-				if (isRouteExcluded(to)) {
-					return;
-				}
+    router.afterEach((to, from) => {
+      nextTick().then(() => {
+        if (isRouteExcluded(to)) {
+          return;
+        }
 
-				if (isFn(onBeforeTrack)) {
-					onBeforeTrack(to, from);
-				}
+        if (isFn(onBeforeTrack)) {
+          onBeforeTrack(to, from);
+        }
 
-				track(to, from);
+        track(to, from);
 
-				if (isFn(onAfterTrack)) {
-					onAfterTrack(to, from);
-				}
-			});
-		});
-	});
+        if (isFn(onAfterTrack)) {
+          onAfterTrack(to, from);
+        }
+      });
+    });
+  });
 };

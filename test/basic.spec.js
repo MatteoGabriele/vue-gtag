@@ -5,18 +5,18 @@ import { createApp } from "vue";
 vi.mock("@/bootstrap");
 
 describe("basic", () => {
-	afterEach(() => {
-		vi.clearAllMocks();
-	});
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
 
-	test("installs plugin", () => {
-		const app = createApp();
+  test("installs plugin", () => {
+    const app = createApp();
 
-		app.use(VueGtag);
+    app.use(VueGtag);
 
-		expect(
-			Object.keys(app.config.globalProperties.$gtag),
-		).toMatchInlineSnapshot(`
+    expect(
+      Object.keys(app.config.globalProperties.$gtag),
+    ).toMatchInlineSnapshot(`
 			[
 			  "query",
 			  "config",
@@ -34,31 +34,31 @@ describe("basic", () => {
 			  "event",
 			]
 		`);
-	});
+  });
 
-	test("installs plugin without window object", () => {
-		const app = createApp();
+  test("installs plugin without window object", () => {
+    const app = createApp();
 
-		expect(() => {
-			app.use(VueGtag);
-		}).not.toThrow();
-	});
+    expect(() => {
+      app.use(VueGtag);
+    }).not.toThrow();
+  });
 
-	test("bootstraps the plugin", () => {
-		const app = createApp();
+  test("bootstraps the plugin", () => {
+    const app = createApp();
 
-		app.use(VueGtag);
+    app.use(VueGtag);
 
-		expect(bootstrap).toHaveBeenCalled();
-	});
+    expect(bootstrap).toHaveBeenCalled();
+  });
 
-	test("bootstrap is disabled", () => {
-		const app = createApp();
+  test("bootstrap is disabled", () => {
+    const app = createApp();
 
-		app.use(VueGtag, {
-			bootstrap: false,
-		});
+    app.use(VueGtag, {
+      bootstrap: false,
+    });
 
-		expect(bootstrap).not.toHaveBeenCalled();
-	});
+    expect(bootstrap).not.toHaveBeenCalled();
+  });
 });

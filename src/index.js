@@ -4,13 +4,13 @@ import { getOptions, setOptions } from "@/options";
 import { setRouter } from "@/router";
 
 const install = (app, options, router) => {
-	attachApi(app);
-	setOptions(options);
-	setRouter(router);
+  attachApi(app);
+  setOptions(options);
+  setRouter(router);
 
-	if (getOptions().bootstrap) {
-		bootstrap();
-	}
+  if (getOptions().bootstrap) {
+    bootstrap();
+  }
 };
 
 export { default as query } from "@/api/query";
