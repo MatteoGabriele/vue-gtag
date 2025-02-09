@@ -5,6 +5,8 @@ on:
     branches:
       - master
   pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -21,7 +23,9 @@ jobs:
           cache: 'pnpm'
 
       - name: Setup pnpm
-        run: npm install -g pnpm@10.2.0
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.2.0
 
       - name: Install dependencies
         run: pnpm install
