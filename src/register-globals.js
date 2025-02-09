@@ -1,26 +1,26 @@
-import { isBrowser } from "@/utils";
-import { getOptions } from "@/options";
 import * as api from "@/api";
+import { getOptions } from "@/options";
+import { isBrowser } from "@/utils";
 
 export default () => {
-  if (!isBrowser()) {
-    return;
-  }
+	if (!isBrowser()) {
+		return;
+	}
 
-  const { enabled, globalObjectName, globalDataLayerName } = getOptions();
+	const { enabled, globalObjectName, globalDataLayerName } = getOptions();
 
-  if (window[globalObjectName] == null) {
-    window[globalDataLayerName] = window[globalDataLayerName] || [];
-    window[globalObjectName] = function () {
-      window[globalDataLayerName].push(arguments);
-    };
-  }
+	if (window[globalObjectName] == null) {
+		window[globalDataLayerName] = window[globalDataLayerName] || [];
+		window[globalObjectName] = (...args) => {
+			window[globalDataLayerName].push(...args);
+		};
+	}
 
-  window[globalObjectName]("js", new Date());
+	window[globalObjectName]("js", new Date());
 
-  if (!enabled) {
-    api.optOut();
-  }
+	if (!enabled) {
+		api.optOut();
+	}
 
-  return window[globalObjectName];
+	return window[globalObjectName];
 };

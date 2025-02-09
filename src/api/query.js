@@ -2,11 +2,11 @@ import { getOptions } from "@/options";
 import { isBrowser } from "@/utils";
 
 export default (...args) => {
-  const { globalObjectName } = getOptions();
+	const { globalObjectName } = getOptions();
 
-  if (!isBrowser() || typeof window[globalObjectName] === "undefined") {
-    return;
-  }
+	if (!isBrowser() || typeof window[globalObjectName] === "undefined") {
+		return;
+	}
 
-  window[globalObjectName](...args);
+	window[globalObjectName](...args);
 };

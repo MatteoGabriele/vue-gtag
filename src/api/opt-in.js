@@ -1,5 +1,5 @@
 import disable from "@/api/disable";
 
 export default () => {
-  disable(false);
+	disable(false);
 };
