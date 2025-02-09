@@ -2,6 +2,8 @@ name: CI
 
 on:
   push:
+    branches:
+      - master
   pull_request:
     branches:
       - master
@@ -27,8 +29,8 @@ jobs:
       run: pnpm install
 
     # Linting
-    - name: Run ESLint
-      run: pnpm exec eslint .
+    - name: Run linst
+      run: pnpm lint
 
     # Testing
     - name: Run tests
