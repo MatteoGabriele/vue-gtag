@@ -15,7 +15,8 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"test": "vitest",
+		"lint": "biome check",
+		"test": "vitest run",
 		"prepublishOnly": "yarn lint && yarn test && yarn build"
 	},
 	"keywords": [
@@ -36,10 +37,7 @@
 	"unpkg": "./dist/vue-gtag.umd.js",
 	"jsdelivr": "./dist/vue-gtag.umd.js",
 	"types": "vue-gtag.d.ts",
-	"files": [
-		"dist",
-		"vue-gtag.d.ts"
-	],
+	"files": ["dist", "vue-gtag.d.ts"],
 	"bugs": {
 		"url": "https://github.com/MatteoGabriele/vue-gtag/issues"
 	},
