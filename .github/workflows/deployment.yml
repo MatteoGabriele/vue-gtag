@@ -5,32 +5,32 @@ on:
     branches:
       - master
   pull_request:
-    branches:
-      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        pnpm:
-          - 10.2.0
-
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Install dependencies
-      run: pnpm install
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23.5.0
+          cache: 'pnpm'
 
-    # Linting
-    - name: Run linst
-      run: pnpm lint
+      - name: Setup pnpm
+        run: npm install -g pnpm@10.2.0
 
-    # Testing
-    - name: Run tests
-      run: pnpm test
+      - name: Install dependencies
+        run: pnpm install
 
-    # Building
-    - name: Build the project
-      run: pnpm build
+      - name: Run linter
+        run: pnpm lint
+
+      - name: Run tests
+        run: pnpm test:once
+
+      - name: Build project
+        run: pnpm build
