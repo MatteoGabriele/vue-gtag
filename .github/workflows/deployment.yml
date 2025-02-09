@@ -3,39 +3,31 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
-    branches:
-      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [23.5.0]
-
     steps:
-    - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23.5.0
+          cache: 'npm'
 
-    - name: Install dependencies
-      run: pnpm install
+      - name: Install dependencies
+        run: npm ci
 
-    # Linting
-    - name: Run ESLint
-      run: pnpm exec eslint .
+      - name: Run linter
+        run: npm run lint
 
-    # Testing
-    - name: Run tests
-      run: pnpm test
+      - name: Run tests
+        run: npm run test:once
 
-    # Building
-    - name: Build the project
-      run: pnpm build
+      - name: Build project
+        run: npm run build
