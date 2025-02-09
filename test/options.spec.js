@@ -2,7 +2,7 @@ import { getDefaultParams, getOptions, setOptions } from "@/options";
 
 describe("options", () => {
 	afterEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 
 	test("getDefaultParams", () => {

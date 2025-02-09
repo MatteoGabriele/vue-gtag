@@ -3,11 +3,11 @@ import screenview from "@/api/screenview";
 import VueGtag from "@/index";
 import { createApp } from "vue";
 
-jest.mock("@/api/event");
+vi.mock("@/api/event");
 
 describe("screenview", () => {
 	afterEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 
 	test("fires a screenview as string", () => {

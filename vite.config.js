@@ -1,5 +1,5 @@
 import path from "node:path";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
 	resolve: {
@@ -24,5 +24,9 @@ export default defineConfig({
 				},
 			},
 		},
+	},
+	test: {
+		environment: "jsdom",
+		globals: true,
 	},
 });

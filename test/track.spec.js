@@ -5,7 +5,7 @@ import flushPromises from "flush-promises";
 import { createApp } from "vue";
 import { createMemoryHistory, createRouter } from "vue-router";
 
-jest.mock("@/api");
+vi.mock("@/api");
 
 const Home = { template: "<div></div>" };
 const About = { template: "<div></div>" };
@@ -33,12 +33,12 @@ describe("track", () => {
 			],
 		});
 
-		jest.spyOn(window.console, "warn").mockReturnValue();
-		jest.spyOn(utils, "load").mockResolvedValue();
+		vi.spyOn(window.console, "warn").mockReturnValue();
+		vi.spyOn(utils, "load").mockResolvedValue();
 	});
 
 	afterEach(() => {
-		jest.resetAllMocks();
+		vi.resetAllMocks();
 	});
 
 	describe("pageview", () => {

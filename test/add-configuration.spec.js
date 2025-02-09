@@ -2,11 +2,11 @@ import * as api from "@/api";
 import VueGtag from "@/index";
 import { createApp } from "vue";
 
-jest.mock("@/api");
+vi.mock("@/api");
 
 describe("add-configuration", () => {
 	afterEach(() => {
-		jest.resetAllMocks();
+		vi.resetAllMocks();
 	});
 
 	test("fires a configuration for the main domain", () => {

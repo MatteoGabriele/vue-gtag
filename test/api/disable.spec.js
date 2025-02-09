@@ -4,7 +4,7 @@ import { createApp } from "vue";
 
 describe("disable", () => {
 	afterEach(() => {
-		jest.resetAllMocks();
+		vi.resetAllMocks();
 	});
 
 	test("turns off tracking", () => {

@@ -10,7 +10,7 @@ describe("query", () => {
 	});
 
 	afterEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 
 	test("passes argumemets to the gtag instance", () => {
@@ -18,7 +18,7 @@ describe("query", () => {
 
 		app.use(VueGtag);
 
-		jest.spyOn(window, "gtag").mockReturnValue();
+		vi.spyOn(window, "gtag").mockReturnValue();
 
 		query("foo", "bar");
 
@@ -32,7 +32,7 @@ describe("query", () => {
 			globalObjectName: "foo",
 		});
 
-		jest.spyOn(window, "foo").mockReturnValue();
+		vi.spyOn(window, "foo").mockReturnValue();
 
 		query("foo", "bar");
 

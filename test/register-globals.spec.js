@@ -6,7 +6,7 @@ import { createApp } from "vue";
 
 mockDate.set("2021-04-20 10:00:00");
 
-jest.mock("@/api");
+vi.mock("@/api");
 
 describe("registerGlobals", () => {
 	beforeEach(() => {
@@ -15,7 +15,7 @@ describe("registerGlobals", () => {
 	});
 
 	afterEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 
 	test("register global dataLayer and globalObject", () => {

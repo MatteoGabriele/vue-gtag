@@ -15,8 +15,7 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"test": "jest",
-		"coverage": "jest --coverage",
+		"test": "vitest",
 		"prepublishOnly": "yarn lint && yarn test && yarn build"
 	},
 	"keywords": [
@@ -50,8 +49,12 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
+		"flush-promises": "^1.0.2",
+		"jsdom": "^26.0.0",
+		"mockdate": "^3.0.5",
 		"vite": "^6.1.0",
 		"vitest": "^3.0.5",
-		"vue": "^3.0.0"
+		"vue": "^3.0.0",
+		"vue-router": "^4.5.0"
 	}
 }

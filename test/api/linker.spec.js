@@ -1,7 +1,7 @@
 import config from "@/api/config";
 import linker from "@/api/linker";
 
-jest.mock("@/api/config");
+vi.mock("@/api/config");
 
 describe("linker", () => {
 	test("fires a linker config", () => {

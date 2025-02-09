@@ -1,7 +1,7 @@
 import config from "@/api/config";
 import customMap from "@/api/custom-map";
 
-jest.mock("@/api/config");
+vi.mock("@/api/config");
 
 describe("customMap", () => {
 	test("fires custom_map config", () => {

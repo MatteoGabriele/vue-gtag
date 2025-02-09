@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`load should create a link for domain preconnect 1`] = `
+exports[`load > should create a link for domain preconnect 1`] = `
 <head>
   <link
     href="bar"
@@ -12,7 +12,7 @@ exports[`load should create a link for domain preconnect 1`] = `
 </head>
 `;
 
-exports[`load should create a script tag 1`] = `
+exports[`load > should create a script tag 1`] = `
 <head>
   <script
     src="foo"
@@ -20,7 +20,7 @@ exports[`load should create a script tag 1`] = `
 </head>
 `;
 
-exports[`load should create a script tag with the defer attribute 1`] = `
+exports[`load > should create a script tag with the defer attribute 1`] = `
 <head>
   <script
     defer=""

@@ -12,18 +12,18 @@ import { createMemoryHistory, createRouter } from "vue-router";
 
 MockDate.set("06-03-1997 10:00:00");
 
-jest.mock("@/register-globals");
-jest.mock("@/add-routes-tracker");
-jest.mock("@/add-configuration");
-jest.mock("@/api");
+vi.mock("@/register-globals");
+vi.mock("@/add-routes-tracker");
+vi.mock("@/add-configuration");
+vi.mock("@/api");
 
 describe("boostrap", () => {
 	beforeEach(() => {
-		jest.spyOn(utils, "load").mockResolvedValue();
+		vi.spyOn(utils, "load").mockResolvedValue();
 	});
 
 	afterEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 
 	test("loads gtag script", async () => {
@@ -151,7 +151,7 @@ describe("boostrap", () => {
 
 	test("uses onReady callback after script is loaded", async () => {
 		const app = createApp();
-		const spy = jest.fn();
+		const spy = vi.fn();
 
 		Object.defineProperty(window, "gtag", {
 			get: () => "global_registerd_value",
@@ -171,7 +171,7 @@ describe("boostrap", () => {
 
 	test("uses onError callback after script failed loading", async () => {
 		const app = createApp();
-		const spy = jest.fn();
+		const spy = vi.fn();
 		const error = new Error("error_value");
 
 		utils.load.mockRejectedValue(error);

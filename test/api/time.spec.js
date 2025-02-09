@@ -1,7 +1,7 @@
 import event from "@/api/event";
 import time from "@/api/time";
 
-jest.mock("@/api/event");
+vi.mock("@/api/event");
 
 describe("time", () => {
 	test("fires a time event", () => {

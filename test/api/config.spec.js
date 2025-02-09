@@ -2,12 +2,12 @@ import config from "@/api/config";
 import query from "@/api/query";
 import { getOptions } from "@/options";
 
-jest.mock("@/api/query");
-jest.mock("@/options");
+vi.mock("@/api/query");
+vi.mock("@/options");
 
 describe("config", () => {
 	afterEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 
 	test("fires config with domain ID and any arguments", () => {

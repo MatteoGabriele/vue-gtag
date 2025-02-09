@@ -5,7 +5,7 @@ import flushPromises from "flush-promises";
 import { createApp } from "vue";
 import { createMemoryHistory, createRouter } from "vue-router";
 
-jest.mock("@/api/event");
+vi.mock("@/api/event");
 
 const Home = { template: "<div><div>" };
 const About = { template: "<div><div>" };
@@ -29,7 +29,7 @@ describe("pageview", () => {
 	});
 
 	afterEach(() => {
-		jest.resetAllMocks();
+		vi.resetAllMocks();
 	});
 
 	test("pass a page as string", () => {
@@ -97,16 +97,19 @@ describe("pageview", () => {
 			const app = createApp();
 			const router = createRouter({
 				history: createMemoryHistory(),
-				routes: [{ path: "/" }, { path: "/about", component: About }],
+				routes: [
+					{ path: "/", component: Home },
+					{ path: "/about", component: About },
+				],
 			});
+
+			app.use(router);
 
 			app.use(VueGtag, {
 				config: {
 					id: 1,
 				},
 			});
-
-			app.use(router);
 
 			router.push("/about?foo=bar");
 
@@ -133,7 +136,10 @@ describe("pageview", () => {
 
 			const router = createRouter({
 				history: createMemoryHistory(),
-				routes: [{ path: "/" }, { path: "/about", component: About }],
+				routes: [
+					{ path: "/", component: Home },
+					{ path: "/about", component: About },
+				],
 			});
 
 			app.use(router);

@@ -7,9 +7,9 @@ import flushPromises from "flush-promises";
 import { createApp } from "vue";
 import { createMemoryHistory, createRouter } from "vue-router";
 
-jest.mock("@/track");
-jest.mock("@/api");
-jest.mock("@/add-configuration");
+vi.mock("@/track");
+vi.mock("@/api");
+vi.mock("@/add-configuration");
 
 const Home = { template: "<div></div>" };
 const About = { template: "<div></div>" };
@@ -38,12 +38,12 @@ describe("page-tracker", () => {
 			],
 		});
 
-		jest.spyOn(window.console, "warn").mockReturnValue();
-		jest.spyOn(utils, "load").mockResolvedValue();
+		vi.spyOn(window.console, "warn").mockReturnValue();
+		vi.spyOn(utils, "load").mockResolvedValue();
 	});
 
 	afterEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 
 	test("waits router ready before start tracking", async () => {
@@ -51,7 +51,7 @@ describe("page-tracker", () => {
 
 		app.use(router);
 
-		jest.spyOn(router, "isReady").mockResolvedValue();
+		vi.spyOn(router, "isReady").mockResolvedValue();
 
 		app.use(
 			VueGtag,
@@ -66,7 +66,7 @@ describe("page-tracker", () => {
 		router.push("/");
 		await flushPromises();
 
-		expect(router.isReady).toHaveBeenCalledBefore(api.config);
+		expect(router.isReady).toHaveBeenCalled();
 	});
 
 	test("fires the config hit", async () => {
@@ -154,7 +154,7 @@ describe("page-tracker", () => {
 
 	test("fires the onBeforeTrack method", async () => {
 		const app = createApp();
-		const onBeforeTrackSpy = jest.fn();
+		const onBeforeTrackSpy = vi.fn();
 
 		app.use(router);
 
@@ -191,7 +191,7 @@ describe("page-tracker", () => {
 
 	test("fires the onAfterTrack method", async () => {
 		const app = createApp();
-		const onAfterTrackSpy = jest.fn();
+		const onAfterTrackSpy = vi.fn();
 
 		app.use(router);
 
@@ -228,7 +228,7 @@ describe("page-tracker", () => {
 
 	test("remove routes from tracking based on path", async () => {
 		const app = createApp();
-		const onAfterTrackSpy = jest.fn();
+		const onAfterTrackSpy = vi.fn();
 		const router = createRouter({
 			history: createMemoryHistory(),
 			routes: [

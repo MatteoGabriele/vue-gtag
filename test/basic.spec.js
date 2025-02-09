@@ -2,11 +2,11 @@ import bootstrap from "@/bootstrap";
 import VueGtag from "@/index";
 import { createApp } from "vue";
 
-jest.mock("@/bootstrap");
+vi.mock("@/bootstrap");
 
 describe("basic", () => {
 	afterEach(() => {
-		jest.clearAllMocks();
+		vi.clearAllMocks();
 	});
 
 	test("installs plugin", () => {
@@ -17,23 +17,23 @@ describe("basic", () => {
 		expect(
 			Object.keys(app.config.globalProperties.$gtag),
 		).toMatchInlineSnapshot(`
-      Array [
-        "query",
-        "config",
-        "optOut",
-        "optIn",
-        "pageview",
-        "screenview",
-        "exception",
-        "linker",
-        "time",
-        "set",
-        "refund",
-        "purchase",
-        "customMap",
-        "event",
-      ]
-    `);
+			[
+			  "query",
+			  "config",
+			  "optOut",
+			  "optIn",
+			  "pageview",
+			  "screenview",
+			  "exception",
+			  "linker",
+			  "time",
+			  "set",
+			  "refund",
+			  "purchase",
+			  "customMap",
+			  "event",
+			]
+		`);
 	});
 
 	test("installs plugin without window object", () => {
