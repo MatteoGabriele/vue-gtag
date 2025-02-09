@@ -68,7 +68,14 @@ describe("registerGlobals", () => {
       },
     });
 
-    expect(window.dataLayer).toMatchSnapshot();
+    expect(window.dataLayer).toMatchInlineSnapshot(`
+      [
+        [
+          "js",
+          2021-04-20T08:00:00.000Z,
+        ],
+      ]
+    `);
   });
 
   test("optOut when disabled", async () => {

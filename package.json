@@ -17,8 +17,9 @@
     "fix": "biome check --write",
     "build": "vite build",
     "lint": "biome check",
-    "test": "vitest run",
-    "prepublishOnly": "yarn lint && yarn test && yarn build"
+    "test": "vitest",
+    "test:once": "vitest run",
+    "prepublishOnly": "yarn lint && yarn test:once && yarn build"
   },
   "keywords": [
     "google",
