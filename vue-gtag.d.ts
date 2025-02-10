@@ -296,7 +296,7 @@ declare module "vue-gtag" {
     onReady?: (gtag: Gtag.Gtag) => void;
     enabled?: boolean;
     deferScriptLoad?: boolean;
-    customResourceURL: string;
+    customResourceURL?: string;
     disableScriptLoad?: boolean;
     bootstrap?: boolean;
     globalObjectName?: string;
