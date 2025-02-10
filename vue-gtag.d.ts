@@ -124,13 +124,11 @@ declare module "vue-gtag" {
   /**
    * @see https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#action_data
    */
-  export interface EcommerceAction {
+  export interface EcommerceActionBase {
     /** Unique ID for the transaction. */
     transaction_id: string;
     /** The store or affiliation from which this transaction occurred */
     affiliation?: string;
-    /** Value (i.e., revenue) associated with the event */
-    value?: number;
     /** Tax amount */
     tax?: number;
     /** Shipping cost */
@@ -142,6 +140,25 @@ declare module "vue-gtag" {
     /** Checkout option (i.e. selected payment method) */
     checkout_option?: string;
   }
+
+  type UppercaseLetter = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z';
+  export type ISO4217Currency = `${UppercaseLetter}${UppercaseLetter}${UppercaseLetter}`;
+  
+  export interface EcommerceActionWithCurrency extends EcommerceActionBase {
+    /** Value (i.e., revenue) associated with the event */
+    value: number;
+    /** The currency of the value */
+    currency: ISO4217Currency;
+  }
+  
+  export interface EcommerceActionWithoutCurrency extends EcommerceActionBase {
+    /** Value (i.e., revenue) associated with the event */
+    value?: undefined;
+    /** The currency of the value */
+    currency?: undefined;
+  }
+  
+  export type EcommerceAction = EcommerceActionWithCurrency | EcommerceActionWithoutCurrency;
 
   export interface Linker {
     domains: string[];
