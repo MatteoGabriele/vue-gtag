@@ -39,10 +39,7 @@
   "unpkg": "./dist/vue-gtag.umd.js",
   "jsdelivr": "./dist/vue-gtag.umd.js",
   "types": "vue-gtag.d.ts",
-  "files": [
-    "dist",
-    "vue-gtag.d.ts"
-  ],
+  "files": ["dist", "vue-gtag.d.ts"],
   "bugs": {
     "url": "https://github.com/MatteoGabriele/vue-gtag/issues"
   },
