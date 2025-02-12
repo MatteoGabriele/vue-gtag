@@ -20,6 +20,10 @@ export const load = (url, options = {}) => {
       head.appendChild(link);
     }
 
+    if (options.cspNonce) {
+      script.setAttribute("nonce", options.cspNonce);
+    }
+
     head.appendChild(script);
 
     script.onload = resolve;

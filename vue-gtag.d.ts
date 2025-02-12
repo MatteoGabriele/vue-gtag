@@ -320,6 +320,7 @@ declare module "vue-gtag" {
     pageTrackerEnabled?: boolean;
     pageTrackerScreenviewEnabled?: boolean;
     defaultGroupName?: string;
+    cspNonce?: string;
     includes?: DomainConfig[];
     config?: DomainConfig;
   }
