@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@types/gtag.js": "^0.0.20",
     "@types/node": "^22.13.4",
     "flush-promises": "^1.0.2",
     "jsdom": "^26.0.0",

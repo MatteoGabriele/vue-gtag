@@ -8,7 +8,7 @@
   "files": {
     "ignoreUnknown": false,
     "ignore": ["dist"],
-    "include": ["./src"]
+    "include": ["./src/**/*.ts", "./tsconfig.json"]
   },
   "formatter": {
     "enabled": true,
@@ -25,8 +25,7 @@
   },
   "javascript": {
     "formatter": {
-      "quoteStyle": "double",
-      "enabled": true
+      "quoteStyle": "double"
     }
   }
 }

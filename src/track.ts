@@ -1,8 +1,8 @@
 import * as api from "@/api";
-import { getOptions } from "@/options";
-import { isFn, validateScreenviewShape } from "@/utils";
+import { type RoutePath, type TrackingTemplate, getOptions } from "@/options";
+import { validateScreenviewShape } from "@/utils";
 
-export default (to = {}, from = {}) => {
+export default (to: RoutePath, from: RoutePath) => {
   const {
     appName,
     pageTrackerTemplate: proxy,
@@ -14,9 +14,9 @@ export default (to = {}, from = {}) => {
     return;
   }
 
-  let template = to;
+  let template: TrackingTemplate = to;
 
-  if (isFn(proxy)) {
+  if (proxy) {
     template = proxy(to, from);
   } else if (useScreenview) {
     template = validateScreenviewShape({

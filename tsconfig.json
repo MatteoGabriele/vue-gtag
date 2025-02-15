@@ -3,7 +3,7 @@
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2020"],
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -18,11 +18,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    
+
     /* Vue specific */
     "jsx": "preserve",
     "jsxImportSource": "vue",
-    
+
     /* Path aliases */
     "baseUrl": ".",
     "paths": {
@@ -38,7 +38,7 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
 
-    "types": []
+    "types": ["@types/gtag.js"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
   "exclude": ["node_modules", "dist"]

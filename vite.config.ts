@@ -25,11 +25,9 @@ export default defineConfig({
         },
       },
     },
-    // Minify the output
     minify: 'terser',
   },
   plugins: [
-    // Generate .d.ts files
     dts({
       insertTypesEntry: true,
       rollupTypes: true,
