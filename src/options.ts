@@ -1,16 +1,11 @@
 import { mergeDeep } from "@/utils";
 import type { RouteLocationNormalized } from "vue-router";
 
-export type TrackingTemplate = {
-  app_name?: string;
-  screen_name?: string;
-};
-
 export type RoutePath = RouteLocationNormalized;
 export type PageTrackerTemplate = (
   to: RoutePath,
   from: RoutePath,
-) => TrackingTemplate;
+) => Gtag.ConfigParams;
 
 export type Config = {
   id: string;

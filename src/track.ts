@@ -1,5 +1,5 @@
 import * as api from "@/api";
-import { type RoutePath, type TrackingTemplate, getOptions } from "@/options";
+import { type RoutePath, getOptions } from "@/options";
 import { validateScreenviewShape } from "@/utils";
 
 export default (to: RoutePath, from: RoutePath) => {
@@ -14,7 +14,9 @@ export default (to: RoutePath, from: RoutePath) => {
     return;
   }
 
-  let template: TrackingTemplate = to;
+  let template: Gtag.ConfigParams = {
+    page_location: to.path,
+  };
 
   if (proxy) {
     template = proxy(to, from);

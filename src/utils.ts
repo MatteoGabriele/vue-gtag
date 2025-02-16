@@ -79,7 +79,7 @@ export const warn = (text, shouldLog = true) => {
   console.warn(`[vue-gtag] ${text}`);
 };
 
-export const validateScreenviewShape = (obj = {}) => {
+export const validateScreenviewShape = (obj: ): Gtag.ConfigParams => {
   warn(
     `Missing "appName" property inside the plugin options.`,
     obj.app_name == null,
