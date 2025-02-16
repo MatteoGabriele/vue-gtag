@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-export default () => {
+export default async () => {
   const {
     onReady,
     onError,
@@ -43,16 +43,17 @@ export default () => {
     return;
   }
 
-  return load(`${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`, {
-    preconnectOrigin: customPreconnectOrigin,
-    defer: deferScriptLoad,
-  })
-    .then(() => {
-      onReady?.(window[globalObjectName]);
-    })
-    .catch((error: Error) => {
-      onError?.(error);
+  try {
+    await load(
+      `${customResourceURL}?id=${config.id}&l=${globalDataLayerName}`,
+      {
+        preconnectOrigin: customPreconnectOrigin,
+        defer: deferScriptLoad,
+      },
+    );
 
-      return error;
-    });
+    onReady?.(window[globalObjectName]);
+  } catch (error: unknown) {
+    onError?.(error);
+  }
 };

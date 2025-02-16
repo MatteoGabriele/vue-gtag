@@ -15,7 +15,7 @@ export type Config = {
 export type GtagOptions = {
   bootstrap?: boolean;
   onReady?: (gtag: Gtag.Gtag) => void;
-  onError?: (error: Error) => void;
+  onError?: (error: unknown) => void;
   onBeforeTrack?: () => void;
   onAfterTrack?: () => void;
   pageTrackerTemplate?: PageTrackerTemplate;
