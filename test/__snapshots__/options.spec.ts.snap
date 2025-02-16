@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`options > getDefaultParams 1`] = `
+{
+  "bootstrap": true,
+  "customPreconnectOrigin": "https://www.googletagmanager.com",
+  "customResourceURL": "https://www.googletagmanager.com/gtag/js",
+  "defaultGroupName": "default",
+  "enabled": true,
+  "globalDataLayerName": "dataLayer",
+  "globalObjectName": "gtag",
+  "pageTrackerEnabled": true,
+  "pageTrackerPrependBase": true,
+  "pageTrackerSkipSamePath": true,
+}
+`;
+
+exports[`options > set and get options 1`] = `
+{
+  "bootstrap": true,
+  "config": {
+    "id": 1,
+  },
+  "customPreconnectOrigin": "https://www.googletagmanager.com",
+  "customResourceURL": "https://www.googletagmanager.com/gtag/js",
+  "defaultGroupName": "default",
+  "enabled": true,
+  "globalDataLayerName": "dataLayer",
+  "globalObjectName": "gtag",
+  "pageTrackerEnabled": true,
+  "pageTrackerPrependBase": true,
+  "pageTrackerSkipSamePath": true,
+}
+`;

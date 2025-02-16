@@ -1,18 +1,23 @@
-import attachApi from "@/attach-api";
+import * as api from "@/api";
 import bootstrap from "@/bootstrap";
-import { type InstallOptions, getOptions, setOptions } from "@/options";
+import { getOptions, setOptions } from "@/options";
 import { setRouter } from "@/router";
 import type { App } from "vue";
 import type { Router } from "vue-router";
+import type { InstallOptions } from "./types";
 
 const install = (app: App, options: InstallOptions, router?: Router) => {
-  attachApi(app);
   setOptions(options);
-  setRouter(router);
+
+  if (router) {
+    setRouter(router);
+  }
 
   if (getOptions().bootstrap) {
     bootstrap();
   }
+
+  app.config.globalProperties.$gtag = api;
 };
 
 export { default as query } from "@/api/query";

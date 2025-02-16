@@ -1,15 +1,16 @@
 import addConfiguration from "@/add-configuration";
 import addRoutesTracker from "@/add-routes-tracker";
-import { type GtagOptions, getOptions } from "@/options";
+import { getOptions } from "@/options";
 import registerGlobals from "@/register-globals";
 import { getRouter } from "@/router";
 import { load } from "@/utils";
 
-declare global {
-  interface Window {
-    [gtag: GtagOptions["globalObjectName"]]: Gtag.Gtag;
-  }
-}
+// declare global {
+//   interface Window {
+//     gtag: Gtag.Gtag;
+//     dataLayer: Parameters<Gtag.Gtag>;
+//   }
+// }
 
 export default async () => {
   const {

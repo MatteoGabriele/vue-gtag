@@ -1,6 +1,7 @@
 import event from "@/api/event";
-import { type RoutePath, getOptions } from "@/options";
+import { getOptions } from "@/options";
 import { getRouter } from "@/router";
+import type { RoutePath } from "@/types";
 import { getPathWithBase, isBrowser } from "@/utils";
 
 export default (param: string | RoutePath | Gtag.ConfigParams) => {

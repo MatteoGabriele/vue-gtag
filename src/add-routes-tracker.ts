@@ -2,7 +2,6 @@ import addConfiguration from "@/add-configuration";
 import { getOptions } from "@/options";
 import { getRouter } from "@/router";
 import track from "@/track";
-import { isFn } from "@/utils";
 import { nextTick } from "vue";
 
 const isRouteExcluded = (route) => {
@@ -33,13 +32,13 @@ export default () => {
           return;
         }
 
-        if (isFn(onBeforeTrack)) {
+        if (onBeforeTrack) {
           onBeforeTrack(to, from);
         }
 
         track(to, from);
 
-        if (isFn(onAfterTrack)) {
+        if (onAfterTrack) {
           onAfterTrack(to, from);
         }
       });

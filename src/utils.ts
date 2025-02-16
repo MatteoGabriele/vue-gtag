@@ -1,4 +1,10 @@
-export const load = (url, options = {}) => {
+export const load = (
+  url: string,
+  options?: {
+    defer?: boolean;
+    preconnectOrigin?: string;
+  },
+) => {
   return new Promise((resolve, reject) => {
     if (typeof document === "undefined") {
       return;
@@ -9,9 +15,12 @@ export const load = (url, options = {}) => {
 
     script.async = true;
     script.src = url;
-    script.defer = options.defer;
 
-    if (options.preconnectOrigin) {
+    if (options?.defer) {
+      script.defer = options.defer;
+    }
+
+    if (options?.preconnectOrigin) {
       const link = document.createElement("link");
 
       link.href = options.preconnectOrigin;
@@ -27,36 +36,27 @@ export const load = (url, options = {}) => {
   });
 };
 
-export const isFn = (fn) => typeof fn === "function";
-
-export const isObject = (item) => {
-  return item && typeof item === "object" && !Array.isArray(item);
+const isObject = (item: unknown): item is Record<string, unknown> => {
+  return Boolean(item && typeof item === "object" && !Array.isArray(item));
 };
 
-export const mergeDeep = (target, ...sources) => {
-  if (!sources.length) {
-    return target;
-  }
-
-  const source = sources.shift();
-
-  if (!isObject(target) || !isObject(source)) {
-    return;
-  }
-
+export const mergeDeep = <T extends object>(
+  target: T,
+  source: Partial<T>,
+): T => {
   for (const key in source) {
-    if (isObject(source[key])) {
-      if (!target[key]) {
-        Object.assign(target, { [key]: {} });
-      }
+    const sourceValue = source[key];
 
-      mergeDeep(target[key], source[key]);
-    } else {
-      Object.assign(target, { [key]: source[key] });
+    if (isObject(target[key]) && isObject(sourceValue)) {
+      Object.assign(target, {
+        [key]: mergeDeep(target[key], sourceValue as T),
+      });
+    } else if (sourceValue !== undefined) {
+      Object.assign(target, { [key]: sourceValue });
     }
   }
 
-  return mergeDeep(target, ...sources);
+  return target;
 };
 
 export const isBrowser = () => {
@@ -67,7 +67,7 @@ export const isBrowser = () => {
   return true;
 };
 
-export const warn = (text, shouldLog = true) => {
+export const warn = (text: string, shouldLog = true) => {
   if (!isBrowser() || process.env.NODE_ENV === "production") {
     return;
   }
@@ -79,7 +79,9 @@ export const warn = (text, shouldLog = true) => {
   console.warn(`[vue-gtag] ${text}`);
 };
 
-export const validateScreenviewShape = (obj: ): Gtag.ConfigParams => {
+export const validateScreenviewShape = (
+  obj: Gtag.CustomParams,
+): Gtag.ConfigParams => {
   warn(
     `Missing "appName" property inside the plugin options.`,
     obj.app_name == null,

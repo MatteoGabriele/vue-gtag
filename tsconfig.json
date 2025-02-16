@@ -38,8 +38,8 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
 
-    "types": ["@types/gtag.js"]
+    "types": ["@types/gtag.js", "@types/node", "./global"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "global.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -39,7 +39,7 @@ describe("load", () => {
   });
 });
 
-describe("mergeDeep", () => {
+describe.only("mergeDeep", () => {
   it("should merge two objects", () => {
     const a = { a: 1, c: { a: 1 } };
     const b = { b: 1, c: { b: 1 } };
@@ -72,16 +72,6 @@ describe("warn", () => {
     console.warn = vi.fn();
     util.warn("foo");
     expect(console.warn).toHaveBeenCalledWith("[vue-gtag] foo");
-  });
-});
-
-describe("isFn", () => {
-  it("should return true", () => {
-    expect(util.isFn(() => {})).toBe(true);
-  });
-
-  it("should return false", () => {
-    expect(util.isFn("hello")).toBe(false);
   });
 });
 

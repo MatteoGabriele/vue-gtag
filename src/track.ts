@@ -1,6 +1,7 @@
 import * as api from "@/api";
-import { type RoutePath, getOptions } from "@/options";
+import { getOptions } from "@/options";
 import { validateScreenviewShape } from "@/utils";
+import type { RoutePath } from "./types";
 
 export default (to: RoutePath, from: RoutePath) => {
   const {

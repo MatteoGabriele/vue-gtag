@@ -1,14 +1,16 @@
 import event from "@/api/event";
 import { getOptions } from "@/options";
 
-export default (param) => {
+export default (
+  param: string | Gtag.EventParams | Gtag.CustomParams | Gtag.ConfigParams,
+) => {
   const { appName } = getOptions();
 
   if (!param) {
     return;
   }
 
-  let template;
+  let template: Gtag.CustomParams;
 
   if (typeof param === "string") {
     template = {
