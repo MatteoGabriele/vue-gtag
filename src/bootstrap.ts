@@ -1,9 +1,15 @@
 import addConfiguration from "@/add-configuration";
 import addRoutesTracker from "@/add-routes-tracker";
-import { getOptions } from "@/options";
+import { type GtagOptions, getOptions } from "@/options";
 import registerGlobals from "@/register-globals";
 import { getRouter } from "@/router";
 import { load } from "@/utils";
+
+declare global {
+  interface Window {
+    [gtag: GtagOptions["globalObjectName"]]: Gtag.Gtag;
+  }
+}
 
 export default () => {
   const {
@@ -18,6 +24,10 @@ export default () => {
     pageTrackerEnabled,
     disableScriptLoad,
   } = getOptions();
+
+  if (config == null) {
+    return;
+  }
 
   const isPageTrackerEnabled = Boolean(pageTrackerEnabled && getRouter());
 
@@ -38,14 +48,10 @@ export default () => {
     defer: deferScriptLoad,
   })
     .then(() => {
-      if (onReady) {
-        onReady(window[globalObjectName]);
-      }
+      onReady?.(window[globalObjectName]);
     })
-    .catch((error) => {
-      if (onError) {
-        onError(error);
-      }
+    .catch((error: Error) => {
+      onError?.(error);
 
       return error;
     });

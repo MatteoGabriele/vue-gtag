@@ -90,7 +90,7 @@ export const validateScreenviewShape = (obj = {}) => {
   return obj;
 };
 
-export function getPathWithBase(path = "", base = "") {
+export function getPathWithBase(path = "", base = ""): string {
   const pathAsArray = path.split("/");
   const baseAsArray = base.split("/");
 

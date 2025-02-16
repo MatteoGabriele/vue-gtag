@@ -12,15 +12,15 @@ export type PageTrackerTemplate = (
   from: RoutePath,
 ) => TrackingTemplate;
 
-type Config = {
+export type Config = {
   id: string;
-  params?: Record<string, unknown>;
+  params?: Gtag.ConfigParams;
 };
 
-type GtagOptions = {
+export type GtagOptions = {
   bootstrap?: boolean;
-  onReady?: () => void;
-  onError?: () => void;
+  onReady?: (gtag: Gtag.Gtag) => void;
+  onError?: (error: Error) => void;
   onBeforeTrack?: () => void;
   onAfterTrack?: () => void;
   pageTrackerTemplate?: PageTrackerTemplate;
@@ -36,11 +36,15 @@ type GtagOptions = {
   pageTrackerUseFullPath?: boolean;
   pageTrackerPrependBase?: boolean;
   pageTrackerSkipSamePath?: boolean;
-  globalDataLayerName?: string;
-  globalObjectName?: string;
-  defaultGroupName?: string;
+  globalDataLayerName: string;
+  globalObjectName: string;
+  defaultGroupName: string;
   includes?: Config[];
   config?: Config;
+};
+
+export type InstallOptions = Partial<Omit<GtagOptions, "config">> & {
+  config: Config;
 };
 
 export const getDefaultParams = (): GtagOptions => ({
@@ -56,7 +60,7 @@ export const getDefaultParams = (): GtagOptions => ({
   defaultGroupName: "default",
 });
 
-let params: GtagOptions = {};
+let params: GtagOptions = getDefaultParams();
 
 export const setOptions = (options: Partial<GtagOptions>): void => {
   const defaultParams = getDefaultParams();

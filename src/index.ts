@@ -1,9 +1,11 @@
 import attachApi from "@/attach-api";
 import bootstrap from "@/bootstrap";
-import { getOptions, setOptions } from "@/options";
+import { type InstallOptions, getOptions, setOptions } from "@/options";
 import { setRouter } from "@/router";
+import type { App } from "vue";
+import type { Router } from "vue-router";
 
-const install = (app, options, router) => {
+const install = (app: App, options: InstallOptions, router?: Router) => {
   attachApi(app);
   setOptions(options);
   setRouter(router);

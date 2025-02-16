@@ -1,9 +1,11 @@
-let router;
+import type { Router } from "vue-router";
 
-export const setRouter = (instance) => {
+let router: Router | undefined;
+
+export const setRouter = (instance: Router) => {
   router = instance;
 };
 
-export const getRouter = () => router;
+export const getRouter = (): Router | undefined => router;
 
 export default router;
