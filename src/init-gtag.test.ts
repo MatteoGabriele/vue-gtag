@@ -101,5 +101,6 @@ describe("initGtag", () => {
     await initGtag();
 
     expect(addRouterTracking).toHaveBeenCalled();
+    expect(addConfiguration).not.toHaveBeenCalled();
   });
 });
