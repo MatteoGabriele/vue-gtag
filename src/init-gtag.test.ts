@@ -55,6 +55,7 @@ describe("initGtag", () => {
     const spyOnReady = vi.fn();
 
     updateConfig({
+      tagId: "UA-12345678",
       onReady: spyOnReady,
     });
 
@@ -69,6 +70,7 @@ describe("initGtag", () => {
     vi.spyOn(utils, "injectScript").mockRejectedValue(new Error());
 
     updateConfig({
+      tagId: "UA-12345678",
       onError: spyOnError,
     });
 
@@ -101,6 +103,12 @@ describe("initGtag", () => {
     await initGtag();
 
     expect(addRouterTracking).toHaveBeenCalled();
+    expect(addConfiguration).not.toHaveBeenCalled();
+  });
+
+  it("should not bootstrap gtag if tagId is missing", async () => {
+    await initGtag();
+
     expect(addConfiguration).not.toHaveBeenCalled();
   });
 });

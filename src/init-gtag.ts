@@ -15,6 +15,10 @@ export default async function start(): Promise<void> {
     onError,
   } = getConfig();
 
+  if (!tagId) {
+    return;
+  }
+
   if (router) {
     addRouterTracking();
   } else {
