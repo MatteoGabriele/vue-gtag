@@ -1,8 +1,14 @@
 import type { Router } from "vue-router";
 
+export type ConfigParams =
+  | Gtag.ControlParams
+  | Gtag.EventParams
+  | Gtag.ConfigParams
+  | Gtag.CustomParams;
+
 export type Config = {
   tagId?: string;
-  config?: Gtag.GtagCommands["config"][1]; // refactor to get type
+  config?: ConfigParams;
   enabled: boolean | (() => Promise<boolean>);
   resourceUrl: string;
   resourceUrlPreconnect: string;
