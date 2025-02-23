@@ -9,6 +9,7 @@ export type ConfigParams =
 export type Config = {
   tagId?: string;
   config?: ConfigParams;
+  domains?: Array<{ tagId: string; config?: ConfigParams }>;
   enabled: boolean | (() => Promise<boolean>);
   resourceUrl: string;
   resourceUrlPreconnect: string;
