@@ -1,3 +1,5 @@
+import type { Router } from "vue-router";
+
 export type Config = {
   tagId?: string;
   enabled: boolean | (() => Promise<boolean>);
@@ -6,6 +8,7 @@ export type Config = {
   resourceDeferred: boolean;
   dataLayerName: string;
   gtagName: string;
+  router?: Router;
   onReady?: () => void;
   onError?: (error: unknown) => void;
 };

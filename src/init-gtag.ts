@@ -1,5 +1,7 @@
 import { getConfig } from "@/config";
 import { injectScript } from "@/utils";
+import addConfiguration from "./add-configuration";
+import addRouterTracking from "./add-router-tracking";
 
 export default async function start(): Promise<void> {
   const {
@@ -8,9 +10,16 @@ export default async function start(): Promise<void> {
     resourceDeferred,
     dataLayerName,
     tagId,
+    router,
     onReady,
     onError,
   } = getConfig();
+
+  if (router) {
+    addRouterTracking();
+  } else {
+    addConfiguration();
+  }
 
   try {
     await injectScript(`${resourceUrl}?id=${tagId}&l=${dataLayerName}`, {

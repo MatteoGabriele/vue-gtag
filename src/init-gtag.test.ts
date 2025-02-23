@@ -1,8 +1,13 @@
+import addConfiguration from "@/add-configuration";
+import addRouterTracking from "@/add-router-tracking";
 import { resetConfig, updateConfig } from "@/config";
 import initGtag from "@/init-gtag";
 import * as utils from "@/utils";
+import { createRouter, createWebHistory } from "vue-router";
 
 vi.mock("@/utils");
+vi.mock("@/add-configuration");
+vi.mock("@/add-router-tracking");
 
 describe("initGtag", () => {
   beforeEach(resetConfig);
@@ -72,9 +77,29 @@ describe("initGtag", () => {
     expect(spyOnError).toHaveBeenCalled();
   });
 
-  it("should add gtag to the window object", () => {});
+  it("should add initial gtag config call", async () => {
+    updateConfig({
+      tagId: "UA-12345678",
+    });
 
-  it.todo("should add initial gtag config call", () => {});
+    await initGtag();
 
-  it.todo("should initialize routes tracking", () => {});
+    expect(addConfiguration).toHaveBeenCalled();
+  });
+
+  it("should initialize router tracking", async () => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes: [{ path: "/", component: { template: "<div />" } }],
+    });
+
+    updateConfig({
+      tagId: "UA-12345678",
+      router,
+    });
+
+    await initGtag();
+
+    expect(addRouterTracking).toHaveBeenCalled();
+  });
 });
