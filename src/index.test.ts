@@ -9,7 +9,7 @@ describe("index", () => {
 
   it("should be disabled by default", () => {
     createGtag({
-      targetId: "UA-1234567",
+      tagId: "UA-1234567",
     });
 
     expect(initGtag).not.toHaveBeenCalled();
@@ -17,7 +17,7 @@ describe("index", () => {
 
   it("should enable plugin", () => {
     createGtag({
-      targetId: "UA-1234567",
+      tagId: "UA-1234567",
       enabled: true,
     });
 
@@ -26,7 +26,7 @@ describe("index", () => {
 
   it("should enable plugin with a promise", () => {
     createGtag({
-      targetId: "UA-1234567",
+      tagId: "UA-1234567",
       enabled: () => Promise.resolve(true),
     });
 

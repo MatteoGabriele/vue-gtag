@@ -9,7 +9,7 @@ describe("initGtag", () => {
 
   it("should download the gtag.js library", async () => {
     updateConfig({
-      targetId: "UA-12345678",
+      tagId: "UA-12345678",
     });
 
     await initGtag();
@@ -28,7 +28,7 @@ describe("initGtag", () => {
 
   it("should download a custom version of the gtag.js library", async () => {
     updateConfig({
-      targetId: "UA-12345678",
+      tagId: "UA-12345678",
       resourceUrl: "custom_resource_url",
     });
 

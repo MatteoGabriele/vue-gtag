@@ -1,5 +1,5 @@
 export type Config = {
-  targetId?: string;
+  tagId?: string;
   enabled: boolean | (() => Promise<boolean>);
   resourceUrl: string;
   resourceUrlPreconnect: string;

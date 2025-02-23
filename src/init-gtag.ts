@@ -7,13 +7,13 @@ export default async function start(): Promise<void> {
     resourceUrlPreconnect,
     resourceDeferred,
     dataLayerName,
-    targetId,
+    tagId,
     onReady,
     onError,
   } = getConfig();
 
   try {
-    await injectScript(`${resourceUrl}?id=${targetId}&l=${dataLayerName}`, {
+    await injectScript(`${resourceUrl}?id=${tagId}&l=${dataLayerName}`, {
       preconnectOrigin: resourceUrlPreconnect,
       defer: resourceDeferred,
     });
