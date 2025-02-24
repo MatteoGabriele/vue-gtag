@@ -1,7 +1,7 @@
 import { createGtag } from "@/index";
 import initGtag from "@/init-gtag";
+import { resetSettings } from "@/settings";
 import flushPromises from "flush-promises";
-import { resetSettings } from "./config";
 
 vi.mock("@/init-gtag");
 

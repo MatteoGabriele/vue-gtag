@@ -1,6 +1,6 @@
+import addConfiguration from "@/add-configuration";
 import query from "@/gtag/query";
-import addConfiguration from "./add-configuration";
-import { resetSettings, updateSettings } from "./config";
+import { resetSettings, updateSettings } from "@/settings";
 
 vi.mock("@/gtag/query");
 

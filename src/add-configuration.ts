@@ -1,5 +1,5 @@
 import query from "@/gtag/query";
-import { getSettings } from "./config";
+import { getSettings } from "@/settings";
 
 export default function addConfiguration(): void {
   const { tagId, config, domains } = getSettings();
