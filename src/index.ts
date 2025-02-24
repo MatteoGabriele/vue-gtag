@@ -1,9 +1,9 @@
 import { type Settings, updateSettings } from "@/config";
 import initGtag from "@/init-gtag";
 
-type PluginSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
+type AppSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
 
-export const createGtag = async (settings: PluginSettings): Promise<void> => {
+export const createGtag = async (settings: AppSettings): Promise<void> => {
   updateSettings(settings);
 
   const enabled =
