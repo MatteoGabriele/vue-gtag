@@ -6,7 +6,7 @@ export type ConfigParams =
   | Gtag.ConfigParams
   | Gtag.CustomParams;
 
-export type Config = {
+export type Settings = {
   tagId?: string;
   config?: ConfigParams;
   domains?: Array<{ tagId: string; config?: ConfigParams }>;
@@ -21,7 +21,7 @@ export type Config = {
   onError?: (error: unknown) => void;
 };
 
-const defaultConfig: Readonly<Config> = {
+const defaultSettings: Readonly<Settings> = {
   enabled: false,
   resourceUrl: "https://www.googletagmanager.com/gtag/js",
   resourceUrlPreconnect: "https://www.googletagmanager.com",
@@ -30,14 +30,14 @@ const defaultConfig: Readonly<Config> = {
   gtagName: "gtag",
 };
 
-let config: Config = { ...defaultConfig };
+let settings: Settings = { ...defaultSettings };
 
-export const getConfig = (): Config => config;
+export const getSettings = (): Settings => settings;
 
-export const resetConfig = (): void => {
-  config = { ...defaultConfig };
+export const resetSettings = (): void => {
+  settings = { ...defaultSettings };
 };
 
-export const updateConfig = (configParams: Partial<Config>): void => {
-  config = { ...config, ...configParams };
+export const updateSettings = (configParams: Partial<Settings>): void => {
+  settings = { ...settings, ...configParams };
 };

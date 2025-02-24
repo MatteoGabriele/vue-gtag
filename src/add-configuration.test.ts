@@ -1,14 +1,14 @@
 import query from "@/gtag/query";
 import addConfiguration from "./add-configuration";
-import { resetConfig, updateConfig } from "./config";
+import { resetSettings, updateSettings } from "./config";
 
 vi.mock("@/gtag/query");
 
 describe("addConfiguration", () => {
-  beforeEach(resetConfig);
+  beforeEach(resetSettings);
 
   it("should query with initial configuration", () => {
-    updateConfig({
+    updateSettings({
       tagId: "UA-12345678",
       config: {
         send_page_view: false,
@@ -23,11 +23,11 @@ describe("addConfiguration", () => {
   });
 
   it("should query multiple domains", () => {
-    updateConfig({
+    updateSettings({
       tagId: "UA-1",
       domains: [
         { tagId: "UA-2", config: { send_page_view: false } },
-        { tagId: "UA-3" },
+        { tagId: "UA-3", config: { currency: "USD" } },
       ],
     });
 
@@ -39,6 +39,8 @@ describe("addConfiguration", () => {
       send_page_view: false,
     });
 
-    expect(query).toHaveBeenNthCalledWith(3, "config", "UA-3", undefined);
+    expect(query).toHaveBeenNthCalledWith(3, "config", "UA-3", {
+      currency: "USD",
+    });
   });
 });

@@ -1,6 +1,6 @@
 import addConfiguration from "@/add-configuration";
 import addRouterTracking from "@/add-router-tracking";
-import { resetConfig, updateConfig } from "@/config";
+import { resetSettings, updateSettings } from "@/config";
 import initGtag from "@/init-gtag";
 import * as utils from "@/utils";
 import { createRouter, createWebHistory } from "vue-router";
@@ -10,10 +10,10 @@ vi.mock("@/add-configuration");
 vi.mock("@/add-router-tracking");
 
 describe("initGtag", () => {
-  beforeEach(resetConfig);
+  beforeEach(resetSettings);
 
   it("should download the gtag.js library", async () => {
-    updateConfig({
+    updateSettings({
       tagId: "UA-12345678",
     });
 
@@ -32,7 +32,7 @@ describe("initGtag", () => {
   });
 
   it("should download a custom version of the gtag.js library", async () => {
-    updateConfig({
+    updateSettings({
       tagId: "UA-12345678",
       resourceUrl: "custom_resource_url",
     });
@@ -54,7 +54,7 @@ describe("initGtag", () => {
   it("should fire callback when plugin is ready", async () => {
     const spyOnReady = vi.fn();
 
-    updateConfig({
+    updateSettings({
       tagId: "UA-12345678",
       onReady: spyOnReady,
     });
@@ -69,7 +69,7 @@ describe("initGtag", () => {
 
     vi.spyOn(utils, "injectScript").mockRejectedValue(new Error());
 
-    updateConfig({
+    updateSettings({
       tagId: "UA-12345678",
       onError: spyOnError,
     });
@@ -80,7 +80,7 @@ describe("initGtag", () => {
   });
 
   it("should add initial gtag config call", async () => {
-    updateConfig({
+    updateSettings({
       tagId: "UA-12345678",
     });
 
@@ -95,7 +95,7 @@ describe("initGtag", () => {
       routes: [{ path: "/", component: { template: "<div />" } }],
     });
 
-    updateConfig({
+    updateSettings({
       tagId: "UA-12345678",
       router,
     });

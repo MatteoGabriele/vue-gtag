@@ -1,15 +1,15 @@
-import { type Config, updateConfig } from "@/config";
+import { type Settings, updateSettings } from "@/config";
 import initGtag from "@/init-gtag";
 
-type CreateGtagConfig = Partial<Config> & Required<Pick<Config, "tagId">>;
+type PluginSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
 
-export const createGtag = async (config: CreateGtagConfig): Promise<void> => {
-  updateConfig(config);
+export const createGtag = async (settings: PluginSettings): Promise<void> => {
+  updateSettings(settings);
 
   const enabled =
-    typeof config.enabled === "function"
-      ? await config.enabled()
-      : config.enabled;
+    typeof settings.enabled === "function"
+      ? await settings.enabled()
+      : settings.enabled;
 
   if (!enabled) {
     return;

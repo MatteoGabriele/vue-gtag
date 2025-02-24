@@ -1,8 +1,8 @@
-import { getConfig, updateConfig } from "@/config";
+import { getSettings, updateSettings } from "@/config";
 
 describe("config", () => {
   it("should return the configuration", () => {
-    expect(getConfig()).toEqual({
+    expect(getSettings()).toEqual({
       enabled: false,
       resourceUrl: "https://www.googletagmanager.com/gtag/js",
       resourceUrlPreconnect: "https://www.googletagmanager.com",
@@ -13,8 +13,8 @@ describe("config", () => {
   });
 
   it("should update the default configuration", () => {
-    updateConfig({ enabled: true });
+    updateSettings({ enabled: true });
 
-    expect(getConfig()).toEqual(expect.objectContaining({ enabled: true }));
+    expect(getSettings()).toEqual(expect.objectContaining({ enabled: true }));
   });
 });

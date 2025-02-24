@@ -1,4 +1,4 @@
-import { getConfig } from "@/config";
+import { getSettings } from "@/config";
 import { injectScript } from "@/utils";
 import addConfiguration from "./add-configuration";
 import addRouterTracking from "./add-router-tracking";
@@ -13,7 +13,7 @@ export default async function start(): Promise<void> {
     router,
     onReady,
     onError,
-  } = getConfig();
+  } = getSettings();
 
   if (!tagId) {
     return;

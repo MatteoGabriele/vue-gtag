@@ -1,12 +1,12 @@
 import { createGtag } from "@/index";
 import initGtag from "@/init-gtag";
 import flushPromises from "flush-promises";
-import { resetConfig } from "./config";
+import { resetSettings } from "./config";
 
 vi.mock("@/init-gtag");
 
 describe("index", () => {
-  beforeEach(resetConfig);
+  beforeEach(resetSettings);
 
   it("should be disabled by default", () => {
     createGtag({
