@@ -1,4 +1,4 @@
-import { getSettings } from "@/config";
+import { getSettings } from "@/settings";
 import { injectScript } from "@/utils";
 import addConfiguration from "./add-configuration";
 import addRouterTracking from "./add-router-tracking";

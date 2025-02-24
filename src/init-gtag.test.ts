@@ -1,7 +1,7 @@
 import addConfiguration from "@/add-configuration";
 import addRouterTracking from "@/add-router-tracking";
-import { resetSettings, updateSettings } from "@/config";
 import initGtag from "@/init-gtag";
+import { resetSettings, updateSettings } from "@/settings";
 import * as utils from "@/utils";
 import { createRouter, createWebHistory } from "vue-router";
 

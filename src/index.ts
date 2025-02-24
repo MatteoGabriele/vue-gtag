@@ -1,5 +1,5 @@
-import { type Settings, updateSettings } from "@/config";
 import initGtag from "@/init-gtag";
+import { type Settings, updateSettings } from "@/settings";
 
 type AppSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
 
