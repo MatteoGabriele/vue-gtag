@@ -25,7 +25,7 @@ describe("addConfiguration", () => {
   it("should query multiple domains", () => {
     updateSettings({
       tagId: "UA-1",
-      domains: [
+      additionalAccounts: [
         { tagId: "UA-2", config: { send_page_view: false } },
         { tagId: "UA-3", config: { currency: "USD" } },
       ],

@@ -10,7 +10,7 @@ export async function injectScript(
       return;
     }
 
-    const head = document.head || document.getElementsByTagName("head")[0];
+    const head = document.head;
     const script = document.createElement("script");
 
     script.async = true;

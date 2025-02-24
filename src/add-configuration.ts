@@ -2,7 +2,7 @@ import query from "@/gtag/query";
 import { getSettings } from "@/settings";
 
 export default function addConfiguration(): void {
-  const { tagId, config, domains } = getSettings();
+  const { tagId, config, additionalAccounts } = getSettings();
 
   if (!tagId) {
     return;
@@ -10,11 +10,11 @@ export default function addConfiguration(): void {
 
   query("config", tagId, config);
 
-  if (!domains) {
+  if (!additionalAccounts) {
     return;
   }
 
-  for (const domain of domains) {
-    query("config", domain.tagId, domain.config);
+  for (const account of additionalAccounts) {
+    query("config", account.tagId, account.config);
   }
 }
