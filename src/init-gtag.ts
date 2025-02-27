@@ -1,4 +1,3 @@
-import query from "@/gtag/query";
 import { getSettings } from "@/settings";
 import { injectScript } from "@/utils";
 import addConfiguration from "./add-configuration";
@@ -19,8 +18,6 @@ export default async function start(): Promise<void> {
   if (!tagId) {
     return;
   }
-
-  query("js", new Date());
 
   if (router) {
     addRouterTracking();

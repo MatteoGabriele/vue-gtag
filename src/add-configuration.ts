@@ -8,6 +8,7 @@ export default function addConfiguration(): void {
     return;
   }
 
+  query("js", new Date());
   query("config", tagId, config);
 
   if (!additionalAccounts) {
