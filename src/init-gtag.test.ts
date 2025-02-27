@@ -1,5 +1,6 @@
 import addConfiguration from "@/add-configuration";
 import addRouterTracking from "@/add-router-tracking";
+import query from "@/gtag/query";
 import initGtag from "@/init-gtag";
 import { resetSettings, updateSettings } from "@/settings";
 import * as utils from "@/utils";
@@ -8,9 +9,20 @@ import { createRouter, createWebHistory } from "vue-router";
 vi.mock("@/utils");
 vi.mock("@/add-configuration");
 vi.mock("@/add-router-tracking");
+vi.mock("@/gtag/query");
 
 describe("initGtag", () => {
   beforeEach(resetSettings);
+
+  it("should add gtag.js snippet", async () => {
+    updateSettings({
+      tagId: "UA-12345678",
+    });
+
+    await initGtag();
+
+    expect(query).toHaveBeenCalledWith("js", new Date());
+  });
 
   it("should download the gtag.js library", async () => {
     updateSettings({
