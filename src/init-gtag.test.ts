@@ -104,7 +104,7 @@ describe("initGtag", () => {
     await initGtag();
 
     expect(addRouterTracking).toHaveBeenCalled();
-    expect(addConfiguration).not.toHaveBeenCalled();
+    expect(addConfiguration).toHaveBeenCalled();
   });
 
   it("should not bootstrap gtag if tagId is missing", async () => {

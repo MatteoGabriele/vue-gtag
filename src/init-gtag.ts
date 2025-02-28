@@ -19,10 +19,10 @@ export default async function start(): Promise<void> {
     return;
   }
 
+  addConfiguration();
+
   if (router) {
     addRouterTracking();
-  } else {
-    addConfiguration();
   }
 
   try {

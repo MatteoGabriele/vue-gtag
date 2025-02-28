@@ -1,3 +1,7 @@
+export default function isServer(): boolean {
+  return typeof window === "undefined" || typeof document === "undefined";
+}
+
 export async function injectScript(
   url: string,
   options?: {
@@ -6,7 +10,7 @@ export async function injectScript(
   },
 ): Promise<void> {
   return new Promise((resolve, reject) => {
-    if (typeof document === "undefined") {
+    if (isServer()) {
       return;
     }
 
