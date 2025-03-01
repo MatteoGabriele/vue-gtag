@@ -1,5 +1,28 @@
+import type { RouteLocationNormalizedGeneric } from "vue-router";
 import query from "./gtag/query";
 import { getSettings } from "./settings";
+
+function isRouteExcluded(route: RouteLocationNormalizedGeneric) {
+  const { excludedRoutes } = getSettings();
+
+  return excludedRoutes?.some(({ name, path } = {}) => {
+    return (name && name === route.name) || (path && path === route.path);
+  });
+}
+
+function trackRoute(route: RouteLocationNormalizedGeneric) {
+  const { onBeforeTrack, onAfterTrack } = getSettings();
+
+  if (isRouteExcluded(route)) {
+    return;
+  }
+
+  onBeforeTrack?.();
+
+  query("event", "page_view", { page_path: route.path });
+
+  onAfterTrack?.();
+}
 
 export default async function addRouterTracking(): Promise<void> {
   const { router } = getSettings();
@@ -10,5 +33,7 @@ export default async function addRouterTracking(): Promise<void> {
 
   await router.isReady();
 
-  query("event", "page_view", { page_path: "/" });
+  trackRoute(router.currentRoute.value);
+
+  router.afterEach(trackRoute);
 }

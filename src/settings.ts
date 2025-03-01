@@ -1,4 +1,4 @@
-import type { Router } from "vue-router";
+import type { RouteLocationNormalizedGeneric, Router } from "vue-router";
 
 export type ConfigParams =
   | Gtag.ControlParams
@@ -17,8 +17,11 @@ export type Settings = {
   dataLayerName: string;
   gtagName: string;
   router?: Router;
+  excludedRoutes?: Array<{ path?: string; name?: string }>;
   onReady?: () => void;
   onError?: (error: unknown) => void;
+  onBeforeTrack?: () => void;
+  onAfterTrack?: () => void;
 };
 
 const defaultSettings: Readonly<Settings> = {
