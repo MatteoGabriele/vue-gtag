@@ -1,4 +1,4 @@
-import initGtag from "@/init-gtag";
+import addGtag from "@/add-gtag";
 import { type Settings, updateSettings } from "@/settings";
 
 type AppSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
@@ -15,5 +15,5 @@ export const createGtag = async (settings: AppSettings): Promise<void> => {
     return;
   }
 
-  initGtag();
+  addGtag();
 };

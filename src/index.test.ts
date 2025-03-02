@@ -1,9 +1,9 @@
+import addGtag from "@/add-gtag";
 import { createGtag } from "@/index";
-import initGtag from "@/init-gtag";
 import { resetSettings } from "@/settings";
 import flushPromises from "flush-promises";
 
-vi.mock("@/init-gtag");
+vi.mock("@/add-gtag");
 
 describe("index", () => {
   beforeEach(resetSettings);
@@ -13,7 +13,7 @@ describe("index", () => {
       tagId: "UA-1234567",
     });
 
-    expect(initGtag).not.toHaveBeenCalled();
+    expect(addGtag).not.toHaveBeenCalled();
   });
 
   it("should enable plugin", () => {
@@ -22,7 +22,7 @@ describe("index", () => {
       enabled: true,
     });
 
-    expect(initGtag).toHaveBeenCalled();
+    expect(addGtag).toHaveBeenCalled();
   });
 
   it("should enable plugin with a promise", async () => {
@@ -33,6 +33,6 @@ describe("index", () => {
 
     await flushPromises();
 
-    expect(initGtag).toHaveBeenCalled();
+    expect(addGtag).toHaveBeenCalled();
   });
 });

@@ -1,6 +1,6 @@
 import addConfiguration from "@/add-configuration";
+import addGtag from "@/add-gtag";
 import addRouterTracking from "@/add-router-tracking";
-import initGtag from "@/init-gtag";
 import { resetSettings, updateSettings } from "@/settings";
 import * as utils from "@/utils";
 import { createRouter, createWebHistory } from "vue-router";
@@ -10,7 +10,7 @@ vi.mock("@/add-configuration");
 vi.mock("@/add-router-tracking");
 vi.mock("@/gtag/query");
 
-describe("initGtag", () => {
+describe("addGtag", () => {
   beforeEach(resetSettings);
 
   it("should download the gtag.js library", async () => {
@@ -18,7 +18,7 @@ describe("initGtag", () => {
       tagId: "UA-12345678",
     });
 
-    await initGtag();
+    await addGtag();
 
     const resource = "https://www.googletagmanager.com/gtag/js";
     const preconnect = "https://www.googletagmanager.com";
@@ -38,7 +38,7 @@ describe("initGtag", () => {
       resourceUrl: "custom_resource_url",
     });
 
-    await initGtag();
+    await addGtag();
 
     const resource = "custom_resource_url";
     const preconnect = "https://www.googletagmanager.com";
@@ -60,7 +60,7 @@ describe("initGtag", () => {
       onReady: spyOnReady,
     });
 
-    await initGtag();
+    await addGtag();
 
     expect(spyOnReady).toHaveBeenCalled();
   });
@@ -75,7 +75,7 @@ describe("initGtag", () => {
       onError: spyOnError,
     });
 
-    await initGtag();
+    await addGtag();
 
     expect(spyOnError).toHaveBeenCalled();
   });
@@ -85,7 +85,7 @@ describe("initGtag", () => {
       tagId: "UA-12345678",
     });
 
-    await initGtag();
+    await addGtag();
 
     expect(addConfiguration).toHaveBeenCalled();
   });
@@ -101,14 +101,14 @@ describe("initGtag", () => {
       router,
     });
 
-    await initGtag();
+    await addGtag();
 
     expect(addRouterTracking).toHaveBeenCalled();
     expect(addConfiguration).toHaveBeenCalled();
   });
 
   it("should not bootstrap gtag if tagId is missing", async () => {
-    await initGtag();
+    await addGtag();
 
     expect(addConfiguration).not.toHaveBeenCalled();
   });

@@ -3,7 +3,7 @@ import { injectScript } from "@/utils";
 import addConfiguration from "./add-configuration";
 import addRouterTracking from "./add-router-tracking";
 
-export default async function start(): Promise<void> {
+export default async function addGtag(): Promise<void> {
   const {
     resourceUrl,
     resourceUrlPreconnect,
