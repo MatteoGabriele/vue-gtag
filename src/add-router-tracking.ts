@@ -2,15 +2,19 @@ import { getSettings } from "@/settings";
 import trackRoute from "@/track-route";
 
 export default async function addRouterTracking(): Promise<void> {
-  const { router } = getSettings();
+  const { pageTracker } = getSettings();
 
-  if (!router) {
+  if (!pageTracker?.router) {
     return;
   }
+
+  const { router } = pageTracker;
 
   await router.isReady();
 
   trackRoute(router.currentRoute.value);
 
-  router.afterEach(trackRoute);
+  router.afterEach((to) => {
+    trackRoute(to);
+  });
 }

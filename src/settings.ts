@@ -1,10 +1,27 @@
 import type { RouteLocationNormalizedGeneric, Router } from "vue-router";
 
-export type ConfigParams =
+type ConfigParams =
   | Gtag.ControlParams
   | Gtag.EventParams
   | Gtag.ConfigParams
   | Gtag.CustomParams;
+
+type PageTrackerTemplate =
+  | Partial<RouteLocationNormalizedGeneric>
+  | ((
+      to: RouteLocationNormalizedGeneric,
+      from: RouteLocationNormalizedGeneric,
+    ) => Partial<RouteLocationNormalizedGeneric>);
+
+type PageTracker = {
+  router: Router;
+  template?: PageTrackerTemplate;
+  useScreenview?: boolean;
+  exclude?: Array<{ path?: string; name?: string }>;
+  appName?: string;
+  onBeforeTrack?: () => void;
+  onAfterTrack?: () => void;
+};
 
 export type Settings = {
   tagId?: string;
@@ -16,12 +33,9 @@ export type Settings = {
   resourceDeferred: boolean;
   dataLayerName: string;
   gtagName: string;
-  router?: Router;
-  excludedRoutes?: Array<{ path?: string; name?: string }>;
+  pageTracker?: PageTracker;
   onReady?: () => void;
   onError?: (error: unknown) => void;
-  onBeforeTrack?: () => void;
-  onAfterTrack?: () => void;
 };
 
 const defaultSettings: Readonly<Settings> = {

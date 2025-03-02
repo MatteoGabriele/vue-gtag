@@ -3,7 +3,7 @@ import isServer from "@/utils";
 
 type QueryParams = Parameters<Gtag.Gtag>;
 
-export default function query(...args: QueryParams): void {
+export default function query(...args: QueryParams) {
   const { dataLayerName, gtagName } = getSettings();
 
   if (isServer()) {

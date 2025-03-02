@@ -1,7 +1,7 @@
 import query from "@/gtag/query";
 import { getSettings } from "@/settings";
 
-export default function addConfiguration(): void {
+export default function addConfiguration() {
   const { tagId, config, additionalAccounts } = getSettings();
 
   if (!tagId) {

@@ -10,7 +10,7 @@ export default async function addGtag(): Promise<void> {
     resourceDeferred,
     dataLayerName,
     tagId,
-    router,
+    pageTracker,
     onReady,
     onError,
   } = getSettings();
@@ -21,7 +21,7 @@ export default async function addGtag(): Promise<void> {
 
   addConfiguration();
 
-  if (router) {
+  if (pageTracker?.router) {
     addRouterTracking();
   }
 

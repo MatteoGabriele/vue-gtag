@@ -4,7 +4,7 @@ import query from "./query";
 
 type ConfigParams = Tail<Gtag.GtagCommands["config"]>;
 
-export default function config(...args: ConfigParams): void {
+export default function config(...args: ConfigParams) {
   const { tagId, additionalAccounts } = getSettings();
 
   if (!tagId) {

@@ -98,7 +98,9 @@ describe("addGtag", () => {
 
     updateSettings({
       tagId: "UA-12345678",
-      router,
+      pageTracker: {
+        router,
+      },
     });
 
     await addGtag();
