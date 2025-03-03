@@ -14,19 +14,6 @@ function isRouteExcluded(route: RouteLocationNormalizedGeneric): boolean {
   });
 }
 
-function queryRoute(route: RouteLocationNormalizedGeneric) {
-  const { pageTracker } = getSettings();
-
-  if (pageTracker?.useScreenview) {
-    query("event", "screen_view", {
-      app_name: pageTracker.appName,
-      screen_name: route.name,
-    });
-  } else {
-    query("event", "page_view", { page_path: route.path });
-  }
-}
-
 export default function trackRoute(route: RouteLocationNormalizedGeneric) {
   const { pageTracker } = getSettings();
 
@@ -36,7 +23,23 @@ export default function trackRoute(route: RouteLocationNormalizedGeneric) {
 
   pageTracker?.onBeforeTrack?.();
 
-  queryRoute(route);
+  const eventType = pageTracker?.useScreenview ? "screen_view" : "page_view";
+
+  if (pageTracker?.template) {
+    const template =
+      typeof pageTracker.template === "function"
+        ? pageTracker.template(route)
+        : pageTracker.template;
+
+    query("event", eventType, template);
+  } else if (pageTracker?.useScreenview) {
+    query("event", eventType, {
+      app_name: pageTracker.appName,
+      screen_name: route.name,
+    });
+  } else {
+    query("event", eventType, { page_path: route.path });
+  }
 
   pageTracker?.onAfterTrack?.();
 }

@@ -1,7 +1,7 @@
 import { getSettings } from "@/settings";
 import isServer from "@/utils";
 
-type QueryParams = Parameters<Gtag.Gtag>;
+export type QueryParams = Parameters<Gtag.Gtag>;
 
 export default function query(...args: QueryParams) {
   const { dataLayerName, gtagName } = getSettings();

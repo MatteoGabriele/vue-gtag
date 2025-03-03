@@ -1,4 +1,7 @@
-import type { RouteLocationNormalizedGeneric, Router } from "vue-router";
+import type {
+  RouteLocationNormalizedGeneric as Route,
+  Router,
+} from "vue-router";
 
 type ConfigParams =
   | Gtag.ControlParams
@@ -6,12 +9,7 @@ type ConfigParams =
   | Gtag.ConfigParams
   | Gtag.CustomParams;
 
-type PageTrackerTemplate =
-  | Partial<RouteLocationNormalizedGeneric>
-  | ((
-      to: RouteLocationNormalizedGeneric,
-      from: RouteLocationNormalizedGeneric,
-    ) => Partial<RouteLocationNormalizedGeneric>);
+type PageTrackerTemplate = Partial<Route> | ((route: Route) => Partial<Route>);
 
 type PageTracker = {
   router: Router;
