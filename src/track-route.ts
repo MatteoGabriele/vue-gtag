@@ -1,8 +1,8 @@
-import type { RouteLocationNormalizedGeneric } from "vue-router";
-import query from "./gtag/query";
-import { getSettings } from "./settings";
+import query from "@/gtag/query";
+import { getSettings } from "@/settings";
+import type { Route } from "@/types";
 
-function isRouteExcluded(route: RouteLocationNormalizedGeneric): boolean {
+function isRouteExcluded(route: Route): boolean {
   const { pageTracker } = getSettings();
 
   if (!pageTracker?.exclude) {
@@ -14,7 +14,7 @@ function isRouteExcluded(route: RouteLocationNormalizedGeneric): boolean {
   });
 }
 
-export default function trackRoute(route: RouteLocationNormalizedGeneric) {
+export default function trackRoute(route: Route) {
   const { pageTracker } = getSettings();
 
   if (isRouteExcluded(route)) {

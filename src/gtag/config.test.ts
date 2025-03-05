@@ -1,8 +1,8 @@
+import config from "@/gtag/config";
+import query from "@/gtag/query";
 import { updateSettings } from "@/settings";
-import config from "./config";
-import query from "./query";
 
-vi.mock("./query");
+vi.mock("@/gtag/query");
 
 describe("config", () => {
   it("should fire the config event", () => {

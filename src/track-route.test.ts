@@ -154,7 +154,7 @@ describe("track-route", () => {
       path: "/about_custom-template-path",
     });
   });
-  
+
   it("should track screen views using a custom template", async () => {
     updateSettings({
       pageTracker: {

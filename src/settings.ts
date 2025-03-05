@@ -1,7 +1,5 @@
-import type {
-  RouteLocationNormalizedGeneric as Route,
-  Router,
-} from "vue-router";
+import type { Route } from "@/types";
+import type { Router } from "vue-router";
 
 type ConfigParams =
   | Gtag.ControlParams

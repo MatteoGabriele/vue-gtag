@@ -1,5 +1,5 @@
+import query from "@/gtag/query";
 import { getSettings } from "@/settings";
-import query from "./query";
 
 describe("query", () => {
   it("should pass events to the gtag library", () => {
