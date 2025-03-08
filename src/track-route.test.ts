@@ -32,7 +32,7 @@ describe("track-route", () => {
     await router.isReady();
   });
 
-  it("should track pageviews", async () => {
+  it("should track screenviews", async () => {
     updateSettings({
       pageTracker: {
         router,
@@ -52,7 +52,7 @@ describe("track-route", () => {
     });
   });
 
-  it("should track screenviews", async () => {
+  it("should track pageviews", async () => {
     await router.isReady();
     await router.push("/about");
 
@@ -60,14 +60,33 @@ describe("track-route", () => {
 
     expect(query).toHaveBeenCalledWith("event", "page_view", {
       page_path: "/about",
+      page_location: "http://localhost:3000/about",
+      page_title: "about",
+      send_page_view: true,
     });
   });
 
-  it("should avoid tracking excluded routes", async () => {
+  it("should avoid tracking excluded routes using path", async () => {
     updateSettings({
       pageTracker: {
         router,
         exclude: [{ path: "/" }],
+      },
+    });
+
+    await router.isReady();
+    await router.push("/");
+
+    trackRoute(router.currentRoute.value);
+
+    expect(query).not.toHaveBeenCalled();
+  });
+
+  it("should avoid tracking excluded routes using name", async () => {
+    updateSettings({
+      pageTracker: {
+        router,
+        exclude: [{ name: "home" }],
       },
     });
 
@@ -120,7 +139,7 @@ describe("track-route", () => {
       pageTracker: {
         router,
         template: {
-          path: "/custom-template-path",
+          page_path: "/custom-template-path",
         },
       },
     });
@@ -131,7 +150,9 @@ describe("track-route", () => {
     trackRoute(router.currentRoute.value);
 
     expect(query).toHaveBeenCalledWith("event", "page_view", {
-      path: "/custom-template-path",
+      page_path: "/custom-template-path",
+      page_location: "http://localhost:3000/",
+      send_page_view: true,
     });
   });
 
@@ -140,7 +161,7 @@ describe("track-route", () => {
       pageTracker: {
         router,
         template: (to) => ({
-          path: `${to.path}_custom-template-path`,
+          page_path: `${to.path}_custom-template-path`,
         }),
       },
     });
@@ -151,7 +172,9 @@ describe("track-route", () => {
     trackRoute(router.currentRoute.value);
 
     expect(query).toHaveBeenCalledWith("event", "page_view", {
-      path: "/about_custom-template-path",
+      page_path: "/about_custom-template-path",
+      page_location: "http://localhost:3000/about",
+      send_page_view: true,
     });
   });
 
@@ -161,7 +184,7 @@ describe("track-route", () => {
         router,
         useScreenview: true,
         template: {
-          path: "/custom-template-path",
+          screen_name: "about",
         },
       },
     });
@@ -172,7 +195,7 @@ describe("track-route", () => {
     trackRoute(router.currentRoute.value);
 
     expect(query).toHaveBeenCalledWith("event", "screen_view", {
-      path: "/custom-template-path",
+      screen_name: "about",
     });
   });
 });

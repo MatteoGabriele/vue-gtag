@@ -1,6 +1,7 @@
-import query from "@/gtag/query";
 import { getSettings } from "@/settings";
-import type { Route } from "@/types";
+import type { PageTrackerParams, Route } from "@/types";
+import pageview from "./gtag/pageview";
+import screenview from "./gtag/screenview";
 
 function isRouteExcluded(route: Route): boolean {
   const { pageTracker } = getSettings();
@@ -23,22 +24,28 @@ export default function trackRoute(route: Route) {
 
   pageTracker?.onBeforeTrack?.();
 
-  const eventType = pageTracker?.useScreenview ? "screen_view" : "page_view";
+  let template: PageTrackerParams = route;
 
   if (pageTracker?.template) {
-    const template =
+    template =
       typeof pageTracker.template === "function"
         ? pageTracker.template(route)
         : pageTracker.template;
+  }
 
-    query("event", eventType, template);
-  } else if (pageTracker?.useScreenview) {
-    query("event", eventType, {
-      app_name: pageTracker.appName,
-      screen_name: route.name,
-    });
-  } else {
-    query("event", eventType, { page_path: route.path });
+  if (
+    pageTracker?.useScreenview &&
+    (typeof template === "string" ||
+      "screen_name" in template ||
+      "path" in template)
+  ) {
+    screenview(template);
+  } else if (
+    typeof template === "string" ||
+    "path" in template ||
+    "page_path" in template
+  ) {
+    pageview(template);
   }
 
   pageTracker?.onAfterTrack?.();

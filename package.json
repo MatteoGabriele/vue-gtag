@@ -18,6 +18,7 @@
     "build": "tsc --noEmit && vite build",
     "check": "biome check",
     "test": "vitest",
+    "test:cov": "vitest run --coverage",
     "test:once": "vitest run",
     "prepublishOnly": "yarn check && yarn test:once && yarn build"
   },
@@ -53,6 +54,7 @@
     "@biomejs/biome": "1.9.4",
     "@types/gtag.js": "^0.0.20",
     "@types/node": "^22.13.5",
+    "@vitest/coverage-v8": "^3.0.5",
     "flush-promises": "^1.0.2",
     "jsdom": "^26.0.0",
     "mockdate": "^3.0.5",
