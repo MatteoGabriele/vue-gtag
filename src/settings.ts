@@ -1,5 +1,6 @@
-import type { Route } from "@/types";
-import type { Router } from "vue-router";
+import type { PageviewParams } from "@/gtag/pageview";
+import type { ScreenviewParams } from "@/gtag/screenview";
+import type { Route, Router } from "@/types";
 
 type ConfigParams =
   | Gtag.ControlParams
@@ -7,7 +8,10 @@ type ConfigParams =
   | Gtag.ConfigParams
   | Gtag.CustomParams;
 
-type PageTrackerTemplate = Partial<Route> | ((route: Route) => Partial<Route>);
+type PageTrackerParams = PageviewParams | ScreenviewParams;
+type PageTrackerTemplate =
+  | PageTrackerParams
+  | ((route: Route) => PageTrackerParams);
 
 type PageTracker = {
   router: Router;

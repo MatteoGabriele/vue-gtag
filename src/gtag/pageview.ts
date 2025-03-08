@@ -2,7 +2,8 @@ import query from "@/gtag/query";
 import { getSettings } from "@/settings";
 import type { Route } from "@/types";
 
-type PageviewParams = Gtag.ConfigParams;
+export type PageviewParams = string | Route | Gtag.ConfigParams;
+
 type PageviewOptions = {
   useRouteFullPath?: boolean;
   useRouterBasePath?: boolean;
@@ -20,7 +21,7 @@ function getPathWithBase(path: string, base: string): string {
 }
 
 export default function pageview(
-  params: string | Route | PageviewParams,
+  params: PageviewParams,
   options?: PageviewOptions,
 ) {
   const { pageTracker } = getSettings();
