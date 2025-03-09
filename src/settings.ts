@@ -16,8 +16,8 @@ export type PageTracker = {
   useScreenview?: boolean;
   exclude?: Array<{ path?: string; name?: string }>;
   appName?: string;
-  onBeforeTrack?: () => void;
-  onAfterTrack?: () => void;
+  onBeforeTrack?: (route: Route) => void;
+  onAfterTrack?: (route: Route) => void;
 };
 
 export type Settings = {

@@ -22,7 +22,7 @@ export default function trackRoute(route: Route) {
     return;
   }
 
-  pageTracker?.onBeforeTrack?.();
+  pageTracker?.onBeforeTrack?.(route);
 
   let template: PageTrackerParams | undefined;
 
@@ -45,5 +45,5 @@ export default function trackRoute(route: Route) {
     pageview(pageviewParams);
   }
 
-  pageTracker?.onAfterTrack?.();
+  pageTracker?.onAfterTrack?.(route);
 }

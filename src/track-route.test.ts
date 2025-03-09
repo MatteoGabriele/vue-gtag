@@ -113,7 +113,7 @@ describe("track-route", () => {
 
     trackRoute(router.currentRoute.value);
 
-    expect(spyOnBeforeTrack).toHaveBeenCalled();
+    expect(spyOnBeforeTrack).toHaveBeenCalledWith(router.currentRoute.value);
   });
 
   it("should fire a callback after tracking", async () => {
@@ -131,7 +131,7 @@ describe("track-route", () => {
 
     trackRoute(router.currentRoute.value);
 
-    expect(spyOnAfterTrack).toHaveBeenCalled();
+    expect(spyOnAfterTrack).toHaveBeenCalledWith(router.currentRoute.value);
   });
 
   it("should track using a custom template", async () => {
