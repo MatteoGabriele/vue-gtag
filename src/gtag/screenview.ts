@@ -2,12 +2,12 @@ import { getSettings } from "@/settings";
 import type { Route } from "@/types";
 import query from "./query";
 
-type Screenview = {
+export type Screenview = {
   app_name?: string;
   screen_name?: string;
 };
 
-export type ScreenviewParams = string | Route | Gtag.ConfigParams | Screenview;
+export type ScreenviewParams = string | Route | Screenview;
 
 export default function screenview(params: ScreenviewParams) {
   const { pageTracker } = getSettings();
@@ -20,8 +20,6 @@ export default function screenview(params: ScreenviewParams) {
     template.screen_name = (params.name ?? params.path) as string;
   } else if ("screen_name" in params) {
     template.screen_name = params.screen_name;
-  } else if ("page_path" in params || "page_title" in params) {
-    template.screen_name = params.page_path ?? params.page_title;
   }
 
   if (pageTracker?.appName && template?.app_name === undefined) {

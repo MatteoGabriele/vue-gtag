@@ -2,7 +2,9 @@ import query from "@/gtag/query";
 import { getSettings } from "@/settings";
 import type { Route } from "@/types";
 
-export type PageviewParams = string | Route | Gtag.ConfigParams;
+export type Pageview = Gtag.ConfigParams;
+
+export type PageviewParams = string | Route | Pageview;
 
 type PageviewOptions = {
   useRouteFullPath?: boolean;

@@ -68,24 +68,4 @@ describe("screenview", () => {
       screen_name: "/no-name",
     });
   });
-
-  it("should track screenview with a page_path", async () => {
-    screenview({
-      page_path: "/about",
-    });
-
-    expect(query).toHaveBeenCalledWith("event", "screen_view", {
-      screen_name: "/about",
-    });
-  });
-
-  it("should track screenview with a pate_title", async () => {
-    screenview({
-      page_title: "about",
-    });
-
-    expect(query).toHaveBeenCalledWith("event", "screen_view", {
-      screen_name: "about",
-    });
-  });
 });

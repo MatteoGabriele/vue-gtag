@@ -24,7 +24,7 @@ export default function trackRoute(route: Route) {
 
   pageTracker?.onBeforeTrack?.();
 
-  let template: PageTrackerParams = route;
+  let template: PageTrackerParams | undefined;
 
   if (pageTracker?.template) {
     template =
@@ -33,19 +33,16 @@ export default function trackRoute(route: Route) {
         : pageTracker.template;
   }
 
-  if (
-    pageTracker?.useScreenview &&
-    (typeof template === "string" ||
-      "screen_name" in template ||
-      "path" in template)
-  ) {
-    screenview(template);
-  } else if (
-    typeof template === "string" ||
-    "path" in template ||
-    "page_path" in template
-  ) {
-    pageview(template);
+  if (pageTracker?.useScreenview) {
+    const screenviewParams =
+      template && "screen_name" in template ? template : route;
+
+    screenview(screenviewParams);
+  } else {
+    const pageviewParams =
+      template && "page_path" in template ? template : route;
+
+    pageview(pageviewParams);
   }
 
   pageTracker?.onAfterTrack?.();
