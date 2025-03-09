@@ -1,3 +1,4 @@
+import linker from "@/gtag/linker";
 import query from "@/gtag/query";
 import { type ConfigParams, getSettings } from "@/settings";
 
@@ -9,10 +10,19 @@ function mergeDefaultConfig(config: ConfigParams = {}): ConfigParams {
 }
 
 export default function addConfiguration() {
-  const { tagId, config, additionalAccounts } = getSettings();
+  const {
+    tagId,
+    config,
+    linker: linkerOptions,
+    additionalAccounts,
+  } = getSettings();
 
   if (!tagId) {
     return;
+  }
+
+  if (linkerOptions) {
+    linker(linkerOptions);
   }
 
   query("js", new Date());

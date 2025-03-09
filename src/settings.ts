@@ -1,4 +1,5 @@
 import type { PageTrackerParams, Route, Router } from "@/types";
+import type { LinkerParams } from "./gtag/linker";
 
 export type ConfigParams =
   | Gtag.ControlParams
@@ -33,6 +34,7 @@ export type Settings = {
   pageTracker?: PageTracker;
   onReady?: () => void;
   onError?: (error: unknown) => void;
+  linker?: LinkerParams;
 };
 
 const defaultSettings: Readonly<Settings> = {

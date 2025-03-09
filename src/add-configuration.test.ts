@@ -53,4 +53,26 @@ describe("addConfiguration", () => {
       send_page_view: true,
     });
   });
+
+  it("should add the linker", () => {
+    updateSettings({
+      tagId: "UA-1",
+      linker: {
+        domains: ["domain.com"],
+      },
+    });
+
+    addConfiguration();
+
+    expect(query).toHaveBeenNthCalledWith(1, "set", "linker", {
+      domains: ["domain.com"],
+      accept_incoming: true,
+      decorate_forms: false,
+      url_position: "query",
+    });
+    expect(query).toHaveBeenNthCalledWith(2, "js", new Date());
+    expect(query).toHaveBeenNthCalledWith(3, "config", "UA-1", {
+      send_page_view: false,
+    });
+  });
 });
