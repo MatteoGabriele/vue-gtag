@@ -17,3 +17,5 @@ export const createGtag = async (settings: AppSettings): Promise<void> => {
 
   addGtag();
 };
+
+export { useGtag } from "@/gtag";

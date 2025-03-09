@@ -1,5 +1,5 @@
 import addGtag from "@/add-gtag";
-import { createGtag } from "@/index";
+import { createGtag, useGtag } from "@/index";
 import { resetSettings } from "@/settings";
 import flushPromises from "flush-promises";
 
@@ -34,5 +34,9 @@ describe("index", () => {
     await flushPromises();
 
     expect(addGtag).toHaveBeenCalled();
+  });
+
+  it("should export the useGtag composable", () => {
+    expect(useGtag()).toBeDefined();
   });
 });
