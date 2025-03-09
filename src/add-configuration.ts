@@ -1,5 +1,12 @@
 import query from "@/gtag/query";
-import { getSettings } from "@/settings";
+import { type ConfigParams, getSettings } from "@/settings";
+
+function mergeDefaultConfig(config: ConfigParams = {}): ConfigParams {
+  return {
+    send_page_view: false,
+    ...config,
+  };
+}
 
 export default function addConfiguration() {
   const { tagId, config, additionalAccounts } = getSettings();
@@ -9,13 +16,13 @@ export default function addConfiguration() {
   }
 
   query("js", new Date());
-  query("config", tagId, config);
+  query("config", tagId, mergeDefaultConfig(config));
 
   if (!additionalAccounts) {
     return;
   }
 
   for (const account of additionalAccounts) {
-    query("config", account.tagId, account.config);
+    query("config", account.tagId, mergeDefaultConfig(account.config));
   }
 }

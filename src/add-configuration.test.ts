@@ -13,9 +13,6 @@ describe("addConfiguration", () => {
   it("should query with initial configuration", () => {
     updateSettings({
       tagId: "UA-12345678",
-      config: {
-        send_page_view: false,
-      },
     });
 
     addConfiguration();
@@ -30,15 +27,18 @@ describe("addConfiguration", () => {
     updateSettings({
       tagId: "UA-1",
       additionalAccounts: [
-        { tagId: "UA-2", config: { send_page_view: false } },
+        { tagId: "UA-2" },
         { tagId: "UA-3", config: { currency: "USD" } },
+        { tagId: "UA-4", config: { send_page_view: true } },
       ],
     });
 
     addConfiguration();
 
     expect(query).toHaveBeenNthCalledWith(1, "js", new Date());
-    expect(query).toHaveBeenNthCalledWith(2, "config", "UA-1", undefined);
+    expect(query).toHaveBeenNthCalledWith(2, "config", "UA-1", {
+      send_page_view: false,
+    });
 
     expect(query).toHaveBeenNthCalledWith(3, "config", "UA-2", {
       send_page_view: false,
@@ -46,6 +46,11 @@ describe("addConfiguration", () => {
 
     expect(query).toHaveBeenNthCalledWith(4, "config", "UA-3", {
       currency: "USD",
+      send_page_view: false,
+    });
+
+    expect(query).toHaveBeenNthCalledWith(5, "config", "UA-4", {
+      send_page_view: true,
     });
   });
 });

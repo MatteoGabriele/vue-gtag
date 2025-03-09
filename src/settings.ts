@@ -1,16 +1,16 @@
 import type { PageTrackerParams, Route, Router } from "@/types";
 
-type ConfigParams =
+export type ConfigParams =
   | Gtag.ControlParams
   | Gtag.EventParams
   | Gtag.ConfigParams
   | Gtag.CustomParams;
 
-type PageTrackerTemplate =
+export type PageTrackerTemplate =
   | PageTrackerParams
   | ((route: Route) => PageTrackerParams);
 
-type PageTracker = {
+export type PageTracker = {
   router: Router;
   template?: PageTrackerTemplate;
   useScreenview?: boolean;
