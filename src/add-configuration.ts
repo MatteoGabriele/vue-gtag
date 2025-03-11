@@ -1,5 +1,5 @@
-import linker from "@/gtag/linker";
-import query from "@/gtag/query";
+import linker from "@/api/linker";
+import query from "@/api/query";
 import { type ConfigParams, getSettings } from "@/settings";
 
 function mergeDefaultConfig(config: ConfigParams = {}): ConfigParams {

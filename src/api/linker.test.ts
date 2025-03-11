@@ -1,7 +1,7 @@
-import linker from "@/gtag/linker";
-import query from "@/gtag/query";
+import linker from "@/api/linker";
+import query from "@/api/query";
 
-vi.mock("@/gtag/query");
+vi.mock("@/api/query");
 
 describe("linker", () => {
   it("should use the linker event", () => {

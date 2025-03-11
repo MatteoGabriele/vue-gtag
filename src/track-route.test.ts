@@ -1,9 +1,9 @@
-import query from "@/gtag/query";
+import query from "@/api/query";
 import { resetSettings, updateSettings } from "@/settings";
 import trackRoute from "@/track-route";
 import { type Router, createRouter, createWebHistory } from "vue-router";
 
-vi.mock("@/gtag/query");
+vi.mock("@/api/query");
 
 describe("track-route", () => {
   let router: Router;

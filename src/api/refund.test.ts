@@ -1,7 +1,7 @@
-import query from "@/gtag/query";
-import refund from "@/gtag/refund";
+import query from "@/api/query";
+import refund from "@/api/refund";
 
-vi.mock("@/gtag/query");
+vi.mock("@/api/query");
 
 describe("refund", () => {
   it("should use the refund event", () => {

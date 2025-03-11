@@ -8,7 +8,7 @@ import { createRouter, createWebHistory } from "vue-router";
 vi.mock("@/utils");
 vi.mock("@/add-configuration");
 vi.mock("@/add-router-tracking");
-vi.mock("@/gtag/query");
+vi.mock("@/api/query");
 
 describe("addGtag", () => {
   beforeEach(resetSettings);

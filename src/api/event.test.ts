@@ -1,7 +1,7 @@
-import event from "@/gtag/event";
+import event from "@/api/event";
 import query from "./query";
 
-vi.mock("@/gtag/query");
+vi.mock("@/api/query");
 
 describe("event", () => {
   it("should query the event command", () => {

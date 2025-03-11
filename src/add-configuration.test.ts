@@ -1,11 +1,11 @@
 import addConfiguration from "@/add-configuration";
-import query from "@/gtag/query";
+import query from "@/api/query";
 import { resetSettings, updateSettings } from "@/settings";
 import mockdate from "mockdate";
 
 mockdate.set("2025-02-27");
 
-vi.mock("@/gtag/query");
+vi.mock("@/api/query");
 
 describe("addConfiguration", () => {
   beforeEach(resetSettings);

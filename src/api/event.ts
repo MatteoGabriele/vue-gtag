@@ -1,4 +1,4 @@
-import query from "@/gtag/query";
+import query from "@/api/query";
 
 type EventParams = Gtag.GtagCommands["event"];
 

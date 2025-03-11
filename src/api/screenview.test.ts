@@ -1,9 +1,9 @@
-import query from "@/gtag/query";
-import screenview from "@/gtag/screenview";
+import query from "@/api/query";
+import screenview from "@/api/screenview";
 import { resetSettings, updateSettings } from "@/settings";
 import { type Router, createRouter, createWebHistory } from "vue-router";
 
-vi.mock("@/gtag/query");
+vi.mock("@/api/query");
 
 describe("screenview", () => {
   let router: Router;

@@ -1,7 +1,7 @@
-import purchase from "@/gtag/purchase";
-import query from "@/gtag/query";
+import purchase from "@/api/purchase";
+import query from "@/api/query";
 
-vi.mock("@/gtag/query");
+vi.mock("@/api/query");
 
 describe("purchase", () => {
   it("should use the purchase event", () => {

@@ -1,4 +1,4 @@
-import query from "@/gtag/query";
+import query from "@/api/query";
 import { getSettings } from "@/settings";
 
 describe("query", () => {
