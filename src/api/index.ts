@@ -7,3 +7,4 @@ export { default as query } from "@/api/query";
 export { default as refund } from "@/api/refund";
 export { default as screenview } from "@/api/screenview";
 export { default as time } from "@/api/time";
+export { default as set } from "@/api/set";
