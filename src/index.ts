@@ -15,7 +15,8 @@ export const createGtag = async (settings: AppSettings): Promise<void> => {
     return;
   }
 
-  addGtag();
+  return addGtag();
 };
 
 export { default as useGtag } from "@/composable/use-gtag";
+export * from "@/api";
