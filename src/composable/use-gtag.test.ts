@@ -1,5 +1,5 @@
 import * as api from "@/api";
-import useGtag from "./useGtag";
+import useGtag from "./use-gtag";
 
 describe("gtag", () => {
   it("should return useGtag composable", () => {
