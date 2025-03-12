@@ -1,7 +1,17 @@
 import query from "@/api/query";
+import { getSettings } from "@/settings";
 
 type EventParams = Gtag.GtagCommands["event"];
+type Params = Gtag.ControlParams & Gtag.EventParams & Gtag.CustomParams;
 
 export default function event(...args: EventParams) {
-  query("event", ...args);
+  const { groupName, additionalAccounts } = getSettings();
+  const name = args[0];
+  const params: Params = args[1] ?? {};
+
+  if (params.send_to === undefined && additionalAccounts?.length) {
+    params.send_to = groupName;
+  }
+
+  query("event", name, params);
 }

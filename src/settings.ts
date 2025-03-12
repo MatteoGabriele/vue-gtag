@@ -35,6 +35,7 @@ export type Settings = {
   onReady?: () => void;
   onError?: (error: unknown) => void;
   linker?: LinkerParams;
+  groupName: string;
 };
 
 const defaultSettings: Readonly<Settings> = {
@@ -44,6 +45,7 @@ const defaultSettings: Readonly<Settings> = {
   resourceDeferred: false,
   dataLayerName: "dataLayer",
   gtagName: "gtag",
+  groupName: "default",
 };
 
 let settings: Settings = { ...defaultSettings };

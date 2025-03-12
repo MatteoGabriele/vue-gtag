@@ -42,15 +42,18 @@ describe("addConfiguration", () => {
 
     expect(query).toHaveBeenNthCalledWith(3, "config", "UA-2", {
       send_page_view: false,
+      groups: "default",
     });
 
     expect(query).toHaveBeenNthCalledWith(4, "config", "UA-3", {
       currency: "USD",
       send_page_view: false,
+      groups: "default",
     });
 
     expect(query).toHaveBeenNthCalledWith(5, "config", "UA-4", {
       send_page_view: true,
+      groups: "default",
     });
   });
 

@@ -9,6 +9,7 @@ describe("config", () => {
       resourceDeferred: false,
       dataLayerName: "dataLayer",
       gtagName: "gtag",
+      groupName: "default",
     });
   });
 
