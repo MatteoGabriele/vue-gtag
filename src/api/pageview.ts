@@ -12,14 +12,10 @@ type PageviewOptions = {
 };
 
 function getPathWithBase(path: string, base: string): string {
-  const pathAsArray = path.split("/");
-  const baseAsArray = base.split("/");
+  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+  const normalizedPath = path.startsWith("/") ? path.substring(1) : path;
 
-  if (pathAsArray[0] === "" && base[base.length - 1] === "/") {
-    pathAsArray.shift();
-  }
-
-  return baseAsArray.join("/") + pathAsArray.join("/");
+  return `${normalizedBase}${normalizedPath}`;
 }
 
 export default function pageview(
