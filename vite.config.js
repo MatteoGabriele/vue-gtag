@@ -3,18 +3,13 @@ import { defineConfig } from "vitest/config";
 import dts from "vite-plugin-dts";
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src"),
-    },
-  },
   build: {
     outDir: "dist",
     lib: {
       entry: path.resolve(__dirname, "./src/index.ts"),
       name: "VueGtag",
-      formats: ["es", "cjs"],
-      fileName: (format) => `vue-gtag.${format}.js`,
+      formats: ["es"],
+      fileName: "vue-gtag",
     },
     rollupOptions: {
       external: ["vue"],
