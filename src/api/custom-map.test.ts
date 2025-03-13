@@ -4,10 +4,10 @@ import { resetSettings, updateSettings } from "@/settings";
 
 vi.mock("@/api/query");
 
-describe("exception", () => {
+describe("custom-map", () => {
   beforeEach(resetSettings);
 
-  it("should use the exception event", () => {
+  it("should use the custom_map configuration", () => {
     updateSettings({
       tagId: "UA-12345678",
     });
