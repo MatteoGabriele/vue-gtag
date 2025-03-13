@@ -3,7 +3,7 @@ import addGtag from "./add-gtag";
 import { createGtag, useGtag } from "./index";
 import { resetSettings } from "./settings";
 
-vi.mock("@/add-gtag");
+vi.mock("./add-gtag");
 
 describe("index", () => {
   beforeEach(resetSettings);
