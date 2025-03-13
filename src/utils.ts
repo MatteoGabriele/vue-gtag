@@ -35,7 +35,7 @@ export async function injectScript(
 
     head.appendChild(script);
 
-    script.onload = () => resolve;
+    script.onload = () => resolve();
     script.onerror = reject;
   });
 }
