@@ -38,12 +38,7 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
 
-    "types": [
-      "@types/gtag.js",
-      "@types/node",
-      "./global.d.ts",
-      "vitest/globals"
-    ]
+    "types": ["@types/gtag.js", "@types/node", "vitest/globals"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "global.d.ts"],
   "exclude": ["node_modules", "dist"]
