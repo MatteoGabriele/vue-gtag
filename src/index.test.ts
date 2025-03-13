@@ -1,6 +1,7 @@
 import flushPromises from "flush-promises";
+import { createApp } from "vue";
 import addGtag from "./add-gtag";
-import { createGtag, useGtag } from "./index";
+import VueGtag, { createGtag } from "./index";
 import { resetSettings } from "./settings";
 
 vi.mock("./add-gtag");
@@ -36,7 +37,29 @@ describe("index", () => {
     expect(addGtag).toHaveBeenCalled();
   });
 
-  it("should export the useGtag composable", () => {
-    expect(useGtag()).toBeDefined();
+  it("should install plugin globally", () => {
+    const app = createApp({});
+
+    app.use(VueGtag, {
+      tagId: "UA-123456789",
+    });
+
+    expect(app.config.globalProperties.$gtag).toBeDefined();
+    expect(app.config.globalProperties.$gtag).toMatchInlineSnapshot(`
+      {
+        "config": [Function],
+        "customMap": [Function],
+        "event": [Function],
+        "exception": [Function],
+        "linker": [Function],
+        "pageview": [Function],
+        "purchase": [Function],
+        "query": [Function],
+        "refund": [Function],
+        "screenview": [Function],
+        "set": [Function],
+        "time": [Function],
+      }
+    `);
   });
 });

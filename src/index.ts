@@ -1,4 +1,6 @@
+import type { App } from "vue";
 import addGtag from "./add-gtag";
+import * as api from "./api";
 import { type Settings, updateSettings } from "./settings";
 
 declare global {
@@ -27,6 +29,11 @@ export const createGtag = async (settings: AppSettings): Promise<void> => {
   await addGtag();
 };
 
-export { default as useGtag } from "./composable/use-gtag";
+export default {
+  install(app: App, settings: AppSettings) {
+    createGtag(settings);
+    app.config.globalProperties.$gtag = api;
+  },
+};
 
 export * from "./api";

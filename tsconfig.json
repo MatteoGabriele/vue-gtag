@@ -40,6 +40,6 @@
 
     "types": ["@types/gtag.js", "@types/node", "vitest/globals"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "global.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
