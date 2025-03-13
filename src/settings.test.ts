@@ -3,7 +3,6 @@ import { getSettings, updateSettings } from "./settings";
 describe("config", () => {
   it("should return the configuration", () => {
     expect(getSettings()).toEqual({
-      enabled: false,
       resourceUrl: "https://www.googletagmanager.com/gtag/js",
       resourceUrlPreconnect: "https://www.googletagmanager.com",
       resourceDeferred: false,
@@ -14,8 +13,16 @@ describe("config", () => {
   });
 
   it("should update the default configuration", () => {
-    updateSettings({ enabled: true });
+    updateSettings({
+      tagId: "UA-1234567",
+      gtagName: "foo",
+    });
 
-    expect(getSettings()).toEqual(expect.objectContaining({ enabled: true }));
+    expect(getSettings()).toEqual(
+      expect.objectContaining({
+        tagId: "UA-1234567",
+        gtagName: "foo",
+      }),
+    );
   });
 });

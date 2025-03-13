@@ -25,7 +25,6 @@ export type Settings = {
   tagId?: string;
   config?: ConfigParams;
   additionalAccounts?: Array<{ tagId: string; config?: ConfigParams }>;
-  enabled: boolean | (() => Promise<boolean>);
   resourceUrl: string;
   resourceUrlPreconnect: string;
   resourceDeferred: boolean;
@@ -39,7 +38,6 @@ export type Settings = {
 };
 
 const defaultSettings: Readonly<Settings> = {
-  enabled: false,
   resourceUrl: "https://www.googletagmanager.com/gtag/js",
   resourceUrlPreconnect: "https://www.googletagmanager.com",
   resourceDeferred: false,

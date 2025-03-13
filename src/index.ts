@@ -12,28 +12,16 @@ declare global {
   }
 }
 
-type AppSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
+type CreateGtagSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
+type CreateGtagReturn = (app: App) => void;
 
-export const createGtag = async (settings: AppSettings): Promise<void> => {
+export const createGtag = (settings: CreateGtagSettings): CreateGtagReturn => {
   updateSettings(settings);
+  addGtag();
 
-  const enabled =
-    typeof settings.enabled === "function"
-      ? await settings.enabled()
-      : settings.enabled;
-
-  if (!enabled) {
-    return;
-  }
-
-  await addGtag();
-};
-
-export default {
-  install(app: App, settings: AppSettings) {
-    createGtag(settings);
+  return (app) => {
     app.config.globalProperties.$gtag = api;
-  },
+  };
 };
 
 export * from "./api";
