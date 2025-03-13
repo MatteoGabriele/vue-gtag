@@ -1,5 +1,19 @@
 import event from "@/api/event";
 
-export default function refund(params: Gtag.EventParams) {
+type RefundParams =
+  | {
+      transaction_id?: string;
+      value?: number;
+      currency?: string;
+      items?: Array<{
+        id?: string;
+        name?: string;
+        quantity?: number;
+        price?: number;
+      }>;
+    }
+  | Gtag.CustomParams;
+
+export default function refund(params: RefundParams) {
   event("refund", params);
 }
