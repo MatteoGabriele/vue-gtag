@@ -1,7 +1,7 @@
-import query from "@/api/query";
-import time from "@/api/time";
+import query from "./query";
+import time from "./time";
 
-vi.mock("@/api/query");
+vi.mock("./query");
 
 describe("time", () => {
   it("should use the timing_complete event", () => {

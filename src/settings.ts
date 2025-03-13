@@ -1,5 +1,5 @@
-import type { LinkerParams } from "@/api/linker";
-import type { PageTrackerParams, Route, Router } from "@/types";
+import type { LinkerParams } from "./api/linker";
+import type { PageTrackerParams, Route, Router } from "./types";
 
 export type ConfigParams =
   | Gtag.ControlParams

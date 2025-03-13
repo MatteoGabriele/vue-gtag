@@ -1,5 +1,5 @@
-import query from "@/api/query";
-import { getSettings } from "@/settings";
+import { getSettings } from "../settings";
+import query from "./query";
 
 type EventParams = Gtag.GtagCommands["event"];
 type Params = Gtag.ControlParams & Gtag.EventParams & Gtag.CustomParams;

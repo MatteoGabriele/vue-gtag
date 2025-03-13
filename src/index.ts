@@ -1,5 +1,5 @@
-import addGtag from "@/add-gtag";
-import { type Settings, updateSettings } from "@/settings";
+import addGtag from "./add-gtag";
+import { type Settings, updateSettings } from "./settings";
 
 type AppSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
 
@@ -18,5 +18,5 @@ export const createGtag = async (settings: AppSettings): Promise<void> => {
   await addGtag();
 };
 
-export { default as useGtag } from "@/composable/use-gtag";
-export * from "@/api";
+export { default as useGtag } from "./composable/use-gtag";
+export * from "./api";

@@ -1,9 +1,9 @@
-import addRouterTracking from "@/add-router-tracking";
-import { resetSettings, updateSettings } from "@/settings";
-import trackRoute from "@/track-route";
 import { createRouter, createWebHistory } from "vue-router";
+import addRouterTracking from "./add-router-tracking";
+import { resetSettings, updateSettings } from "./settings";
+import trackRoute from "./track-route";
 
-vi.mock("@/track-route");
+vi.mock("./track-route");
 
 const routes = [
   { path: "/", component: { template: "<div />" } },

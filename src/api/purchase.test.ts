@@ -1,7 +1,7 @@
-import purchase from "@/api/purchase";
-import query from "@/api/query";
+import purchase from "./purchase";
+import query from "./query";
 
-vi.mock("@/api/query");
+vi.mock("./query");
 
 describe("purchase", () => {
   it("should use the purchase event", () => {

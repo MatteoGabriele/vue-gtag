@@ -1,6 +1,6 @@
-import linker from "@/api/linker";
-import query from "@/api/query";
-import { type ConfigParams, getSettings } from "@/settings";
+import linker from "./api/linker";
+import query from "./api/query";
+import { type ConfigParams, getSettings } from "./settings";
 
 function mergeDefaults(config: ConfigParams = {}): ConfigParams {
   return {

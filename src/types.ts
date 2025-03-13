@@ -1,5 +1,5 @@
-import type { Pageview } from "@/api/pageview";
-import type { Screenview } from "@/api/screenview";
+import type { Pageview } from "./api/pageview";
+import type { Screenview } from "./api/screenview";
 
 export type {
   RouteLocationNormalizedGeneric as Route,

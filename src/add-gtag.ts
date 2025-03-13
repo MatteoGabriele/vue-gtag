@@ -1,7 +1,7 @@
-import { getSettings } from "@/settings";
-import { injectScript } from "@/utils";
 import addConfiguration from "./add-configuration";
 import addRouterTracking from "./add-router-tracking";
+import { getSettings } from "./settings";
+import { injectScript } from "./utils";
 
 export default async function addGtag(): Promise<void> {
   const {

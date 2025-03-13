@@ -1,5 +1,5 @@
-import * as utils from "@/utils";
 import flushPromises from "flush-promises";
+import * as utils from "./utils";
 
 describe("utils", () => {
   describe("injectScript", () => {

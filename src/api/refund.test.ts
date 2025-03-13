@@ -1,7 +1,7 @@
-import query from "@/api/query";
-import refund from "@/api/refund";
+import query from "./query";
+import refund from "./refund";
 
-vi.mock("@/api/query");
+vi.mock("./query");
 
 describe("refund", () => {
   it("should use the refund event", () => {

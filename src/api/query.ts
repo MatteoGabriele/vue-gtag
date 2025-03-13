@@ -1,5 +1,5 @@
-import { getSettings } from "@/settings";
-import isServer from "@/utils";
+import { getSettings } from "../settings";
+import isServer from "../utils";
 
 export type QueryParams = Parameters<Gtag.Gtag>;
 

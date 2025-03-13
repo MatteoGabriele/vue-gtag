@@ -1,6 +1,6 @@
-import query from "@/api/query";
-import { getSettings } from "@/settings";
-import type { Route } from "@/types";
+import { getSettings } from "../settings";
+import type { Route } from "../types";
+import query from "./query";
 
 export type Pageview = Gtag.ConfigParams;
 

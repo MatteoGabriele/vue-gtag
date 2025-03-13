@@ -1,7 +1,7 @@
-import query from "@/api/query";
-import set from "@/api/set";
+import query from "./query";
+import set from "./set";
 
-vi.mock("@/api/query");
+vi.mock("./query");
 
 describe("set", () => {
   it("should the set command", () => {

@@ -1,8 +1,8 @@
-import config from "@/api/config";
-import query from "@/api/query";
-import { updateSettings } from "@/settings";
+import { updateSettings } from "../settings";
+import config from "./config";
+import query from "./query";
 
-vi.mock("@/api/query");
+vi.mock("./query");
 
 describe("config", () => {
   it("should fire the config event", () => {

@@ -1,4 +1,4 @@
-import query from "@/api/query";
+import query from "./query";
 
 type SetParams = Gtag.GtagCommands["set"];
 

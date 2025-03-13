@@ -1,6 +1,6 @@
-import query from "@/api/query";
-import { getSettings } from "@/settings";
-import type { Tail } from "@/types";
+import { getSettings } from "../settings";
+import type { Tail } from "../types";
+import query from "./query";
 
 type ConfigParams = Tail<Gtag.GtagCommands["config"]>;
 

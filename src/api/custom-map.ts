@@ -1,4 +1,4 @@
-import config from "@/api/config";
+import config from "./config";
 
 type CustomMapParams = Gtag.CustomParams;
 

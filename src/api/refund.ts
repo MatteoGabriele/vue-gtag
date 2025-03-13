@@ -1,4 +1,4 @@
-import event from "@/api/event";
+import event from "./event";
 
 type RefundParams =
   | {
