@@ -4,7 +4,7 @@ import set from "./set";
 vi.mock("./query");
 
 describe("set", () => {
-  it("should the set command", () => {
+  it("should use the set command", () => {
     set({ parameter: "value" });
 
     expect(query).toHaveBeenCalledWith("set", {

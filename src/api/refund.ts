@@ -1,19 +1,7 @@
+import type { Ecommerce } from "@/types";
 import event from "./event";
 
-type RefundParams =
-  | {
-      transaction_id?: string;
-      value?: number;
-      currency?: string;
-      items?: Array<{
-        id?: string;
-        name?: string;
-        quantity?: number;
-        price?: number;
-      }>;
-    }
-  | Gtag.CustomParams;
-
-export default function refund(params: RefundParams) {
+// https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#refund
+export default function refund(params: Ecommerce) {
   event("refund", params);
 }
