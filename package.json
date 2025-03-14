@@ -19,7 +19,7 @@
     "lint": "biome check",
     "test": "vitest",
     "test:once": "vitest run",
-    "prepublishOnly": "yarn lint && yarn test:once && yarn build"
+    "prepublishOnly": "npm run lint && npm run test:once && npm run build"
   },
   "keywords": [
     "google",
