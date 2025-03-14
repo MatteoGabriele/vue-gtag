@@ -37,6 +37,7 @@
     "vuejs"
   ],
   "main": "./dist/vue-gtag.js",
+  "unpkg": "./dist/vue-gtag.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
