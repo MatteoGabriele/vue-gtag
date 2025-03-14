@@ -2,7 +2,7 @@
   "name": "vue-gtag",
   "description": "Global Site Tag (gtag.js) plugin for Vue",
   "type": "module",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": {
     "name": "Matteo Gabriele",
     "email": "m.gabriele.dev@gmail.com"
@@ -21,7 +21,7 @@
     "test": "vitest",
     "test:cov": "vitest run --coverage",
     "test:once": "vitest run",
-    "prepublishOnly": "yarn check && yarn test:once && yarn build"
+    "prepublishOnly": "npm run lint && npm run test:once && npm run build"
   },
   "keywords": [
     "google",
@@ -36,11 +36,6 @@
     "vue",
     "vuejs"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/vue-gtag.js"
-    }
-  },
   "main": "./dist/vue-gtag.js",
   "types": "./dist/index.d.ts",
   "files": [
