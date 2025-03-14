@@ -19,7 +19,7 @@
     "lint": "biome check",
     "test": "vitest",
     "test:once": "vitest run",
-    "prepublishOnly": "yarn lint && yarn test:once && yarn build"
+    "prepublishOnly": "npm run lint && npm run test:once && npm run build"
   },
   "keywords": [
     "google",
@@ -35,7 +35,7 @@
     "vuejs"
   ],
   "main": "./dist/vue-gtag.cjs.js",
-  "module": "./dist/vue-gtag.es.js",
+  "module": "./dist/vue-gtag.esm.js",
   "unpkg": "./dist/vue-gtag.umd.js",
   "jsdelivr": "./dist/vue-gtag.umd.js",
   "types": "vue-gtag.d.ts",
