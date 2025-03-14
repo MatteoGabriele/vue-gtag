@@ -8,11 +8,12 @@
   "files": {
     "ignoreUnknown": false,
     "ignore": ["dist"],
-    "include": ["./src"]
+    "include": ["./src/**/*.ts", "./tsconfig.json", "./global.d.ts"]
   },
   "formatter": {
     "enabled": true,
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "indentWidth": 2
   },
   "organizeImports": {
     "enabled": true
