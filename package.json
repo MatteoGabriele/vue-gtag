@@ -35,7 +35,7 @@
     "vuejs"
   ],
   "main": "./dist/vue-gtag.cjs.js",
-  "module": "./dist/vue-gtag.es.js",
+  "module": "./dist/vue-gtag.esm.js",
   "unpkg": "./dist/vue-gtag.umd.js",
   "jsdelivr": "./dist/vue-gtag.umd.js",
   "types": "vue-gtag.d.ts",

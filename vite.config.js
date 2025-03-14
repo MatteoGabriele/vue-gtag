@@ -12,7 +12,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "./src/index.js"),
       name: "VueGtag",
-      formats: ["umd", "es", "cjs"],
+      formats: ["umd", "esm", "cjs"],
       fileName: (format) => `vue-gtag.${format}.js`,
     },
     rollupOptions: {
