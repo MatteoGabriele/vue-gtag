@@ -1,7 +1,6 @@
 import type { EcommerceEventName } from "./ecommerce";
 
-export type EventNames =
-  | EcommerceEventName
+type GtagEventName =
   | "checkout_progress"
   | "earn_virtual_currency"
   | "exception"
@@ -25,3 +24,5 @@ export type EventNames =
   | "unlock_achievement"
   | "timing_complete"
   | "view_search_results";
+
+export type EventNames = EcommerceEventName | GtagEventName;
