@@ -32,15 +32,15 @@ describe("utils", () => {
     });
 
     it("should create a link for domain preconnect", async () => {
-      utils.injectScript("foo", {
-        preconnectOrigin: "preconnect_origin_value",
+      utils.injectScript("https://www.google.com/something", {
+        preconnectOrigin: true,
       });
 
       await flushPromises();
 
       const links = document.getElementsByTagName("link");
 
-      expect(links[0].getAttribute("href")).toEqual("preconnect_origin_value");
+      expect(links[0].getAttribute("href")).toEqual("https://www.google.com");
       expect(links[0].getAttribute("rel")).toEqual("preconnect");
     });
   });

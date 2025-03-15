@@ -1,4 +1,4 @@
-import type { EcommerceEventName, EcommerceParams } from "@/types/ecommerce";
+import type { EcommerceEventName, EcommerceParams } from "../types/ecommerce";
 import event from "./event";
 
 /**

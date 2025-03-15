@@ -5,7 +5,7 @@ export default function isServer(): boolean {
 export async function injectScript(
   url: string,
   options?: {
-    preconnectOrigin?: string;
+    preconnectOrigin?: boolean;
     defer?: boolean;
   },
 ): Promise<void> {
@@ -27,7 +27,9 @@ export async function injectScript(
     if (options?.preconnectOrigin) {
       const link = document.createElement("link");
 
-      link.href = options.preconnectOrigin;
+      const resource = new URL(url);
+
+      link.href = resource.origin;
       link.rel = "preconnect";
 
       head.appendChild(link);
@@ -38,4 +40,34 @@ export async function injectScript(
     script.onload = () => resolve();
     script.onerror = reject;
   });
+}
+
+type DeepMergeable = {
+  [key: string]: unknown;
+};
+
+function isObject(obj: unknown): obj is DeepMergeable {
+  return obj !== null && typeof obj === "object" && !Array.isArray(obj);
+}
+
+export function deepMerge<T extends DeepMergeable, U extends DeepMergeable>(
+  target: T,
+  source: U,
+): T & U {
+  const output: DeepMergeable = { ...target };
+
+  for (const key in source) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      const sourceValue = source[key];
+      const targetValue = target[key];
+
+      if (isObject(sourceValue) && isObject(targetValue)) {
+        output[key] = deepMerge(targetValue, sourceValue);
+      } else {
+        output[key] = sourceValue;
+      }
+    }
+  }
+
+  return output as T & U;
 }

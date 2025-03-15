@@ -3,9 +3,11 @@ import { getSettings, updateSettings } from "./settings";
 describe("config", () => {
   it("should return the configuration", () => {
     expect(getSettings()).toEqual({
-      resourceUrl: "https://www.googletagmanager.com/gtag/js",
-      resourceUrlPreconnect: "https://www.googletagmanager.com",
-      resourceDeferred: false,
+      resource: {
+        url: "https://www.googletagmanager.com/gtag/js",
+        preconnect: false,
+        deferred: false,
+      },
       dataLayerName: "dataLayer",
       gtagName: "gtag",
       groupName: "default",

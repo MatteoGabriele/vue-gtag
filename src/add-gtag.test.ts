@@ -5,7 +5,11 @@ import addRouterTracking from "./add-router-tracking";
 import { resetSettings, updateSettings } from "./settings";
 import * as utils from "./utils";
 
-vi.mock("./utils");
+vi.mock("./utils", async () => ({
+  ...(await vi.importActual("./utils.ts")),
+  injectScript: vi.fn(),
+}));
+
 vi.mock("./add-configuration");
 vi.mock("./add-router-tracking");
 vi.mock("./api/query");
@@ -21,7 +25,7 @@ describe("addGtag", () => {
     await addGtag();
 
     const resource = "https://www.googletagmanager.com/gtag/js";
-    const preconnect = "https://www.googletagmanager.com";
+    const preconnect = false;
     const id = "UA-12345678";
     const dataLayer = "dataLayer";
     const url = `${resource}?id=${id}&l=${dataLayer}`;
@@ -35,19 +39,20 @@ describe("addGtag", () => {
   it("should download a custom version of the gtag.js library", async () => {
     updateSettings({
       tagId: "UA-12345678",
-      resourceUrl: "custom_resource_url",
+      resource: {
+        url: "custom_resource_url",
+      },
     });
 
     await addGtag();
 
     const resource = "custom_resource_url";
-    const preconnect = "https://www.googletagmanager.com";
     const id = "UA-12345678";
     const dataLayer = "dataLayer";
     const url = `${resource}?id=${id}&l=${dataLayer}`;
 
     expect(utils.injectScript).toHaveBeenCalledWith(url, {
-      preconnectOrigin: preconnect,
+      preconnectOrigin: false,
       defer: false,
     });
   });

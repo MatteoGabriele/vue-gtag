@@ -25,9 +25,6 @@
 
     /* Path aliases */
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    },
 
     /* Declaration files */
     "declaration": true,

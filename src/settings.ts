@@ -1,5 +1,6 @@
 import type { LinkerParams } from "./api/linker";
 import type { PageTrackerParams, Route, Router } from "./types";
+import { deepMerge } from "./utils";
 
 export type ConfigParams =
   | Gtag.ControlParams
@@ -21,13 +22,19 @@ export type PageTracker = {
   onAfterTrack?: (route: Route) => void;
 };
 
+export type Resource = {
+  url?: string;
+  preconnect?: boolean;
+  deferred?: boolean;
+};
+
+export type TagId = string;
+
 export type Settings = {
-  tagId?: string;
+  tagId?: TagId;
   config?: ConfigParams;
-  additionalAccounts?: Array<{ tagId: string; config?: ConfigParams }>;
-  resourceUrl: string;
-  resourceUrlPreconnect: string;
-  resourceDeferred: boolean;
+  additionalAccounts?: Array<{ tagId: TagId; config?: ConfigParams }>;
+  resource: Resource;
   dataLayerName: string;
   gtagName: string;
   pageTracker?: PageTracker;
@@ -38,9 +45,11 @@ export type Settings = {
 };
 
 const defaultSettings: Readonly<Settings> = {
-  resourceUrl: "https://www.googletagmanager.com/gtag/js",
-  resourceUrlPreconnect: "https://www.googletagmanager.com",
-  resourceDeferred: false,
+  resource: {
+    url: "https://www.googletagmanager.com/gtag/js",
+    preconnect: false,
+    deferred: false,
+  },
   dataLayerName: "dataLayer",
   gtagName: "gtag",
   groupName: "default",
@@ -55,5 +64,5 @@ export const resetSettings = (): void => {
 };
 
 export const updateSettings = (configParams: Partial<Settings>): void => {
-  settings = { ...settings, ...configParams };
+  settings = deepMerge(settings, configParams);
 };
