@@ -1,11 +1,11 @@
+import ecommerce from "./ecommerce";
 import query from "./query";
-import refund from "./refund";
 
 vi.mock("./query");
 
-describe("refund", () => {
-  it("should use the refund event", () => {
-    refund({
+describe("ecommerce", () => {
+  it("should use the ecommerce event", () => {
+    ecommerce("refund", {
       transaction_id: "transaction_id_value",
     });
 

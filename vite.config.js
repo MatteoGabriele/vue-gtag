@@ -20,7 +20,6 @@ export default defineConfig({
         },
       },
     },
-    minify: 'terser',
   },
   plugins: [
     dts({
