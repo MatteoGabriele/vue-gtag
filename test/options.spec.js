@@ -10,7 +10,7 @@ describe("options", () => {
   });
 
   test("set and get options", () => {
-    setOptions({ config: { id: 1 } });
+    setOptions({ config: { id: 1 }, cspNonce: "abcdef" });
     expect(getOptions()).toMatchSnapshot();
   });
 
