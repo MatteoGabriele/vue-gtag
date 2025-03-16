@@ -1,7 +1,7 @@
 import { getSettings } from "../settings";
-import type { EventNames } from "../types/event";
 import query from "./query";
 
+type EventNames = Gtag.EventNames;
 type EventParams = Gtag.ControlParams & Gtag.EventParams & Gtag.CustomParams;
 
 export default function event(name: EventNames, params: EventParams) {

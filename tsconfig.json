@@ -26,16 +26,11 @@
     /* Path aliases */
     "baseUrl": ".",
 
-    /* Declaration files */
-    "declaration": true,
-    "declarationDir": "./dist",
-    "outDir": "./dist",
-
     /* Additional checks */
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
 
-    "types": ["@types/gtag.js", "@types/node", "vitest/globals"]
+    "types": ["@types/node", "vitest/globals", "./src/gtag.d.ts"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
