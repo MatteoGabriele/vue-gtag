@@ -1,5 +1,5 @@
 import { getSettings } from "../settings";
-import type { Tail } from "../types";
+import type { Tail } from "../types/utils";
 import query from "./query";
 
 type ConfigParams = Tail<Gtag.GtagCommands["config"]>;

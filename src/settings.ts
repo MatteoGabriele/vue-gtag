@@ -1,5 +1,6 @@
 import type { LinkerParams } from "./api/linker";
-import type { PageTrackerParams, Route, Router } from "./types";
+import type { PageTrackerParams } from "./types/page-tracker";
+import type { Route, Router } from "./types/router";
 import { deepMerge } from "./utils";
 
 export type ConfigParams =
