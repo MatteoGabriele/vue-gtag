@@ -1,9 +1,11 @@
-import { updateSettings } from "../settings";
+import { resetSettings, updateSettings } from "../settings";
 import { optIn, optOut } from "./opt";
 
 describe("opt", () => {
   beforeEach(() => {
+    resetSettings();
     window["ga-disable-UA-1"] = undefined;
+    window["ga-disable-UA-2"] = undefined;
   });
 
   it("should opt out", () => {
@@ -39,6 +41,34 @@ describe("opt", () => {
       optIn("UA-1");
 
       expect(window["ga-disable-UA-1"]).toBeUndefined();
+    });
+  });
+
+  describe("use additional account", () => {
+    beforeEach(() => {
+      updateSettings({
+        tagId: "UA-1",
+        additionalAccounts: [
+          {
+            tagId: "UA-2",
+          },
+        ],
+      });
+    });
+
+    it("should opt out", () => {
+      optOut();
+
+      expect(window["ga-disable-UA-1"]).toBe(true);
+      expect(window["ga-disable-UA-2"]).toBe(true);
+    });
+
+    it("should opt in", () => {
+      optOut();
+      optIn();
+
+      expect(window["ga-disable-UA-1"]).toBeUndefined();
+      expect(window["ga-disable-UA-2"]).toBeUndefined();
     });
   });
 });
