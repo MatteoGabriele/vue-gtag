@@ -4,8 +4,15 @@ import { getSettings } from "./settings";
 import { injectScript } from "./utils";
 
 export default async function addGtag(): Promise<void> {
-  const { resource, dataLayerName, tagId, pageTracker, onReady, onError } =
-    getSettings();
+  const {
+    useCustomScript,
+    resource,
+    dataLayerName,
+    tagId,
+    pageTracker,
+    onReady,
+    onError,
+  } = getSettings();
 
   if (!tagId) {
     return;
@@ -15,6 +22,11 @@ export default async function addGtag(): Promise<void> {
 
   if (pageTracker?.router) {
     addRouterTracking();
+  }
+
+  if (useCustomScript) {
+    onReady?.();
+    return;
   }
 
   try {

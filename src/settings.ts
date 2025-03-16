@@ -42,6 +42,8 @@ export type Settings = {
   onError?: (error: unknown) => void;
   linker?: LinkerParams;
   groupName: string;
+  /** In case you are already loading gtag.js yourself, you can pass true to avoid adding the script again */
+  useCustomScript?: boolean;
 };
 
 const defaultSettings: Readonly<Settings> = {
