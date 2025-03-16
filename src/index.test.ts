@@ -25,6 +25,8 @@ describe("index", () => {
         "event": [Function],
         "exception": [Function],
         "linker": [Function],
+        "optIn": [Function],
+        "optOut": [Function],
         "pageview": [Function],
         "query": [Function],
         "screenview": [Function],
