@@ -53,4 +53,78 @@ describe("add-router-tracking", () => {
       }),
     );
   });
+
+  it("should track identical paths", async () => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes,
+    });
+
+    vi.spyOn(router, "isReady").mockResolvedValue();
+
+    updateSettings({ pageTracker: { router } });
+
+    await addRouterTracking();
+
+    await router.push("/about");
+    await router.push("/about");
+
+    expect(trackRoute).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        path: "/",
+      }),
+    );
+
+    expect(trackRoute).toHaveBeenNthCalledWith(
+      2,
+      expect.objectContaining({
+        path: "/about",
+      }),
+    );
+
+    expect(trackRoute).toHaveBeenNthCalledWith(
+      3,
+      expect.objectContaining({
+        path: "/about",
+      }),
+    );
+  });
+
+  it("should skip tracking identical paths", async () => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes,
+    });
+
+    vi.spyOn(router, "isReady").mockResolvedValue();
+
+    updateSettings({
+      pageTracker: {
+        router,
+        skipSamePath: true,
+      },
+    });
+
+    await addRouterTracking();
+
+    await router.push("/about");
+    await router.push("/about");
+
+    expect(trackRoute).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        path: "/",
+      }),
+    );
+
+    expect(trackRoute).toHaveBeenNthCalledWith(
+      2,
+      expect.objectContaining({
+        path: "/about",
+      }),
+    );
+
+    expect(trackRoute).toHaveBeenCalledTimes(2);
+  });
 });

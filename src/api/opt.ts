@@ -1,4 +1,5 @@
-import { type TagId, getSettings } from "../settings";
+import { getSettings } from "../settings";
+import type { TagId } from "../types/settings";
 
 function assignProperty(tagId?: TagId, value?: boolean) {
   const { tagId: settingsTagId, additionalAccounts } = getSettings();
@@ -16,7 +17,7 @@ function assignProperty(tagId?: TagId, value?: boolean) {
 
 /**
  * Disable tracking
- *
+
  * By default uses the provided tagId and all additional accounts in the plugin configuration.
  * If a tagId is provided, it will only disable that account.
  */

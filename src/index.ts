@@ -1,7 +1,8 @@
 import type { App } from "vue";
 import addGtag from "./add-gtag";
 import * as api from "./api";
-import { type Settings, updateSettings } from "./settings";
+import { updateSettings } from "./settings";
+import type { Settings } from "./types/settings";
 
 type CreateGtagSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
 type CreateGtagReturn = (app: App) => void;
