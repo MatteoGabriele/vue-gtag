@@ -12,7 +12,7 @@ export async function injectScript(
 ): Promise<void> {
   return new Promise((resolve, reject) => {
     if (isServer()) {
-      return;
+      return resolve();
     }
 
     const head = document.head;
