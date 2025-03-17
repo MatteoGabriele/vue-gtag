@@ -31,8 +31,8 @@ export default async function addGtag(): Promise<void> {
 
   try {
     await injectScript(`${resource.url}?id=${tagId}&l=${dataLayerName}`, {
-      preconnectOrigin: resource.preconnect,
-      defer: resource.deferred,
+      preconnect: resource.preconnect,
+      defer: resource.defer,
       nonce: resource.nonce,
     });
 

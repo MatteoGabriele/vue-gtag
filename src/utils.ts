@@ -5,7 +5,7 @@ export default function isServer(): boolean {
 export async function injectScript(
   url: string,
   options?: {
-    preconnectOrigin?: boolean;
+    preconnect?: boolean;
     defer?: boolean;
     nonce?: string;
   },
@@ -29,7 +29,7 @@ export async function injectScript(
       script.setAttribute("nonce", options.nonce);
     }
 
-    if (options?.preconnectOrigin) {
+    if (options?.preconnect) {
       const link = document.createElement("link");
 
       const resource = new URL(url);

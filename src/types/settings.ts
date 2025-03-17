@@ -37,7 +37,7 @@ export type Resource = {
   /** Preconnect to the resource url domain. Default value is `false` */
   preconnect?: boolean;
   /** Defer script loading. Default value is `false` */
-  deferred?: boolean;
+  defer?: boolean;
   /**
    * A string representing the value of the `nonce` attribute to be attached to the script tag.
    * Useful for enforcing Content Security Policy (CSP) and allowing the script to execute.

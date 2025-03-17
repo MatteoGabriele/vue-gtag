@@ -25,15 +25,11 @@ describe("addGtag", () => {
     await addGtag();
 
     const resource = "https://www.googletagmanager.com/gtag/js";
-    const preconnect = false;
     const id = "UA-12345678";
     const dataLayer = "dataLayer";
     const url = `${resource}?id=${id}&l=${dataLayer}`;
 
-    expect(utils.injectScript).toHaveBeenCalledWith(url, {
-      preconnectOrigin: preconnect,
-      defer: false,
-    });
+    expect(utils.injectScript).toHaveBeenCalledWith(url, expect.anything());
   });
 
   it("should download a custom version of the gtag.js library", async () => {
@@ -51,10 +47,7 @@ describe("addGtag", () => {
     const dataLayer = "dataLayer";
     const url = `${resource}?id=${id}&l=${dataLayer}`;
 
-    expect(utils.injectScript).toHaveBeenCalledWith(url, {
-      preconnectOrigin: false,
-      defer: false,
-    });
+    expect(utils.injectScript).toHaveBeenCalledWith(url, expect.anything());
   });
 
   it("should fire callback when plugin is ready", async () => {
@@ -145,7 +138,43 @@ describe("addGtag", () => {
     expect(spyOnReady).toHaveBeenCalled();
   });
 
-  it("should add the nonce attribute", async () => {
+  it("should preconnect the script origin", async () => {
+    updateSettings({
+      tagId: "UA-12345678",
+      resource: {
+        preconnect: true,
+      },
+    });
+
+    await addGtag();
+
+    expect(utils.injectScript).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.objectContaining({
+        preconnect: true,
+      }),
+    );
+  });
+
+  it("should add the defer attribute to the script", async () => {
+    updateSettings({
+      tagId: "UA-12345678",
+      resource: {
+        defer: true,
+      },
+    });
+
+    await addGtag();
+
+    expect(utils.injectScript).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.objectContaining({
+        defer: true,
+      }),
+    );
+  });
+
+  it("should add the nonce attribute to the script", async () => {
     updateSettings({
       tagId: "UA-12345678",
       resource: {

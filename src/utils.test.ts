@@ -33,7 +33,7 @@ describe("utils", () => {
 
     it("should create a link for domain preconnect", async () => {
       utils.injectScript("https://www.google.com/something", {
-        preconnectOrigin: true,
+        preconnect: true,
       });
 
       await flushPromises();

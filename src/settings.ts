@@ -2,11 +2,7 @@ import type { Settings } from "./types/settings";
 import { deepMerge } from "./utils";
 
 const defaultSettings: Readonly<Settings> = {
-  resource: {
-    url: "https://www.googletagmanager.com/gtag/js",
-    preconnect: false,
-    deferred: false,
-  },
+  resource: { url: "https://www.googletagmanager.com/gtag/js" },
   dataLayerName: "dataLayer",
   gtagName: "gtag",
   groupName: "default",
