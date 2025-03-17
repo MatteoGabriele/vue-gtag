@@ -1,8 +1,9 @@
+import type { GtagCommands } from "src/types/gtag";
 import { getSettings } from "../settings";
 import type { Tail } from "../types/utils";
 import query from "./query";
 
-type ConfigParams = Tail<Gtag.GtagCommands["config"]>;
+type ConfigParams = Tail<GtagCommands["config"]>;
 
 export default function config(...args: ConfigParams) {
   const { tagId, additionalAccounts } = getSettings();

@@ -1,12 +1,18 @@
 import type { LinkerParams } from "../api/linker";
+import type {
+  GtagConfigParams,
+  GtagControlParams,
+  GtagCustomParams,
+  GtagEventParams,
+} from "./gtag";
 import type { PageTrackerParams } from "./page-tracker";
 import type { Route, Router } from "./router";
 
 export type ConfigParams =
-  | Gtag.ControlParams
-  | Gtag.EventParams
-  | Gtag.ConfigParams
-  | Gtag.CustomParams;
+  | GtagControlParams
+  | GtagEventParams
+  | GtagConfigParams
+  | GtagCustomParams;
 
 export type PageTrackerTemplate =
   | PageTrackerParams

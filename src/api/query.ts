@@ -1,7 +1,8 @@
+import type { Gtag } from "src/types/gtag";
 import { getSettings } from "../settings";
 import isServer from "../utils";
 
-export type QueryParams = Parameters<Gtag.Gtag>;
+export type QueryParams = Parameters<Gtag>;
 
 declare global {
   interface Window {

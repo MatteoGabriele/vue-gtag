@@ -1,8 +1,7 @@
+import type { GtagCustomParams } from "src/types/gtag";
 import config from "./config";
 
-type CustomMapParams = Gtag.CustomParams;
-
-export default function customMap(params: CustomMapParams) {
+export default function customMap(params: GtagCustomParams) {
   config({
     custom_map: params,
   });

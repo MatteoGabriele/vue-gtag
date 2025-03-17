@@ -1,3 +1,4 @@
+import type { GtagCustomParams } from "src/types/gtag";
 import event from "./event";
 
 type ExceptionParams =
@@ -5,7 +6,7 @@ type ExceptionParams =
       description?: string;
       fatal?: boolean;
     }
-  | Gtag.CustomParams;
+  | GtagCustomParams;
 
 export default function exception(params: ExceptionParams) {
   event("exception", params);

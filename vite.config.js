@@ -25,7 +25,6 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       rollupTypes: true,
-      copyDtsFiles: ['./src/gtag.d.ts']
     }),
   ],
   test: {

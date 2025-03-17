@@ -30,7 +30,7 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
 
-    "types": ["@types/node", "vitest/globals", "./src/gtag.d.ts"]
+    "types": ["@types/node", "vitest/globals"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]

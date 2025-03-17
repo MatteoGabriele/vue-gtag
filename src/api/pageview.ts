@@ -1,8 +1,9 @@
+import type { GtagConfigParams } from "src/types/gtag";
 import { getSettings } from "../settings";
 import type { Route } from "../types/router";
 import query from "./query";
 
-export type Pageview = Gtag.ConfigParams;
+export type Pageview = GtagConfigParams;
 
 export type PageviewParams = string | Route | Pageview;
 
