@@ -24,7 +24,7 @@ export default function pageview(
 ) {
   const { pageTracker } = getSettings();
 
-  let template: PageviewParams = {};
+  let template: PageviewParams | undefined;
 
   if (typeof params === "string") {
     template = {
