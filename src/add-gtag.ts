@@ -10,8 +10,7 @@ export default async function addGtag(): Promise<void> {
     dataLayerName,
     tagId,
     pageTracker,
-    onReady,
-    onError,
+    hooks,
   } = getSettings();
 
   if (!tagId) {
@@ -25,7 +24,7 @@ export default async function addGtag(): Promise<void> {
   }
 
   if (useCustomScript) {
-    onReady?.();
+    hooks?.["script:loaded"]?.();
     return;
   }
 
@@ -36,8 +35,8 @@ export default async function addGtag(): Promise<void> {
       nonce: resource.nonce,
     });
 
-    onReady?.();
+    hooks?.["script:loaded"]?.();
   } catch (error) {
-    onError?.(error);
+    hooks?.["script:error"]?.(error);
   }
 }

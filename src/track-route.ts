@@ -17,13 +17,13 @@ function isRouteExcluded(route: Route): boolean {
 }
 
 export default function trackRoute(route: Route) {
-  const { pageTracker } = getSettings();
+  const { pageTracker, hooks } = getSettings();
 
   if (isRouteExcluded(route)) {
     return;
   }
 
-  pageTracker?.onBeforeTrack?.(route);
+  hooks?.["router:track:before"]?.(route);
 
   let template: PageTrackerParams | undefined;
 
@@ -46,5 +46,5 @@ export default function trackRoute(route: Route) {
     pageview(pageviewParams);
   }
 
-  pageTracker?.onAfterTrack?.(route);
+  hooks?.["router:track:after"]?.(route);
 }

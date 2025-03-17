@@ -51,16 +51,18 @@ describe("addGtag", () => {
   });
 
   it("should fire callback when plugin is ready", async () => {
-    const spyOnReady = vi.fn();
+    const spyOnResolved = vi.fn();
 
     updateSettings({
       tagId: "UA-12345678",
-      onReady: spyOnReady,
+      hooks: {
+        "script:loaded": spyOnResolved,
+      },
     });
 
     await addGtag();
 
-    expect(spyOnReady).toHaveBeenCalled();
+    expect(spyOnResolved).toHaveBeenCalled();
   });
 
   it("should fire callback when downloading library throws an error", async () => {
@@ -70,7 +72,9 @@ describe("addGtag", () => {
 
     updateSettings({
       tagId: "UA-12345678",
-      onError: spyOnError,
+      hooks: {
+        "script:error": spyOnError,
+      },
     });
 
     await addGtag();
@@ -125,17 +129,19 @@ describe("addGtag", () => {
   });
 
   it("should fire the onReady callback even if using custom script loader", async () => {
-    const spyOnReady = vi.fn();
+    const spyOnResolved = vi.fn();
 
     updateSettings({
       tagId: "UA-12345678",
       useCustomScript: true,
-      onReady: spyOnReady,
+      hooks: {
+        "script:loaded": spyOnResolved,
+      },
     });
 
     await addGtag();
 
-    expect(spyOnReady).toHaveBeenCalled();
+    expect(spyOnResolved).toHaveBeenCalled();
   });
 
   it("should preconnect the script origin", async () => {

@@ -25,10 +25,21 @@ export type PageTracker = {
   skipSamePath?: boolean;
   /** Exclude routes using either the route `path` or `name` property */
   exclude?: Array<{ path?: string; name?: string }>;
+};
+
+export type Hooks = {
   /** Event fired before the route tracking is fired */
-  onBeforeTrack?: (route: Route) => void;
+  "router:track:before"?: (route: Route) => void;
   /** Event fired after the route tracking is fired */
-  onAfterTrack?: (route: Route) => void;
+  "router:track:after"?: (route: Route) => void;
+  /** Event fired before the first configuration hit is fired */
+  "config:init:before"?: () => void;
+  /** Event fired after the first configuration hit is fired */
+  "config:init:after"?: () => void;
+  /** Callback fired when the gtag.js library is loaded */
+  "script:loaded"?: () => void;
+  /** Callback fired when the gtag.js library fails to load */
+  "script:error"?: (error: unknown) => void;
 };
 
 export type Resource = {
@@ -62,14 +73,12 @@ export type Settings = {
   gtagName: string;
   /** Routes tracking configuration */
   pageTracker?: PageTracker;
-  /** Callback fired when the gtag.js library is loaded and first hit configuration is fired */
-  onReady?: () => void;
-  /** Callback fired when the gtag.js library fails to load */
-  onError?: (error: unknown) => void;
   /** Set up cross-domain linking */
   linker?: LinkerParams;
   /** Define custom group name. Default is `default` */
   groupName: string;
   /** In case you are already loading gtag.js yourself, you can pass true to avoid adding the script again */
   useCustomScript?: boolean;
+  /** Callback fired before any gtag configuration parameters */
+  hooks?: Hooks;
 };

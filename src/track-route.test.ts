@@ -104,7 +104,9 @@ describe("track-route", () => {
     updateSettings({
       pageTracker: {
         router,
-        onBeforeTrack: spyOnBeforeTrack,
+      },
+      hooks: {
+        "router:track:before": spyOnBeforeTrack,
       },
     });
 
@@ -122,7 +124,9 @@ describe("track-route", () => {
     updateSettings({
       pageTracker: {
         router,
-        onAfterTrack: spyOnAfterTrack,
+      },
+      hooks: {
+        "router:track:after": spyOnAfterTrack,
       },
     });
 

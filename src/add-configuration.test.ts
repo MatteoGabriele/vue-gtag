@@ -72,4 +72,38 @@ describe("addConfiguration", () => {
     });
     expect(query).toHaveBeenNthCalledWith(2, "js", new Date());
   });
+
+  describe("hooks", () => {
+    it("should fire the config:init:before hook", () => {
+      const spyConfigBefore = vi.fn();
+
+      updateSettings({
+        tagId: "UA-1",
+        hooks: {
+          "config:init:before": spyConfigBefore,
+        },
+      });
+
+      addConfiguration();
+
+      expect(spyConfigBefore).toHaveBeenCalled();
+      expect(query).toHaveBeenCalledAfter(spyConfigBefore);
+    });
+
+    it("should fire the config:init:after hook", () => {
+      const spyConfigAfter = vi.fn();
+
+      updateSettings({
+        tagId: "UA-1",
+        hooks: {
+          "config:init:after": spyConfigAfter,
+        },
+      });
+
+      addConfiguration();
+
+      expect(spyConfigAfter).toHaveBeenCalled();
+      expect(query).toHaveBeenCalledBefore(spyConfigAfter);
+    });
+  });
 });

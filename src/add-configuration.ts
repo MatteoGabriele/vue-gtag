@@ -17,11 +17,14 @@ export default function addConfiguration() {
     groupName,
     linker: linkerOptions,
     additionalAccounts,
+    hooks,
   } = getSettings();
 
   if (!tagId) {
     return;
   }
+
+  hooks?.["config:init:before"]?.();
 
   if (linkerOptions) {
     linker(linkerOptions);
@@ -30,18 +33,18 @@ export default function addConfiguration() {
   query("js", new Date());
   query("config", tagId, mergeDefaults(config));
 
-  if (!additionalAccounts) {
-    return;
+  if (additionalAccounts) {
+    for (const account of additionalAccounts) {
+      query(
+        "config",
+        account.tagId,
+        mergeDefaults({
+          groups: groupName,
+          ...account.config,
+        }),
+      );
+    }
   }
 
-  for (const account of additionalAccounts) {
-    query(
-      "config",
-      account.tagId,
-      mergeDefaults({
-        groups: groupName,
-        ...account.config,
-      }),
-    );
-  }
+  hooks?.["config:init:after"]?.();
 }
