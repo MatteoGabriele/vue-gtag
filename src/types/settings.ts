@@ -28,17 +28,17 @@ export type PageTracker = {
 };
 
 export type Hooks = {
-  /** Event fired before the route tracking is fired */
+  /** Called before the route tracking is fired */
   "router:track:before"?: (route: Route) => void;
-  /** Event fired after the route tracking is fired */
+  /** Called after the route tracking is fired */
   "router:track:after"?: (route: Route) => void;
-  /** Event fired before the first configuration hit is fired */
+  /** Called before the first configuration hit is fired */
   "config:init:before"?: () => void;
-  /** Event fired after the first configuration hit is fired */
+  /** Called after the first configuration hit is fired */
   "config:init:after"?: () => void;
-  /** Callback fired when the gtag.js library is loaded */
+  /** Called when the gtag.js library is loaded */
   "script:loaded"?: () => void;
-  /** Callback fired when the gtag.js library fails to load */
+  /** Called when the gtag.js library fails to load */
   "script:error"?: (error: unknown) => void;
 };
 
@@ -79,6 +79,6 @@ export type Settings = {
   groupName: string;
   /** In case you are already loading gtag.js yourself, you can pass true to avoid adding the script again */
   useCustomScript?: boolean;
-  /** Callback fired before any gtag configuration parameters */
+  /** Collection of lifecycle hooks and event callbacks for tracking and configuration */
   hooks?: Hooks;
 };
