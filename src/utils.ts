@@ -7,6 +7,7 @@ export async function injectScript(
   options?: {
     preconnectOrigin?: boolean;
     defer?: boolean;
+    nonce?: string;
   },
 ): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -22,6 +23,10 @@ export async function injectScript(
 
     if (options?.defer) {
       script.defer = true;
+    }
+
+    if (options?.nonce) {
+      script.setAttribute("nonce", options.nonce);
     }
 
     if (options?.preconnectOrigin) {

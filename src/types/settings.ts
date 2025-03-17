@@ -38,6 +38,11 @@ export type Resource = {
   preconnect?: boolean;
   /** Defer script loading. Default value is `false` */
   deferred?: boolean;
+  /**
+   * A string representing the value of the `nonce` attribute to be attached to the script tag.
+   * Useful for enforcing Content Security Policy (CSP) and allowing the script to execute.
+   */
+  nonce?: string;
 };
 
 export type TagId = string;

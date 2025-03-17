@@ -144,4 +144,22 @@ describe("addGtag", () => {
 
     expect(spyOnReady).toHaveBeenCalled();
   });
+
+  it("should add the nonce attribute", async () => {
+    updateSettings({
+      tagId: "UA-12345678",
+      resource: {
+        nonce: "abcd",
+      },
+    });
+
+    await addGtag();
+
+    expect(utils.injectScript).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.objectContaining({
+        nonce: "abcd",
+      }),
+    );
+  });
 });

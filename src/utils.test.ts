@@ -43,5 +43,17 @@ describe("utils", () => {
       expect(links[0].getAttribute("href")).toEqual("https://www.google.com");
       expect(links[0].getAttribute("rel")).toEqual("preconnect");
     });
+
+    it("should accept the nonce attribute", async () => {
+      utils.injectScript("https://www.google.com/something", {
+        nonce: "abcd",
+      });
+
+      await flushPromises();
+
+      const scripts = document.getElementsByTagName("script");
+
+      expect(scripts[0].getAttribute("nonce")).toEqual("abcd");
+    });
   });
 });
