@@ -20,10 +20,11 @@ export default function query(...args: QueryParams) {
 
   window[dataLayerName] = window[dataLayerName] || [];
 
-  // biome-ignore lint/suspicious/noExplicitAny:
-  const gtag = (...args: any[]) => window[dataLayerName].push(args);
-
-  window[gtagName] = window[gtagName] || gtag;
+  // biome-ignore lint/complexity/useArrowFunction:
+  window[gtagName] = function () {
+    // biome-ignore lint/style/noArguments:
+    window[dataLayerName].push(arguments);
+  };
 
   window[gtagName](...args);
 }
