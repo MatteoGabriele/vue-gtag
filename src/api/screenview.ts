@@ -12,14 +12,14 @@ export type ScreenviewParams = string | Route | Screenview;
 export default function screenview(params: ScreenviewParams) {
   const { pageTracker } = getSettings();
 
-  const template: Screenview = { screen_name: undefined };
+  let template: Screenview = { screen_name: undefined };
 
   if (typeof params === "string") {
     template.screen_name = params;
   } else if ("path" in params) {
     template.screen_name = (params.name ?? params.path) as string;
   } else if ("screen_name" in params) {
-    template.screen_name = params.screen_name;
+    template = params;
   }
 
   if (pageTracker?.appName && template?.app_name === undefined) {

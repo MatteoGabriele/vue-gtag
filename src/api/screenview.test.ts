@@ -68,4 +68,16 @@ describe("screenview", () => {
       screen_name: "/no-name",
     });
   });
+
+  it("should track screenview with app_name", () => {
+    screenview({
+      app_name: "MyApp",
+      screen_name: "about",
+    });
+
+    expect(query).toHaveBeenCalledWith("event", "screen_view", {
+      app_name: "MyApp",
+      screen_name: "about",
+    });
+  });
 });
