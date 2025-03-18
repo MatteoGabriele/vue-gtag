@@ -11,8 +11,8 @@ export default () => {
 
   if (window[globalObjectName] == null) {
     window[globalDataLayerName] = window[globalDataLayerName] || [];
-    window[globalObjectName] = (...args) => {
-      window[globalDataLayerName].push(args);
+    window[globalObjectName] = function (){
+      window[globalDataLayerName].push(arguments);
     };
   }
 
