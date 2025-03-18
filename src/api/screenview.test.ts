@@ -33,43 +33,7 @@ describe("screenview", () => {
     });
   });
 
-  it("should track screenview with the app_name", async () => {
-    updateSettings({
-      pageTracker: {
-        router,
-        appName: "myapp",
-      },
-    });
-
-    screenview(router.currentRoute.value);
-
-    expect(query).toHaveBeenCalledWith(
-      "event",
-      "screen_view",
-      expect.objectContaining({
-        app_name: "myapp",
-      }),
-    );
-  });
-
-  it("should track screenview with a route instance and name", async () => {
-    screenview(router.currentRoute.value);
-
-    expect(query).toHaveBeenCalledWith("event", "screen_view", {
-      screen_name: "about",
-    });
-  });
-
-  it("should track screenview with a route instance and page_path only", async () => {
-    await router.push("/no-name");
-    screenview(router.currentRoute.value);
-
-    expect(query).toHaveBeenCalledWith("event", "screen_view", {
-      screen_name: "/no-name",
-    });
-  });
-
-  it("should track screenview with app_name", () => {
+  it("should track a screenview with the app_name", () => {
     screenview({
       app_name: "MyApp",
       screen_name: "about",
@@ -78,6 +42,44 @@ describe("screenview", () => {
     expect(query).toHaveBeenCalledWith("event", "screen_view", {
       app_name: "MyApp",
       screen_name: "about",
+    });
+  });
+
+  describe("pageTracker", () => {
+    it("should track screenview with the app_name", async () => {
+      updateSettings({
+        pageTracker: {
+          router,
+          appName: "myapp",
+        },
+      });
+
+      screenview(router.currentRoute.value);
+
+      expect(query).toHaveBeenCalledWith(
+        "event",
+        "screen_view",
+        expect.objectContaining({
+          app_name: "myapp",
+        }),
+      );
+    });
+
+    it("should track screenview with a route name", async () => {
+      screenview(router.currentRoute.value);
+
+      expect(query).toHaveBeenCalledWith("event", "screen_view", {
+        screen_name: "about",
+      });
+    });
+
+    it("should track screenview with a route and page_path only", async () => {
+      await router.push("/no-name");
+      screenview(router.currentRoute.value);
+
+      expect(query).toHaveBeenCalledWith("event", "screen_view", {
+        screen_name: "/no-name",
+      });
     });
   });
 });
