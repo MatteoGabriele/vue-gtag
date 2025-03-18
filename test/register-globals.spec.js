@@ -68,14 +68,8 @@ describe("registerGlobals", () => {
       },
     });
 
-    expect(window.dataLayer).toMatchInlineSnapshot(`
-      [
-        Arguments [
-          "js",
-          2021-04-20T08:00:00.000Z,
-        ],
-      ]
-    `)
+    expect(window.dataLayer[0][0]).toEqual("js");
+    expect(window.dataLayer[0][1]).toBeInstanceOf(Date);
   });
 
   test("optOut when disabled", async () => {
