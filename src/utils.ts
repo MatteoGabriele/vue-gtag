@@ -47,6 +47,18 @@ export async function injectScript(
   });
 }
 
+export function hasGtag(): boolean {
+  if (isServer()) {
+    return false;
+  }
+
+  const match = document.querySelector(
+    "script[src*='googletagmanager.com/gtag/js']",
+  );
+
+  return match !== null;
+}
+
 type DeepMergeable = {
   [key: string]: unknown;
 };

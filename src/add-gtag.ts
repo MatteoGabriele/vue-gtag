@@ -1,7 +1,7 @@
 import addConfiguration from "./add-configuration";
 import addRouterTracking from "./add-router-tracking";
 import { getSettings } from "./settings";
-import { injectScript } from "./utils";
+import { hasGtag, injectScript } from "./utils";
 
 export default async function addGtag(): Promise<void> {
   const {
@@ -23,7 +23,7 @@ export default async function addGtag(): Promise<void> {
     addRouterTracking();
   }
 
-  if (useCustomScript) {
+  if (useCustomScript || hasGtag()) {
     hooks?.["script:loaded"]?.();
     return;
   }

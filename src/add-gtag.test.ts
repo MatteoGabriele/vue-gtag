@@ -15,7 +15,10 @@ vi.mock("./add-router-tracking");
 vi.mock("./api/query");
 
 describe("addGtag", () => {
-  beforeEach(resetSettings);
+  beforeEach(() => {
+    document.body.innerHTML = "";
+    resetSettings();
+  });
 
   it("should download the gtag.js library", async () => {
     updateSettings({
@@ -30,6 +33,26 @@ describe("addGtag", () => {
     const url = `${resource}?id=${id}&l=${dataLayer}`;
 
     expect(utils.injectScript).toHaveBeenCalledWith(url, expect.anything());
+  });
+
+  it("should avoid downloading gtag if already exists in the DOM", async () => {
+    const spyOnResolved = vi.fn();
+
+    const script = document.createElement("script");
+    script.src = "https://www.googletagmanager.com/gtag/js?id=12345678";
+    document.body.appendChild(script);
+
+    updateSettings({
+      tagId: "UA-12345678",
+      hooks: {
+        "script:loaded": spyOnResolved,
+      },
+    });
+
+    await addGtag();
+
+    expect(spyOnResolved).toHaveBeenCalled();
+    expect(utils.injectScript).not.toHaveBeenCalled();
   });
 
   it("should download a custom version of the gtag.js library", async () => {
