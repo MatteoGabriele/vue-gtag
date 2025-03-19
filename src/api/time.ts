@@ -1,4 +1,4 @@
-import type { GtagEventParams } from "src/types/gtag";
+import type { GtagEventParams } from "../types/gtag";
 import event from "./event";
 
 export default function time(params: GtagEventParams) {

@@ -1,5 +1,5 @@
-import type { GtagConfigParams } from "src/types/gtag";
 import { getSettings } from "../settings";
+import type { GtagConfigParams } from "../types/gtag";
 import type { Route } from "../types/router";
 import query from "./query";
 

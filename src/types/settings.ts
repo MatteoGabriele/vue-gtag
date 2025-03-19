@@ -87,4 +87,6 @@ export type Settings = {
   useCustomScript?: boolean;
   /** Collection of lifecycle hooks and event callbacks for tracking and configuration */
   hooks?: Hooks;
+  /** Sets the default consent mode during initialization */
+  consentMode?: "denied" | "granted";
 };

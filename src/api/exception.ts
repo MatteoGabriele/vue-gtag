@@ -1,4 +1,4 @@
-import type { GtagCustomParams } from "src/types/gtag";
+import type { GtagCustomParams } from "../types/gtag";
 import event from "./event";
 
 type ExceptionParams =
