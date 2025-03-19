@@ -72,8 +72,6 @@ export type Settings = {
   linker?: LinkerParams;
   /** Define custom group name. Default is `default` */
   groupName: string;
-  /** In case you are already loading gtag.js yourself, you can pass true to avoid adding the script again */
-  useCustomScript?: boolean;
   /** Collection of lifecycle hooks and event callbacks for tracking and configuration */
   hooks?: Hooks;
   /** Sets the default consent mode during initialization */

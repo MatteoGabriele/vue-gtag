@@ -140,33 +140,6 @@ describe("addGtag", () => {
     expect(addConfiguration).not.toHaveBeenCalled();
   });
 
-  it("should not inject the script in case the user has it already", async () => {
-    updateSettings({
-      tagId: "UA-12345678",
-      useCustomScript: true,
-    });
-
-    await addGtag();
-
-    expect(utils.injectScript).not.toHaveBeenCalled();
-  });
-
-  it("should fire the onReady callback even if using custom script loader", async () => {
-    const spyOnResolved = vi.fn();
-
-    updateSettings({
-      tagId: "UA-12345678",
-      useCustomScript: true,
-      hooks: {
-        "script:loaded": spyOnResolved,
-      },
-    });
-
-    await addGtag();
-
-    expect(spyOnResolved).toHaveBeenCalled();
-  });
-
   it("should preconnect the script origin", async () => {
     updateSettings({
       tagId: "UA-12345678",
