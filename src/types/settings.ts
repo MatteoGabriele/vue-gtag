@@ -1,18 +1,7 @@
 import type { LinkerParams } from "../api/linker";
-import type {
-  GtagConfigParams,
-  GtagControlParams,
-  GtagCustomParams,
-  GtagEventParams,
-} from "./gtag";
+import type { GtagConfig } from "./gtag";
 import type { PageTrackerParams } from "./page-tracker";
 import type { Route, Router } from "./router";
-
-export type ConfigParams =
-  | GtagControlParams
-  | GtagEventParams
-  | GtagConfigParams
-  | GtagCustomParams;
 
 export type PageTrackerTemplate =
   | PageTrackerParams
@@ -68,9 +57,9 @@ export type Settings = {
   /** The tag ID value */
   tagId?: TagId;
   /** The initial configuration attached to the `tagId` value */
-  config?: ConfigParams;
+  config?: GtagConfig;
   /** An array of additional tag IDs and configurations that will be triggered with the main `tagId` value */
-  additionalAccounts?: Array<{ tagId: TagId; config?: ConfigParams }>;
+  additionalAccounts?: Array<{ tagId: TagId; config?: GtagConfig }>;
   /** gtag.js loader configuration */
   resource: Resource;
   /** Custom dataLayer global name. Default is `dataLayer` */
@@ -83,8 +72,8 @@ export type Settings = {
   linker?: LinkerParams;
   /** Define custom group name. Default is `default` */
   groupName: string;
-  /** In case you are already loading gtag.js yourself, you can pass true to avoid adding the script again */
-  useCustomScript?: boolean;
   /** Collection of lifecycle hooks and event callbacks for tracking and configuration */
   hooks?: Hooks;
+  /** Sets the default consent mode during initialization */
+  consentMode?: "denied" | "granted";
 };

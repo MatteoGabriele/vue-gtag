@@ -1,5 +1,5 @@
-import type { Gtag } from "src/types/gtag";
 import { getSettings } from "../settings";
+import type { Gtag } from "../types/gtag";
 import isServer from "../utils";
 
 export type QueryParams = Parameters<Gtag>;

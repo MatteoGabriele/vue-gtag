@@ -1,10 +1,10 @@
+import { getSettings } from "../settings";
 import type {
   GtagControlParams,
   GtagCustomParams,
   GtagEventNames,
   GtagEventParams,
-} from "src/types/gtag";
-import { getSettings } from "../settings";
+} from "../types/gtag";
 import query from "./query";
 
 type EventParams = GtagControlParams & GtagEventParams & GtagCustomParams;

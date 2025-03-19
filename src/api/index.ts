@@ -9,4 +9,5 @@ export { default as time } from "./time";
 export { default as set } from "./set";
 export { default as exception } from "./exception";
 export { default as customMap } from "./custom-map";
+export { consent, consentDeniedAll, consentGrantedAll } from "./consent";
 export { optIn, optOut } from "./opt";

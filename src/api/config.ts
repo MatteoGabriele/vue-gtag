@@ -1,5 +1,5 @@
-import type { GtagCommands } from "src/types/gtag";
 import { getSettings } from "../settings";
+import type { GtagCommands } from "../types/gtag";
 import type { Tail } from "../types/utils";
 import query from "./query";
 

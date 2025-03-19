@@ -1,9 +1,10 @@
+import { consentDeniedAll, consentGrantedAll } from "./api/consent";
 import linker from "./api/linker";
 import query from "./api/query";
 import { getSettings } from "./settings";
-import type { ConfigParams } from "./types/settings";
+import type { GtagConfig } from "./types/gtag";
 
-function mergeDefaults(config: ConfigParams = {}): ConfigParams {
+function mergeDefaults(config: GtagConfig = {}): GtagConfig {
   return {
     send_page_view: false,
     ...config,
@@ -18,6 +19,7 @@ export default function addConfiguration() {
     linker: linkerOptions,
     additionalAccounts,
     hooks,
+    consentMode,
   } = getSettings();
 
   if (!tagId) {
@@ -25,6 +27,12 @@ export default function addConfiguration() {
   }
 
   hooks?.["config:init:before"]?.();
+
+  if (consentMode === "granted") {
+    consentGrantedAll();
+  } else if (consentMode === "denied") {
+    consentDeniedAll();
+  }
 
   if (linkerOptions) {
     linker(linkerOptions);

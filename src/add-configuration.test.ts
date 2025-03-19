@@ -106,4 +106,42 @@ describe("addConfiguration", () => {
       expect(query).toHaveBeenCalledBefore(spyConfigAfter);
     });
   });
+
+  describe("consent mode", () => {
+    it("should set all granted", () => {
+      updateSettings({
+        tagId: "UA-12345678",
+        consentMode: "granted",
+      });
+
+      addConfiguration();
+
+      expect(query).toHaveBeenNthCalledWith(1, "consent", "default", {
+        ad_user_data: "granted",
+        ad_personalization: "granted",
+        ad_storage: "granted",
+        analytics_storage: "granted",
+      });
+
+      expect(query).toHaveBeenNthCalledWith(2, "js", new Date());
+    });
+
+    it("should set all denied", () => {
+      updateSettings({
+        tagId: "UA-12345678",
+        consentMode: "denied",
+      });
+
+      addConfiguration();
+
+      expect(query).toHaveBeenNthCalledWith(1, "consent", "default", {
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        ad_storage: "denied",
+        analytics_storage: "denied",
+      });
+
+      expect(query).toHaveBeenNthCalledWith(2, "js", new Date());
+    });
+  });
 });

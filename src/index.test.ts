@@ -20,6 +20,9 @@ describe("index", () => {
     expect(app.config.globalProperties.$gtag).toMatchInlineSnapshot(`
       {
         "config": [Function],
+        "consent": [Function],
+        "consentDeniedAll": [Function],
+        "consentGrantedAll": [Function],
         "customMap": [Function],
         "ecommerce": [Function],
         "event": [Function],

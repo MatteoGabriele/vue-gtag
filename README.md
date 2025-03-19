@@ -6,7 +6,7 @@
     <img src="https://badgen.net/npm/v/vue-gtag">
   </a>
   <a href="https://npm.im/vue-gtag">
-    <img src="https://badgen.net/npm/dw/vue-gtag?color=blue">
+    <img src="https://badgen.net/npm/dm/vue-gtag?color=blue">
   </a>
   <a href="https://bundlephobia.com/result?p=vue-gtag">
     <img src="https://badgen.net/bundlephobia/minzip/vue-gtag">
@@ -38,4 +38,4 @@ npm install vue-gtag
 
 Please drop an issue, if you find something that doesn't work, or a feature request at [https://github.com/MatteoGabriele/vue-gtag/issues](https://github.com/MatteoGabriele/vue-gtag/issues)
 
-Follow me on twitter [@matteo\_gabriele](https://twitter.com/matteo_gabriele) for updates
+Follow me on Bluesky at [matteogabriele.bsky.social](https://bsky.app/profile/matteogabriele.bsky.social) for updates
