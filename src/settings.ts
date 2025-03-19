@@ -10,12 +10,14 @@ const defaultSettings: Readonly<Settings> = {
 
 let settings: Settings = { ...defaultSettings };
 
-export const getSettings = (): Settings => settings;
+export function getSettings(): Settings {
+  return settings;
+}
 
-export const resetSettings = (): void => {
+export function resetSettings(): void {
   settings = { ...defaultSettings };
-};
+}
 
-export const updateSettings = (configParams: Partial<Settings>): void => {
+export function updateSettings(configParams: Partial<Settings>): void {
   settings = deepMerge(settings, configParams);
-};
+}

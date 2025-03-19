@@ -7,13 +7,13 @@ import type { Settings } from "./types/settings";
 type CreateGtagSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
 type CreateGtagReturn = (app: App) => void;
 
-export const createGtag = (settings: CreateGtagSettings): CreateGtagReturn => {
+export function createGtag(settings: CreateGtagSettings): CreateGtagReturn {
   updateSettings(settings);
   addGtag();
 
   return (app) => {
     app.config.globalProperties.$gtag = api;
   };
-};
+}
 
 export * from "./api";
