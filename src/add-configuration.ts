@@ -2,9 +2,9 @@ import { consentDeniedAll, consentGrantedAll } from "./api/consent";
 import linker from "./api/linker";
 import query from "./api/query";
 import { getSettings } from "./settings";
-import type { ConfigParams } from "./types/settings";
+import type { GtagConfig } from "./types/gtag";
 
-function mergeDefaults(config: ConfigParams = {}): ConfigParams {
+function mergeDefaults(config: GtagConfig = {}): GtagConfig {
   return {
     send_page_view: false,
     ...config,

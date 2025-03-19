@@ -1,3 +1,9 @@
+export type GtagConfig =
+  | GtagControlParams
+  | GtagEventParams
+  | GtagConfigParams
+  | GtagCustomParams;
+
 /**
  * Defines the available Google Tag (gtag) commands and their respective parameters.
  */
@@ -7,11 +13,7 @@ export type GtagCommands = {
     /** The tracking ID or measurement ID. */
     targetId: string,
     /** Optional configuration parameters. */
-    config?:
-      | GtagControlParams
-      | GtagEventParams
-      | GtagConfigParams
-      | GtagCustomParams,
+    config?: GtagConfig,
   ];
 
   /** Sets custom parameters or updates existing values. */
