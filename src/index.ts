@@ -1,19 +1,42 @@
-import type { App } from "vue";
 import addGtag from "./add-gtag";
-import * as api from "./api";
+import config from "./api/config";
+import { consent, consentDeniedAll, consentGrantedAll } from "./api/consent";
+import customMap from "./api/custom-map";
+import ecommerce from "./api/ecommerce";
+import event from "./api/event";
+import exception from "./api/exception";
+import linker from "./api/linker";
+import { optIn, optOut } from "./api/opt";
+import pageview from "./api/pageview";
+import query from "./api/query";
+import screenview from "./api/screenview";
+import set from "./api/set";
+import time from "./api/time";
 import { updateSettings } from "./settings";
 import type { Settings } from "./types/settings";
 
 type CreateGtagSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
-type CreateGtagReturn = (app: App) => void;
 
-export function createGtag(settings: CreateGtagSettings): CreateGtagReturn {
+export function createGtag(settings: CreateGtagSettings) {
   updateSettings(settings);
   addGtag();
-
-  return (app) => {
-    app.config.globalProperties.$gtag = api;
-  };
 }
 
-export * from "./api";
+export {
+  config,
+  event,
+  linker,
+  pageview,
+  ecommerce,
+  query,
+  screenview,
+  time,
+  set,
+  exception,
+  customMap,
+  consent,
+  consentDeniedAll,
+  consentGrantedAll,
+  optIn,
+  optOut,
+};
