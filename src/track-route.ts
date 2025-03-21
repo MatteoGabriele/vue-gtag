@@ -1,8 +1,6 @@
 import pageview from "./api/pageview";
 import screenview from "./api/screenview";
-import { getSettings } from "./settings";
-import type { PageTrackerParams } from "./types/page-tracker";
-import type { Route } from "./types/router";
+import { type PageTrackerParams, type Route, getSettings } from "./settings";
 
 function isRouteExcluded(route: Route): boolean {
   const { pageTracker } = getSettings();

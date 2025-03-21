@@ -12,8 +12,7 @@ import query from "./api/query";
 import screenview from "./api/screenview";
 import set from "./api/set";
 import time from "./api/time";
-import { updateSettings } from "./settings";
-import type { Settings } from "./types/settings";
+import { updateSettings, type Settings } from "./settings";
 
 type CreateGtagSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
 

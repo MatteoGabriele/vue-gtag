@@ -1,5 +1,4 @@
-import { getSettings } from "../settings";
-import type { Route } from "../types/router";
+import { type Route, getSettings } from "../settings";
 import query from "./query";
 
 export type Screenview = {
