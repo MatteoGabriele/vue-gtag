@@ -1,4 +1,4 @@
-import { getSettings, type TagId } from "../settings";
+import { type TagId, getSettings } from "../settings";
 
 function assignProperty(tagId?: TagId, value?: boolean) {
   const { tagId: settingsTagId, additionalAccounts } = getSettings();

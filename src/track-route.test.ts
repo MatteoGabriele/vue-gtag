@@ -97,12 +97,12 @@ describe("track-route", () => {
 
     expect(query).not.toHaveBeenCalled();
   });
-  
+
   it("should avoid tracking excluded routes using a custom function", async () => {
     updateSettings({
       pageTracker: {
         router,
-        exclude: ({ name }) => name === 'home'
+        exclude: ({ name }) => name === "home",
       },
     });
 
