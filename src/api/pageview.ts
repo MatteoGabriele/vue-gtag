@@ -49,7 +49,7 @@ export default function pageview(
   }
 
   if (template.send_page_view === undefined) {
-    template.send_page_view = true;
+    template.send_page_view = pageTracker?.sendPageView ?? true;
   }
 
   query("event", "page_view", template);

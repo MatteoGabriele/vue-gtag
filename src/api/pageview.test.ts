@@ -144,5 +144,24 @@ describe("pageview", () => {
         }),
       );
     });
+
+    it("should change the default send_page_view value", async () => {
+      updateSettings({
+        pageTracker: {
+          router,
+          sendPageView: false,
+        },
+      });
+
+      pageview(router.currentRoute.value);
+
+      expect(query).toHaveBeenCalledWith(
+        "event",
+        "page_view",
+        expect.objectContaining({
+          send_page_view: false,
+        }),
+      );
+    });
   });
 });

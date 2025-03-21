@@ -50,6 +50,12 @@ export type PageTracker = {
    * - Can also be a function that returns `true` to exclude the route from tracking.
    */
   exclude?: PageTrackerExclude;
+
+  /**
+   * Set `send_page_view` for each route change.
+   * @default true
+   */
+  sendPageView?: boolean;
 };
 
 export type Hooks = {
