@@ -9,6 +9,10 @@ function isRouteExcluded(route: Route): boolean {
     return false;
   }
 
+  if (typeof pageTracker.exclude === "function") {
+    return pageTracker.exclude(route);
+  }
+
   return pageTracker.exclude?.some(({ name, path } = {}) => {
     return (name && name === route.name) || (path && path === route.path);
   });

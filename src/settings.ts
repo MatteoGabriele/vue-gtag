@@ -17,6 +17,10 @@ export type PageTrackerTemplate =
   | PageTrackerParams
   | ((route: Route) => PageTrackerParams);
 
+export type PageTrackerExclude =
+  | Array<{ path?: string; name?: string }>
+  | ((route: Route) => boolean);
+
 export type PageTracker = {
   /**
    * Vue Router instance used for tracking navigation events.
@@ -41,9 +45,11 @@ export type PageTracker = {
   skipSamePath?: boolean;
 
   /**
-   * List of routes to exclude from tracking, identified by `path` or `name`.
+   * Defines routes to exclude from tracking.
+   * - Can be an array of route objects identified by `path` or `name`.
+   * - Can also be a function that returns `true` to exclude the route from tracking.
    */
-  exclude?: Array<{ path?: string; name?: string }>;
+  exclude?: PageTrackerExclude;
 };
 
 export type Hooks = {

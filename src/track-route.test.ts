@@ -97,6 +97,22 @@ describe("track-route", () => {
 
     expect(query).not.toHaveBeenCalled();
   });
+  
+  it("should avoid tracking excluded routes using a custom function", async () => {
+    updateSettings({
+      pageTracker: {
+        router,
+        exclude: ({ name }) => name === 'home'
+      },
+    });
+
+    await router.isReady();
+    await router.push("/");
+
+    trackRoute(router.currentRoute.value);
+
+    expect(query).not.toHaveBeenCalled();
+  });
 
   it("should fire a callback before tracking", async () => {
     const spyOnBeforeTrack = vi.fn();
