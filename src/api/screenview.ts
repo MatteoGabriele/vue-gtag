@@ -9,7 +9,7 @@ export type Screenview = {
 export type ScreenviewParams = string | Route | Screenview;
 
 export default function screenview(params: ScreenviewParams) {
-  const { pageTracker } = getSettings();
+  const { appName } = getSettings();
 
   let template: Screenview = { screen_name: undefined };
 
@@ -21,8 +21,8 @@ export default function screenview(params: ScreenviewParams) {
     template = params;
   }
 
-  if (pageTracker?.appName && template?.app_name === undefined) {
-    template.app_name = pageTracker.appName;
+  if (appName && template?.app_name === undefined) {
+    template.app_name = appName;
   }
 
   query("event", "screen_view", template);

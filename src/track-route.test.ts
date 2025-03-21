@@ -34,9 +34,9 @@ describe("track-route", () => {
 
   it("should track screenviews", async () => {
     updateSettings({
+      appName: "MyApp",
       pageTracker: {
         router,
-        appName: "MyApp",
         useScreenview: true,
       },
     });

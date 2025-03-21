@@ -48,9 +48,9 @@ describe("screenview", () => {
   describe("pageTracker", () => {
     it("should track screenview with the app_name", async () => {
       updateSettings({
+        appName: "myapp",
         pageTracker: {
           router,
-          appName: "myapp",
         },
       });
 

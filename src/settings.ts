@@ -18,45 +18,90 @@ export type PageTrackerTemplate =
   | ((route: Route) => PageTrackerParams);
 
 export type PageTracker = {
-  /** VueRouter router instance */
+  /**
+   * Vue Router instance used for tracking navigation events.
+   */
   router: Router;
-  /** Create a custom template for automatic route tracking */
+
+  /**
+   * Custom template for generating route tracking events.
+   */
   template?: PageTrackerTemplate;
-  /** Use `screen_view` event. Default is `page_view` */
+
+  /**
+   * Use `screen_view` instead of the default `page_view` event.
+   * @default false
+   */
   useScreenview?: boolean;
-  /** Pass the name of the app. Only available when useScreenview is set to true */
-  appName?: string;
-  /** Avoid traking route changes triggerd by the same path */
+
+  /**
+   * Prevent tracking consecutive route changes with the same path.
+   * @default false
+   */
   skipSamePath?: boolean;
-  /** Exclude routes using either the route `path` or `name` property */
+
+  /**
+   * List of routes to exclude from tracking, identified by `path` or `name`.
+   */
   exclude?: Array<{ path?: string; name?: string }>;
 };
 
 export type Hooks = {
-  /** Called before the route tracking is fired */
+  /**
+   * Triggered before a route tracking event is fired.
+   * @param route - The current route being tracked.
+   */
   "router:track:before"?: (route: Route) => void;
-  /** Called after the route tracking is fired */
+
+  /**
+   * Triggered after a route tracking event is fired.
+   * @param route - The current route that was tracked.
+   */
   "router:track:after"?: (route: Route) => void;
-  /** Called before the first configuration hit is fired */
+
+  /**
+   * Triggered before the initial configuration request is sent.
+   */
   "config:init:before"?: () => void;
-  /** Called after the first configuration hit is fired */
+
+  /**
+   * Triggered after the initial configuration request is sent.
+   */
   "config:init:after"?: () => void;
-  /** Called when the gtag.js library is loaded */
+
+  /**
+   * Called when the gtag.js script successfully loads.
+   */
   "script:loaded"?: () => void;
-  /** Called when the gtag.js library fails to load */
+
+  /**
+   * Called when the gtag.js script fails to load.
+   * @param error - The error encountered during script loading.
+   */
   "script:error"?: (error: unknown) => void;
 };
 
 export type Resource = {
-  /** The URL pointing to gtag.js script. Default value is `https://www.googletagmanager.com/gtag/js` */
-  url?: string;
-  /** Preconnect to the resource url domain. Default value is `false` */
-  preconnect?: boolean;
-  /** Defer script loading. Default value is `false` */
-  defer?: boolean;
   /**
-   * A string representing the value of the `nonce` attribute to be attached to the script tag.
-   * Useful for enforcing Content Security Policy (CSP) and allowing the script to execute.
+   * URL of the gtag.js script.
+   * @default "https://www.googletagmanager.com/gtag/js"
+   */
+  url?: string;
+
+  /**
+   * Enable preconnecting to the script's domain for faster loading.
+   * @default false
+   */
+  preconnect?: boolean;
+
+  /**
+   * Load the script with the `defer` attribute.
+   * @default false
+   */
+  defer?: boolean;
+
+  /**
+   * A nonce value for the script tag, useful for enforcing Content Security Policy (CSP).
    */
   nonce?: string;
 };
@@ -64,28 +109,68 @@ export type Resource = {
 export type TagId = string;
 
 export type Settings = {
-  /** The tag ID value */
+  /**
+   * Primary Google Tag Manager or Google Analytics tag ID.
+   */
   tagId?: TagId;
-  /** The initial configuration attached to the `tagId` value */
+
+  /**
+   * Configuration settings for the main `tagId`.
+   */
   config?: GtagConfig;
-  /** An array of additional tag IDs and configurations that will be triggered with the main `tagId` value */
+
+  /**
+   * Additional tag IDs and their configurations to be tracked alongside the main `tagId`.
+   */
   additionalAccounts?: Array<{ tagId: TagId; config?: GtagConfig }>;
-  /** gtag.js loader configuration */
+
+  /**
+   * Configuration for loading the gtag.js script.
+   */
   resource: Resource;
-  /** Custom dataLayer global name. Default is `dataLayer` */
+
+  /**
+   * Custom global variable name for the data layer.
+   * @default "dataLayer"
+   */
   dataLayerName: string;
-  /** Custom gtag global name. Default is `gtag` */
+
+  /**
+   * Custom global function name for `gtag`.
+   * @default "gtag"
+   */
   gtagName: string;
-  /** Routes tracking configuration */
+
+  /**
+   * Settings for automatic route tracking.
+   */
   pageTracker?: PageTracker;
-  /** Set up cross-domain linking */
+
+  /**
+   * Configuration for cross-domain tracking.
+   */
   linker?: LinkerParams;
-  /** Define custom group name. Default is `default` */
+
+  /**
+   * Custom analytics group name.
+   * @default "default"
+   */
   groupName: string;
-  /** Collection of lifecycle hooks and event callbacks for tracking and configuration */
+
+  /**
+   * Collection of lifecycle hooks and event callbacks for tracking and configuration.
+   */
   hooks?: Hooks;
-  /** Sets the default consent mode during initialization */
+
+  /**
+   * Default consent mode applied during initialization.
+   */
   consentMode?: "denied" | "granted";
+
+  /**
+   * Default value for `app_name` when using the `screen_view` tracking method.
+   */
+  appName?: string;
 };
 
 const defaultSettings: Readonly<Settings> = {
