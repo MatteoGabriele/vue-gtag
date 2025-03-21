@@ -6,11 +6,6 @@ export type Pageview = GtagConfigParams;
 
 export type PageviewParams = string | Route | Pageview;
 
-type PageviewOptions = {
-  useRouteFullPath?: boolean;
-  useRouterBasePath?: boolean;
-};
-
 function getPathWithBase(path: string, base: string): string {
   const normalizedBase = base.endsWith("/") ? base : `${base}/`;
   const normalizedPath = path.startsWith("/") ? path.substring(1) : path;
@@ -18,10 +13,7 @@ function getPathWithBase(path: string, base: string): string {
   return `${normalizedBase}${normalizedPath}`;
 }
 
-export default function pageview(
-  params: PageviewParams,
-  options?: PageviewOptions,
-) {
+export default function pageview(params: PageviewParams) {
   const { pageTracker } = getSettings();
 
   let template: PageviewParams | undefined;
@@ -32,11 +24,11 @@ export default function pageview(
     };
   } else if ("path" in params) {
     const base = pageTracker?.router.options.history.base ?? "";
-    const path = options?.useRouteFullPath ? params.fullPath : params.path;
+    const path = pageTracker?.useRouteFullPath ? params.fullPath : params.path;
 
     template = {
       ...(params.name ? { page_title: params.name as string } : {}),
-      page_path: options?.useRouterBasePath
+      page_path: pageTracker?.useRouterBasePath
         ? getPathWithBase(path, base)
         : path,
     };

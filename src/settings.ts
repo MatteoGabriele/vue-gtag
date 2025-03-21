@@ -56,6 +56,16 @@ export type PageTracker = {
    * @default true
    */
   sendPageView?: boolean;
+
+  /**
+   * Use the router base path option
+   */
+  useRouterBasePath?: boolean;
+
+  /**
+   * Sets the `page_path` equal to the route `fullPath` instead of `path` property
+   */
+  useRouteFullPath?: boolean;
 };
 
 export type Hooks = {

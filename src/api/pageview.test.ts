@@ -48,20 +48,6 @@ describe("pageview", () => {
     );
   });
 
-  it("should track a page full path using a route", async () => {
-    pageview(router.currentRoute.value, {
-      useRouteFullPath: true,
-    });
-
-    expect(query).toHaveBeenCalledWith(
-      "event",
-      "page_view",
-      expect.objectContaining({
-        page_path: "/about?id=1#title",
-      }),
-    );
-  });
-
   it("should add the page_location property by default", async () => {
     pageview("/about");
 
@@ -131,10 +117,34 @@ describe("pageview", () => {
       );
     });
 
-    it("should track a page path with base using a route", async () => {
-      pageview(router.currentRoute.value, {
-        useRouterBasePath: true,
+    it("should track a page full path using a route", async () => {
+      updateSettings({
+        pageTracker: {
+          router,
+          useRouteFullPath: true,
+        },
       });
+
+      pageview(router.currentRoute.value);
+
+      expect(query).toHaveBeenCalledWith(
+        "event",
+        "page_view",
+        expect.objectContaining({
+          page_path: "/about?id=1#title",
+        }),
+      );
+    });
+
+    it("should track a page path with base using a route", async () => {
+      updateSettings({
+        pageTracker: {
+          router,
+          useRouterBasePath: true,
+        },
+      });
+
+      pageview(router.currentRoute.value);
 
       expect(query).toHaveBeenCalledWith(
         "event",
