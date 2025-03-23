@@ -15,7 +15,7 @@ export default async function addRouterTracking(): Promise<void> {
   trackRoute(router.currentRoute.value);
 
   router.afterEach((to, from) => {
-    if (to.path === from.path && pageTracker.skipSamePath) {
+    if (to.path === from.path) {
       return;
     }
 

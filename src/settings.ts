@@ -39,12 +39,6 @@ export type PageTracker = {
   useScreenview?: boolean;
 
   /**
-   * Prevent tracking consecutive route changes with the same path.
-   * @default false
-   */
-  skipSamePath?: boolean;
-
-  /**
    * Defines routes to exclude from tracking.
    * - Can be an array of route objects identified by `path` or `name`.
    * - Can also be a function that returns `true` to exclude the route from tracking.
@@ -165,6 +159,8 @@ export type Settings = {
 
   /**
    * Settings for automatic route tracking.
+   * Make sure to disable pageview tracking from the "Enhanced measurement" in your Data Stream to avoid
+   * possible double-tracking of your routes.
    */
   pageTracker?: PageTracker;
 
