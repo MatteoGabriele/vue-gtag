@@ -2,7 +2,7 @@
   "name": "vue-gtag",
   "description": "Global Site Tag (gtag.js) plugin for Vue",
   "type": "module",
-  "version": "3.0.0-beta.15",
+  "version": "3.0.0-beta.16",
   "author": {
     "name": "Matteo Gabriele",
     "email": "m.gabriele.dev@gmail.com"
@@ -36,9 +36,14 @@
     "vue",
     "vuejs"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/vue-gtag.d.ts",
+      "import": "./dist/vue-gtag.js"
+    }
+  },
   "main": "./dist/vue-gtag.js",
   "module": "./dist/vue-gtag.js",
-  "unpkg": "./dist/vue-gtag.js",
   "types": "./dist/vue-gtag.d.ts",
   "files": [
     "dist"

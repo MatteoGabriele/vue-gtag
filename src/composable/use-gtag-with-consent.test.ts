@@ -1,12 +1,14 @@
 import flushPromises from "flush-promises";
+import addGtag from "../add-gtag";
 import { consent, consentDeniedAll, consentGrantedAll } from "../api/consent";
-import createGtag from "../create-gtag";
-import { resetSettings } from "../settings";
+import { resetSettings, updateSettings } from "../settings";
 import useGtagWithConsent from "./use-gtag-with-consent";
 
 vi.mock("../api/consent");
-vi.mock("../create-gtag", () => ({
-  default: vi.fn().mockResolvedValue({}),
+vi.mock("../add-gtag");
+vi.mock("../settings", async () => ({
+  ...(await vi.importActual("../settings")),
+  updateSettings: vi.fn(),
 }));
 
 const tagId = "G-1234567890";
@@ -33,10 +35,11 @@ describe("useGtagWithConsent", () => {
 
     expect(consentGrantedAll).toHaveBeenCalledWith("update");
     expect(window.location.reload).toHaveBeenCalled();
-    expect(createGtag).toHaveBeenCalledWith({
+    expect(updateSettings).toHaveBeenCalledWith({
       consentMode: "denied",
       tagId,
     });
+    expect(addGtag).toHaveBeenCalled();
   });
 
   it("should load and accept custom consent properties", async () => {
@@ -56,10 +59,11 @@ describe("useGtagWithConsent", () => {
       ad_user_data: "granted",
     });
     expect(window.location.reload).toHaveBeenCalled();
-    expect(createGtag).toHaveBeenCalledWith({
+    expect(updateSettings).toHaveBeenCalledWith({
       consentMode: "denied",
       tagId,
     });
+    expect(addGtag).toHaveBeenCalled();
   });
 
   it("should reject all", () => {
@@ -71,14 +75,14 @@ describe("useGtagWithConsent", () => {
 
     expect(consentDeniedAll).toHaveBeenCalledWith("update");
     expect(window.location.reload).not.toHaveBeenCalled();
-    expect(createGtag).not.toHaveBeenCalled();
+    expect(addGtag).not.toHaveBeenCalled();
   });
 
   it("should not have consent", async () => {
     const { hasConsent } = useGtagWithConsent({ tagId });
 
     expect(hasConsent.value).toEqual(false);
-    expect(createGtag).not.toHaveBeenCalled();
+    expect(addGtag).not.toHaveBeenCalled();
   });
 
   it("should have consent", async () => {
@@ -86,9 +90,10 @@ describe("useGtagWithConsent", () => {
     const { hasConsent } = useGtagWithConsent({ tagId });
 
     expect(hasConsent.value).toEqual(true);
-    expect(createGtag).toHaveBeenCalledWith({
+    expect(updateSettings).toHaveBeenCalledWith({
       consentMode: "denied",
       tagId,
     });
+    expect(addGtag).toHaveBeenCalled();
   });
 });
