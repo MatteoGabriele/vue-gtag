@@ -3,6 +3,7 @@ import consent, { consentDeniedAll, consentGrantedAll } from "../api/consent";
 import createGtag from "../create-gtag";
 import type { PluginSettings } from "../settings";
 import type { GtagConsentParams } from "../types/gtag";
+import { isServer } from "../utils";
 
 export type UseWithConsentReturn = {
   hasConsent: Ref<boolean>;
@@ -20,7 +21,9 @@ export default function useGtagWithConsent(
     return createGtag({ consentMode: "denied", ...settings });
   };
 
-  const hasConsent = ref<boolean>(document.cookie.includes(GA_COOKIE_VALUE));
+  const hasConsent = ref<boolean>(
+    isServer() ? false : document.cookie.includes(GA_COOKIE_VALUE),
+  );
 
   const acceptAll = async () => {
     await initialize();
