@@ -7,6 +7,7 @@ import type { GtagConfig } from "./types/gtag";
 function mergeDefaults(config: GtagConfig = {}): GtagConfig {
   return {
     send_page_view: false,
+    anonymize_ip: true,
     ...config,
   };
 }

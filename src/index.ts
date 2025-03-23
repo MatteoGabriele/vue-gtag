@@ -1,4 +1,3 @@
-import addGtag from "./add-gtag";
 import config from "./api/config";
 import { consent, consentDeniedAll, consentGrantedAll } from "./api/consent";
 import customMap from "./api/custom-map";
@@ -12,16 +11,12 @@ import query from "./api/query";
 import screenview from "./api/screenview";
 import set from "./api/set";
 import time from "./api/time";
-import { type Settings, updateSettings } from "./settings";
-
-type CreateGtagSettings = Partial<Settings> & Required<Pick<Settings, "tagId">>;
-
-export function createGtag(settings: CreateGtagSettings) {
-  updateSettings(settings);
-  addGtag();
-}
+import useGtagWithConsent from "./composable/use-gtag-with-consent";
+import createGtag from "./create-gtag";
 
 export {
+  createGtag,
+  useGtagWithConsent,
   config,
   event,
   linker,

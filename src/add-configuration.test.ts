@@ -20,6 +20,7 @@ describe("addConfiguration", () => {
     expect(query).toHaveBeenNthCalledWith(1, "js", new Date());
     expect(query).toHaveBeenNthCalledWith(2, "config", "UA-12345678", {
       send_page_view: false,
+      anonymize_ip: true,
     });
   });
 
@@ -38,21 +39,25 @@ describe("addConfiguration", () => {
     expect(query).toHaveBeenNthCalledWith(1, "js", new Date());
     expect(query).toHaveBeenNthCalledWith(2, "config", "UA-1", {
       send_page_view: false,
+      anonymize_ip: true,
     });
 
     expect(query).toHaveBeenNthCalledWith(3, "config", "UA-2", {
       send_page_view: false,
+      anonymize_ip: true,
       groups: "default",
     });
 
     expect(query).toHaveBeenNthCalledWith(4, "config", "UA-3", {
       currency: "USD",
       send_page_view: false,
+      anonymize_ip: true,
       groups: "default",
     });
 
     expect(query).toHaveBeenNthCalledWith(5, "config", "UA-4", {
       send_page_view: true,
+      anonymize_ip: true,
       groups: "default",
     });
   });

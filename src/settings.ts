@@ -195,6 +195,9 @@ export type Settings = {
   appName?: string;
 };
 
+export type PluginSettings = Partial<Settings> &
+  Required<Pick<Settings, "tagId">>;
+
 const defaultSettings: Readonly<Settings> = {
   resource: { url: "https://www.googletagmanager.com/gtag/js" },
   dataLayerName: "dataLayer",
