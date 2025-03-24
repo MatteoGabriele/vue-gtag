@@ -1,6 +1,6 @@
 import mockdate from "mockdate";
 import addConfiguration from "./add-configuration";
-import query from "./api/query";
+import { query } from "./api/query";
 import { resetSettings, updateSettings } from "./settings";
 
 mockdate.set("2025-02-27");

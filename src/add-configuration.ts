@@ -1,6 +1,6 @@
 import { consentDeniedAll, consentGrantedAll } from "./api/consent";
-import linker from "./api/linker";
-import query from "./api/query";
+import { linker } from "./api/linker";
+import { query } from "./api/query";
 import { getSettings } from "./settings";
 import type { GtagConfig } from "./types/gtag";
 
@@ -12,7 +12,7 @@ function mergeDefaults(config: GtagConfig = {}): GtagConfig {
   };
 }
 
-export default function addConfiguration() {
+export default function addConfiguration(): void {
   const {
     tagId,
     config,

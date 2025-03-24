@@ -23,9 +23,9 @@ export default async function addGtag(): Promise<void> {
 
   try {
     await injectScript(`${resource.url}?id=${tagId}&l=${dataLayerName}`, {
-      preconnect: resource.preconnect,
-      defer: resource.defer,
-      nonce: resource.nonce,
+      preconnect: resource.preconnect ?? false,
+      defer: resource.defer ?? false,
+      nonce: resource.nonce ?? "",
     });
 
     hooks?.["script:loaded"]?.();
