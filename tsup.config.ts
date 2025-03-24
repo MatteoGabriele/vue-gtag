@@ -4,7 +4,7 @@ export default defineConfig([
   {
     entry: ['./src/index.ts'],
     clean: true,
-    format: ['esm', 'cjs'],
+    format: ['esm'],
     minify: false,
     dts: true,
     outDir: './dist',
@@ -12,12 +12,12 @@ export default defineConfig([
   {
     entry: ['./src/index.ts'],
     clean: true,
-    format: ['esm', 'cjs'],
+    format: ['esm'],
     minify: true,
     dts: false,
     outDir: './dist',
-    outExtension: ({ format }) => ({
-      js: format === 'cjs' ? '.min.cjs' : '.min.js',
+    outExtension: () => ({
+      js: '.min.js',
     }),
   },
 ]);

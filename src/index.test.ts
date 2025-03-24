@@ -1,5 +1,5 @@
 import addGtag from "./add-gtag";
-import createGtag from "./create-gtag";
+import { createGtag } from "./create-gtag";
 
 vi.mock("./add-gtag");
 

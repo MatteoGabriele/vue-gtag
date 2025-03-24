@@ -1,9 +1,9 @@
 import type { App } from "vue";
 import addGtag from "./add-gtag";
-import * as api from "./api";
+import * as api from "./api/index";
 import { type PluginSettings, updateSettings } from "./settings";
 
-type CreateGtagReturn = (app: App) => void;
+export type CreateGtagReturn = (app: App) => void;
 
 export type GtagAPI = {
   config: typeof api.config;
@@ -23,7 +23,7 @@ export type GtagAPI = {
   time: typeof api.time;
 };
 
-export default function createGtag(settings: PluginSettings): CreateGtagReturn {
+export function createGtag(settings: PluginSettings): CreateGtagReturn {
   updateSettings(settings);
   addGtag();
 

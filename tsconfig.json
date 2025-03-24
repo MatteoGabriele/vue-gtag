@@ -3,6 +3,7 @@
     "forceConsistentCasingInFileNames": true,
     "allowImportingTsExtensions": true,
     "declaration": true,
+    "allowSyntheticDefaultImports": true,
     "exactOptionalPropertyTypes": true,
     "isolatedDeclarations": true,
     "lib": ["ESNext", "DOM"],
@@ -14,5 +15,6 @@
     "target": "ES2020",
     "types": ["vitest/globals"]
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
