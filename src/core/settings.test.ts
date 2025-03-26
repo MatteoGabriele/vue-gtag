@@ -7,6 +7,7 @@ describe("config", () => {
       dataLayerName: "dataLayer",
       gtagName: "gtag",
       groupName: "default",
+      initMode: "auto",
     });
   });
 

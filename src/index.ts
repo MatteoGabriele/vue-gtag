@@ -1,6 +1,10 @@
 import * as api from "@/api/index";
-import addGtag from "@/core/add-gtag";
-import { type PluginSettings, updateSettings } from "@/core/settings";
+import { addGtag } from "@/core/add-gtag";
+import {
+  type PluginSettings,
+  getSettings,
+  updateSettings,
+} from "@/core/settings";
 import type { App } from "vue";
 
 type GtagAPI = typeof api;
@@ -13,9 +17,20 @@ declare module "vue" {
 
 type CreateGtagReturn = (app: App) => void;
 
+function handleGtag() {
+  const { initMode } = getSettings();
+
+  if (initMode === "manual") {
+    return;
+  }
+
+  addGtag();
+}
+
 export function createGtag(settings: PluginSettings): CreateGtagReturn {
   updateSettings(settings);
-  addGtag();
+
+  handleGtag();
 
   return (app: App) => {
     app.config.globalProperties.$gtag = api;
@@ -24,3 +39,5 @@ export function createGtag(settings: PluginSettings): CreateGtagReturn {
 
 export * from "@/api/index";
 export * from "@/composables/index";
+
+export { addGtag };

@@ -3,7 +3,7 @@ import addRouterTracking from "@/core/add-router-tracking";
 import { getSettings } from "@/core/settings";
 import { hasGtag, injectScript } from "@/utils";
 
-export default async function addGtag(): Promise<void> {
+export async function addGtag(): Promise<void> {
   const { resource, dataLayerName, tagId, pageTracker, hooks } = getSettings();
 
   if (!tagId) {

@@ -3,7 +3,7 @@ import addRouterTracking from "@/core/add-router-tracking";
 import { resetSettings, updateSettings } from "@/core/settings";
 import * as utils from "@/utils";
 import { createRouter, createWebHistory } from "vue-router";
-import addGtag from "./add-gtag";
+import { addGtag } from "./add-gtag";
 
 vi.mock("@/utils", async () => ({
   ...(await vi.importActual("@/utils.ts")),

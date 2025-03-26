@@ -1,6 +1,5 @@
 import { consent, consentDeniedAll, consentGrantedAll } from "@/api/consent";
-import addGtag from "@/core/add-gtag";
-import { type PluginSettings, updateSettings } from "@/core/settings";
+import { addGtag } from "@/core/add-gtag";
 import type { GtagConsentParams } from "@/types/gtag";
 import { isServer } from "@/utils";
 import { type Ref, ref } from "vue";
@@ -14,18 +13,13 @@ export type UseWithConsentReturn = {
 
 const GA_COOKIE_VALUE = "_ga";
 
-export function useConsent(settings: PluginSettings): UseWithConsentReturn {
-  const createGtag = (): Promise<void> => {
-    updateSettings({ consentMode: "denied", ...settings });
-    return addGtag();
-  };
-
+export function useConsent(): UseWithConsentReturn {
   const hasConsent = ref<boolean>(
     isServer() ? false : document.cookie.includes(GA_COOKIE_VALUE),
   );
 
   const acceptAll = async () => {
-    await createGtag();
+    await addGtag();
     consentGrantedAll("update");
     window.location.reload();
   };
@@ -35,13 +29,13 @@ export function useConsent(settings: PluginSettings): UseWithConsentReturn {
   };
 
   const acceptCustom = async (params: GtagConsentParams) => {
-    await createGtag();
+    await addGtag();
     consent("update", params);
     window.location.reload();
   };
 
   if (hasConsent.value) {
-    createGtag();
+    addGtag();
   }
 
   return {

@@ -186,6 +186,17 @@ export type Settings = {
   consentMode?: "denied" | "granted";
 
   /**
+   * Whether to initialize the Google tag script immediately after the page has loaded.
+   *
+   * @remarks
+   * - Set this to `manual` to delay the initialization until you call the `addGtag` function manually.
+   * - Set this to `manual` if you want to use the `useConsent` composable.
+   *
+   * @default 'auto'
+   */
+  initMode?: "auto" | "manual";
+
+  /**
    * Default value for `app_name` when using the `screen_view` tracking method.
    */
   appName?: string;
@@ -199,6 +210,7 @@ const defaultSettings: Readonly<Settings> = {
   dataLayerName: "dataLayer",
   gtagName: "gtag",
   groupName: "default",
+  initMode: "auto",
 };
 
 let settings: Settings = { ...defaultSettings };
