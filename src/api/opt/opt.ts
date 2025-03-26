@@ -1,16 +1,29 @@
 import { type TagId, getSettings } from "../../core/settings";
+import { isServer } from "../../utils";
+
+function updateProperty<T>(propertyName: string, value: T) {
+  if (value) {
+    window[propertyName] = value;
+  } else {
+    delete window[propertyName];
+  }
+}
 
 function assignProperty(tagId?: TagId, value?: boolean) {
   const { tagId: settingsTagId, additionalAccounts } = getSettings();
 
-  window[`ga-disable-${tagId ?? settingsTagId}`] = value;
+  if (isServer()) {
+    return;
+  }
+
+  updateProperty(`ga-disable-${tagId ?? settingsTagId}`, value);
 
   if (!additionalAccounts?.length || tagId) {
     return;
   }
 
   for (const account of additionalAccounts) {
-    window[`ga-disable-${account.tagId}`] = value;
+    updateProperty(`ga-disable-${account.tagId}`, value);
   }
 }
 
