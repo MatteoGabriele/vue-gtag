@@ -1,5 +1,5 @@
 import { type Router, createRouter, createWebHistory } from "vue-router";
-import { resetSettings, updateSettings } from "../settings";
+import { resetSettings, updateSettings } from "../core/settings";
 import query from "./query";
 import screenview from "./screenview";
 

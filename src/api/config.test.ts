@@ -1,4 +1,4 @@
-import { updateSettings } from "../settings";
+import { updateSettings } from "../core/settings";
 import config from "./config";
 import query from "./query";
 

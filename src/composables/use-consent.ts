@@ -1,7 +1,7 @@
 import { type Ref, ref } from "vue";
-import addGtag from "../add-gtag";
 import consent, { consentDeniedAll, consentGrantedAll } from "../api/consent";
-import { type PluginSettings, updateSettings } from "../settings";
+import addGtag from "../core/add-gtag";
+import { type PluginSettings, updateSettings } from "../core/settings";
 import type { GtagConsentParams } from "../types/gtag";
 import { isServer } from "../utils";
 

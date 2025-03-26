@@ -1,7 +1,7 @@
-import addGtag from "./add-gtag";
+import addGtag from "./core/add-gtag";
 import { createGtag } from "./index";
 
-vi.mock("./add-gtag");
+vi.mock("./core/add-gtag");
 
 describe("index", () => {
   it("should install the plugin", () => {

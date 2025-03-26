@@ -1,4 +1,4 @@
-import { resetSettings, updateSettings } from "../settings";
+import { resetSettings, updateSettings } from "../core/settings";
 import { optIn, optOut } from "./opt";
 
 describe("opt", () => {

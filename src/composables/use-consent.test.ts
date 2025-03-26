@@ -1,13 +1,13 @@
 import flushPromises from "flush-promises";
-import addGtag from "../add-gtag";
 import { consent, consentDeniedAll, consentGrantedAll } from "../api/consent";
-import { resetSettings, updateSettings } from "../settings";
+import addGtag from "../core/add-gtag";
+import { resetSettings, updateSettings } from "../core/settings";
 import { useConsent } from "./use-consent";
 
 vi.mock("../api/consent");
-vi.mock("../add-gtag");
-vi.mock("../settings", async () => ({
-  ...(await vi.importActual("../settings")),
+vi.mock("../core/add-gtag");
+vi.mock("../core/settings", async () => ({
+  ...(await vi.importActual("../core/settings")),
   updateSettings: vi.fn(),
 }));
 

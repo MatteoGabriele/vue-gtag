@@ -1,4 +1,4 @@
-import { type Route, getSettings } from "../settings";
+import { type Route, getSettings } from "../core/settings";
 import query from "./query";
 
 export type Screenview = {

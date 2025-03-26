@@ -1,4 +1,4 @@
-import { resetSettings, updateSettings } from "../settings";
+import { resetSettings, updateSettings } from "../core/settings";
 import customMap from "./custom-map";
 import query from "./query";
 

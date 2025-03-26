@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
+import * as utils from "../utils";
 import addConfiguration from "./add-configuration";
 import addGtag from "./add-gtag";
 import addRouterTracking from "./add-router-tracking";
 import { resetSettings, updateSettings } from "./settings";
-import * as utils from "./utils";
 
-vi.mock("./utils", async () => ({
-  ...(await vi.importActual("./utils.ts")),
+vi.mock("../utils", async () => ({
+  ...(await vi.importActual("../utils.ts")),
   injectScript: vi.fn(),
 }));
 
