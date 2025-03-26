@@ -1,6 +1,5 @@
 import type { App } from "vue";
 import * as api from "./api/index";
-import { useConsent } from "./composables/use-consent";
 import addGtag from "./core/add-gtag";
 import { type PluginSettings, updateSettings } from "./core/settings";
 
@@ -24,5 +23,4 @@ export function createGtag(settings: PluginSettings): CreateGtagReturn {
 }
 
 export * from "./api/index";
-
-export { useConsent };
+export * from "./composables/index";
