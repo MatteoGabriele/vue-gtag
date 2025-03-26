@@ -11,13 +11,13 @@ export type ScreenviewParams = string | Route | Screenview;
 export default function screenview(params: ScreenviewParams) {
   const { appName } = getSettings();
 
-  let template: Screenview = { screen_name: undefined };
+  let template: Screenview = {};
 
   if (typeof params === "string") {
     template.screen_name = params;
   } else if ("path" in params) {
     template.screen_name = (params.name ?? params.path) as string;
-  } else if ("screen_name" in params) {
+  } else {
     template = params;
   }
 

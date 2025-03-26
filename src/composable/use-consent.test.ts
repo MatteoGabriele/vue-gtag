@@ -2,7 +2,7 @@ import flushPromises from "flush-promises";
 import addGtag from "../add-gtag";
 import { consent, consentDeniedAll, consentGrantedAll } from "../api/consent";
 import { resetSettings, updateSettings } from "../settings";
-import useGtagWithConsent from "./use-gtag-with-consent";
+import { useConsent } from "./use-consent";
 
 vi.mock("../api/consent");
 vi.mock("../add-gtag");
@@ -13,7 +13,7 @@ vi.mock("../settings", async () => ({
 
 const tagId = "G-1234567890";
 
-describe("useGtagWithConsent", () => {
+describe("useConsent", () => {
   beforeEach(() => {
     resetSettings();
     vi.stubGlobal("location", {
@@ -27,7 +27,7 @@ describe("useGtagWithConsent", () => {
   });
 
   it("should load and accept all consent", async () => {
-    const { acceptAll } = useGtagWithConsent({ tagId });
+    const { acceptAll } = useConsent({ tagId });
 
     acceptAll();
 
@@ -43,7 +43,7 @@ describe("useGtagWithConsent", () => {
   });
 
   it("should load and accept custom consent properties", async () => {
-    const { acceptCustom } = useGtagWithConsent({
+    const { acceptCustom } = useConsent({
       tagId,
     });
 
@@ -67,7 +67,7 @@ describe("useGtagWithConsent", () => {
   });
 
   it("should reject all", () => {
-    const { rejectAll } = useGtagWithConsent({
+    const { rejectAll } = useConsent({
       tagId,
     });
 
@@ -79,7 +79,7 @@ describe("useGtagWithConsent", () => {
   });
 
   it("should not have consent", async () => {
-    const { hasConsent } = useGtagWithConsent({ tagId });
+    const { hasConsent } = useConsent({ tagId });
 
     expect(hasConsent.value).toEqual(false);
     expect(addGtag).not.toHaveBeenCalled();
@@ -87,7 +87,7 @@ describe("useGtagWithConsent", () => {
 
   it("should have consent", async () => {
     document.cookie = "_ga=1234";
-    const { hasConsent } = useGtagWithConsent({ tagId });
+    const { hasConsent } = useConsent({ tagId });
 
     expect(hasConsent.value).toEqual(true);
     expect(updateSettings).toHaveBeenCalledWith({

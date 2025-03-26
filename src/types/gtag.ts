@@ -323,23 +323,24 @@ type GtagPromotion = {
 
 export type GtagFieldNames = "client_id" | "session_id" | "gclid";
 
+export type GtagConsentMode = "granted" | "denied";
 export type GtagConsentArg = "default" | "update";
 
 export type GtagConsentParams = {
   /** Consent for ad personalization. */
-  ad_personalization?: "granted" | "denied";
+  ad_personalization?: GtagConsentMode;
   /** Consent for ad user data. */
-  ad_user_data?: "granted" | "denied";
+  ad_user_data?: GtagConsentMode;
   /** Consent for ad storage. */
-  ad_storage?: "granted" | "denied";
+  ad_storage?: GtagConsentMode;
   /** Consent for analytics storage. */
-  analytics_storage?: "granted" | "denied";
+  analytics_storage?: GtagConsentMode;
   /** Consent for functionality storage. */
-  functionality_storage?: "granted" | "denied";
+  functionality_storage?: GtagConsentMode;
   /** Consent for personalization storage. */
-  personalization_storage?: "granted" | "denied";
+  personalization_storage?: GtagConsentMode;
   /** Consent for security storage. */
-  security_storage?: "granted" | "denied";
+  security_storage?: GtagConsentMode;
   /** Time to wait for consent update in milliseconds. */
   wait_for_update?: number;
   /** The regions where the consent applies. */

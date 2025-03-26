@@ -1,24 +1,21 @@
 import { getSettings } from "../settings";
-import type { GtagCommands } from "../types/gtag";
-import type { Tail } from "../types/utils";
+import type { GtagConfig } from "../types/gtag";
 import query from "./query";
 
-type ConfigParams = Tail<GtagCommands["config"]>;
-
-export default function config(...args: ConfigParams) {
+export default function config(params: GtagConfig) {
   const { tagId, additionalAccounts } = getSettings();
 
   if (!tagId) {
     return;
   }
 
-  query("config", tagId, ...args);
+  query("config", tagId, params);
 
   if (!additionalAccounts) {
     return;
   }
 
   for (const account of additionalAccounts) {
-    query("config", account.tagId, ...args);
+    query("config", account.tagId, params);
   }
 }

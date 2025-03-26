@@ -14,9 +14,7 @@ export type UseWithConsentReturn = {
 
 const GA_COOKIE_VALUE = "_ga";
 
-export default function useGtagWithConsent(
-  settings: PluginSettings,
-): UseWithConsentReturn {
+export function useConsent(settings: PluginSettings): UseWithConsentReturn {
   const createGtag = (): Promise<void> => {
     updateSettings({ consentMode: "denied", ...settings });
     return addGtag();
