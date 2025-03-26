@@ -1,5 +1,5 @@
-import { updateSettings } from "../../core/settings";
-import { query } from "../query";
+import { query } from "@/api/query";
+import { updateSettings } from "@/core/settings";
 import { event } from "./event";
 
 vi.mock("../query");

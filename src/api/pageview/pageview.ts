@@ -1,6 +1,6 @@
-import { type Route, getSettings } from "../../core/settings";
-import type { GtagConfigParams } from "../../types/gtag";
-import { query } from "../query";
+import { query } from "@/api/query";
+import { type Route, getSettings } from "@/core/settings";
+import type { GtagConfigParams } from "@/types/gtag";
 
 export type Pageview = GtagConfigParams;
 

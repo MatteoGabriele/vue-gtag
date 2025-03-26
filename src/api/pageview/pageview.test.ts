@@ -1,9 +1,9 @@
+import { query } from "@/api/query";
+import { resetSettings, updateSettings } from "@/core/settings";
 import { type Router, createRouter, createWebHistory } from "vue-router";
-import { resetSettings, updateSettings } from "../../core/settings";
-import { query } from "../query";
 import { pageview } from "./pageview";
 
-vi.mock("../query");
+vi.mock("@/api/query");
 
 describe("pageview", () => {
   let router: Router;

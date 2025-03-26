@@ -1,5 +1,5 @@
-import { type Route, getSettings } from "../../core/settings";
-import { query } from "../query";
+import { query } from "@/api/query";
+import { type Route, getSettings } from "@/core/settings";
 
 export type Screenview = {
   app_name?: string;

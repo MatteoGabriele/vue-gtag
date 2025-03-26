@@ -1,4 +1,4 @@
-import { query } from "../query";
+import { query } from "@/api/query";
 import { exception } from "./exception";
 
 vi.mock("../query");

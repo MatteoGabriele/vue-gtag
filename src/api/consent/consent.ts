@@ -1,5 +1,5 @@
-import type { GtagConsentArg, GtagConsentParams } from "../../types/gtag";
-import { query } from "../query";
+import { query } from "@/api/query";
+import type { GtagConsentArg, GtagConsentParams } from "@/types/gtag";
 
 export function consent(consentArg: GtagConsentArg, params: GtagConsentParams) {
   query("consent", consentArg, params);

@@ -1,6 +1,6 @@
-import { getSettings } from "../../core/settings";
-import type { Gtag } from "../../types/gtag";
-import { isServer } from "../../utils";
+import { getSettings } from "@/core/settings";
+import type { Gtag } from "@/types/gtag";
+import { isServer } from "@/utils";
 
 export type QueryParams = Parameters<Gtag>;
 

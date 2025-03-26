@@ -1,8 +1,8 @@
-import { resetSettings, updateSettings } from "../../core/settings";
-import { query } from "../query";
+import { query } from "@/api/query";
+import { resetSettings, updateSettings } from "@/core/settings";
 import { customMap } from "./custom-map";
 
-vi.mock("../query");
+vi.mock("@/api/query");
 
 describe("custom-map", () => {
   beforeEach(resetSettings);

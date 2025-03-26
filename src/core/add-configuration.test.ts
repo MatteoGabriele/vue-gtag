@@ -1,11 +1,11 @@
+import { query } from "@/api/query";
+import { resetSettings, updateSettings } from "@/core/settings";
 import mockdate from "mockdate";
-import { query } from "../api/query";
 import addConfiguration from "./add-configuration";
-import { resetSettings, updateSettings } from "./settings";
 
 mockdate.set("2025-02-27");
 
-vi.mock("../api/query");
+vi.mock("@/api/query");
 
 describe("addConfiguration", () => {
   beforeEach(resetSettings);

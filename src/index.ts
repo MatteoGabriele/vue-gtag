@@ -1,7 +1,7 @@
+import * as api from "@/api/index";
+import addGtag from "@/core/add-gtag";
+import { type PluginSettings, updateSettings } from "@/core/settings";
 import type { App } from "vue";
-import * as api from "./api/index";
-import addGtag from "./core/add-gtag";
-import { type PluginSettings, updateSettings } from "./core/settings";
 
 type GtagAPI = typeof api;
 
@@ -22,5 +22,5 @@ export function createGtag(settings: PluginSettings): CreateGtagReturn {
   };
 }
 
-export * from "./api/index";
-export * from "./composables/index";
+export * from "@/api/index";
+export * from "@/composables/index";

@@ -1,5 +1,5 @@
-import type { GtagCustomParams } from "../../types/gtag";
-import { config } from "../config";
+import { config } from "@/api/config";
+import type { GtagCustomParams } from "@/types/gtag";
 
 export function customMap(params: GtagCustomParams) {
   config({

@@ -1,6 +1,6 @@
+import * as api from "@/api/index";
+import addGtag from "@/core/add-gtag";
 import { createApp } from "vue";
-import * as api from "./api/index";
-import addGtag from "./core/add-gtag";
 import { createGtag } from "./index";
 
 vi.mock("./core/add-gtag");

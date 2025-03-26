@@ -25,6 +25,9 @@
 
     /* Path aliases */
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
 
     /* Additional checks */
     "forceConsistentCasingInFileNames": true,

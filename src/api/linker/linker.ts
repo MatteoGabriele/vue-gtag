@@ -1,4 +1,4 @@
-import { query } from "../query";
+import { query } from "@/api/query";
 
 export type LinkerParams = {
   accept_incoming?: boolean;

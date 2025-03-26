@@ -1,6 +1,6 @@
-import { getSettings } from "../../core/settings";
-import type { GtagConfig } from "../../types/gtag";
-import { query } from "../query";
+import { query } from "@/api/query";
+import { getSettings } from "@/core/settings";
+import type { GtagConfig } from "@/types/gtag";
 
 export function config(params: GtagConfig) {
   const { tagId, additionalAccounts } = getSettings();

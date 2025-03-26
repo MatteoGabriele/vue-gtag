@@ -1,8 +1,8 @@
+import { event } from "@/api/event";
 import type {
   GtagEcommerceEventNames,
   GtagEcommerceParams,
-} from "../../types/gtag";
-import { event } from "../event";
+} from "@/types/gtag";
 
 export function ecommerce(
   name: GtagEcommerceEventNames,

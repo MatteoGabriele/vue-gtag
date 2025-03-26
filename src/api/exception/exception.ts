@@ -1,5 +1,5 @@
-import type { GtagCustomParams } from "../../types/gtag";
-import { event } from "../event";
+import { event } from "@/api/event";
+import type { GtagCustomParams } from "@/types/gtag";
 
 type ExceptionParams =
   | {

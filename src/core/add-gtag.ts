@@ -1,7 +1,7 @@
-import { hasGtag, injectScript } from "../utils";
-import addConfiguration from "./add-configuration";
-import addRouterTracking from "./add-router-tracking";
-import { getSettings } from "./settings";
+import addConfiguration from "@/core/add-configuration";
+import addRouterTracking from "@/core/add-router-tracking";
+import { getSettings } from "@/core/settings";
+import { hasGtag, injectScript } from "@/utils";
 
 export default async function addGtag(): Promise<void> {
   const { resource, dataLayerName, tagId, pageTracker, hooks } = getSettings();

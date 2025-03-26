@@ -1,18 +1,18 @@
+import addConfiguration from "@/core/add-configuration";
+import addRouterTracking from "@/core/add-router-tracking";
+import { resetSettings, updateSettings } from "@/core/settings";
+import * as utils from "@/utils";
 import { createRouter, createWebHistory } from "vue-router";
-import * as utils from "../utils";
-import addConfiguration from "./add-configuration";
 import addGtag from "./add-gtag";
-import addRouterTracking from "./add-router-tracking";
-import { resetSettings, updateSettings } from "./settings";
 
-vi.mock("../utils", async () => ({
-  ...(await vi.importActual("../utils.ts")),
+vi.mock("@/utils", async () => ({
+  ...(await vi.importActual("@/utils.ts")),
   injectScript: vi.fn(),
 }));
 
-vi.mock("./add-configuration");
-vi.mock("./add-router-tracking");
-vi.mock("./api/query");
+vi.mock("@/core/add-configuration");
+vi.mock("@/core/add-router-tracking");
+vi.mock("@/core/api/query");
 
 describe("addGtag", () => {
   beforeEach(() => {

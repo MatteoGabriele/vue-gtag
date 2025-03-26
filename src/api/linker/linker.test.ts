@@ -1,7 +1,7 @@
-import { query } from "../query";
+import { query } from "@/api/query";
 import { linker } from "./linker";
 
-vi.mock("../query");
+vi.mock("@/api/query");
 
 describe("linker", () => {
   it("should use the linker event", () => {

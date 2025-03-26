@@ -1,12 +1,12 @@
+import type { LinkerParams } from "@/api/linker";
+import type { Pageview } from "@/api/pageview";
+import type { Screenview } from "@/api/screenview";
+import type { GtagConfig } from "@/types/gtag";
+import { deepMerge } from "@/utils";
 import type {
   RouteLocationNormalizedGeneric as VueRouterRoute,
   Router as VueRouterRouter,
 } from "vue-router";
-import type { LinkerParams } from "../api/linker";
-import type { Pageview } from "../api/pageview";
-import type { Screenview } from "../api/screenview";
-import type { GtagConfig } from "../types/gtag";
-import { deepMerge } from "../utils";
 
 export type Router = VueRouterRouter;
 export type Route = VueRouterRoute;

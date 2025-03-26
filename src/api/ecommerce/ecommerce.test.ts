@@ -1,7 +1,7 @@
-import { query } from "../query";
+import { query } from "@/api/query";
 import { ecommerce } from "./ecommerce";
 
-vi.mock("../query");
+vi.mock("@/api/query");
 
 describe("ecommerce", () => {
   it("should use the ecommerce event", () => {

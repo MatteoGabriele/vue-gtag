@@ -1,7 +1,7 @@
-import { query } from "../query";
+import { query } from "@/api/query";
 import { consent, consentDeniedAll, consentGrantedAll } from "./consent";
 
-vi.mock("../query");
+vi.mock("@/api/query");
 
 describe("consent", () => {
   it("should use the consent event without default values", () => {

@@ -1,5 +1,5 @@
-import type { GtagCommands } from "../../types/gtag";
-import { query } from "../query";
+import { query } from "@/api/query";
+import type { GtagCommands } from "@/types/gtag";
 
 type SetParams = GtagCommands["set"];
 
