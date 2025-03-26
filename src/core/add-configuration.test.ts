@@ -1,5 +1,5 @@
 import mockdate from "mockdate";
-import query from "../api/query";
+import { query } from "../api/query";
 import addConfiguration from "./add-configuration";
 import { resetSettings, updateSettings } from "./settings";
 

@@ -1,6 +1,6 @@
 import { consentDeniedAll, consentGrantedAll } from "../api/consent";
-import linker from "../api/linker";
-import query from "../api/query";
+import { linker } from "../api/linker";
+import { query } from "../api/query";
 import type { GtagConfig } from "../types/gtag";
 import { getSettings } from "./settings";
 
