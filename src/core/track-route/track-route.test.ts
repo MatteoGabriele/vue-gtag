@@ -1,7 +1,7 @@
 import { query } from "@/api/query";
 import { resetSettings, updateSettings } from "@/core/settings";
 import { type Router, createRouter, createWebHistory } from "vue-router";
-import trackRoute from "./track-route";
+import { trackRoute } from "./track-route";
 
 vi.mock("@/api/query");
 

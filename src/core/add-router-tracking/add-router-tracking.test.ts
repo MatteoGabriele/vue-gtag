@@ -1,7 +1,7 @@
 import { resetSettings, updateSettings } from "@/core/settings";
-import trackRoute from "@/core/track-route";
+import { trackRoute } from "@/core/track-route";
 import { createRouter, createWebHistory } from "vue-router";
-import addRouterTracking from "./add-router-tracking";
+import { addRouterTracking } from "./add-router-tracking";
 
 vi.mock("@/core/track-route");
 

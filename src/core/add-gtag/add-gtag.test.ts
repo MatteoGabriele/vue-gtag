@@ -1,5 +1,5 @@
-import addConfiguration from "@/core/add-configuration";
-import addRouterTracking from "@/core/add-router-tracking";
+import { addConfiguration } from "@/core/add-configuration";
+import { addRouterTracking } from "@/core/add-router-tracking";
 import { resetSettings, updateSettings } from "@/core/settings";
 import * as utils from "@/utils";
 import { createRouter, createWebHistory } from "vue-router";

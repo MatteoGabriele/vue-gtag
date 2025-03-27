@@ -2,7 +2,6 @@ import type { LinkerParams } from "@/api/linker";
 import type { Pageview } from "@/api/pageview";
 import type { Screenview } from "@/api/screenview";
 import type { GtagConfig } from "@/types/gtag";
-import { deepMerge } from "@/utils";
 import type {
   RouteLocationNormalizedGeneric as VueRouterRoute,
   Router as VueRouterRouter,
@@ -204,25 +203,3 @@ export type Settings = {
 
 export type PluginSettings = Partial<Settings> &
   Required<Pick<Settings, "tagId">>;
-
-const defaultSettings: Readonly<Settings> = {
-  resource: { url: "https://www.googletagmanager.com/gtag/js" },
-  dataLayerName: "dataLayer",
-  gtagName: "gtag",
-  groupName: "default",
-  initMode: "auto",
-};
-
-let settings: Settings = { ...defaultSettings };
-
-export function getSettings(): Settings {
-  return settings;
-}
-
-export function resetSettings(): void {
-  settings = { ...defaultSettings };
-}
-
-export function updateSettings(configParams: Partial<Settings>): void {
-  settings = deepMerge(settings, configParams);
-}

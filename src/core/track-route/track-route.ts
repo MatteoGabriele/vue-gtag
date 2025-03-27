@@ -22,7 +22,7 @@ function isRouteExcluded(route: Route): boolean {
   });
 }
 
-export default function trackRoute(route: Route) {
+export function trackRoute(route: Route) {
   const { pageTracker, hooks } = getSettings();
 
   if (isRouteExcluded(route)) {

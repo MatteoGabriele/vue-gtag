@@ -1,5 +1,5 @@
-import addConfiguration from "@/core/add-configuration";
-import addRouterTracking from "@/core/add-router-tracking";
+import { addConfiguration } from "@/core/add-configuration";
+import { addRouterTracking } from "@/core/add-router-tracking";
 import { getSettings } from "@/core/settings";
 import { hasGtag, injectScript } from "@/utils";
 

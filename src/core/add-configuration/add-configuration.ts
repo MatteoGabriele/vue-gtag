@@ -12,7 +12,7 @@ function mergeDefaults(config: GtagConfig = {}): GtagConfig {
   };
 }
 
-export default function addConfiguration() {
+export function addConfiguration() {
   const {
     tagId,
     config,

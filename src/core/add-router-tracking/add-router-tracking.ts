@@ -1,7 +1,7 @@
 import { getSettings } from "@/core/settings";
-import trackRoute from "@/core/track-route";
+import { trackRoute } from "@/core/track-route";
 
-export default async function addRouterTracking(): Promise<void> {
+export async function addRouterTracking(): Promise<void> {
   const { pageTracker } = getSettings();
 
   if (!pageTracker?.router) {
