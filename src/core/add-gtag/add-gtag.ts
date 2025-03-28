@@ -3,6 +3,10 @@ import { addRouterTracking } from "@/core/add-router-tracking";
 import { getSettings } from "@/core/settings";
 import { hasGtag, injectScript } from "@/utils";
 
+/**
+ * Adds the Google Analytics gtag script to the application and initializes router
+ * auto-tracking when enabled.
+ */
 export async function addGtag(): Promise<void> {
   const { resource, dataLayerName, tagId, pageTracker, hooks } = getSettings();
 

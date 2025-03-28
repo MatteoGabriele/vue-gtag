@@ -2,34 +2,29 @@ import * as api from "@/api/index";
 import { addGtag } from "@/core/add-gtag";
 import { resetSettings } from "@/core/settings";
 import { createApp } from "vue";
-import { createGtag, addGtag as initialize } from "./index";
+import { createGtag } from "./create-gtag";
 
 vi.mock("@/core/add-gtag");
 
-describe("index", () => {
+describe("createGtag", () => {
   beforeEach(resetSettings);
 
-  it("should install the plugin", () => {
+  it("should initialize gtag", () => {
     createGtag({ tagId: "UA-123456789" });
     expect(addGtag).toHaveBeenCalled();
   });
 
-  it("should use manual installation", () => {
-    createGtag({ tagId: "UA-123456789", initMode: "manual" });
-
-    expect(addGtag).not.toHaveBeenCalled();
-
-    initialize();
-
-    expect(addGtag).toHaveBeenCalled();
-  });
-
-  it("should install global properties", () => {
+  it("should add global properties", () => {
     const app = createApp({});
     const gtag = createGtag({ tagId: "UA-123456789" });
 
     app.use(gtag);
 
     expect(app.config.globalProperties.$gtag).toEqual(api);
+  });
+
+  it("should avoid initialization using initMode in manual mode", () => {
+    createGtag({ tagId: "UA-123456789", initMode: "manual" });
+    expect(addGtag).not.toHaveBeenCalled();
   });
 });
