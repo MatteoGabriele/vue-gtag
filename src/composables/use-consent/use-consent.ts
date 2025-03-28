@@ -13,6 +13,10 @@ export type UseWithConsentReturn = {
 
 const GA_COOKIE_VALUE = "_ga";
 
+/**
+ * Provides functionality to manage user consent.
+ * @remark Make sure to set `initMode` to `manual`
+ */
 export function useConsent(): UseWithConsentReturn {
   const hasConsent = ref<boolean>(
     isServer() ? false : document.cookie.includes(GA_COOKIE_VALUE),
