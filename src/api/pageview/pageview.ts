@@ -1,4 +1,5 @@
 import { query } from "@/api/query";
+import { set } from "@/api/set";
 import { type Route, getSettings } from "@/core/settings";
 import type { GtagConfigParams } from "@/types/gtag";
 
@@ -46,6 +47,16 @@ export function pageview(params: PageviewParams) {
 
   if (template.page_path !== "/" && template.page_path?.endsWith("/")) {
     template.page_path = template.page_path.slice(0, -1);
+  }
+
+  if (template.page_location.match(/utm_/)) {
+    const url = new URL(template.page_location);
+    const utmParams = Object.fromEntries(url.searchParams.entries());
+
+    url.search = "";
+    template.page_location = url.toString();
+
+    set("campaign", utmParams);
   }
 
   query("event", "page_view", template);

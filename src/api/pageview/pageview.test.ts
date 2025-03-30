@@ -120,6 +120,30 @@ describe("pageview", () => {
     );
   });
 
+  it("should send utm parameters manually outside the page_view event", () => {
+    pageview({
+      page_path: "/",
+      page_location:
+        "http://localhost:3000/?utm_source=google&utm_medium=cpc&utm_campaign=summer_sale",
+    });
+
+    expect(query).toHaveBeenNthCalledWith(1, "set", "utm_tracking", {
+      utm_source: "google",
+      utm_medium: "cpc",
+      utm_campaign: "summer_sale",
+    });
+
+    expect(query).toHaveBeenNthCalledWith(
+      2,
+      "event",
+      "page_view",
+      expect.objectContaining({
+        page_path: "/",
+        page_location: "http://localhost:3000/",
+      }),
+    );
+  });
+
   describe("pageTracker enabled", () => {
     beforeEach(() => {
       updateSettings({
