@@ -3,7 +3,10 @@ import { getSettings, updateSettings } from "./settings";
 describe("config", () => {
   it("should return the configuration", () => {
     expect(getSettings()).toEqual({
-      resource: { url: "https://www.googletagmanager.com/gtag/js" },
+      resource: {
+        url: "https://www.googletagmanager.com/gtag/js",
+        inject: true,
+      },
       dataLayerName: "dataLayer",
       gtagName: "gtag",
       groupName: "default",

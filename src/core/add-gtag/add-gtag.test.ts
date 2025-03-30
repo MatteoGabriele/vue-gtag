@@ -35,40 +35,21 @@ describe("addGtag", () => {
     expect(utils.injectScript).toHaveBeenCalledWith(url, expect.anything());
   });
 
-  it("should avoid downloading gtag if already exists in the DOM", async () => {
-    const spyOnResolved = vi.fn();
-
-    const script = document.createElement("script");
-    script.src = "https://www.googletagmanager.com/gtag/js?id=12345678";
-    document.body.appendChild(script);
-
-    updateSettings({
-      tagId: "UA-12345678",
-      hooks: {
-        "script:loaded": spyOnResolved,
-      },
-    });
-
-    await addGtag();
-
-    expect(spyOnResolved).toHaveBeenCalled();
-    expect(utils.injectScript).not.toHaveBeenCalled();
-  });
-
   it("should download a custom version of the gtag.js library", async () => {
+    const resourceUrl = "custom_resource_url";
+
     updateSettings({
       tagId: "UA-12345678",
       resource: {
-        url: "custom_resource_url",
+        url: resourceUrl,
       },
     });
 
     await addGtag();
 
-    const resource = "custom_resource_url";
     const id = "UA-12345678";
     const dataLayer = "dataLayer";
-    const url = `${resource}?id=${id}&l=${dataLayer}`;
+    const url = `${resourceUrl}?id=${id}&l=${dataLayer}`;
 
     expect(utils.injectScript).toHaveBeenCalledWith(url, expect.anything());
   });
@@ -192,5 +173,18 @@ describe("addGtag", () => {
         nonce: "abcd",
       }),
     );
+  });
+
+  it("should avoid injecting gtag script", async () => {
+    updateSettings({
+      tagId: "UA-12345678",
+      resource: {
+        inject: false,
+      },
+    });
+
+    await addGtag();
+
+    expect(utils.injectScript).not.toHaveBeenCalled();
   });
 });

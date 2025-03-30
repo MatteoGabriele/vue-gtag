@@ -2,13 +2,16 @@ export function isServer(): boolean {
   return typeof window === "undefined" || typeof document === "undefined";
 }
 
+export type InjectScriptOptions = {
+  preconnect?: boolean;
+  defer?: boolean;
+  nonce?: string;
+  type?: string;
+};
+
 export async function injectScript(
   url: string,
-  options?: {
-    preconnect?: boolean;
-    defer?: boolean;
-    nonce?: string;
-  },
+  options?: InjectScriptOptions,
 ): Promise<void> {
   return new Promise((resolve, reject) => {
     if (isServer()) {
@@ -20,6 +23,7 @@ export async function injectScript(
 
     script.async = true;
     script.src = url;
+    script.type = options?.type ?? "text/javascript";
 
     if (options?.defer) {
       script.defer = true;
@@ -31,10 +35,9 @@ export async function injectScript(
 
     if (options?.preconnect) {
       const link = document.createElement("link");
+      const urlObj: URL = new URL(url);
 
-      const resource = new URL(url);
-
-      link.href = resource.origin;
+      link.href = urlObj.origin;
       link.rel = "preconnect";
 
       head.appendChild(link);
@@ -43,20 +46,8 @@ export async function injectScript(
     head.appendChild(script);
 
     script.onload = () => resolve();
-    script.onerror = reject;
+    script.onerror = (error) => reject(error);
   });
-}
-
-export function hasGtag(): boolean {
-  if (isServer()) {
-    return false;
-  }
-
-  const match = document.querySelector(
-    "script[src*='googletagmanager.com/gtag/js']",
-  );
-
-  return match !== null;
 }
 
 type DeepMergeable = {

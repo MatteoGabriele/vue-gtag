@@ -119,6 +119,12 @@ export type Resource = {
    * A nonce value for the script tag, useful for enforcing Content Security Policy (CSP).
    */
   nonce?: string;
+
+  /**
+   * Download gtag.js script
+   * @default true
+   */
+  inject?: boolean;
 };
 
 export type TagId = string;
