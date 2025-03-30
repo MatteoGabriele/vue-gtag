@@ -127,7 +127,7 @@ describe("pageview", () => {
         "http://localhost:3000/?utm_source=google&utm_medium=cpc&utm_campaign=summer_sale",
     });
 
-    expect(query).toHaveBeenNthCalledWith(1, "set", "utm_tracking", {
+    expect(query).toHaveBeenNthCalledWith(1, "set", "campaign", {
       utm_source: "google",
       utm_medium: "cpc",
       utm_campaign: "summer_sale",
