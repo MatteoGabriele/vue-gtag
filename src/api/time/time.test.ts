@@ -1,5 +1,5 @@
 import { query } from "@/api/query";
-import time from "./time";
+import { time } from "./time";
 
 vi.mock("@/api/query");
 

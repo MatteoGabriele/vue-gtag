@@ -3,6 +3,6 @@ import type { GtagCommands } from "@/types/gtag";
 
 type SetParams = GtagCommands["set"];
 
-export default function set(...args: SetParams) {
+export function set(...args: SetParams) {
   query("set", ...args);
 }
