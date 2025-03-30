@@ -98,6 +98,28 @@ describe("pageview", () => {
     });
   });
 
+  it("should track url with a consistent shape", () => {
+    pageview("/about");
+    pageview("/about/");
+
+    expect(query).toHaveBeenNthCalledWith(
+      1,
+      "event",
+      "page_view",
+      expect.objectContaining({
+        page_path: "/about",
+      }),
+    );
+    expect(query).toHaveBeenNthCalledWith(
+      2,
+      "event",
+      "page_view",
+      expect.objectContaining({
+        page_path: "/about",
+      }),
+    );
+  });
+
   describe("pageTracker enabled", () => {
     beforeEach(() => {
       updateSettings({

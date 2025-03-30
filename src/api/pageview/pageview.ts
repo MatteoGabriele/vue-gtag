@@ -44,5 +44,11 @@ export function pageview(params: PageviewParams) {
     template.send_page_view = pageTracker?.sendPageView ?? true;
   }
 
+  if (template.page_path) {
+    template.page_path = template.page_path.endsWith("/")
+      ? template.page_path.slice(0, -1)
+      : template.page_path;
+  }
+
   query("event", "page_view", template);
 }
