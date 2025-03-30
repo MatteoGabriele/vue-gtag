@@ -49,7 +49,7 @@ export function pageview(params: PageviewParams) {
     template.page_path = template.page_path.slice(0, -1);
   }
 
-  if (template.page_location.match(/utm_/)) {
+  if (template.page_location?.match(/[?&]utm_/)) {
     const url = new URL(template.page_location);
     const utmParams = Object.fromEntries(url.searchParams.entries());
 
