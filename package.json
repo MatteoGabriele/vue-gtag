@@ -16,12 +16,13 @@
     "dev": "vite build --watch",
     "fix": "biome check --write",
     "lint": "biome lint",
-    "build": "tsc --noEmit && vite build",
-    "typecheck": "tsc --noEmit",
+    "build": "vite build",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
     "test:once": "vitest run",
-    "prepublishOnly": "npm run lint && npm run test:once && npm run build"
+    "typecheck": "tsc --noEmit",
+    "lint:typecheck:test:build": "npm run lint && npm run typecheck && npm run test:once && npm run build",
+    "prepublishOnly": "npm run lint:typecheck:test:build"
   },
   "keywords": [
     "google",
