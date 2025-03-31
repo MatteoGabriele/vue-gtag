@@ -3,66 +3,57 @@ version: 2.1
 orbs:
   node: circleci/node@5.1.0
 
+# Add executor to reuse configuration
+executors:
+  node-executor:
+    docker:
+      - image: cimg/node:lts
+
+commands:
+  setup-and-cache:
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+          cache-path: ~/project/node_modules
+          cache-version: v1
+
 jobs:
   setup:
-    docker:
-      - image: cimg/node:lts
+    executor: node-executor
     steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
-          cache-path: ~/project/node_modules
-          cache-version: v1
-          override-ci-command: npm ci
+      - setup-and-cache
+      - run:
+          command: echo "Dependencies installed and cached"
 
   lint:
-    docker:
-      - image: cimg/node:lts
+    executor: node-executor
     steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
-          cache-path: ~/project/node_modules
-          cache-version: v1
+      - setup-and-cache
       - run:
           name: "Lint"
           command: "npm run lint"
 
   typecheck:
-    docker:
-      - image: cimg/node:lts
+    executor: node-executor
     steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
-          cache-path: ~/project/node_modules
-          cache-version: v1
+      - setup-and-cache
       - run:
           name: "Typecheck"
           command: "npm run typecheck"
 
   test:
-    docker:
-      - image: cimg/node:lts
+    executor: node-executor
     steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
-          cache-path: ~/project/node_modules
-          cache-version: v1
+      - setup-and-cache
       - run:
           name: "Test"
           command: "npm run test:once"
 
   build:
-    docker:
-      - image: cimg/node:lts
+    executor: node-executor
     steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
-          cache-path: ~/project/node_modules
-          cache-version: v1
+      - setup-and-cache
       - run:
           name: "Build"
           command: "npm run build"
@@ -86,3 +77,7 @@ workflows:
             - lint
             - typecheck
             - test
+  # Add this workflow for local testing
+  setup-workflow:
+    jobs:
+      - setup
