@@ -58,6 +58,14 @@ jobs:
           name: "Build"
           command: "npm run build"
 
+  release:
+    executor: node-executor
+    steps:
+      - setup-and-cache
+      - run:
+          name: "Release"
+          command: npx semantic-release
+
 workflows:
   version: 2
   build-test-deploy:
@@ -77,6 +85,12 @@ workflows:
             - lint
             - typecheck
             - test
+      - release:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
   # Add this workflow for local testing
   setup-workflow:
     jobs:
