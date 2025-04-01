@@ -21,8 +21,8 @@
     "test:cov": "vitest run --coverage",
     "test:once": "vitest run",
     "typecheck": "tsc --noEmit",
-    "lint:typecheck:test:build": "npm run lint && npm run typecheck && npm run test:once && npm run build",
-    "prepublishOnly": "npm run lint:typecheck:test:build"
+    "validate": "npm run lint && npm run typecheck && npm run test:once",
+    "prepublishOnly": "npm run validate && npm run build"
   },
   "keywords": [
     "google",
@@ -46,9 +46,7 @@
   "main": "./dist/vue-gtag.js",
   "module": "./dist/vue-gtag.js",
   "types": "./dist/vue-gtag.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "bugs": {
     "url": "https://github.com/MatteoGabriele/vue-gtag/issues"
   },
