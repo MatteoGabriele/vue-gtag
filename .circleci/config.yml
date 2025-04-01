@@ -19,13 +19,6 @@ commands:
           cache-version: v1
 
 jobs:
-  setup:
-    executor: node-executor
-    steps:
-      - setup-and-cache
-      - run:
-          command: echo "Dependencies installed and cached"
-
   lint:
     executor: node-executor
     steps:
@@ -63,6 +56,9 @@ jobs:
     steps:
       - setup-and-cache
       - run:
+          name: "Setup NPM Authentication"
+          command: "npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN"
+      - run:
           name: "Release"
           command: npx semantic-release
 
@@ -70,22 +66,20 @@ workflows:
   version: 2
   build-test-deploy:
     jobs:
-      - setup
-      - lint:
-          requires:
-            - setup
+      - lint
       - typecheck:
           requires:
-            - setup
+            - lint
       - test:
           requires:
-            - setup
+            - typecheck
       - build:
           requires:
-            - lint
-            - typecheck
             - test
       - release:
+          context: 
+            - npm-publish
+            - github-token
           requires:
             - build
           filters:
