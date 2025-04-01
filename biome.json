@@ -8,7 +8,7 @@
   "files": {
     "ignoreUnknown": false,
     "ignore": ["dist"],
-    "include": ["./src/**/*.ts", "./tsconfig.json", "./package.json"]
+    "include": ["./src/**/*.ts", "./tsconfig.json"]
   },
   "formatter": {
     "enabled": true,
