@@ -91,7 +91,3 @@ workflows:
           filters:
             branches:
               only: main
-  # Add this workflow for local testing
-  setup-workflow:
-    jobs:
-      - setup
