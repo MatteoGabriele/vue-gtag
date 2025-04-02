@@ -11,6 +11,9 @@
   <a href="https://bundlephobia.com/result?p=vue-gtag">
     <img src="https://badgen.net/bundlephobia/minzip/vue-gtag">
   </a>
+  <a href="https://circleci.com/gh/MatteoGabriele/vue-gtag">
+    <img src="https://circleci.com/gh/MatteoGabriele/vue-gtag.svg?style=svg">
+  </a>
 </p>
 
 # vue-gtag
