@@ -49,9 +49,6 @@ jobs:
   release:
     docker:
       - image: cimg/node:lts
-    environment:
-      GITHUB_TOKEN: $GITHUB_TOKEN
-      NPM_TOKEN: $NPM_TOKEN
     steps:
       - checkout
       - install-deps
@@ -60,11 +57,6 @@ jobs:
           command: |
             git config --global user.email "m.gabriele.dev@gmail.com"
             git config --global user.name "Matteo Gabriele"
-      - run:
-          name: Configure Git Authentication
-          command: |
-            git config --global credential.helper 'cache --timeout=120'
-            git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/MatteoGabriele/vue-gtag.git
       - run:
           name: Configure NPM Authentication
           command: |
