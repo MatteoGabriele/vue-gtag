@@ -59,14 +59,17 @@ workflows:
   verify-test-and-release:
     jobs:
       - lint
-      - typecheck
-      - build
-      - test
-      - release:
+      - typecheck:
           requires:
             - lint
+      - build:
+          requires:
             - typecheck
+      - test:
+          requires:
             - build
+      - release:
+          requires:
             - test
           filters:
             branches:
