@@ -132,7 +132,10 @@ export type GtagGeneralEventNames =
   | "timing_complete"
   | "view_search_results";
 
-export type GtagEventNames = GtagEcommerceEventNames | GtagGeneralEventNames;
+export type GtagEventNames =
+  | GtagEcommerceEventNames
+  | GtagGeneralEventNames
+  | (string & {});
 
 /**
  * Parameters associated with Google Analytics events.
