@@ -49,6 +49,9 @@ jobs:
   release:
     docker:
       - image: cimg/node:lts
+    environment:
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      NPM_TOKEN: ${NPM_TOKEN}
     steps:
       - checkout
       - install-deps
