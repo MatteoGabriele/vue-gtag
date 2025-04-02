@@ -1,0 +1,76 @@
+version: 2.1
+
+commands:
+  install-deps:
+    steps:
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+jobs:
+  lint:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - install-deps
+      - run: npm run lint
+
+  typecheck:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - install-deps
+      - run: npm run typecheck
+
+  build:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - install-deps
+      - run: npm run build
+
+  test:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - install-deps
+      - run: npm test
+
+  release:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - install-deps
+      - run: npx semantic-release
+
+workflows:
+  version: 2
+  verify-test-and-release:
+    jobs:
+      - lint
+      - typecheck:
+          requires:
+            - lint
+      - build:
+          requires:
+            - typecheck
+      - test:
+          requires:
+            - build
+      - release:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
