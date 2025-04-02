@@ -55,6 +55,20 @@ jobs:
     steps:
       - checkout
       - install-deps
+      - run:
+          name: Configure Git User
+          command: |
+            git config --global user.email "m.gabriele.dev@gmail.com"
+            git config --global user.name "Matteo Gabriele"
+      - run:
+          name: Configure Git Authentication
+          command: |
+            echo "https://${GITHUB_TOKEN}@github.com" > ~/.git-credentials
+            git config --global credential.helper store
+      - run:
+          name: Configure NPM Authentication
+          command: |
+            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
       - run: npx semantic-release
 
 workflows:
