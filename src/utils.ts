@@ -80,24 +80,19 @@ export function deepMerge<T extends DeepMergeable, U extends DeepMergeable>(
   return output as T & U;
 }
 
+const UTM_PREFIX = "utm_";
+
 type UseUtmParams = {
   utmParams: Record<string, string>;
   cleanUrl: string;
 };
 
-const UTM_PREFIX = "utm_";
-
-export function hasUtmParams(pageviewUrl: string): boolean {
-  const utmRegex = new RegExp(`[?&]${UTM_PREFIX}`);
-  return !!pageviewUrl.match(utmRegex);
-}
-
-export function useUtmParams(pageviewUrl: string): UseUtmParams {
-  const url = new URL(pageviewUrl);
+export function useUtmParams(url: string): UseUtmParams {
+  const urlObject = new URL(url);
   const utmParams: Record<string, string> = {};
   const params: string[] = [];
 
-  url.searchParams.forEach((value, key) => {
+  urlObject.searchParams.forEach((value, key) => {
     if (key.includes(UTM_PREFIX)) {
       utmParams[key.replace(UTM_PREFIX, "")] = value;
       params.push(key);
@@ -105,13 +100,18 @@ export function useUtmParams(pageviewUrl: string): UseUtmParams {
   });
 
   for (const utmParam of params) {
-    url.searchParams.delete(utmParam);
+    urlObject.searchParams.delete(utmParam);
   }
 
   return {
     utmParams,
-    cleanUrl: url.toString(),
+    cleanUrl: urlObject.toString(),
   };
+}
+
+export function hasUtmParams(url: string): boolean {
+  const utmRegex = new RegExp(`[?&]${UTM_PREFIX}`);
+  return !!url.match(utmRegex);
 }
 
 export function getPathWithBase(path: string, base: string): string {
