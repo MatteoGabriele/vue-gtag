@@ -128,9 +128,9 @@ describe("pageview", () => {
     });
 
     expect(query).toHaveBeenNthCalledWith(1, "set", "campaign", {
-      utm_source: "google",
-      utm_medium: "cpc",
-      utm_campaign: "summer_sale",
+      source: "google",
+      medium: "cpc",
+      campaign: "summer_sale",
     });
 
     expect(query).toHaveBeenNthCalledWith(

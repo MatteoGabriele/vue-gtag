@@ -7,6 +7,18 @@ export type Pageview = GtagConfigParams;
 
 export type PageviewParams = string | Route | Pageview;
 
+const UTM_PREFIX = "utm_";
+
+function extractUtmParams(url: URL): Record<string, string> {
+  const params: Record<string, string> = {};
+
+  url.searchParams.forEach((value, key) => {
+    params[key.replace(UTM_PREFIX, "")] = value;
+  });
+
+  return params;
+}
+
 function getPathWithBase(path: string, base: string): string {
   const normalizedBase = base.endsWith("/") ? base : `${base}/`;
   const normalizedPath = path.startsWith("/") ? path.substring(1) : path;
@@ -49,14 +61,16 @@ export function pageview(params: PageviewParams) {
     template.page_path = template.page_path.slice(0, -1);
   }
 
-  if (template.page_location?.match(/[?&]utm_/)) {
+  const utmRegex = new RegExp(`[?&]${UTM_PREFIX}`);
+
+  if (template.page_location?.match(utmRegex)) {
     const url = new URL(template.page_location);
-    const utmParams = Object.fromEntries(url.searchParams.entries());
+    const campaignParams = extractUtmParams(url);
 
     url.search = "";
     template.page_location = url.toString();
 
-    set("campaign", utmParams);
+    set("campaign", campaignParams);
   }
 
   query("event", "page_view", template);
