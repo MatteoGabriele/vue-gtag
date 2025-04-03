@@ -79,3 +79,44 @@ export function deepMerge<T extends DeepMergeable, U extends DeepMergeable>(
 
   return output as T & U;
 }
+
+type UseUtmParams = {
+  utmParams: Record<string, string>;
+  cleanUrl: string;
+};
+
+const UTM_PREFIX = "utm_";
+
+export function hasUtmParams(pageviewUrl: string): boolean {
+  const utmRegex = new RegExp(`[?&]${UTM_PREFIX}`);
+  return !!pageviewUrl.match(utmRegex);
+}
+
+export function useUtmParams(pageviewUrl: string): UseUtmParams {
+  const url = new URL(pageviewUrl);
+  const utmParams: Record<string, string> = {};
+  const params: string[] = [];
+
+  url.searchParams.forEach((value, key) => {
+    if (key.includes(UTM_PREFIX)) {
+      utmParams[key.replace(UTM_PREFIX, "")] = value;
+      params.push(key);
+    }
+  });
+
+  for (const utmParam of params) {
+    url.searchParams.delete(utmParam);
+  }
+
+  return {
+    utmParams,
+    cleanUrl: url.toString(),
+  };
+}
+
+export function getPathWithBase(path: string, base: string): string {
+  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+  const normalizedPath = path.startsWith("/") ? path.substring(1) : path;
+
+  return `${normalizedBase}${normalizedPath}`;
+}

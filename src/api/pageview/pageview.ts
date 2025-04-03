@@ -2,29 +2,10 @@ import { query } from "@/api/query";
 import { set } from "@/api/set";
 import { type Route, getSettings } from "@/core/settings";
 import type { GtagConfigParams } from "@/types/gtag";
+import { getPathWithBase, hasUtmParams, useUtmParams } from "@/utils";
 
 export type Pageview = GtagConfigParams;
-
 export type PageviewParams = string | Route | Pageview;
-
-const UTM_PREFIX = "utm_";
-
-function extractUtmParams(url: URL): Record<string, string> {
-  const params: Record<string, string> = {};
-
-  url.searchParams.forEach((value, key) => {
-    params[key.replace(UTM_PREFIX, "")] = value;
-  });
-
-  return params;
-}
-
-function getPathWithBase(path: string, base: string): string {
-  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
-  const normalizedPath = path.startsWith("/") ? path.substring(1) : path;
-
-  return `${normalizedBase}${normalizedPath}`;
-}
 
 export function pageview(params: PageviewParams) {
   const { pageTracker } = getSettings();
@@ -61,16 +42,12 @@ export function pageview(params: PageviewParams) {
     template.page_path = template.page_path.slice(0, -1);
   }
 
-  const utmRegex = new RegExp(`[?&]${UTM_PREFIX}`);
+  if (hasUtmParams(template.page_location)) {
+    const { utmParams, cleanUrl } = useUtmParams(template.page_location);
 
-  if (template.page_location?.match(utmRegex)) {
-    const url = new URL(template.page_location);
-    const campaignParams = extractUtmParams(url);
+    template.page_location = cleanUrl;
 
-    url.search = "";
-    template.page_location = url.toString();
-
-    set("campaign", campaignParams);
+    set("campaign", utmParams);
   }
 
   query("event", "page_view", template);

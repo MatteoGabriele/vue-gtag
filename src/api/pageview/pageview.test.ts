@@ -124,7 +124,7 @@ describe("pageview", () => {
     pageview({
       page_path: "/",
       page_location:
-        "http://localhost:3000/?utm_source=google&utm_medium=cpc&utm_campaign=summer_sale",
+        "http://localhost:3000/?foo=1&utm_source=google&utm_medium=cpc&utm_campaign=summer_sale&bar=2",
     });
 
     expect(query).toHaveBeenNthCalledWith(1, "set", "campaign", {
@@ -139,7 +139,7 @@ describe("pageview", () => {
       "page_view",
       expect.objectContaining({
         page_path: "/",
-        page_location: "http://localhost:3000/",
+        page_location: "http://localhost:3000/?foo=1&bar=2",
       }),
     );
   });
