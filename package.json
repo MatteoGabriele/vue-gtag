@@ -16,7 +16,7 @@
     "dev": "vite build --watch",
     "fix": "biome check --write",
     "lint": "biome lint",
-    "build": "tsc --noEmit && vite build",
+    "build": "vite build",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
