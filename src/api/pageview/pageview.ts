@@ -21,7 +21,7 @@ export function pageview(params: PageviewParams) {
     const path = pageTracker?.useRouteFullPath ? params.fullPath : params.path;
 
     template = {
-      ...(params.name ? { page_title: params.name as string } : {}),
+      ...(params.name ? { page_title: params.name.toString() } : {}),
       page_path: pageTracker?.useRouterBasePath
         ? getPathWithBase(path, base)
         : path,
