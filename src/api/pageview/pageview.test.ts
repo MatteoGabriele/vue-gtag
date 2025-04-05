@@ -120,7 +120,30 @@ describe("pageview", () => {
     );
   });
 
-  it("should send utm parameters manually outside the page_view event", () => {
+  it("should send utm parameters within the page_view event", () => {
+    const pageLocation =
+      "http://localhost:3000/?foo=1&utm_source=google&utm_medium=cpc&utm_campaign=summer_sale&bar=2";
+
+    pageview({
+      page_path: "/",
+      page_location: pageLocation,
+    });
+
+    expect(query).toHaveBeenCalledWith(
+      "event",
+      "page_view",
+      expect.objectContaining({
+        page_path: "/",
+        page_location: pageLocation,
+      }),
+    );
+  });
+
+  it("should send utm parameters manually with custom set command", () => {
+    updateSettings({
+      useUtmTracking: true,
+    });
+
     pageview({
       page_path: "/",
       page_location:
