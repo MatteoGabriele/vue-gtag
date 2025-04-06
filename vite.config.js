@@ -1,6 +1,7 @@
 import path from "node:path";
 import { defineConfig } from "vitest/config";
 import dts from "vite-plugin-dts";
+import realImport from 'vite-plugin-real-import'
 
 export default defineConfig({
   resolve: {
@@ -17,6 +18,7 @@ export default defineConfig({
       fileName: "vue-gtag",
     },
     rollupOptions: {
+      treeshake: true,
       external: ["vue", "vue-router"],
       output: {
         exports: "named",
@@ -32,6 +34,7 @@ export default defineConfig({
       insertTypesEntry: true,
       rollupTypes: true,
     }),
+    realImport('./example/install.js')
   ],
   test: {
     environment: "jsdom",

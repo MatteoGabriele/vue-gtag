@@ -6,6 +6,7 @@ describe("index", () => {
       {
         "addGtag": [Function],
         "config": [Function],
+        "configure": [Function],
         "consent": [Function],
         "consentDeniedAll": [Function],
         "consentGrantedAll": [Function],
