@@ -94,7 +94,7 @@ export function useUtmParams(url: string): UseUtmParams {
 
   urlObject.searchParams.forEach((value, key) => {
     if (key.includes(UTM_PREFIX)) {
-      utmParams[key.replace(UTM_PREFIX, "")] = value;
+      utmParams[key.replace(UTM_PREFIX, "").replace("campaign", "id")] = value;
       params.push(key);
     }
   });

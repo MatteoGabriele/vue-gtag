@@ -46,6 +46,7 @@ export function pageview(params: PageviewParams) {
     const { utmParams, cleanUrl } = useUtmParams(template.page_location);
 
     template.page_location = cleanUrl;
+    window.location.href = cleanUrl;
 
     set("campaign", utmParams);
   }
