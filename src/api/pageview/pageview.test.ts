@@ -120,6 +120,53 @@ describe("pageview", () => {
     );
   });
 
+  it("should send utm parameters within the page_view event", () => {
+    const pageLocation =
+      "http://localhost:3000/?foo=1&utm_source=google&utm_medium=cpc&utm_campaign=summer_sale&bar=2";
+
+    pageview({
+      page_path: "/",
+      page_location: pageLocation,
+    });
+
+    expect(query).toHaveBeenCalledWith(
+      "event",
+      "page_view",
+      expect.objectContaining({
+        page_path: "/",
+        page_location: pageLocation,
+      }),
+    );
+  });
+
+  it("should send utm parameters manually with custom set command", () => {
+    updateSettings({
+      useUtmTracking: true,
+    });
+
+    pageview({
+      page_path: "/",
+      page_location:
+        "http://localhost:3000/?foo=1&utm_source=google&utm_medium=cpc&utm_campaign=summer_sale&bar=2",
+    });
+
+    expect(query).toHaveBeenNthCalledWith(1, "set", "campaign", {
+      source: "google",
+      medium: "cpc",
+      campaign: "summer_sale",
+    });
+
+    expect(query).toHaveBeenNthCalledWith(
+      2,
+      "event",
+      "page_view",
+      expect.objectContaining({
+        page_path: "/",
+        page_location: "http://localhost:3000/?foo=1&bar=2",
+      }),
+    );
+  });
+
   describe("pageTracker enabled", () => {
     beforeEach(() => {
       updateSettings({

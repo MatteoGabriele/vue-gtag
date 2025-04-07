@@ -205,6 +205,12 @@ export type Settings = {
    * Default value for `app_name` when using the `screen_view` tracking method.
    */
   appName?: string;
+
+  /**
+   * When enabled, automatically captures UTM parameters from URLs
+   * and sends them as separate tracking events.
+   */
+  useUtmTracking?: boolean;
 };
 
 export type PluginSettings = Partial<Settings> &
