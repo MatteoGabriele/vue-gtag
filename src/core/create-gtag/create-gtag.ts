@@ -7,6 +7,25 @@ import {
 } from "@/core/settings";
 import type { App } from "vue";
 
+function initGtag() {
+  const { initMode } = getSettings();
+
+  if (initMode === "manual") {
+    return;
+  }
+
+  addGtag();
+}
+
+/**
+ * Configures Google Analytics gtag instance
+ * @param settings - Configuration settings for the gtag plugin
+ */
+export function configure(settings: PluginSettings): void {
+  updateSettings(settings);
+  initGtag();
+}
+
 type GtagAPI = typeof api;
 
 declare module "vue" {
@@ -17,20 +36,12 @@ declare module "vue" {
 
 type CreateGtagReturn = (app: App) => void;
 
-function handleGtag() {
-  const { initMode } = getSettings();
-
-  if (initMode === "manual") {
-    return;
-  }
-
-  addGtag();
-}
-
-/** Creates and initializes the `gtag` function for use within a Vue application. */
+/**
+ * Creates and configures Google Analytics gtag instance for Vue application
+ * @param settings - Configuration settings for the gtag plugin
+ */
 export function createGtag(settings: PluginSettings): CreateGtagReturn {
-  updateSettings(settings);
-  handleGtag();
+  configure(settings);
 
   return (app: App) => {
     app.config.globalProperties.$gtag = api;
