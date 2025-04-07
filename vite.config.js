@@ -18,7 +18,6 @@ export default defineConfig({
       fileName: "vue-gtag",
     },
     rollupOptions: {
-      treeshake: true,
       external: ["vue", "vue-router"],
       output: {
         exports: "named",
