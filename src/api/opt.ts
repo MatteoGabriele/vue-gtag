@@ -1,4 +1,5 @@
-import { type TagId, getSettings } from "@/core/settings";
+import { getSettings } from "@/core/settings";
+import type { TagId } from "@/types/settings";
 import { isServer } from "@/utils";
 
 function updateProperty<T>(propertyName: string, value: T) {

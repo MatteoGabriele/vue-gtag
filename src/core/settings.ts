@@ -1,5 +1,5 @@
+import type { Settings } from "@/types/settings";
 import { deepMerge } from "@/utils";
-import type { Settings } from "./types";
 
 const defaultSettings: Readonly<Settings> = {
   resource: {
