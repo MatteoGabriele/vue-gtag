@@ -8,6 +8,7 @@ export default defineConfig({
   },
   platform: 'browser',
   format: ['esm'],
+  minify: true,
   external: ['vue'],
   outDir: "./dist",
   publint: true,

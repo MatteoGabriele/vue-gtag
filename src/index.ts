@@ -17,3 +17,5 @@ export { useConsent } from "@/composables/use-consent";
 export { addGtag } from "@/core/add-gtag";
 export { createGtag } from "@/core/create-gtag";
 export { configure } from "@/core/create-gtag";
+
+export type { PluginSettings } from "@/types/settings";
