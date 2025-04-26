@@ -1,5 +1,5 @@
+import { optIn, optOut } from "@/api/opt";
 import { resetSettings, updateSettings } from "@/core/settings";
-import { optIn, optOut } from "./opt";
 
 describe("opt", () => {
   beforeEach(() => {

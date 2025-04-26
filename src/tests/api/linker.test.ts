@@ -1,5 +1,5 @@
+import { linker } from "@/api/linker";
 import { query } from "@/api/query";
-import { linker } from "./linker";
 
 vi.mock("@/api/query");
 

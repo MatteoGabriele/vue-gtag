@@ -1,5 +1,5 @@
 import { query } from "@/api/query";
-import { set } from "./set";
+import { set } from "@/api/set";
 
 vi.mock("@/api/query");
 

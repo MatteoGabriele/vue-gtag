@@ -1,5 +1,5 @@
+import { ecommerce } from "@/api/ecommerce";
 import { query } from "@/api/query";
-import { ecommerce } from "./ecommerce";
 
 vi.mock("@/api/query");
 

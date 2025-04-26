@@ -1,7 +1,7 @@
+import { exception } from "@/api/exception";
 import { query } from "@/api/query";
-import { exception } from "./exception";
 
-vi.mock("../query");
+vi.mock("@/api/query");
 
 describe("exception", () => {
   it("should use the exception event", () => {

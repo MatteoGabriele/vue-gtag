@@ -1,5 +1,5 @@
+import { consent, consentDeniedAll, consentGrantedAll } from "@/api/consent";
 import { query } from "@/api/query";
-import { consent, consentDeniedAll, consentGrantedAll } from "./consent";
 
 vi.mock("@/api/query");
 

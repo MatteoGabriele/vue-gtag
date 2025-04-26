@@ -1,5 +1,5 @@
+import { query } from "@/api/query";
 import { getSettings } from "@/core/settings";
-import { query } from "./query";
 
 describe("query", () => {
   it("should pass events to the gtag library", () => {

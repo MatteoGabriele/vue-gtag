@@ -1,7 +1,7 @@
 import { query } from "@/api/query";
+import { screenview } from "@/api/screenview";
 import { resetSettings, updateSettings } from "@/core/settings";
 import { type Router, createRouter, createWebHistory } from "vue-router";
-import { screenview } from "./screenview";
 
 vi.mock("@/api/query");
 

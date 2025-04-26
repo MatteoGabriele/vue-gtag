@@ -1,6 +1,6 @@
+import { config } from "@/api/config";
 import { query } from "@/api/query";
 import { updateSettings } from "@/core/settings";
-import { config } from "./config";
 
 vi.mock("@/api/query");
 

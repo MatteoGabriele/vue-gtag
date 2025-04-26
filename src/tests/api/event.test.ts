@@ -1,8 +1,8 @@
+import { event } from "@/api/event";
 import { query } from "@/api/query";
 import { updateSettings } from "@/core/settings";
-import { event } from "./event";
 
-vi.mock("../query");
+vi.mock("@/api/query");
 
 describe("event", () => {
   it("should query the event command", () => {

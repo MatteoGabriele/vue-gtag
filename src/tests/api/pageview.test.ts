@@ -1,7 +1,7 @@
+import { pageview } from "@/api/pageview";
 import { query } from "@/api/query";
 import { resetSettings, updateSettings } from "@/core/settings";
 import { type Router, createRouter, createWebHistory } from "vue-router";
-import { pageview } from "./pageview";
 
 vi.mock("@/api/query");
 

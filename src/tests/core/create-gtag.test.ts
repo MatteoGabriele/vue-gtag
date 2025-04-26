@@ -1,8 +1,8 @@
 import * as api from "@/api/index";
 import { addGtag } from "@/core/add-gtag";
+import { createGtag } from "@/core/create-gtag";
 import { resetSettings } from "@/core/settings";
 import { createApp } from "vue";
-import { createGtag } from "./create-gtag";
 
 vi.mock("@/core/add-gtag");
 

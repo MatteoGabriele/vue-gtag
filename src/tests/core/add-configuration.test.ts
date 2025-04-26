@@ -1,7 +1,7 @@
 import { query } from "@/api/query";
+import { addConfiguration } from "@/core/add-configuration";
 import { resetSettings, updateSettings } from "@/core/settings";
 import mockdate from "mockdate";
-import { addConfiguration } from "./add-configuration";
 
 mockdate.set("2025-02-27");
 

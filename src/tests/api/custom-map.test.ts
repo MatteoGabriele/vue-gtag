@@ -1,6 +1,6 @@
+import { customMap } from "@/api/custom-map";
 import { query } from "@/api/query";
 import { resetSettings, updateSettings } from "@/core/settings";
-import { customMap } from "./custom-map";
 
 vi.mock("@/api/query");
 

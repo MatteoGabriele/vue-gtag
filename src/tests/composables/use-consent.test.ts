@@ -1,8 +1,8 @@
 import { consent, consentDeniedAll, consentGrantedAll } from "@/api/consent";
+import { useConsent } from "@/composables/use-consent";
 import { addGtag } from "@/core/add-gtag";
 import { resetSettings } from "@/core/settings";
 import flushPromises from "flush-promises";
-import { useConsent } from "./use-consent";
 
 vi.mock("@/api/consent");
 vi.mock("@/core/add-gtag");

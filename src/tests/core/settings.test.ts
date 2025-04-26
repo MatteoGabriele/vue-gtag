@@ -1,4 +1,4 @@
-import { getSettings, updateSettings } from "./settings";
+import { getSettings, updateSettings } from "@/core/settings";
 
 describe("config", () => {
   it("should return the configuration", () => {
