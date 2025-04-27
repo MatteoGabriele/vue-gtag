@@ -68,9 +68,7 @@
     "jsdom": "^26.0.0",
     "mockdate": "^3.0.5",
     "semantic-release": "^24.2.3",
-    "terser": "^5.39.0",
     "tsdown": "0.9.8",
-    "vite-plugin-real-import": "0.1.0",
     "vitest": "^3.0.5",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
