@@ -1,8 +1,8 @@
 import { query } from "@/api/query";
 import { set } from "@/api/set";
-import type { Route } from "@/types/settings";
 import { getSettings } from "@/core/settings";
 import type { GtagConfigParams } from "@/types/gtag";
+import type { Route } from "@/types/settings";
 import { getPathWithBase, hasUtmParams, useUtmParams } from "@/utils";
 
 export type Pageview = GtagConfigParams;
@@ -44,10 +44,15 @@ export function pageview(params: PageviewParams) {
   }
 
   if (useUtmTracking && hasUtmParams(template.page_location)) {
-    const { utmParams, cleanUrl } = useUtmParams(template.page_location);
+    const { utmParams, cleanUrl, cleanQueryParams } = useUtmParams(
+      template.page_location,
+    );
 
     template.page_location = cleanUrl;
-    window.location.href = cleanUrl;
+
+    pageTracker?.router.replace({
+      query: cleanQueryParams,
+    });
 
     set("campaign", utmParams);
   }

@@ -47,9 +47,7 @@
   "main": "./dist/vue-gtag.js",
   "module": "./dist/vue-gtag.js",
   "types": "./dist/vue-gtag.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "bugs": {
     "url": "https://github.com/MatteoGabriele/vue-gtag/issues"
   },

@@ -82,8 +82,10 @@ export function deepMerge<T extends DeepMergeable, U extends DeepMergeable>(
 
 const UTM_PREFIX = "utm_";
 
+type QueryParams = Record<string, string>;
 type UseUtmParams = {
-  utmParams: Record<string, string>;
+  utmParams: QueryParams;
+  cleanQueryParams: QueryParams;
   cleanUrl: string;
 };
 
@@ -91,11 +93,15 @@ export function useUtmParams(url: string): UseUtmParams {
   const urlObject = new URL(url);
   const utmParams: Record<string, string> = {};
   const params: string[] = [];
+  const cleanQueryParams: Record<string, string> = {};
 
   urlObject.searchParams.forEach((value, key) => {
     if (key.includes(UTM_PREFIX)) {
+      // Replace "campaign" with "id" to match Google Analytics campaign parameter naming
       utmParams[key.replace(UTM_PREFIX, "").replace("campaign", "id")] = value;
       params.push(key);
+    } else {
+      cleanQueryParams[key] = value;
     }
   });
 
@@ -105,6 +111,7 @@ export function useUtmParams(url: string): UseUtmParams {
 
   return {
     utmParams,
+    cleanQueryParams,
     cleanUrl: urlObject.toString(),
   };
 }

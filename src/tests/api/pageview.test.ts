@@ -19,6 +19,7 @@ describe("pageview", () => {
     });
 
     vi.spyOn(router, "isReady").mockResolvedValue();
+    vi.spyOn(router, "replace");
 
     await router.isReady();
     await router.push({ name: "about", query: { id: 1 }, hash: "#title" });
@@ -144,15 +145,6 @@ describe("pageview", () => {
       useUtmTracking: true,
     });
 
-    const originalHref = window.location.href;
-    Object.defineProperty(window, 'location', {
-      value: {
-        ...window.location,
-        href: originalHref,
-      },
-      writable: true
-    });
-
     pageview({
       page_path: "/",
       page_location:
@@ -180,6 +172,32 @@ describe("pageview", () => {
     beforeEach(() => {
       updateSettings({
         pageTracker: { router },
+      });
+    });
+
+    it("should clear the query from utm params", async () => {
+      updateSettings({
+        useUtmTracking: true,
+        pageTracker: { router },
+      });
+
+      await router.push({
+        query: {
+          foo: "2",
+          utm_source: "google",
+          utm_medium: "cpc",
+          utm_campaign: "summer_sale",
+          bar: "2",
+        },
+      });
+
+      pageview(router.currentRoute.value);
+
+      expect(router.replace).toHaveBeenCalledWith({
+        query: {
+          foo: "2",
+          bar: "2",
+        },
       });
     });
 
