@@ -2,7 +2,7 @@
   "name": "vue-gtag",
   "description": "Global Site Tag (gtag.js) plugin for Vue",
   "type": "module",
-  "version": "3.2.0",
+  "version": "3.4.0",
   "author": {
     "name": "Matteo Gabriele",
     "email": "m.gabriele.dev@gmail.com"
@@ -13,10 +13,10 @@
     "url": "git+https://github.com/MatteoGabriele/vue-gtag.git"
   },
   "scripts": {
-    "dev": "vite build --watch",
+    "dev": "tsdown --watch",
     "fix": "biome check --write",
     "lint": "biome lint",
-    "build": "vite build",
+    "build": "tsdown",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
@@ -37,6 +37,7 @@
     "vue",
     "vuejs"
   ],
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/vue-gtag.d.ts",
@@ -46,7 +47,9 @@
   "main": "./dist/vue-gtag.js",
   "module": "./dist/vue-gtag.js",
   "types": "./dist/vue-gtag.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "bugs": {
     "url": "https://github.com/MatteoGabriele/vue-gtag/issues"
   },
@@ -64,11 +67,8 @@
     "flush-promises": "^1.0.2",
     "jsdom": "^26.0.0",
     "mockdate": "^3.0.5",
-    "publint": "0.3.10",
     "semantic-release": "^24.2.3",
-    "terser": "^5.39.0",
-    "vite": "^6.1.0",
-    "vite-plugin-dts": "^4.5.0",
+    "tsdown": "0.9.8",
     "vitest": "^3.0.5",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
