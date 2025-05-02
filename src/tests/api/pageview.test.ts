@@ -178,7 +178,6 @@ describe("pageview", () => {
     it("should clear the query from utm params", async () => {
       updateSettings({
         useUtmTracking: true,
-        pageTracker: { router },
       });
 
       await router.push({
