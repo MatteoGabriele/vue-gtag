@@ -144,6 +144,15 @@ describe("pageview", () => {
       useUtmTracking: true,
     });
 
+    const originalHref = window.location.href;
+    Object.defineProperty(window, 'location', {
+      value: {
+        ...window.location,
+        href: originalHref,
+      },
+      writable: true
+    });
+
     pageview({
       page_path: "/",
       page_location:
@@ -153,7 +162,7 @@ describe("pageview", () => {
     expect(query).toHaveBeenNthCalledWith(1, "set", "campaign", {
       source: "google",
       medium: "cpc",
-      campaign: "summer_sale",
+      id: "summer_sale",
     });
 
     expect(query).toHaveBeenNthCalledWith(
