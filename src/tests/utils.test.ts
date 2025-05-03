@@ -1,5 +1,5 @@
+import * as utils from "@/utils";
 import flushPromises from "flush-promises";
-import * as utils from "./utils";
 
 const defaultUrl = "https://www.googletagmanager.com/gtag/js?id=12345678";
 
