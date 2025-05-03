@@ -1,6 +1,7 @@
 import { pageview } from "@/api/pageview";
 import { query } from "@/api/query";
 import { resetSettings, updateSettings } from "@/core/settings";
+import * as utils from "@/utils";
 import { type Router, createRouter, createWebHistory } from "vue-router";
 
 vi.mock("@/api/query");
@@ -11,6 +12,8 @@ describe("pageview", () => {
   beforeEach(async () => {
     resetSettings();
 
+    vi.spyOn(utils, "urlQueryReplace");
+
     router = createRouter({
       history: createWebHistory("/base-path"),
       routes: [
@@ -19,7 +22,6 @@ describe("pageview", () => {
     });
 
     vi.spyOn(router, "isReady").mockResolvedValue();
-    vi.spyOn(router, "replace");
 
     await router.isReady();
     await router.push({ name: "about", query: { id: 1 }, hash: "#title" });
@@ -192,11 +194,9 @@ describe("pageview", () => {
 
       pageview(router.currentRoute.value);
 
-      expect(router.replace).toHaveBeenCalledWith({
-        query: {
-          foo: "2",
-          bar: "2",
-        },
+      expect(utils.urlQueryReplace).toHaveBeenCalledWith({
+        foo: "2",
+        bar: "2",
       });
     });
 

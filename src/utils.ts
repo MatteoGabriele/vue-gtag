@@ -80,6 +80,22 @@ export function deepMerge<T extends DeepMergeable, U extends DeepMergeable>(
   return output as T & U;
 }
 
+export function urlQueryReplace(queryParams: Record<string, string>): void {
+  if (isServer()) {
+    return;
+  }
+
+  const url = new URL(window.location.href);
+
+  url.search = "";
+
+  for (const [key, value] of Object.entries(queryParams)) {
+    url.searchParams.set(key, value);
+  }
+
+  window.history.replaceState({}, "", url.toString());
+}
+
 const UTM_PREFIX = "utm_";
 
 type QueryParams = Record<string, string>;

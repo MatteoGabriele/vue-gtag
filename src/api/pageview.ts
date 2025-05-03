@@ -3,7 +3,12 @@ import { set } from "@/api/set";
 import { getSettings } from "@/core/settings";
 import type { GtagConfigParams } from "@/types/gtag";
 import type { Route } from "@/types/settings";
-import { getPathWithBase, hasUtmParams, useUtmParams } from "@/utils";
+import {
+  getPathWithBase,
+  hasUtmParams,
+  urlQueryReplace,
+  useUtmParams,
+} from "@/utils";
 
 export type Pageview = GtagConfigParams;
 export type PageviewParams = string | Route | Pageview;
@@ -50,9 +55,7 @@ export function pageview(params: PageviewParams) {
 
     template.page_location = cleanUrl;
 
-    pageTracker?.router.replace({
-      query: cleanQueryParams,
-    });
+    urlQueryReplace(cleanQueryParams);
 
     set("campaign", utmParams);
   }
