@@ -1,7 +1,7 @@
 
-<p align="center">
-  <img width="250" src="https://i.imgur.com/AlAf04U.png">
-  <br>
+# vue-gtag
+
+<p>
   <a href="https://npm.im/vue-gtag">
     <img src="https://badgen.net/npm/v/vue-gtag">
   </a>
@@ -16,7 +16,6 @@
   </a>
 </p>
 
-# vue-gtag
 
 Global Site Tag plugin for Vue
 
