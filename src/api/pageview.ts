@@ -14,7 +14,7 @@ export type Pageview = GtagConfigParams;
 export type PageviewParams = string | Route | Pageview;
 
 export function pageview(params: PageviewParams) {
-  const { useUtmTracking, pageTracker } = getSettings();
+  const { pageTracker } = getSettings();
 
   let template: PageviewParams | undefined;
 
@@ -48,7 +48,7 @@ export function pageview(params: PageviewParams) {
     template.page_path = template.page_path.slice(0, -1);
   }
 
-  if (useUtmTracking && hasUtmParams(template.page_location)) {
+  if (hasUtmParams(template.page_location)) {
     const { utmParams, cleanUrl, cleanQueryParams } = useUtmParams(
       template.page_location,
     );
