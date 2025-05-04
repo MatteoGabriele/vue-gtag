@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/MatteoGabriele/vue-gtag/compare/v3.4.0...v3.5.0) (2025-05-04)
+
+
+### Features
+
+* **pageview:** extract and track utm parameters ([#618](https://github.com/MatteoGabriele/vue-gtag/issues/618)) ([b147fb9](https://github.com/MatteoGabriele/vue-gtag/commit/b147fb945ea476604f183326961c1f1819dfed86))
+
 # [3.4.0](https://github.com/MatteoGabriele/vue-gtag/compare/v3.3.0...v3.4.0) (2025-04-26)
 
 
