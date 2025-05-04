@@ -1,5 +1,5 @@
+import * as utils from "@/utils";
 import flushPromises from "flush-promises";
-import * as utils from "./utils";
 
 const defaultUrl = "https://www.googletagmanager.com/gtag/js?id=12345678";
 
@@ -71,6 +71,69 @@ describe("utils", () => {
       const scripts = document.getElementsByTagName("script");
 
       expect(scripts[0].getAttribute("type")).toEqual("text/partytown");
+    });
+  });
+
+  describe("urlQueryReplace", () => {
+    const originalLocation = window.location;
+    const originalHistory = window.history;
+
+    beforeEach(() => {
+      Object.defineProperty(window, "location", {
+        value: {
+          ...originalLocation,
+          href: "https://example.com/page?oldParam=value&utm_source=test",
+        },
+        writable: true,
+      });
+
+      // Mock window.history.replaceState
+      window.history.replaceState = vi.fn();
+    });
+
+    afterEach(() => {
+      // Restore window.location
+      Object.defineProperty(window, "location", {
+        value: originalLocation,
+        writable: true,
+      });
+      window.history.replaceState = originalHistory.replaceState;
+    });
+
+    it("should replace URL query parameters without page refresh", () => {
+      const newQueryParams = {
+        newParam: "newValue",
+        anotherParam: "anotherValue",
+      };
+
+      utils.urlQueryReplace(newQueryParams);
+
+      // Check if history.replaceState was called correctly
+      expect(window.history.replaceState).toHaveBeenCalledWith(
+        {},
+        "",
+        "https://example.com/page?newParam=newValue&anotherParam=anotherValue",
+      );
+    });
+
+    it("should clear all existing query parameters", () => {
+      utils.urlQueryReplace({});
+
+      expect(window.history.replaceState).toHaveBeenCalledWith(
+        {},
+        "",
+        "https://example.com/page",
+      );
+    });
+
+    it("should handle empty parameters", () => {
+      utils.urlQueryReplace({ param: "" });
+
+      expect(window.history.replaceState).toHaveBeenCalledWith(
+        {},
+        "",
+        "https://example.com/page?param=",
+      );
     });
   });
 });

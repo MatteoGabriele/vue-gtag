@@ -1,4 +1,4 @@
-import * as plugin from "./index";
+import * as plugin from "@/index";
 
 describe("index", () => {
   it("should have the following exports", () => {

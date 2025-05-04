@@ -1,18 +1,17 @@
 import { query } from "@/api/query";
+import { set } from "@/api/set";
 import { getSettings } from "@/core/settings";
 import type { GtagConfigParams } from "@/types/gtag";
 import type { Route } from "@/types/settings";
+import {
+  getPathWithBase,
+  hasUtmParams,
+  urlQueryReplace,
+  useUtmParams,
+} from "@/utils";
 
 export type Pageview = GtagConfigParams;
-
 export type PageviewParams = string | Route | Pageview;
-
-function getPathWithBase(path: string, base: string): string {
-  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
-  const normalizedPath = path.startsWith("/") ? path.substring(1) : path;
-
-  return `${normalizedBase}${normalizedPath}`;
-}
 
 export function pageview(params: PageviewParams) {
   const { pageTracker } = getSettings();
@@ -28,7 +27,7 @@ export function pageview(params: PageviewParams) {
     const path = pageTracker?.useRouteFullPath ? params.fullPath : params.path;
 
     template = {
-      ...(params.name ? { page_title: params.name as string } : {}),
+      ...(params.name ? { page_title: params.name.toString() } : {}),
       page_path: pageTracker?.useRouterBasePath
         ? getPathWithBase(path, base)
         : path,
@@ -47,6 +46,18 @@ export function pageview(params: PageviewParams) {
 
   if (template.page_path !== "/" && template.page_path?.endsWith("/")) {
     template.page_path = template.page_path.slice(0, -1);
+  }
+
+  if (hasUtmParams(template.page_location)) {
+    const { utmParams, cleanUrl, cleanQueryParams } = useUtmParams(
+      template.page_location,
+    );
+
+    template.page_location = cleanUrl;
+
+    urlQueryReplace(cleanQueryParams);
+
+    set("campaign", utmParams);
   }
 
   query("event", "page_view", template);

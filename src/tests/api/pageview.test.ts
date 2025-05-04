@@ -1,6 +1,7 @@
 import { pageview } from "@/api/pageview";
 import { query } from "@/api/query";
 import { resetSettings, updateSettings } from "@/core/settings";
+import * as utils from "@/utils";
 import { type Router, createRouter, createWebHistory } from "vue-router";
 
 vi.mock("@/api/query");
@@ -10,6 +11,8 @@ describe("pageview", () => {
 
   beforeEach(async () => {
     resetSettings();
+
+    vi.spyOn(utils, "urlQueryReplace");
 
     router = createRouter({
       history: createWebHistory("/base-path"),
@@ -120,10 +123,53 @@ describe("pageview", () => {
     );
   });
 
+  it("should send utm parameters", () => {
+    pageview({
+      page_path: "/",
+      page_location:
+        "http://localhost:3000/?foo=1&utm_source=google&utm_medium=cpc&utm_campaign=summer_sale&bar=2",
+    });
+
+    expect(query).toHaveBeenNthCalledWith(1, "set", "campaign", {
+      source: "google",
+      medium: "cpc",
+      id: "summer_sale",
+    });
+
+    expect(query).toHaveBeenNthCalledWith(
+      2,
+      "event",
+      "page_view",
+      expect.objectContaining({
+        page_path: "/",
+        page_location: "http://localhost:3000/?foo=1&bar=2",
+      }),
+    );
+  });
+
   describe("pageTracker enabled", () => {
     beforeEach(() => {
       updateSettings({
         pageTracker: { router },
+      });
+    });
+
+    it("should clear the query from utm params", async () => {
+      await router.push({
+        query: {
+          foo: "2",
+          utm_source: "google",
+          utm_medium: "cpc",
+          utm_campaign: "summer_sale",
+          bar: "2",
+        },
+      });
+
+      pageview(router.currentRoute.value);
+
+      expect(utils.urlQueryReplace).toHaveBeenCalledWith({
+        foo: "2",
+        bar: "2",
       });
     });
 
