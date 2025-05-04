@@ -9,7 +9,7 @@ export default defineConfig({
   platform: 'browser',
   format: ['esm'],
   minify: true,
-  external: ['vue'],
+  external: ['vue', 'vue-router'],
   outDir: "./dist",
   publint: true,
   dts: true,
