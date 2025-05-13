@@ -7,9 +7,7 @@ export default defineConfig({
     [name]: './src/index.ts'
   },
   platform: 'browser',
-  format: ['esm'],
   minify: true,
-  external: ['vue', 'vue-router'],
   outDir: "./dist",
   publint: true,
   dts: true,
