@@ -7,7 +7,7 @@ commands:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
-      - run: npm install
+      - run: pnpm install
       - save_cache:
           paths:
             - node_modules
@@ -20,7 +20,7 @@ jobs:
     steps:
       - checkout
       - install-deps
-      - run: npm run lint
+      - run: pnpm run lint
 
   typecheck:
     docker:
@@ -28,7 +28,7 @@ jobs:
     steps:
       - checkout
       - install-deps
-      - run: npm run typecheck
+      - run: pnpm run typecheck
 
   build:
     docker:
@@ -36,7 +36,7 @@ jobs:
     steps:
       - checkout
       - install-deps
-      - run: npm run build
+      - run: pnpm run build
 
   test:
     docker:
@@ -44,7 +44,7 @@ jobs:
     steps:
       - checkout
       - install-deps
-      - run: npm test
+      - run: pnpm test
 
   release:
     docker:

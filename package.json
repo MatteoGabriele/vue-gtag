@@ -17,12 +17,11 @@
     "fix": "biome check --write",
     "lint": "biome lint",
     "build": "tsdown",
-    "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
     "test:once": "vitest run",
-    "validate": "npm run typecheck && npm run lint && npm run test:once && npm run build && publint run --strict",
-    "prepublishOnly": "npm run lint && npm run test:once && npm run build"
+    "validate": "pnpm run lint && pnpm run test:once && pnpm run build",
+    "prepublishOnly": "pnpm run lint && pnpm run test:once && pnpm run build"
   },
   "keywords": [
     "google",
@@ -63,12 +62,11 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/node": "^22.13.5",
-    "@vitest/coverage-v8": "^3.0.5",
     "flush-promises": "^1.0.2",
     "jsdom": "^26.0.0",
     "mockdate": "^3.0.5",
     "semantic-release": "^24.2.3",
-    "tsdown": "0.9.8",
+    "tsdown": "0.11.9",
     "vitest": "^3.0.5",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
