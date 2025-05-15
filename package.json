@@ -14,14 +14,15 @@
   },
   "scripts": {
     "dev": "tsdown --watch",
+    "check": "biome check",
     "fix": "biome check --write",
     "lint": "biome lint",
     "build": "tsdown",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
     "test:once": "vitest run",
-    "validate": "pnpm run lint && pnpm run test:once && pnpm run build",
-    "prepublishOnly": "pnpm run lint && pnpm run test:once && pnpm run build"
+    "validate": "pnpm check && pnpm lint && pnpm test:once && pnpm build",
+    "prepublishOnly": "pnpm validate"
   },
   "keywords": [
     "google",
@@ -46,9 +47,7 @@
   "main": "./dist/vue-gtag.js",
   "module": "./dist/vue-gtag.js",
   "types": "./dist/vue-gtag.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "bugs": {
     "url": "https://github.com/MatteoGabriele/vue-gtag/issues"
   },

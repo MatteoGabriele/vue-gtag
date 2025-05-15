@@ -22,13 +22,13 @@ jobs:
       - install-deps
       - run: pnpm run lint
 
-  typecheck:
+  check:
     docker:
       - image: cimg/node:lts
     steps:
       - checkout
       - install-deps
-      - run: pnpm run typecheck
+      - run: pnpm run check
 
   build:
     docker:
