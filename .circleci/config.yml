@@ -68,12 +68,12 @@ workflows:
   verify-test-and-release:
     jobs:
       - lint
-      - typecheck:
+      - check:
           requires:
             - lint
       - build:
           requires:
-            - typecheck
+            - check
       - test:
           requires:
             - build
