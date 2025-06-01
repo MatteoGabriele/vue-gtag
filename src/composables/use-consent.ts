@@ -1,8 +1,8 @@
 import { consent, consentDeniedAll, consentGrantedAll } from "@/api/consent";
 import { addGtag } from "@/core/add-gtag";
 import type { GtagConsentParams } from "@/types/gtag";
-import { isServer } from "@/utils";
-import { type Ref, ref } from "vue";
+import { isServer, removeCookies } from "@/utils";
+import { type Ref, computed } from "vue";
 
 export type UseWithConsentReturn = {
   hasConsent: Ref<boolean>;
@@ -18,9 +18,9 @@ const GA_COOKIE_VALUE = "_ga";
  * @remark Make sure to set `initMode` to `manual`
  */
 export function useConsent(): UseWithConsentReturn {
-  const hasConsent = ref<boolean>(
-    isServer() ? false : document.cookie.includes(GA_COOKIE_VALUE),
-  );
+  const hasConsent = computed<boolean>(() => {
+    return isServer() ? false : document.cookie.includes(GA_COOKIE_VALUE);
+  });
 
   const acceptAll = async () => {
     await addGtag();
@@ -30,6 +30,8 @@ export function useConsent(): UseWithConsentReturn {
 
   const rejectAll = () => {
     consentDeniedAll("update");
+    removeCookies(GA_COOKIE_VALUE);
+    window.location.reload();
   };
 
   const acceptCustom = async (params: GtagConsentParams) => {

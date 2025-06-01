@@ -2,8 +2,10 @@ import { consent, consentDeniedAll, consentGrantedAll } from "@/api/consent";
 import { useConsent } from "@/composables/use-consent";
 import { addGtag } from "@/core/add-gtag";
 import { resetSettings } from "@/core/settings";
+import { removeCookies } from "@/utils";
 import flushPromises from "flush-promises";
 
+vi.mock("@/utils");
 vi.mock("@/api/consent");
 vi.mock("@/core/add-gtag");
 
@@ -56,7 +58,8 @@ describe("useConsent", () => {
     rejectAll();
 
     expect(consentDeniedAll).toHaveBeenCalledWith("update");
-    expect(window.location.reload).not.toHaveBeenCalled();
+    expect(window.location.reload).toHaveBeenCalled();
+    expect(removeCookies).toHaveBeenCalledWith("_ga");
     expect(addGtag).not.toHaveBeenCalled();
   });
 

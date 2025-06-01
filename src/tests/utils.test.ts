@@ -136,4 +136,17 @@ describe("utils", () => {
       );
     });
   });
+
+  describe("removeCookies", () => {
+    it("should remove the cookies", () => {
+      const cookie =
+        "_ga=GA1.1.949206007.1748804891; _ga_K2TWZNL3LY=GS2.1.s1748804891$o1$g0$t1748804910$j41$l0$h0";
+
+      document.cookie = cookie;
+
+      utils.removeCookies("_ga");
+
+      expect(document.cookie).toEqual("");
+    });
+  });
 });

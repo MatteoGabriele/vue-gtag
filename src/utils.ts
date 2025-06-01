@@ -143,3 +143,15 @@ export function getPathWithBase(path: string, base: string): string {
 
   return `${normalizedBase}${normalizedPath}`;
 }
+
+const COOKIE_EXPIRED = "expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+export function removeCookies(name: string): void {
+  for (const gaCookie of document.cookie.split(";")) {
+    const cookieName = gaCookie.split("=")[0].trim();
+
+    if (cookieName.startsWith(name)) {
+      document.cookie = `${cookieName}=; ${COOKIE_EXPIRED}`;
+    }
+  }
+}
