@@ -1,3 +1,10 @@
+## [3.5.1](https://github.com/MatteoGabriele/vue-gtag/compare/v3.5.0...v3.5.1) (2025-06-01)
+
+
+### Bug Fixes
+
+* **use-consent:** hasConsent stays true after rejecting ([d8ba1b8](https://github.com/MatteoGabriele/vue-gtag/commit/d8ba1b8cce127c7487df4ca37269953205dbb5d6)), closes [#623](https://github.com/MatteoGabriele/vue-gtag/issues/623)
+
 # [3.5.0](https://github.com/MatteoGabriele/vue-gtag/compare/v3.4.0...v3.5.0) (2025-05-04)
 
 
