@@ -84,7 +84,7 @@ workflows:
             - check
       - build:
           requires:
-            - check
+            - typecheck
       - test:
           requires:
             - build
