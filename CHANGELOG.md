@@ -1,3 +1,10 @@
+## [3.5.2](https://github.com/MatteoGabriele/vue-gtag/compare/v3.5.1...v3.5.2) (2025-07-09)
+
+
+### Bug Fixes
+
+* **use-consent:** does not remove cookie after refresh ([#627](https://github.com/MatteoGabriele/vue-gtag/issues/627)) ([ea3fb43](https://github.com/MatteoGabriele/vue-gtag/commit/ea3fb43f455c975e699d48ef42eb60bd99e16bde))
+
 ## [3.5.1](https://github.com/MatteoGabriele/vue-gtag/compare/v3.5.0...v3.5.1) (2025-06-01)
 
 
