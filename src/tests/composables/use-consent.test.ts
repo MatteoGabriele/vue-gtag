@@ -52,14 +52,17 @@ describe("useConsent", () => {
     expect(addGtag).toHaveBeenCalled();
   });
 
-  it("should reject all", () => {
+  it("should reject all", async () => {
     const { rejectAll } = useConsent();
 
     rejectAll();
 
     expect(consentDeniedAll).toHaveBeenCalledWith("update");
-    expect(window.location.reload).toHaveBeenCalled();
     expect(removeCookies).toHaveBeenCalledWith("_ga");
+
+    await flushPromises();
+
+    expect(window.location.reload).toHaveBeenCalled();
     expect(addGtag).not.toHaveBeenCalled();
   });
 

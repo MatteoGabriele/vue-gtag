@@ -28,9 +28,9 @@ export function useConsent(): UseWithConsentReturn {
     window.location.reload();
   };
 
-  const rejectAll = () => {
+  const rejectAll = async () => {
     consentDeniedAll("update");
-    removeCookies(GA_COOKIE_VALUE);
+    await removeCookies(GA_COOKIE_VALUE);
     window.location.reload();
   };
 
