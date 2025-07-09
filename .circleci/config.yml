@@ -30,6 +30,14 @@ jobs:
       - install-deps
       - run: pnpm run check
 
+  typecheck:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - install-deps
+      - run: pnpm run typecheck
+        
   build:
     docker:
       - image: cimg/node:lts
@@ -71,6 +79,9 @@ workflows:
       - check:
           requires:
             - lint
+      - typecheck:
+          requires:
+            - check
       - build:
           requires:
             - check
