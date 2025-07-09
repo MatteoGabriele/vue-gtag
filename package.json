@@ -17,11 +17,12 @@
     "check": "biome check",
     "fix": "biome check --write",
     "lint": "biome lint",
+    "typecheck": "tsc --noEmit",
     "build": "tsdown",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
     "test:once": "vitest run",
-    "validate": "pnpm check && pnpm lint && pnpm test:once && pnpm build",
+    "validate": "pnpm typecheck && pnpm check && pnpm lint && pnpm test:once && pnpm build",
     "prepublishOnly": "pnpm validate"
   },
   "keywords": [
