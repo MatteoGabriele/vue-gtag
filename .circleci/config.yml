@@ -10,16 +10,13 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "pnpm-lock.yaml" }}
+            - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
-      - run: corepack enable
-      - run: pnpm config set store-dir ~/.pnpm-store
       - run: pnpm install
       - save_cache:
           paths:
-             - node_modules
-              - ~/.pnpm-store
-          key: v1-dependencies-{{ checksum "pnpm-lock.yaml" }}
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
 
 jobs:
   lint:
