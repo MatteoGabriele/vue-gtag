@@ -1,5 +1,10 @@
 version: 2.1
 
+parameters:
+  node_image:
+    type: string
+    default: "cimg/node:22.15.1"
+
 commands:
   install-deps:
     steps:
@@ -16,7 +21,7 @@ commands:
 jobs:
   lint:
     docker:
-      - image: cimg/node:lts
+      - image: << pipeline.parameters.node_image >>
     steps:
       - checkout
       - install-deps
@@ -24,7 +29,7 @@ jobs:
 
   check:
     docker:
-      - image: cimg/node:lts
+      - image: << pipeline.parameters.node_image >>
     steps:
       - checkout
       - install-deps
@@ -32,7 +37,7 @@ jobs:
 
   typecheck:
     docker:
-      - image: cimg/node:lts
+      - image: << pipeline.parameters.node_image >>
     steps:
       - checkout
       - install-deps
@@ -40,7 +45,7 @@ jobs:
         
   build:
     docker:
-      - image: cimg/node:lts
+      - image: << pipeline.parameters.node_image >>
     steps:
       - checkout
       - install-deps
@@ -48,7 +53,7 @@ jobs:
 
   test:
     docker:
-      - image: cimg/node:lts
+      - image: << pipeline.parameters.node_image >>
     steps:
       - checkout
       - install-deps
@@ -56,7 +61,7 @@ jobs:
 
   release:
     docker:
-      - image: cimg/node:lts
+      - image: << pipeline.parameters.node_image >>
     steps:
       - checkout
       - install-deps
