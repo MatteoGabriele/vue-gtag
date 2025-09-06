@@ -18,4 +18,15 @@ export { addGtag } from "@/core/add-gtag";
 export { createGtag } from "@/core/create-gtag";
 export { configure } from "@/core/create-gtag";
 
-export type { PluginSettings } from "@/types/settings";
+export type {
+  GtagEcommerceParams,
+  GtagEcommerceEventNames,
+  GtagEventNames,
+  GtagEventParams,
+  GtagConfigParams,
+  GtagCustomParams,
+  GtagConsentParams,
+  GtagConsentMode,
+  GtagConfig,
+  Gtag,
+} from "@/types/gtag";
