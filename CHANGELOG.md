@@ -1,3 +1,10 @@
+## [3.6.1](https://github.com/MatteoGabriele/vue-gtag/compare/v3.6.0...v3.6.1) (2025-09-06)
+
+
+### Bug Fixes
+
+* **docs:** update gtag.js documentation links in README ([#633](https://github.com/MatteoGabriele/vue-gtag/issues/633)) ([560b49d](https://github.com/MatteoGabriele/vue-gtag/commit/560b49d151a83dfe54896bbf344ead66f75c0f08))
+
 # [3.6.0](https://github.com/MatteoGabriele/vue-gtag/compare/v3.5.2...v3.6.0) (2025-09-06)
 
 
