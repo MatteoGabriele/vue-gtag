@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/MatteoGabriele/vue-gtag/compare/v3.5.2...v3.6.0) (2025-09-06)
+
+
+### Features
+
+* export all types ([#634](https://github.com/MatteoGabriele/vue-gtag/issues/634)) ([54ebdba](https://github.com/MatteoGabriele/vue-gtag/commit/54ebdba6b19346ca60cbafca1844d6e5e02dab71))
+
 ## [3.5.2](https://github.com/MatteoGabriele/vue-gtag/compare/v3.5.1...v3.5.2) (2025-07-09)
 
 
