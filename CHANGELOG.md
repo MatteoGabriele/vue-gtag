@@ -1,3 +1,10 @@
+## [3.6.2](https://github.com/MatteoGabriele/vue-gtag/compare/v3.6.1...v3.6.2) (2025-10-08)
+
+
+### Bug Fixes
+
+* **api:** make second function parameter optional to prevent TypeError ([#637](https://github.com/MatteoGabriele/vue-gtag/issues/637)) ([005c996](https://github.com/MatteoGabriele/vue-gtag/commit/005c9965c09108d0863927623311e5e90da978a8)), closes [#636](https://github.com/MatteoGabriele/vue-gtag/issues/636)
+
 ## [3.6.1](https://github.com/MatteoGabriele/vue-gtag/compare/v3.6.0...v3.6.1) (2025-09-06)
 
 
