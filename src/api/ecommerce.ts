@@ -6,7 +6,7 @@ import type {
 
 export function ecommerce(
   name: GtagEcommerceEventNames,
-  params: GtagEcommerceParams,
+  params: GtagEcommerceParams = {},
 ) {
   event(name, params);
 }

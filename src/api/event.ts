@@ -9,7 +9,7 @@ import type {
 
 type EventParams = GtagControlParams & GtagEventParams & GtagCustomParams;
 
-export function event(name: GtagEventNames, params: EventParams) {
+export function event(name: GtagEventNames, params: EventParams = {}) {
   const { groupName, additionalAccounts } = getSettings();
 
   if (params.send_to === undefined && additionalAccounts?.length) {
