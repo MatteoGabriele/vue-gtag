@@ -42,7 +42,8 @@
   "exports": {
     ".": {
       "types": "./dist/vue-gtag.d.ts",
-      "import": "./dist/vue-gtag.js"
+      "import": "./dist/vue-gtag.js",
+      "node": "./dist/vue-gtag.js"
     }
   },
   "main": "./dist/vue-gtag.js",
