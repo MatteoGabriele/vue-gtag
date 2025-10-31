@@ -1,3 +1,10 @@
+## [3.6.3](https://github.com/MatteoGabriele/vue-gtag/compare/v3.6.2...v3.6.3) (2025-10-31)
+
+
+### Bug Fixes
+
+* **exports:** add node to package.json export conditions ([#638](https://github.com/MatteoGabriele/vue-gtag/issues/638)) ([abb0753](https://github.com/MatteoGabriele/vue-gtag/commit/abb07533a4448186a961264abc5d97d8e1cf0522))
+
 ## [3.6.2](https://github.com/MatteoGabriele/vue-gtag/compare/v3.6.1...v3.6.2) (2025-10-08)
 
 
