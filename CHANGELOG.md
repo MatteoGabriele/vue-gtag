@@ -1,3 +1,10 @@
+# [3.7.0](https://github.com/MatteoGabriele/vue-gtag/compare/v3.6.3...v3.7.0) (2026-02-02)
+
+
+### Features
+
+* **deps:** allow optional vue-router 4 and 5 ([#641](https://github.com/MatteoGabriele/vue-gtag/issues/641)) ([5755680](https://github.com/MatteoGabriele/vue-gtag/commit/5755680b4d6f83b8ad463fa615d8b4675de6efe1))
+
 ## [3.6.3](https://github.com/MatteoGabriele/vue-gtag/compare/v3.6.2...v3.6.3) (2025-10-31)
 
 
