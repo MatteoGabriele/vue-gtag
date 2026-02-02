@@ -48,7 +48,7 @@ importers:
         specifier: ^3.5.13
         version: 3.5.14(typescript@5.8.3)
       vue-router:
-        specifier: ^4.5.0
+        specifier: ^4.5.0 || ^5.0.0
         version: 4.5.1(vue@3.5.14(typescript@5.8.3))
 
 packages:

@@ -1,9 +1,9 @@
 import { defineConfig } from 'tsdown'
-import { name } from './package.json'
+import pkg from './package.json' with { type: 'json' }
 
 export default defineConfig({
   entry: {
-    [name]: './src/index.ts'
+    [pkg.name]: './src/index.ts'
   },
   platform: 'browser',
   minify: true,
