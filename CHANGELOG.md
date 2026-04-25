@@ -1,3 +1,10 @@
+## [3.7.1](https://github.com/MatteoGabriele/vue-gtag/compare/v3.7.0...v3.7.1) (2026-04-25)
+
+
+### Bug Fixes
+
+* **use-consent:** rejectAll with custom domain name ([#643](https://github.com/MatteoGabriele/vue-gtag/issues/643)) ([f57a015](https://github.com/MatteoGabriele/vue-gtag/commit/f57a0152c497267b8f5af554a2dce97188a19a39)), closes [#642](https://github.com/MatteoGabriele/vue-gtag/issues/642)
+
 # [3.7.0](https://github.com/MatteoGabriele/vue-gtag/compare/v3.6.3...v3.7.0) (2026-02-02)
 
 
