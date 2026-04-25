@@ -1,11 +1,17 @@
 import { consent, consentDeniedAll, consentGrantedAll } from "@/api/consent";
 import { useConsent } from "@/composables/use-consent";
 import { addGtag } from "@/core/add-gtag";
-import { resetSettings } from "@/core/settings";
+import { resetSettings, updateSettings } from "@/core/settings";
 import { removeCookies } from "@/utils";
 import flushPromises from "flush-promises";
 
-vi.mock("@/utils");
+vi.mock("@/utils", async () => {
+  const actual = await vi.importActual("@/utils");
+  return {
+    ...actual,
+    removeCookies: vi.fn(),
+  };
+});
 vi.mock("@/api/consent");
 vi.mock("@/core/add-gtag");
 
@@ -58,7 +64,28 @@ describe("useConsent", () => {
     rejectAll();
 
     expect(consentDeniedAll).toHaveBeenCalledWith("update");
-    expect(removeCookies).toHaveBeenCalledWith("_ga");
+    expect(removeCookies).toHaveBeenCalledWith("_ga", undefined);
+
+    await flushPromises();
+
+    expect(window.location.reload).toHaveBeenCalled();
+    expect(addGtag).not.toHaveBeenCalled();
+  });
+
+  it("should reject all with cookie domain from config", async () => {
+    updateSettings({
+      tagId: "GA-123456789",
+      config: {
+        cookie_domain: "domain.com",
+      },
+    });
+
+    const { rejectAll } = useConsent();
+
+    rejectAll();
+
+    expect(consentDeniedAll).toHaveBeenCalledWith("update");
+    expect(removeCookies).toHaveBeenCalledWith("_ga", "domain.com");
 
     await flushPromises();
 

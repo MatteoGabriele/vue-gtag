@@ -1,5 +1,6 @@
 import { consent, consentDeniedAll, consentGrantedAll } from "@/api/consent";
 import { addGtag } from "@/core/add-gtag";
+import { getSettings } from "@/core/settings";
 import type { GtagConsentParams } from "@/types/gtag";
 import { isServer, removeCookies } from "@/utils";
 import { type Ref, computed } from "vue";
@@ -18,6 +19,20 @@ const GA_COOKIE_VALUE = "_ga";
  * @remark Make sure to set `initMode` to `manual`
  */
 export function useConsent(): UseWithConsentReturn {
+  const cookieDomain = computed<string | undefined>(() => {
+    const settings = getSettings();
+
+    if (
+      typeof settings.config === "object" &&
+      "cookie_domain" in settings.config
+    ) {
+      const config = settings.config;
+      if (typeof config.cookie_domain === "string") {
+        return config.cookie_domain;
+      }
+    }
+  });
+
   const hasConsent = computed<boolean>(() => {
     return isServer() ? false : document.cookie.includes(GA_COOKIE_VALUE);
   });
@@ -30,7 +45,7 @@ export function useConsent(): UseWithConsentReturn {
 
   const rejectAll = async () => {
     consentDeniedAll("update");
-    await removeCookies(GA_COOKIE_VALUE);
+    await removeCookies(GA_COOKIE_VALUE, cookieDomain.value);
     window.location.reload();
   };
 

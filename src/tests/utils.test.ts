@@ -148,5 +148,26 @@ describe("utils", () => {
 
       expect(document.cookie).toEqual("");
     });
+    it("should remove cookies with domain attribute when domain is provided", () => {
+      // Set up cookies first
+      const cookie =
+        "_ga=GA1.1.949206007.1748804891; _ga_K2TWZNL3LY=GS2.1.s1748804891$o1$g0$t1748804910$j41$l0$h0";
+      document.cookie = cookie;
+
+      const cookieSetter = vi.spyOn(document, "cookie", "set");
+
+      utils.removeCookies("_ga", "domain.com");
+
+      // Verify that document.cookie was set with the domain attribute
+      expect(cookieSetter).toHaveBeenCalled();
+
+      // Get the call that includes the domain
+      const calls = cookieSetter.mock.calls.filter((call) =>
+        call[0].includes("domain=domain.com"),
+      );
+      expect(calls.length).toBeGreaterThan(0);
+
+      cookieSetter.mockRestore();
+    });
   });
 });
