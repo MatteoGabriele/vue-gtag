@@ -146,7 +146,10 @@ export function getPathWithBase(path: string, base: string): string {
 
 const COOKIE_EXPIRED = "expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
-export async function removeCookies(name: string, domain?: string): Promise<void> {
+export async function removeCookies(
+  name: string,
+  domain?: string,
+): Promise<void> {
   for (const gaCookie of document.cookie.split(";")) {
     const cookieName = gaCookie.split("=")[0].trim();
 
