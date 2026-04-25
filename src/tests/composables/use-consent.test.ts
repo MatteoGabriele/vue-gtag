@@ -1,7 +1,7 @@
 import { consent, consentDeniedAll, consentGrantedAll } from "@/api/consent";
 import { useConsent } from "@/composables/use-consent";
 import { addGtag } from "@/core/add-gtag";
-import { getSettings, resetSettings, updateSettings } from "@/core/settings";
+import { resetSettings, updateSettings } from "@/core/settings";
 import { removeCookies } from "@/utils";
 import flushPromises from "flush-promises";
 
